@@ -1,16 +1,35 @@
 <template lang="pug">
-    div.q-ma-xl
-        q-table(
-        :data="data"
-        :columns="columns"
-        row-key="name")
+    div.q-ma-xl.q-gutter-xl
+
+        .div(@click="selectTable(1)")
+            q-table(
+            :data="data"
+            :columns="columns"
+            row-key="name"
+            :card-class="{'bg-grey-5': tableSelected == 1}"
+            )
+
+        .div(@click="selectTable(2)")
+            q-table(
+            :data="data"
+            :columns="columns"
+            row-key="name"
+            :card-class="{'bg-grey-5': tableSelected == 2}"
+            )
 </template>
 
 <script>
 export default {
   name: 'harvest-dashboard',
+  methods: {
+    selectTable (table) {
+      // alert(number)
+      this.tableSelected = table
+    }
+  },
   data () {
     return {
+      tableSelected: false,
       columns: [
         {
           name: 'name',
@@ -20,28 +39,20 @@ export default {
           field: row => row.name,
           format: val => `${val}`,
           sortable: true,
-          classes: 'bg-grey-2 ellipsis',
-          style: 'max-width: 100px',
-          headerClasses: 'bg-primary text-white'
+          // classes: 'bg-grey-2 ellipsis',
+          headerClasses: 'bg-primary text-white',
+          style: 'max-width: 100px'
         },
-        { name: 'calories', align: 'center', label: 'Calories', field: 'calories', sortable: true },
-        { name: 'fat', label: 'Fat (g)', field: 'fat', sortable: true },
-        { name: 'carbs', label: 'Carbs (g)', field: 'carbs' },
-        { name: 'protein', label: 'Protein (g)', field: 'protein' },
-        { name: 'sodium', label: 'Sodium (mg)', field: 'sodium' },
-        { name: 'calcium', label: 'Calcium (%)', field: 'calcium', sortable: true, sort: (a, b) => parseInt(a, 10) - parseInt(b, 10) },
-        { name: 'iron', label: 'Iron (%)', field: 'iron', sortable: true, sort: (a, b) => parseInt(a, 10) - parseInt(b, 10) }
+        { name: 'calories', align: 'center', label: 'Calories', field: 'calories', sortable: true, headerClasses: 'bg-primary text-white' },
+        { name: 'sodium', label: 'Sodium (mg)', field: 'sodium', headerClasses: 'bg-primary text-white' },
+        { name: 'iron', label: 'Iron (%)', field: 'iron', sortable: true, headerClasses: 'bg-primary text-white', sort: (a, b) => parseInt(a, 10) - parseInt(b, 10) }
       ],
       data: [
         {
           name: 'Frozen Yogurt',
           calories: 159,
-          fat: 6.0,
-          carbs: 24,
-          protein: 4.0,
           sodium: 87,
-          calcium: '14%',
-          iron: '1%'
+          calcium: '14%'
         },
         {
           name: 'Ice cream sandwich',
