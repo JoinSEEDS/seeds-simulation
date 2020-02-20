@@ -16,11 +16,15 @@
             row-key="name"
             :card-class="{'bg-grey-5': tableSelected == 2}"
             )
+
+        custom-chart
 </template>
 
 <script>
+import CustomChart from '~/pages/harvest/chart'
 export default {
   name: 'harvest-dashboard',
+  components: { CustomChart },
   methods: {
     /**
      * This method toggle select between the tables
