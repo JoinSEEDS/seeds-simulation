@@ -94,11 +94,15 @@ module.exports = function (ctx) {
         'QSpinner',
         'QSpinnerComment',
         'QSpinnerDots',
+        'QTable',
+        'QTd',
+        'QTh',
         'QTime',
         'QToggle',
         'QToolbar',
         'QToolbarTitle',
-        'QTooltip'
+        'QTooltip',
+        'QTr'
       ],
 
       directives: [
