@@ -33,5 +33,5 @@ export default {
 </template>
 
 <style lang="stylus">
-
+  .a
 </style>
