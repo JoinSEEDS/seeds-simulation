@@ -22,8 +22,10 @@
 export default {
   name: 'harvest-dashboard',
   methods: {
+    /**
+     * This method toggle select between the tables
+     */
     selectTable (table) {
-      // alert(number)
       this.tableSelected = table
     }
   },
