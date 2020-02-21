@@ -22,9 +22,19 @@
 
 <script>
 import CustomChart from '~/pages/harvest/chart'
+import { seeds } from '~/mixins/seeds'
 export default {
   name: 'harvest-dashboard',
   components: { CustomChart },
+  mixins: [ seeds ],
+  mounted () {
+    this.getDataTable('None')
+  },
+  watch: {
+    tableSelected () {
+      this.getDataTable(this.tableSelected)
+    }
+  },
   methods: {
     /**
      * This method toggle select between the tables

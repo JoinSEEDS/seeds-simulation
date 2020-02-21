@@ -4,6 +4,7 @@ import Vuex from 'vuex'
 import accounts from './accounts'
 import transfers from './transfers'
 import general from './general'
+import harvest from './harvest'
 
 Vue.use(Vuex)
 
@@ -17,7 +18,8 @@ export default function (/* { ssrContext } */) {
     modules: {
       accounts,
       transfers,
-      general
+      general,
+      harvest
     },
 
     // enable strict mode (adds overhead!)
