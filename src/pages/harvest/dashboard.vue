@@ -33,6 +33,7 @@ export default {
   watch: {
     tableSelected () {
       this.getDataTable(this.tableSelected)
+      this.getDataChart(this.tableSelected)
     }
   },
   methods: {
@@ -63,6 +64,27 @@ export default {
         { name: 'sodium', label: 'Sodium (mg)', field: 'sodium', headerClasses: 'bg-primary text-white' },
         { name: 'iron', label: 'Iron (%)', field: 'iron', sortable: true, headerClasses: 'bg-primary text-white', sort: (a, b) => parseInt(a, 10) - parseInt(b, 10) }
       ],
+      columnsTable1: [
+        {
+          name: 'seeds3cycles',
+          required: true,
+          label: 'Seeds Grown 3 Cycles',
+          align: 'left',
+          field: 'seeds3cycles',
+          // format: val => `${val}`,
+          sortable: true,
+          headerClasses: 'bg-primary text-white',
+          style: 'max-width: 100px'
+        },
+        { name: 'seedsPerCycle', align: 'center', label: 'Seeds Grown Per Cycle', field: 'seedsPerCycle', sortable: true, headerClasses: 'bg-primary text-white' },
+        { name: 'seedsPerBlock', align: 'right', label: 'Seeds Grown Per Block', field: 'seedsPerBlock', sortable: true, headerClasses: 'bg-primary text-white' }
+      ],
+      dataTable1: {
+        name: 'Seeds Created',
+        seeds3cycles: 0,
+        seedsPerCycle: 0,
+        seedsPerBlock: 0
+      },
       data: [
         {
           name: 'Frozen Yogurt',

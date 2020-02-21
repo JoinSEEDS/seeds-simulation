@@ -5,9 +5,11 @@
 
 <script>
 import chart from 'tui-chart'
+import { seeds } from '~/mixins/seeds'
 
 export default {
   name: 'custom-chart',
+  mixins: [ seeds ],
   mounted () {
     this.loadChart()
   },
