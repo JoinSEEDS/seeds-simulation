@@ -1,7 +1,7 @@
 <template lang="pug">
     div.q-ma-xl.q-gutter-xl
 
-        .div(@click="selectTable(1)")
+        #customTable(@click="selectTable(1)")
             q-table(
             :data="data"
             :columns="columns"

@@ -1,15 +1,24 @@
 <template lang="pug">
-    div
-        #chart-area
+    div.column
+        #chart-area.full-width
 </template>
 
 <script>
 import chart from 'tui-chart'
+import { dom } from 'quasar'
+const { width } = dom
 
 export default {
   name: 'custom-chart',
   mounted () {
     this.loadChart()
+  },
+  computed: {
+    chartWidth () {
+      var customTable = document.getElementById('chart-area')
+      console.log('Width dom:', width(customTable))
+      return width(customTable)
+    }
   },
   methods: {
     loadChart () {
@@ -33,9 +42,8 @@ export default {
       }
       var options = {
         chart: {
-          width: 1000,
-          height: 540,
-          title: '24-hr Average Temperature'
+          title: '24-hr Average Temperature',
+          width: this.chartWidth
         },
         yAxis: {
           title: 'Amount',
