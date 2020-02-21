@@ -1,0 +1,8 @@
+export default {
+  SEEDS_CREATED: 1,
+  SEEDS_GDC: 2,
+  SEEDS_BDC: 3,
+  SEEDS_ORG_ACCNTS: 4,
+  SEEDS_IND_ACCNTS: 5,
+  CYCLE: 29.5
+}

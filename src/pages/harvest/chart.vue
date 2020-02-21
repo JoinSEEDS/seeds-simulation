@@ -7,9 +7,11 @@
 import chart from 'tui-chart'
 import { dom } from 'quasar'
 const { width } = dom
+import { seeds } from '~/mixins/seeds'
 
 export default {
   name: 'custom-chart',
+  mixins: [ seeds ],
   mounted () {
     this.loadChart()
   },

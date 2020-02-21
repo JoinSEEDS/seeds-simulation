@@ -50,6 +50,13 @@ export default {
       getApp: 'Download the app',
       title: 'Select your wallet',
       selectAccount: 'Please select an account'
+    },
+    harvest: {
+      grownSeedsChart: {
+        perThreeCycles: 'Seeds Grown 3 Cycles',
+        perCycle: 'Seeds Grown Per Cycle',
+        perBlock: 'Seeds Grown Per Block'
+      }
     }
   }
 }
