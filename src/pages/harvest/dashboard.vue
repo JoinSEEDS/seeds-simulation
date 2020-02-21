@@ -35,7 +35,7 @@ export default {
   },
   data () {
     return {
-      tableSelected: false,
+      tableSelected: 0,
       columns: [
         {
           name: 'name',
