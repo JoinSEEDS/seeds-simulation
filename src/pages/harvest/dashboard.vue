@@ -3,8 +3,8 @@
 
         #customTable(@click="selectTable(1)")
             q-table(
-            :data="data"
-            :columns="columns"
+            :data="dataTable1"
+            :columns="columnsTable1"
             row-key="name"
             :card-class="{'bg-grey-5': tableSelected == 1}"
             )
@@ -12,9 +12,33 @@
         .div(@click="selectTable(2)")
             q-table(
             :data="data"
-            :columns="columns"
+            :columns="columnsTable2"
             row-key="name"
             :card-class="{'bg-grey-5': tableSelected == 2}"
+            )
+
+        .div(@click="selectTable(3)")
+            q-table(
+            :data="data"
+            :columns="columnsTable3"
+            row-key="name"
+            :card-class="{'bg-grey-5': tableSelected == 3}"
+            )
+
+        .div(@click="selectTable(4)")
+            q-table(
+            :data="data"
+            :columns="columnsTable4"
+            row-key="name"
+            :card-class="{'bg-grey-5': tableSelected == 4}"
+            )
+
+        .div(@click="selectTable(5)")
+            q-table(
+            :data="data"
+            :columns="columnsTable5"
+            row-key="name"
+            :card-class="{'bg-grey-5': tableSelected == 5}"
             )
 
         custom-chart
@@ -79,12 +103,77 @@ export default {
         { name: 'seedsPerCycle', align: 'center', label: 'Seeds Grown Per Cycle', field: 'seedsPerCycle', sortable: true, headerClasses: 'bg-primary text-white' },
         { name: 'seedsPerBlock', align: 'right', label: 'Seeds Grown Per Block', field: 'seedsPerBlock', sortable: true, headerClasses: 'bg-primary text-white' }
       ],
-      dataTable1: {
+      columnsTable2: [
+        {
+          name: 'position',
+          required: true,
+          label: 'Rank',
+          align: 'left',
+          field: 'position',
+          // format: val => `${val}`,
+          sortable: true,
+          headerClasses: 'bg-primary text-white',
+          style: 'max-width: 100px'
+        },
+        { name: 'numberUsers', align: 'center', label: 'Number People Accounts', field: 'numberUsers', sortable: true, headerClasses: 'bg-primary text-white' },
+        { name: 'totalAmount', label: 'Total Amount', field: 'totalAmount', sortable: true, headerClasses: 'bg-primary text-white' },
+        { name: 'totalAmountPerUser', label: 'Total Amount per Account', field: 'totalAmountPerUser', sortable: true, headerClasses: 'bg-primary text-white' }
+      ],
+      columnsTable3: [
+        {
+          name: 'position',
+          required: true,
+          label: 'Rank',
+          align: 'left',
+          field: 'position',
+          // format: val => `${val}`,
+          sortable: true,
+          headerClasses: 'bg-primary text-white',
+          style: 'max-width: 100px'
+        },
+        { name: 'numberUsers', align: 'center', label: 'Number Organization Accounts', field: 'numberUsers', sortable: true, headerClasses: 'bg-primary text-white' },
+        { name: 'totalAmount', label: 'Total Amount', field: 'totalAmount', sortable: true, headerClasses: 'bg-primary text-white' },
+        { name: 'totalAmountPerOrganization', label: 'Total Amount per Organization', field: 'totalAmountPerOrganization', sortable: true, headerClasses: 'bg-primary text-white' }
+      ],
+      columnsTable4: [
+        {
+          name: 'position',
+          required: true,
+          label: 'Rank',
+          align: 'left',
+          field: 'position',
+          // format: val => `${val}`,
+          sortable: true,
+          headerClasses: 'bg-primary text-white',
+          style: 'max-width: 100px'
+        },
+        { name: 'numBdc', align: 'center', label: 'Number BDC', field: 'numBdc', sortable: true, headerClasses: 'bg-primary text-white' },
+        { name: 'budget', label: 'Total Amount', field: 'budget', sortable: true, headerClasses: 'bg-primary text-white' },
+        { name: 'budgetPerBdc', label: 'Something strange', field: 'budgetPerBdc', sortable: true, headerClasses: 'bg-primary text-white' }
+      ],
+      columnsTable5: [
+        {
+          name: 'totalAmountForGdc',
+          required: true,
+          label: 'Total Amount',
+          align: 'left',
+          field: 'totalAmountForGdc',
+          // format: val => `${val}`,
+          sortable: true,
+          headerClasses: 'bg-primary text-white',
+          style: 'max-width: 100px'
+        },
+        { name: 'networkMaintenance', align: 'center', label: 'Network Maintenance', field: 'networkMaintenance', sortable: true, headerClasses: 'bg-primary text-white' },
+        { name: 'regenGrants', label: 'Regen Grants', field: 'regenGrants', sortable: true, headerClasses: 'bg-primary text-white' },
+        { name: 'coreDevelopment', label: 'Core Development', field: 'coreDevelopment', sortable: true, headerClasses: 'bg-primary text-white' },
+        { name: 'interestFreeLoans', label: 'Interest Free Loans', field: 'interestFreeLoans', sortable: true, headerClasses: 'bg-primary text-white' }
+      ],
+      dataTable1: [{
         name: 'Seeds Created',
         seeds3cycles: 0,
         seedsPerCycle: 0,
         seedsPerBlock: 0
-      },
+      }],
       data: [
         {
           name: 'Frozen Yogurt',

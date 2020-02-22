@@ -331,15 +331,106 @@ export default () => ({
       }
     }
   ],
-  dataTable1: {
-    name: 'Seeds Created',
-    seeds3cycles: 1,
-    seedsPerCycle: 1,
-    seedsPerBlock: 1
-  },
-  dataTable2: {},
-  dataTable3: {},
-  dataTable4: {},
+  dataTable1: [
+    {
+      seeds3cycles: 0,
+      seedsPerCycle: 0,
+      seedsPerBlock: 0
+    }
+  ],
+  dataTable2: [ // people table
+    {
+      totalAmountForPeople: 4554005.87945625
+    },
+    {
+      position: 'first',
+      numberUsers: 0,
+      totalAmount: 0,
+      totalAmountPerUser: 0
+    },
+    {
+      position: 'middle',
+      numberUsers: 0,
+      totalAmount: 0,
+      totalAmountPerUser: 0
+    },
+    {
+      position: 'last',
+      numberUsers: 0,
+      totalAmount: 0,
+      totalAmountPerUser: 0
+    }
+  ],
+  dataTable3: [ // organizations table
+    {
+      totalAmountForOrganizations: 0
+    },
+    {
+      position: 'first',
+      numberUsers: 0,
+      totalAmount: 0,
+      totalAmountPerOrganization: 0
+    },
+    {
+      position: 'middle',
+      numberUsers: 0,
+      totalAmount: 0,
+      totalAmountPerOrganization: 0
+    },
+    {
+      position: 'last',
+      numberUsers: 0,
+      totalAmount: 0,
+      totalAmountPerOrganization: 0
+    }
+  ],
+  dataTable4: [ // bdcs table
+    {
+      totalAmountPerBdc: 0
+    },
+    {
+      position: 'first',
+      numBdc: 0,
+      budget: 0,
+      budgetPerBdc: {
+        totalAmount: 0,
+        regenGrants: 0,
+        regenLoans: 0,
+        openProposal: 0
+      }
+    },
+    {
+      position: 'middle',
+      numBdc: 0,
+      budget: 0,
+      budgetPerBdc: {
+        totalAmount: 0,
+        regenGrants: 0,
+        regenLoans: 0,
+        openProposal: 0
+      }
+    },
+    {
+      position: 'last',
+      numBdc: 0,
+      budget: 0,
+      budgetPerBdc: {
+        totalAmount: 0,
+        regenGrants: 0,
+        regenLoans: 0,
+        openProposal: 0
+      }
+    }
+  ],
+  dataTable5: [
+    {
+      totalAmountForGdc: 0,
+      networkMaintenance: 0,
+      regenGrants: 0,
+      coreDevelopment: 0,
+      interestFreeLoans: 0
+    }
+  ],
   dataChart1: {
     // Data for Chart 1
   },
