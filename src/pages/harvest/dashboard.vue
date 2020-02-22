@@ -22,7 +22,7 @@
             :data="data"
             :columns="columnsTable3"
             row-key="name"
-            :card-class="{'bg-grey-5': tableSelected == 2}"
+            :card-class="{'bg-grey-5': tableSelected == 3}"
             )
 
         .div(@click="selectTable(4)")
@@ -30,7 +30,7 @@
             :data="data"
             :columns="columnsTable4"
             row-key="name"
-            :card-class="{'bg-grey-5': tableSelected == 2}"
+            :card-class="{'bg-grey-5': tableSelected == 4}"
             )
 
         .div(@click="selectTable(5)")
@@ -38,7 +38,7 @@
             :data="data"
             :columns="columnsTable5"
             row-key="name"
-            :card-class="{'bg-grey-5': tableSelected == 2}"
+            :card-class="{'bg-grey-5': tableSelected == 5}"
             )
 
         custom-chart
