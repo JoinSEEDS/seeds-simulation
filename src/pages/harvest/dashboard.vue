@@ -47,10 +47,11 @@
 <script>
 import CustomChart from '~/pages/harvest/chart'
 import { seeds } from '~/mixins/seeds'
+import { EventBus } from '~/mixins/utils'
 export default {
   name: 'harvest-dashboard',
   components: { CustomChart },
-  mixins: [ seeds ],
+  mixins: [ seeds, EventBus ],
   mounted () {
     this.getDataTable('None')
   },
@@ -58,6 +59,7 @@ export default {
     tableSelected () {
       this.getDataTable(this.tableSelected)
       this.getDataChart(this.tableSelected)
+      EventBus.$emit('on-change-table-selected', null)
     }
   },
   methods: {
@@ -66,6 +68,7 @@ export default {
      */
     selectTable (table) {
       this.tableSelected = table
+      window.scrollTo(0, document.body.scrollHeight || document.documentElement.scrollHeight)
     }
   },
   data () {

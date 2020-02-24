@@ -8,10 +8,10 @@ import chart from 'tui-chart'
 import { dom } from 'quasar'
 const { width } = dom
 import { seeds } from '~/mixins/seeds'
-
+import { EventBus } from '~/mixins/utils'
 export default {
   name: 'custom-chart',
-  mixins: [ seeds ],
+  mixins: [ seeds, EventBus ],
   data () {
     return {
       chartWidth: 200
@@ -21,16 +21,19 @@ export default {
     this.resizeChart()
 
     window.addEventListener('resize', () => { this.resizeChart() })
+    EventBus.$on('on-change-table-selected', clickCount => {
+      this.resizeChart()
+    })
   },
   beforeDestroy () {
     document.removeEventListener('resize', () => { this.resizeChart() })
   },
   computed: {
-    // chartWidth () {
-    //   var customTable = document.getElementById('chart-area')
-    //   console.log('Width dom:', width(customTable))
-    //   return width(customTable)
-    // }
+    ListenMyDataChart () {
+      console.log('Watching myDataChart')
+      if (this.myDataChart) this.resizeChart()
+      return true
+    }
   },
   methods: {
     getWidth () {
@@ -45,25 +48,14 @@ export default {
     loadChart () {
       var container = document.getElementById('chart-area')
       var data = {
-        categories: ['June', 'July', 'Aug', 'Sep', 'Oct', 'Nov'],
-        series: [
-          {
-            name: 'Budget',
-            data: [5000, 3000, 6000, 3000, 6000, 4000]
-          },
-          {
-            name: 'Income',
-            data: [8000, 1000, 7000, 2000, 5000, 3000]
-          },
-          {
-            name: 'Outgo',
-            data: [900, 6000, 1000, 9000, 3000, 1000]
-          }
-        ]
+        categories: this.myDataChart.categories,
+        series: this.myDataChart.series
       }
+      console.log('Data sent to chart', data)
+      console.log('myDataChart', this.myDataChart)
       var options = {
         chart: {
-          title: '24-hr Average Temperature',
+          title: 'Custom Chart',
           width: this.chartWidth
         },
         yAxis: {
