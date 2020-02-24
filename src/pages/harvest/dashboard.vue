@@ -41,25 +41,26 @@
             :card-class="{'bg-grey-5': tableSelected == 5}"
             )
 
-        custom-chart
+        custom-chart(:dataChart="myDataChart")
 </template>
 
 <script>
 import CustomChart from '~/pages/harvest/chart'
 import { seeds } from '~/mixins/seeds'
-import { EventBus } from '~/mixins/utils'
+// import { EventBus } from '~/mixins/utils'
 export default {
   name: 'harvest-dashboard',
   components: { CustomChart },
-  mixins: [ seeds, EventBus ],
+  mixins: [ seeds ],
   mounted () {
     this.getDataTable('None')
   },
   watch: {
     tableSelected () {
-      this.getDataTable(this.tableSelected)
+      // this.getDataTable(this.tableSelected)
+      console.log('dash chart', this.myDataChart)
       this.getDataChart(this.tableSelected)
-      EventBus.$emit('on-change-table-selected', null)
+      // EventBus.$emit('on-change-table-selected', null)
     }
   },
   methods: {

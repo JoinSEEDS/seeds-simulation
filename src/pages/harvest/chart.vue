@@ -7,33 +7,31 @@
 import chart from 'tui-chart'
 import { dom } from 'quasar'
 const { width } = dom
-import { seeds } from '~/mixins/seeds'
-import { EventBus } from '~/mixins/utils'
 export default {
   name: 'custom-chart',
-  mixins: [ seeds, EventBus ],
+  model: {
+    prop: 'dataChart'
+  },
+  props: {
+    dataChart: {
+      default: null
+    }
+  },
   data () {
     return {
       chartWidth: 200
     }
   },
-  mounted () {
-    this.resizeChart()
-
-    window.addEventListener('resize', () => { this.resizeChart() })
-    EventBus.$on('on-change-table-selected', clickCount => {
+  watch: {
+    dataChart () {
       this.resizeChart()
-    })
+    }
+  },
+  mounted () {
+    window.addEventListener('resize', () => { this.resizeChart() })
   },
   beforeDestroy () {
     document.removeEventListener('resize', () => { this.resizeChart() })
-  },
-  computed: {
-    ListenMyDataChart () {
-      console.log('Watching myDataChart')
-      if (this.myDataChart) this.resizeChart()
-      return true
-    }
   },
   methods: {
     getWidth () {
@@ -48,11 +46,11 @@ export default {
     loadChart () {
       var container = document.getElementById('chart-area')
       var data = {
-        categories: this.myDataChart.categories,
-        series: this.myDataChart.series
+        categories: this.dataChart.categories,
+        series: this.dataChart.series
       }
-      console.log('Data sent to chart', data)
-      console.log('myDataChart', this.myDataChart)
+      // console.log('Data sent to chart', dataChart)
+      // console.log('myDataChart', this.dataChart)
       var options = {
         chart: {
           title: 'Custom Chart',
