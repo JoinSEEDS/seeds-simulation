@@ -1,18 +1,27 @@
-export const setDataTable1 = (state, data) => {
-  state.dataTable1 = data
+export const setDataSeedsGrownTable = (state, data) => {
+  state.seedsGrownTable = data
 }
-export const setDataTable2 = (state, data) => {
-  state.dataTable2 = data
+export const setDataPeopleAccountsTable = (state, data) => {
+  state.peopleAccountsTable = data
 }
-export const setDataTable3 = (state, data) => {
-  state.dataTable3 = data
+export const setDataOrganizationsAccountsTable = (state, data) => {
+  state.organizationAccountsTable = data
 }
-export const setDataTable4 = (state, data) => {
-  state.dataTable4 = data
+export const setDataBdcsTable = (state, data) => {
+  state.bdcsTable = data
 }
-export const setDataTable5 = (state, data) => {
-  state.dataTable5 = data
+export const setDataGdcTable = (state, data) => {
+  state.gdcTable = data
 }
 export const setDataChart = (state, data) => {
   state.dataChart1 = data
+}
+export const setDataSimulationState = (state, data) => {
+  if (data.append) {
+    for (let i = 0; i < data.simulation.length; i++) {
+      state.simulationState.push(data.simulation[i])
+    }
+  } else {
+    state.simulationState[data.step] = data.simulation
+  }
 }

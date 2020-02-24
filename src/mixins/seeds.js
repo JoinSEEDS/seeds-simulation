@@ -8,7 +8,10 @@ export const seeds = {
   methods: {
     // Import actions from the store (Vuex)
     ...mapActions('harvest', ['getDataTable']),
-    ...mapActions('harvest', ['getDataChart'])
+    ...mapActions('harvest', ['getDataChart']),
+    ...mapActions('harvest', ['doCycle']),
+    ...mapActions('harvest', ['editSimulationState']),
+    ...mapActions('harvest', ['setCycleTables'])
   },
   computed: {
     myDataTable1 () {

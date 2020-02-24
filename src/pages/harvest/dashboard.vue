@@ -56,8 +56,84 @@ export default {
   },
   watch: {
     tableSelected () {
-      this.getDataTable(this.tableSelected)
-      this.getDataChart(this.tableSelected)
+      console.log('doing the cycle')
+      this.doCycle(
+        {
+          simulationState: {
+            circulatingSeeds: 1333561643.84,
+            volumeGrowth: 0.025,
+            changeRequiredToMeetDemand: 33339041.096,
+            seedsDestroyed: 10000,
+            plantedSeeds: 13335616.44,
+            enterExchanges: 133356164.38,
+            enterExchangesWeight: 0.1,
+            enterSeedsBank: 0,
+            seedsRemoved3Cycles: 26681232.878,
+            unplantedSeeds: 1333561.64,
+            exitExchanges: 66678082.19,
+            exitExchangesWeight: 0.1,
+            exitSeedsBank: 6667808.22,
+            seedsIntroducedPrevious3Cycles: 14669178.079,
+            seedsGrownPerCycle: 15117031.964999998,
+            percentageOfHarvestAssignedCirculating: 0.5,
+            percentageDistributionOfNewHarvest: { gdc: 0.3, bdc: 0.2, organizations: 0.2, accounts: 0.3 },
+            maxPercentageAccounts: 0.012,
+            maxPercentageOrganizations: 0.011,
+            maxPercentageBdc: 0.013,
+            bdcPercentagesDistribution: { regenGrants: 0.25, regenLoans: 0.25, openProposal: 0.5 },
+            gdcPercentagesDistribution: {
+              networkMaintenance: 0.15,
+              regenGrants: 0.2,
+              coreDevelopment: 0.45,
+              interestFreeLoans: 0.2
+            },
+            numPeopleAccounts: 10000000,
+            numOrganizationAccounts: 100000,
+            numBdcs: 100,
+            harvestDistribution: {}
+          }
+        }
+      )
+      this.editSimulationState(
+        {
+          stateEdited: {
+            circulatingSeeds: 23.84,
+            volumeGrowth: 0.025,
+            changeRequiredToMeetDemand: 33339041.096,
+            seedsDestroyed: 10000,
+            plantedSeeds: 13335616.44,
+            enterExchanges: 133356164.38,
+            enterExchangesWeight: 0.1,
+            enterSeedsBank: 0,
+            seedsRemoved3Cycles: 26681232.878,
+            unplantedSeeds: 1333561.64,
+            exitExchanges: 66678082.19,
+            exitExchangesWeight: 0.1,
+            exitSeedsBank: 6667808.22,
+            seedsIntroducedPrevious3Cycles: 14669178.079,
+            seedsGrownPerCycle: 15117031.964999998,
+            percentageOfHarvestAssignedCirculating: 0.5,
+            percentageDistributionOfNewHarvest: { gdc: 0.3, bdc: 0.2, organizations: 0.2, accounts: 0.3 },
+            maxPercentageAccounts: 0.012,
+            maxPercentageOrganizations: 0.011,
+            maxPercentageBdc: 0.013,
+            bdcPercentagesDistribution: { regenGrants: 0.25, regenLoans: 0.25, openProposal: 0.5 },
+            gdcPercentagesDistribution: {
+              networkMaintenance: 0.15,
+              regenGrants: 0.2,
+              coreDevelopment: 0.45,
+              interestFreeLoans: 0.2
+            },
+            numPeopleAccounts: 10000000,
+            numOrganizationAccounts: 100000,
+            numBdcs: 100,
+            harvestDistribution: {}
+          },
+          step: 0
+        }
+      )
+      // this.getDataTable(this.tableSelected)
+      this.getDataChart({ tableId: this.tableSelected })
     }
   },
   methods: {
