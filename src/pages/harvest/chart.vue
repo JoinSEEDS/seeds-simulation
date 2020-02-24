@@ -12,17 +12,36 @@ import { seeds } from '~/mixins/seeds'
 export default {
   name: 'custom-chart',
   mixins: [ seeds ],
-  mounted () {
-    this.loadChart()
-  },
-  computed: {
-    chartWidth () {
-      var customTable = document.getElementById('chart-area')
-      console.log('Width dom:', width(customTable))
-      return width(customTable)
+  data () {
+    return {
+      chartWidth: 200
     }
   },
+  mounted () {
+    this.resizeChart()
+
+    window.addEventListener('resize', this.resizeChart())
+  },
+  beforeDestroy () {
+    document.removeEventListener('resize', this.resizeChart())
+  },
+  computed: {
+    // chartWidth () {
+    //   var customTable = document.getElementById('chart-area')
+    //   console.log('Width dom:', width(customTable))
+    //   return width(customTable)
+    // }
+  },
   methods: {
+    getWidth () {
+      var customTable = document.getElementById('chart-area')
+      this.chartWidth = width(customTable)
+    },
+    resizeChart () {
+      document.getElementById('chart-area').innerHTML = ''
+      this.getWidth()
+      this.loadChart()
+    },
     loadChart () {
       var container = document.getElementById('chart-area')
       var data = {
