@@ -1,5 +1,5 @@
 export default {
-  SEEDS_CREATED: 1,
+  SEEDS_GROWN: 1,
   SEEDS_IND_ACCNTS: 2,
   SEEDS_ORG_ACCNTS: 3,
   SEEDS_BDC: 4,
