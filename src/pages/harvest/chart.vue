@@ -20,10 +20,10 @@ export default {
   mounted () {
     this.resizeChart()
 
-    window.addEventListener('resize', this.resizeChart())
+    window.addEventListener('resize', () => { this.resizeChart() })
   },
   beforeDestroy () {
-    document.removeEventListener('resize', this.resizeChart())
+    document.removeEventListener('resize', () => { this.resizeChart() })
   },
   computed: {
     // chartWidth () {
