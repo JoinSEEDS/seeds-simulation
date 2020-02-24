@@ -1,9 +1,11 @@
 <template lang="pug">
-    div.column
-        #chart-area.full-width
+    div.column(ref='container')
+      //- slot(name='container')
+      #chart-area
 </template>
 
 <script>
+// https://github.com/nhn/tui.chart/blob/master/docs/wiki/README.md
 import chart from 'tui-chart'
 import { dom } from 'quasar'
 const { width } = dom
@@ -29,28 +31,29 @@ export default {
   },
   mounted () {
     window.addEventListener('resize', () => { this.resizeChart() })
+    console.log('Container ref', this.$refs)
   },
   beforeDestroy () {
     document.removeEventListener('resize', () => { this.resizeChart() })
   },
   methods: {
     getWidth () {
-      var customTable = document.getElementById('chart-area')
+      // var customTable = document.getElementById('chart-area')
+      var customTable = this.$refs.container.children[0]
       this.chartWidth = width(customTable)
     },
     resizeChart () {
-      document.getElementById('chart-area').innerHTML = ''
+      this.$refs.container.children[0].innerHTML = ''
       this.getWidth()
       this.loadChart()
     },
     loadChart () {
       var container = document.getElementById('chart-area')
+      // var container = document.getElementById('chart-area')
       var data = {
         categories: this.dataChart.categories,
         series: this.dataChart.series
       }
-      // console.log('Data sent to chart', dataChart)
-      // console.log('myDataChart', this.dataChart)
       var options = {
         chart: {
           title: 'Custom Chart',

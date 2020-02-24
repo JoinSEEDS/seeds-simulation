@@ -42,6 +42,13 @@
             )
 
         custom-chart(:dataChart="myDataChart")
+          //- template(v-slot:container)
+          //-   h2 test
+          //-   #chart-area1
+        custom-chart(:dataChart="[]")
+          //- template(v-slot:container)
+          //-   h2 test 2
+          //-   #chart-area2
 </template>
 
 <script>
