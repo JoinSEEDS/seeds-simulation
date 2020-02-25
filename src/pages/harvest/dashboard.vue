@@ -1,5 +1,5 @@
 <template lang="pug">
-    div.q-ma-xl.q-gutter-xl
+    div.q-ma-xl.q-gutter-y-xl
 
         #customTable(@click="selectTable(constant.SEEDS_GROWN)")
             q-table(
