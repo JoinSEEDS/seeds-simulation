@@ -18,7 +18,7 @@ export const seeds = {
       return this.$store.state.harvest.dataTable1
     },
     myDataChart () {
-      return this.$store.state.harvest.dataChart1
+      return this.$store.state.harvest.dataChart
     }
   }
 }

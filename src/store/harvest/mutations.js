@@ -14,7 +14,7 @@ export const setDataGdcTable = (state, data) => {
   state.gdcTable = data
 }
 export const setDataChart = (state, data) => {
-  state.dataChart1 = data
+  state.dataChart = data
 }
 export const setDataSimulationState = (state, data) => {
   if (data.append) {

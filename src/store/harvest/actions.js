@@ -129,6 +129,10 @@ export const getDataChart = async function ({ dispatch, commit, state }, { table
   console.log('getDataChart function')
   let data
 
+  if (state.simulationState.length === 0) {
+    commit('setDataChart', [])
+  }
+
   switch (tableId) {
     case HarvestConstants.SEEDS_GROWN:
       data = {
@@ -301,6 +305,7 @@ export const doCycle = async function ({ dispatch, commit, state }, { simulation
     let initState = doNextCycle(Object.assign({}, simulationState), false)
     let newState = doNextCycle(Object.assign({}, simulationState), true)
     commit('setDataSimulationState', { simulation: [initState, newState], append: true })
+    // console.log(JSON.stringify(state.simulationState[0]))
   } else {
     let newState = doNextCycle(Object.assign({}, simulationState), true)
     commit('setDataSimulationState', { simulation: [newState], append: true })
