@@ -216,13 +216,13 @@ export default {
           label: 'Seeds Grown 3 Cycles',
           align: 'left',
           field: 'seeds3cycles',
-          // format: val => `${val}`,
+          format: val => `${val.toFixed(2)}`,
           sortable: true,
           headerClasses: 'bg-primary text-white',
           style: 'max-width: 100px'
         },
-        { name: 'seedsPerCycle', align: 'center', label: 'Seeds Grown Per Cycle', field: 'seedsPerCycle', sortable: true, headerClasses: 'bg-primary text-white' },
-        { name: 'seedsPerBlock', align: 'right', label: 'Seeds Grown Per Block', field: 'seedsPerBlock', sortable: true, headerClasses: 'bg-primary text-white' }
+        { name: 'seedsPerCycle', align: 'center', label: 'Seeds Grown Per Cycle', field: 'seedsPerCycle', sortable: true, headerClasses: 'bg-primary text-white', format: val => `${val.toFixed(2)}` },
+        { name: 'seedsPerBlock', align: 'right', label: 'Seeds Grown Per Block', field: 'seedsPerBlock', sortable: true, headerClasses: 'bg-primary text-white', format: val => `${val.toFixed(2)}` }
       ],
       columnsTableInd: [
         {
@@ -231,13 +231,19 @@ export default {
           label: 'Rank',
           align: 'left',
           field: 'position',
-          // format: val => `${val}`,
           sortable: true,
           headerClasses: 'bg-primary text-white',
           style: 'max-width: 100px'
         },
         { name: 'numberUsers', align: 'center', label: 'Number People Accounts', field: 'numberUsers', sortable: true, headerClasses: 'bg-primary text-white' },
-        { name: 'totalAmount', label: 'Total Amount', field: 'totalAmount', sortable: true, headerClasses: 'bg-primary text-white' },
+        {
+          name: 'totalAmount',
+          label: 'Total Amount',
+          field: 'totalAmount',
+          sortable: true,
+          headerClasses: 'bg-primary text-white',
+          format: val => `Hola ${val}`
+        },
         { name: 'totalAmountPerUser', label: 'Total Amount per Account', field: 'totalAmountPerUser', sortable: true, headerClasses: 'bg-primary text-white' }
       ],
       columnsTableOrg: [

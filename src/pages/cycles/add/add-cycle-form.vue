@@ -235,6 +235,7 @@ export default {
       exitExchanges: 66678082.19,
       exitExchangesWeight: 0.1,
       exitSeedsBank: 6667808.22,
+      percentageOfHarvestAssignedCirculating: 0.5,
       // Interface - START percentageDistributionOfNewHarvest
       gdc: 0.3,
       bdc: 0.2,
