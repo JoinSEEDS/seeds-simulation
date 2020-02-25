@@ -172,19 +172,19 @@ export default {
           simulationState: {
             circulatingSeeds: 1333561643.84,
             volumeGrowth: 0.025,
-            changeRequiredToMeetDemand: 33339041.096,
+            // changeRequiredToMeetDemand: 33339041.096,
             seedsDestroyed: 10000,
             plantedSeeds: 13335616.44,
             enterExchanges: 133356164.38,
             enterExchangesWeight: 0.1,
             enterSeedsBank: 0,
-            seedsRemoved3Cycles: 26681232.878,
+            // seedsRemoved3Cycles: 26681232.878,
             unplantedSeeds: 1333561.64,
             exitExchanges: 66678082.19,
             exitExchangesWeight: 0.1,
             exitSeedsBank: 6667808.22,
-            seedsIntroducedPrevious3Cycles: 14669178.079,
-            seedsGrownPerCycle: 15117031.964999998,
+            // seedsIntroducedPrevious3Cycles: 14669178.079,
+            // seedsGrownPerCycle: 15117031.964999998,
             percentageOfHarvestAssignedCirculating: 0.5,
             percentageDistributionOfNewHarvest: { gdc: 0.3, bdc: 0.2, organizations: 0.2, accounts: 0.3 },
             maxPercentageAccounts: 0.012,
@@ -199,8 +199,8 @@ export default {
             },
             numPeopleAccounts: 10000000,
             numOrganizationAccounts: 100000,
-            numBdcs: 100,
-            harvestDistribution: {}
+            numBdcs: 100
+            // harvestDistribution: {}
           }
         })
     }
