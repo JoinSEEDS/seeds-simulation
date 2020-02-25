@@ -4,7 +4,7 @@
         #customTable(@click="selectTable(constant.SEEDS_GROWN)")
             q-table(
             :data="dataTableGROWN"
-            :columns="columnsTable1"
+            :columns="columnsTableGrown"
             row-key="name"
             :card-class="{'bg-grey-5': tableSelected == constant.SEEDS_GROWN}"
             )
@@ -12,7 +12,7 @@
         .div(@click="selectTable(constant.SEEDS_IND_ACCNTS)")
             q-table(
             :data="dataTableIND"
-            :columns="columnsTable2"
+            :columns="columnsTableInd"
             row-key="name"
             :card-class="{'bg-grey-5': tableSelected == constant.SEEDS_IND_ACCNTS}"
             )
@@ -20,7 +20,7 @@
         .div(@click="selectTable(constant.SEEDS_ORG_ACCNTS)")
             q-table(
             :data="dataTableORG"
-            :columns="columnsTable3"
+            :columns="columnsTableOrg"
             row-key="name"
             :card-class="{'bg-grey-5': tableSelected == constant.SEEDS_ORG_ACCNTS}"
             )
@@ -28,7 +28,7 @@
         .div(@click="selectTable(constant.SEEDS_BDC)")
             q-table(
             :data="dataTableBDC"
-            :columns="columnsTable4"
+            :columns="columnsTableBDC"
             row-key="name"
             :card-class="{'bg-grey-5': tableSelected == constant.SEEDS_BDC}"
             )
@@ -36,7 +36,7 @@
         .div(@click="selectTable(constant.SEEDS_GDC)")
             q-table(
             :data="dataTableGDC"
-            :columns="columnsTable5"
+            :columns="columnsTableGDC"
             row-key="name"
             :card-class="{'bg-grey-5': tableSelected == constant.SEEDS_GDC}"
             )
@@ -161,8 +161,10 @@ export default {
      * This method toggle select between the tables
      */
     selectTable (table) {
-      this.tableSelected = table
-      window.scrollTo(0, document.body.scrollHeight || document.documentElement.scrollHeight)
+      if (this.tableSelected !== table) {
+        this.tableSelected = table
+        window.scrollTo(0, document.body.scrollHeight || document.documentElement.scrollHeight)
+      }
     },
     fillToTest () {
       this.doCycle(
@@ -207,24 +209,7 @@ export default {
     return {
       tableSelected: 0,
       constant: undefined,
-      columns: [
-        {
-          name: 'name',
-          required: true,
-          label: 'Dessert (100g serving)',
-          align: 'left',
-          field: row => row.name,
-          format: val => `${val}`,
-          sortable: true,
-          // classes: 'bg-grey-2 ellipsis',
-          headerClasses: 'bg-primary text-white',
-          style: 'max-width: 100px'
-        },
-        { name: 'calories', align: 'center', label: 'Calories', field: 'calories', sortable: true, headerClasses: 'bg-primary text-white' },
-        { name: 'sodium', label: 'Sodium (mg)', field: 'sodium', headerClasses: 'bg-primary text-white' },
-        { name: 'iron', label: 'Iron (%)', field: 'iron', sortable: true, headerClasses: 'bg-primary text-white', sort: (a, b) => parseInt(a, 10) - parseInt(b, 10) }
-      ],
-      columnsTable1: [
+      columnsTableGrown: [
         {
           name: 'seeds3cycles',
           required: true,
@@ -239,7 +224,7 @@ export default {
         { name: 'seedsPerCycle', align: 'center', label: 'Seeds Grown Per Cycle', field: 'seedsPerCycle', sortable: true, headerClasses: 'bg-primary text-white' },
         { name: 'seedsPerBlock', align: 'right', label: 'Seeds Grown Per Block', field: 'seedsPerBlock', sortable: true, headerClasses: 'bg-primary text-white' }
       ],
-      columnsTable2: [
+      columnsTableInd: [
         {
           name: 'position',
           required: true,
@@ -255,7 +240,7 @@ export default {
         { name: 'totalAmount', label: 'Total Amount', field: 'totalAmount', sortable: true, headerClasses: 'bg-primary text-white' },
         { name: 'totalAmountPerUser', label: 'Total Amount per Account', field: 'totalAmountPerUser', sortable: true, headerClasses: 'bg-primary text-white' }
       ],
-      columnsTable3: [
+      columnsTableOrg: [
         {
           name: 'position',
           required: true,
@@ -271,7 +256,7 @@ export default {
         { name: 'totalAmount', label: 'Total Amount', field: 'totalAmount', sortable: true, headerClasses: 'bg-primary text-white' },
         { name: 'totalAmountPerOrganization', label: 'Total Amount per Organization', field: 'totalAmountPerOrganization', sortable: true, headerClasses: 'bg-primary text-white' }
       ],
-      columnsTable4: [
+      columnsTableBDC: [
         {
           name: 'position',
           required: true,
@@ -287,7 +272,7 @@ export default {
         { name: 'budget', label: 'Total Amount', field: 'budget', sortable: true, headerClasses: 'bg-primary text-white' },
         { name: 'budgetPerBdc', label: 'Something strange', field: 'budgetPerBdc', sortable: true, headerClasses: 'bg-primary text-white' }
       ],
-      columnsTable5: [
+      columnsTableGDC: [
         {
           name: 'totalAmountForGdc',
           required: true,
@@ -303,110 +288,6 @@ export default {
         { name: 'regenGrants', label: 'Regen Grants', field: 'regenGrants', sortable: true, headerClasses: 'bg-primary text-white' },
         { name: 'coreDevelopment', label: 'Core Development', field: 'coreDevelopment', sortable: true, headerClasses: 'bg-primary text-white' },
         { name: 'interestFreeLoans', label: 'Interest Free Loans', field: 'interestFreeLoans', sortable: true, headerClasses: 'bg-primary text-white' }
-      ],
-      dataTable1: [{
-        name: 'Seeds Created',
-        seeds3cycles: 0,
-        seedsPerCycle: 0,
-        seedsPerBlock: 0
-      }],
-      data: [
-        {
-          name: 'Frozen Yogurt',
-          calories: 159,
-          sodium: 87,
-          calcium: '14%'
-        },
-        {
-          name: 'Ice cream sandwich',
-          calories: 237,
-          fat: 9.0,
-          carbs: 37,
-          protein: 4.3,
-          sodium: 129,
-          calcium: '8%',
-          iron: '1%'
-        },
-        {
-          name: 'Eclair',
-          calories: 262,
-          fat: 16.0,
-          carbs: 23,
-          protein: 6.0,
-          sodium: 337,
-          calcium: '6%',
-          iron: '7%'
-        },
-        {
-          name: 'Cupcake',
-          calories: 305,
-          fat: 3.7,
-          carbs: 67,
-          protein: 4.3,
-          sodium: 413,
-          calcium: '3%',
-          iron: '8%'
-        },
-        {
-          name: 'Gingerbread',
-          calories: 356,
-          fat: 16.0,
-          carbs: 49,
-          protein: 3.9,
-          sodium: 327,
-          calcium: '7%',
-          iron: '16%'
-        },
-        {
-          name: 'Jelly bean',
-          calories: 375,
-          fat: 0.0,
-          carbs: 94,
-          protein: 0.0,
-          sodium: 50,
-          calcium: '0%',
-          iron: '0%'
-        },
-        {
-          name: 'Lollipop',
-          calories: 392,
-          fat: 0.2,
-          carbs: 98,
-          protein: 0,
-          sodium: 38,
-          calcium: '0%',
-          iron: '2%'
-        },
-        {
-          name: 'Honeycomb',
-          calories: 408,
-          fat: 3.2,
-          carbs: 87,
-          protein: 6.5,
-          sodium: 562,
-          calcium: '0%',
-          iron: '45%'
-        },
-        {
-          name: 'Donut',
-          calories: 452,
-          fat: 25.0,
-          carbs: 51,
-          protein: 4.9,
-          sodium: 326,
-          calcium: '2%',
-          iron: '22%'
-        },
-        {
-          name: 'KitKat',
-          calories: 518,
-          fat: 26.0,
-          carbs: 65,
-          protein: 7,
-          sodium: 54,
-          calcium: '12%',
-          iron: '6%'
-        }
       ]
     }
   }
