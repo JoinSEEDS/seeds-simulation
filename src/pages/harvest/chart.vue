@@ -12,11 +12,20 @@ const { width } = dom
 export default {
   name: 'custom-chart',
   model: {
-    prop: 'dataChart'
+    prop: ['dataChart', 'chartName', 'xAxisTitle', 'yAxisTitle']
   },
   props: {
     dataChart: {
       default: null
+    },
+    chartName: {
+      default: 'Title'
+    },
+    xAxisTitle: {
+      default: 'XTitle'
+    },
+    yAxisTitle: {
+      default: 'YTitle'
     }
   },
   data () {
@@ -48,7 +57,7 @@ export default {
       this.loadChart()
     },
     loadChart () {
-      var container = document.getElementById('chart-area')
+      var container = this.$refs.container.children[0]
       // var container = document.getElementById('chart-area')
       var data = {
         categories: this.dataChart.categories,
@@ -56,22 +65,22 @@ export default {
       }
       var options = {
         chart: {
-          title: 'Custom Chart',
+          title: this.chartName,
           width: this.chartWidth
         },
         yAxis: {
-          title: 'Amount',
+          title: this.yAxisTitle,
           pointOnColumn: true
         },
         xAxis: {
-          title: 'Month'
+          title: this.xAxisTitle
         },
         series: {
           spline: true,
           showDot: false
         },
         tooltip: {
-          suffix: '°C'
+          suffix: this.yAxisTitle
         }
       }
       //   var theme = {

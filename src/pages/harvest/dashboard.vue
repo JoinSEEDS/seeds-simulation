@@ -41,14 +41,12 @@
             :card-class="{'bg-grey-5': tableSelected == constant.SEEDS_GDC}"
             )
 
-        custom-chart(:dataChart="myDataChart")
-          //- template(v-slot:container)
-          //-   h2 test
-          //-   #chart-area1
-        custom-chart(:dataChart="[]")
-          //- template(v-slot:container)
-          //-   h2 test 2
-          //-   #chart-area2
+        custom-chart(
+          :dataChart="myDataChart",
+          :chartName="myDataChart.chartName",
+          xAxisTitle="Cycles",
+          yAxisTitle="Seeds"
+          )
 </template>
 
 <script>
