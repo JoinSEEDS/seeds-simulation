@@ -20,9 +20,9 @@ export const getDataTable = async function ({ dispatch, commit, state }, { table
       break
     case HarvestConstants.SEEDS_IND_ACCNTS:
       commit('setDataPeopleAccountsTable', [
-        {
-          totalAmountForPeople: state.simulationState[step].harvestDistribution.peopleAccounts.totalAmountForAccounts
-        },
+        // {
+        //   totalAmountForPeople: state.simulationState[step].harvestDistribution.peopleAccounts.totalAmountForAccounts
+        // },
         {
           position: 'first',
           numberUsers: state.simulationState[step].harvestDistribution.peopleAccounts.first.numberUsers,
@@ -45,9 +45,9 @@ export const getDataTable = async function ({ dispatch, commit, state }, { table
       break
     case HarvestConstants.SEEDS_ORG_ACCNTS:
       commit('setDataOrganizationsAccountsTable', [ // organizations table
-        {
-          totalAmountForOrganizations: state.simulationState[step].harvestDistribution.organizationAccounts.totalAmountForOrganizations
-        },
+        // {
+        //  totalAmountForOrganizations: state.simulationState[step].harvestDistribution.organizationAccounts.totalAmountForOrganizations
+        // },
         {
           position: 'first',
           numberUsers: state.simulationState[step].harvestDistribution.organizationAccounts.first.numberUsers,
@@ -70,9 +70,9 @@ export const getDataTable = async function ({ dispatch, commit, state }, { table
       break
     case HarvestConstants.SEEDS_BDC:
       commit('setDataBdcsTable', [ // bdcs table
-        {
-          totalAmountPerBdc: state.simulationState[step].harvestDistribution.bdcs.totalAmountForBdcs
-        },
+        // {
+        //   totalAmountPerBdc: state.simulationState[step].harvestDistribution.bdcs.totalAmountForBdcs
+        // },
         {
           position: 'first',
           numBdc: state.simulationState[step].harvestDistribution.bdcs.first.numBdcs,
