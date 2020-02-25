@@ -77,10 +77,16 @@ export default {
         },
         series: {
           spline: true,
-          showDot: false
+          showDot: true,
+          animation: {
+            duration: 300
+          }
         },
         tooltip: {
           suffix: this.yAxisTitle
+        },
+        legend: {
+          align: 'top'
         }
       }
       //   var theme = {
