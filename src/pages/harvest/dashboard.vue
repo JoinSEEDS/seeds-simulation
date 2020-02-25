@@ -1,29 +1,32 @@
 <template lang="pug">
     div.q-ma-xl.q-gutter-y-xl
 
-        #customTable(@click="selectTable(constant.SEEDS_GROWN)")
+        .div(@click="selectTable(constant.SEEDS_GROWN)")
             q-table(
+            title="Test"
             :data="dataTableGROWN"
             :columns="columnsTableGrown"
             row-key="name"
             :card-class="{'bg-grey-5': tableSelected == constant.SEEDS_GROWN}"
             )
+              template(v-slot:top)
+                custom-table-header
 
-        .div(@click="selectTable(constant.SEEDS_IND_ACCNTS)")
-            q-table(
-            :data="dataTableIND"
-            :columns="columnsTableInd"
-            row-key="name"
-            :card-class="{'bg-grey-5': tableSelected == constant.SEEDS_IND_ACCNTS}"
-            )
+        //- .div(@click="selectTable(constant.SEEDS_IND_ACCNTS)")
+        //-     q-table(
+        //-     :data="dataTableIND"
+        //-     :columns="columnsTableInd"
+        //-     row-key="name"
+        //-     :card-class="{'bg-grey-5': tableSelected == constant.SEEDS_IND_ACCNTS}"
+        //-     )
 
-        .div(@click="selectTable(constant.SEEDS_ORG_ACCNTS)")
-            q-table(
-            :data="dataTableORG"
-            :columns="columnsTableOrg"
-            row-key="name"
-            :card-class="{'bg-grey-5': tableSelected == constant.SEEDS_ORG_ACCNTS}"
-            )
+        //- .div(@click="selectTable(constant.SEEDS_ORG_ACCNTS)")
+        //-     q-table(
+        //-     :data="dataTableORG"
+        //-     :columns="columnsTableOrg"
+        //-     row-key="name"
+        //-     :card-class="{'bg-grey-5': tableSelected == constant.SEEDS_ORG_ACCNTS}"
+        //-     )
 
         .div(@click="selectTable(constant.SEEDS_BDC)")
             q-table(
@@ -51,12 +54,12 @@
 
 <script>
 import CustomChart from '~/pages/harvest/chart'
+import CustomTableHeader from '~/pages/harvest/components/customTableHeader'
 import harvestConstant from '~/const/harvestConstants'
 import { mapActions, mapGetters } from 'vuex'
-// import { EventBus } from '~/mixins/utils'
 export default {
   name: 'harvest-dashboard',
-  components: { CustomChart },
+  components: { CustomChart, CustomTableHeader },
   beforeMount () {
     this.constant = harvestConstant
   },
@@ -242,9 +245,9 @@ export default {
           field: 'totalAmount',
           sortable: true,
           headerClasses: 'bg-primary text-white',
-          format: val => `Hola ${val}`
+          format: val => `${val.toFixed(2)}`
         },
-        { name: 'totalAmountPerUser', label: 'Total Amount per Account', field: 'totalAmountPerUser', sortable: true, headerClasses: 'bg-primary text-white' }
+        { name: 'totalAmountPerUser', label: 'Total Amount per Account', field: 'totalAmountPerUser', sortable: true, headerClasses: 'bg-primary text-white', format: val => `${val.toFixed(2)}` }
       ],
       columnsTableOrg: [
         {
@@ -259,8 +262,8 @@ export default {
           style: 'max-width: 100px'
         },
         { name: 'numberUsers', align: 'center', label: 'Number Organization Accounts', field: 'numberUsers', sortable: true, headerClasses: 'bg-primary text-white' },
-        { name: 'totalAmount', label: 'Total Amount', field: 'totalAmount', sortable: true, headerClasses: 'bg-primary text-white' },
-        { name: 'totalAmountPerOrganization', label: 'Total Amount per Organization', field: 'totalAmountPerOrganization', sortable: true, headerClasses: 'bg-primary text-white' }
+        { name: 'totalAmount', label: 'Total Amount', field: 'totalAmount', sortable: true, headerClasses: 'bg-primary text-white', format: val => `${val.toFixed(2)}` },
+        { name: 'totalAmountPerOrganization', label: 'Total Amount per Organization', field: 'totalAmountPerOrganization', sortable: true, headerClasses: 'bg-primary text-white', format: val => `${val.toFixed(2)}` }
       ],
       columnsTableBDC: [
         {
@@ -288,12 +291,13 @@ export default {
           // format: val => `${val}`,
           sortable: true,
           headerClasses: 'bg-primary text-white',
-          style: 'max-width: 100px'
+          style: 'max-width: 100px',
+          format: val => `${val.toFixed(2)}`
         },
-        { name: 'networkMaintenance', align: 'center', label: 'Network Maintenance', field: 'networkMaintenance', sortable: true, headerClasses: 'bg-primary text-white' },
-        { name: 'regenGrants', label: 'Regen Grants', field: 'regenGrants', sortable: true, headerClasses: 'bg-primary text-white' },
-        { name: 'coreDevelopment', label: 'Core Development', field: 'coreDevelopment', sortable: true, headerClasses: 'bg-primary text-white' },
-        { name: 'interestFreeLoans', label: 'Interest Free Loans', field: 'interestFreeLoans', sortable: true, headerClasses: 'bg-primary text-white' }
+        { name: 'networkMaintenance', align: 'center', label: 'Network Maintenance', field: 'networkMaintenance', sortable: true, headerClasses: 'bg-primary text-white', format: val => `${val.toFixed(2)}` },
+        { name: 'regenGrants', label: 'Regen Grants', field: 'regenGrants', sortable: true, headerClasses: 'bg-primary text-white', format: val => `${val.toFixed(2)}` },
+        { name: 'coreDevelopment', label: 'Core Development', field: 'coreDevelopment', sortable: true, headerClasses: 'bg-primary text-white', format: val => `${val.toFixed(2)}` },
+        { name: 'interestFreeLoans', label: 'Interest Free Loans', field: 'interestFreeLoans', sortable: true, headerClasses: 'bg-primary text-white', format: val => `${val.toFixed(2)}` }
       ]
     }
   }
