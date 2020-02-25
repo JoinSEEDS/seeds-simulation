@@ -3,7 +3,7 @@
 
         #customTable(@click="selectTable(constant.SEEDS_GROWN)")
             q-table(
-            :data="dataTable1"
+            :data="dataTableGROWN"
             :columns="columnsTable1"
             row-key="name"
             :card-class="{'bg-grey-5': tableSelected == constant.SEEDS_GROWN}"
@@ -11,7 +11,7 @@
 
         .div(@click="selectTable(constant.SEEDS_IND_ACCNTS)")
             q-table(
-            :data="data"
+            :data="dataTableIND"
             :columns="columnsTable2"
             row-key="name"
             :card-class="{'bg-grey-5': tableSelected == constant.SEEDS_IND_ACCNTS}"
@@ -19,7 +19,7 @@
 
         .div(@click="selectTable(constant.SEEDS_ORG_ACCNTS)")
             q-table(
-            :data="data"
+            :data="dataTableORG"
             :columns="columnsTable3"
             row-key="name"
             :card-class="{'bg-grey-5': tableSelected == constant.SEEDS_ORG_ACCNTS}"
@@ -27,7 +27,7 @@
 
         .div(@click="selectTable(constant.SEEDS_BDC)")
             q-table(
-            :data="data"
+            :data="dataTableBDC"
             :columns="columnsTable4"
             row-key="name"
             :card-class="{'bg-grey-5': tableSelected == constant.SEEDS_BDC}"
@@ -35,7 +35,7 @@
 
         .div(@click="selectTable(constant.SEEDS_GDC)")
             q-table(
-            :data="data"
+            :data="dataTableGDC"
             :columns="columnsTable5"
             row-key="name"
             :card-class="{'bg-grey-5': tableSelected == constant.SEEDS_GDC}"
@@ -54,7 +54,7 @@
 <script>
 import CustomChart from '~/pages/harvest/chart'
 import harvestConstant from '~/const/harvestConstants'
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 // import { EventBus } from '~/mixins/utils'
 export default {
   name: 'harvest-dashboard',
@@ -149,6 +149,7 @@ export default {
     }
   },
   computed: {
+    ...mapGetters('harvest', ['dataTableGROWN', 'dataTableIND', 'dataTableORG', 'dataTableBDC', 'dataTableGDC']),
     myDataTable1 () {
       return this.$store.state.harvest.dataTable1
     },
