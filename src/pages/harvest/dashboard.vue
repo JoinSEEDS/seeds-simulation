@@ -53,13 +53,12 @@
 
 <script>
 import CustomChart from '~/pages/harvest/chart'
-import { seeds } from '~/mixins/seeds'
 import harvestConstant from '~/const/harvestConstants'
+import { mapActions } from 'vuex'
 // import { EventBus } from '~/mixins/utils'
 export default {
   name: 'harvest-dashboard',
   components: { CustomChart },
-  mixins: [ seeds ],
   beforeMount () {
     this.constant = harvestConstant
   },
@@ -149,7 +148,16 @@ export default {
       this.getDataChart({ tableId: this.tableSelected })
     }
   },
+  computed: {
+    myDataTable1 () {
+      return this.$store.state.harvest.dataTable1
+    },
+    myDataChart () {
+      return this.$store.state.harvest.dataChart
+    }
+  },
   methods: {
+    ...mapActions('harvest', ['getDataTable', 'getDataChart', 'doCycle', 'editSimulationState', 'setCycleTables']),
     /**
      * This method toggle select between the tables
      */
