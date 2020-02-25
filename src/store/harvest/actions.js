@@ -261,11 +261,6 @@ export const getDataChart = async function ({ dispatch, commit, state }, { table
             visible: false
           },
           {
-            name: 'Regen Loans',
-            data: state.simulationState.map(s => { return s.harvestDistribution.gdcs.regenLoans }),
-            visible: false
-          },
-          {
             name: 'Core Development',
             data: state.simulationState.map(s => { return s.harvestDistribution.gdcs.coreDevelopment }),
             visible: false
