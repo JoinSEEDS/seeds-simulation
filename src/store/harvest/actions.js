@@ -286,7 +286,7 @@ export const setCycleTables = async function ({ dispatch, commit, state }, { ste
     step = state.simulationState.length - 1
   }
 
-  for (let i = 0; i < 5; i++) {
+  for (let i = 1; i <= 5; i++) {
     getDataTable({ dispatch, commit, state }, { tableId: i, step: step })
   }
 
