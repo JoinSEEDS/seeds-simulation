@@ -117,7 +117,8 @@ export default {
       //       numOrganizationAccounts: 100000,
       //       numBdcs: 100,
       //       harvestDistribution: {}
-      //     }
+      //     },
+      //     step: 0
       //   }
       // )
       // this.editSimulationState(

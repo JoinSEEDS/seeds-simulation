@@ -294,17 +294,19 @@ export const setCycleTables = async function ({ dispatch, commit, state }, { ste
   return true
 }
 
-export const doCycle = async function ({ dispatch, commit, state }, { simulationState }) {
-  let step = state.simulationState.length
+export const doCycle = async function ({ dispatch, commit, state }, { simulationState, step = -1 }) {
+  if (step === -1) {
+    step = state.simulationState.length
+  }
 
   if (state.simulationState.length === 0) {
     let initState = doNextCycle(Object.assign({}, simulationState), false)
     let newState = doNextCycle(Object.assign({}, simulationState), true)
-    commit('setDataSimulationState', { simulation: [initState, newState], append: true })
+    commit('setDataSimulationState', { simulation: [initState, newState], step: step })
     // console.log(JSON.stringify(state.simulationState[0]))
   } else {
     let newState = doNextCycle(Object.assign({}, simulationState), true)
-    commit('setDataSimulationState', { simulation: [newState], append: true })
+    commit('setDataSimulationState', { simulation: [newState], step: step })
   }
 
   setCycleTables({ dispatch, commit, state }, { step: step })
