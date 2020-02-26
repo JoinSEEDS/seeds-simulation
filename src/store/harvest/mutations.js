@@ -17,11 +17,10 @@ export const setDataChart = (state, data) => {
   state.dataChart = data
 }
 export const setDataSimulationState = (state, data) => {
-  if (data.append) {
-    for (let i = 0; i < data.simulation.length; i++) {
-      state.simulationState.push(data.simulation[i])
-    }
-  } else {
-    state.simulationState[data.step] = data.simulation
+  if (data.step < state.simulationState.length) {
+    state.simulationState.splice(data.step, state.simulationState.length - data.step - 1)
+  }
+  for (let i = 0; i < data.simulation.length; i++) {
+    state.simulationState.push(data.simulation[i])
   }
 }
