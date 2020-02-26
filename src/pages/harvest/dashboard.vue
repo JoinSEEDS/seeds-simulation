@@ -49,11 +49,12 @@
             template(v-slot:top)
                 custom-table-header(:titleTable="dataTableGDC.tableName" :subtitleTable="dataTableGDC.totalAmount")
       custom-chart(
+        v-if="totalSimulationSteps > 0"
         :dataChart="myDataChart",
         :chartName="myDataChart.chartName",
         xAxisTitle="Cycles",
         yAxisTitle="Seeds"
-        )
+      )
 </template>
 
 <script>
@@ -75,11 +76,12 @@ export default {
   watch: {
     simulationStep (currentStep, prevStep) {
       console.log('The simulation step was changed', currentStep, prevStep)
-      this.getDataTable(this.constant.SEEDS_GROWN, this.simulationStep)
-      this.getDataTable(this.constant.SEEDS_IND_ACCNTS, this.simulationStep)
-      this.getDataTable(this.constant.SEEDS_ORG_ACCNTS, this.simulationStep)
-      this.getDataTable(this.constant.SEEDS_BDC, this.simulationStep)
-      this.getDataTable(this.constant.SEEDS_GDC, this.simulationStep)
+      this.setCycleTables({ step: this.simulationStep - 1 })
+      // this.getDataTable({ tableId: this.constant.SEEDS_GROWN, step: (this.simulationStep - 1) })
+      // this.getDataTable({ tableId: this.constant.SEEDS_IND_ACCNTS, step: (this.simulationStep - 1) })
+      // this.getDataTable({ tableId: this.constant.SEEDS_ORG_ACCNTS, step: (this.simulationStep - 1) })
+      // this.getDataTable({ tableId: this.constant.SEEDS_BDC, step: (this.simulationStep - 1) })
+      // this.getDataTable({ tableId: this.constant.SEEDS_GDC, step: (this.simulationStep - 1) })
       if (this.simulationStep > prevStep) this.getDataChart({ tableId: this.tableSelected })
       console.log('Tables updated')
     },
@@ -127,7 +129,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('harvest', ['dataTableGROWN', 'dataTableIND', 'dataTableORG', 'dataTableBDC', 'dataTableGDC', 'simulationStep']),
+    ...mapGetters('harvest', ['dataTableGROWN', 'dataTableIND', 'dataTableORG', 'dataTableBDC', 'dataTableGDC', 'simulationStep', 'totalSimulationSteps']),
     myDataTable1 () {
       return this.$store.state.harvest.dataTable1
     },

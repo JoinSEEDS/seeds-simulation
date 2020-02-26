@@ -225,48 +225,50 @@ export default {
   name: 'add-cycle-form',
   data () {
     return {
-      name: '',
-      circulatingSeeds: 1333561643.84,
-      volumeGrowth: 0.025,
+      circulatingSeeds: 0,
+      volumeGrowth: 0,
       // changeRequiredToMeetDemand: 33339041.096,
-      seedsDestroyed: 10000,
-      plantedSeeds: 13335616.44,
-      enterExchanges: 133356164.38,
-      enterExchangesWeight: 0.1,
+      seedsDestroyed: 0,
+      plantedSeeds: 0,
+      enterExchanges: 0,
+      enterExchangesWeight: 0,
       enterSeedsBank: 0,
       // seedsRemoved3Cycles: 26681232.878,
-      unplantedSeeds: 1333561.64,
-      exitExchanges: 66678082.19,
-      exitExchangesWeight: 0.1,
-      exitSeedsBank: 6667808.22,
-      percentageOfHarvestAssignedCirculating: 0.5,
+      unplantedSeeds: 0,
+      exitExchanges: 0,
+      exitExchangesWeight: 0,
+      exitSeedsBank: 0,
+      percentageOfHarvestAssignedCirculating: 0,
       // Interface - START percentageDistributionOfNewHarvest
-      gdc: 0.3,
-      bdc: 0.2,
-      organizations: 0.2,
-      accounts: 0.3,
+      gdc: 0,
+      bdc: 0,
+      organizations: 0,
+      accounts: 0,
       // -END
-      maxPercentageAccounts: 0.012,
-      maxPercentageOrganizations: 0.011,
-      maxPercentageBdc: 0.013,
+      maxPercentageAccounts: 0,
+      maxPercentageOrganizations: 0,
+      maxPercentageBdc: 0,
       // Interface - Start bdcPercentagesDistribution
-      regenGrantsBDC: 0.25,
-      regenLoans: 0.25,
-      openProposal: 0.5,
+      regenGrantsBDC: 0,
+      regenLoans: 0,
+      openProposal: 0,
       // -END
       // Interface - Start gdcPercentagesDistribution
-      networkMaintenance: 0.15,
-      regenGrantsGDC: 0.2,
-      coreDevelopment: 0.45,
-      interestFreeLoans: 0.2,
+      networkMaintenance: 0,
+      regenGrantsGDC: 0,
+      coreDevelopment: 0,
+      interestFreeLoans: 0,
       // -END
-      numPeopleAccounts: 10000000,
-      numOrganizationAccounts: 100000,
-      numBdcs: 100
+      numPeopleAccounts: 0,
+      numOrganizationAccounts: 0,
+      numBdcs: 0
     }
   },
   computed: {
-    ...mapGetters('harvest', ['simulationStep', 'totalSimulationSteps'])
+    ...mapGetters('harvest', ['simulationStep', 'totalSimulationSteps', 'cycleDataForm'])
+  },
+  mounted () {
+    this.syncFormData()
   },
   methods: {
     ...mapActions('harvest', ['getInitSimulationStep', 'doCycle']),
@@ -309,8 +311,40 @@ export default {
             numOrganizationAccounts: parseFloat(this.numOrganizationAccounts),
             numBdcs: parseFloat(this.numBdcs)
             // harvestDistribution: {}
-          }
+          },
+          step: (this.simulationStep - 1)
         })
+    },
+    syncFormData () {
+      this.circulatingSeeds = this.cycleDataForm.circulatingSeeds
+      this.volumeGrowth = this.cycleDataForm.volumeGrowth
+      this.seedsDestroyed = this.cycleDataForm.seedsDestroyed
+      this.plantedSeeds = this.cycleDataForm.plantedSeeds
+      this.enterExchanges = this.cycleDataForm.enterExchanges
+      this.enterExchangesWeight = this.cycleDataForm.enterExchangesWeight
+      this.enterSeedsBank = this.cycleDataForm.enterSeedsBank
+      this.unplantedSeeds = this.cycleDataForm.unplantedSeeds
+      this.exitExchanges = this.cycleDataForm.exitExchanges
+      this.exitExchangesWeight = this.cycleDataForm.exitExchangesWeight
+      this.exitSeedsBank = this.cycleDataForm.exitSeedsBank
+      this.percentageOfHarvestAssignedCirculating = this.cycleDataForm.percentageOfHarvestAssignedCirculating
+      this.gdc = this.cycleDataForm.gdc
+      this.bdc = this.cycleDataForm.bdc
+      this.organizations = this.cycleDataForm.organizations
+      this.accounts = this.cycleDataForm.accounts
+      this.maxPercentageAccounts = this.cycleDataForm.maxPercentageAccounts
+      this.maxPercentageOrganizations = this.cycleDataForm.maxPercentageOrganizations
+      this.maxPercentageBdc = this.cycleDataForm.maxPercentageBdc
+      this.regenGrantsBDC = this.cycleDataForm.regenGrantsBDC
+      this.regenLoans = this.cycleDataForm.regenLoans
+      this.openProposal = this.cycleDataForm.openProposal
+      this.networkMaintenance = this.cycleDataForm.networkMaintenance
+      this.regenGrantsGDC = this.cycleDataForm.regenGrantsGDC
+      this.coreDevelopment = this.cycleDataForm.coreDevelopment
+      this.interestFreeLoans = this.cycleDataForm.interestFreeLoans
+      this.numPeopleAccounts = this.cycleDataForm.numPeopleAccounts
+      this.numOrganizationAccounts = this.cycleDataForm.numOrganizationAccounts
+      this.numBdcs = this.cycleDataForm.numBdcs
     }
   }
 }

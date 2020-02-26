@@ -5,3 +5,4 @@ export const dataTableBDC = ({ bdcsTable }) => bdcsTable
 export const dataTableGDC = ({ gdcTable }) => gdcTable
 export const simulationStep = ({ simulationStep }) => simulationStep
 export const totalSimulationSteps = ({ simulationState }) => simulationState.length
+export const cycleDataForm = ({ stateForm }) => stateForm

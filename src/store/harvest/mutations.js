@@ -27,3 +27,6 @@ export const setDataSimulationState = (state, data) => {
 export const setSimulationStep = (state, step) => {
   state.simulationStep = step
 }
+export const setDataForm = (state, dataForm) => {
+  state.stateForm = dataForm
+}

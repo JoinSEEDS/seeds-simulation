@@ -298,7 +298,6 @@ export const doCycle = async function ({ dispatch, commit, state }, { simulation
   if (step === -1) {
     step = state.simulationState.length
   }
-  console.log('from form: ', simulationState)
 
   if (state.simulationState.length === 0) {
     let initState = doNextCycle(Object.assign({}, simulationState), false)
@@ -312,6 +311,7 @@ export const doCycle = async function ({ dispatch, commit, state }, { simulation
 
   setCycleTables({ dispatch, commit, state }, { step: step })
   commit('setSimulationStep', state.simulationState.length)
+  commit('setDataForm', simulationState)
 
   return true
 }
