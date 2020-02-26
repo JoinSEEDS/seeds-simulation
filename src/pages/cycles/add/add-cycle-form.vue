@@ -1,18 +1,5 @@
 <template lang="pug">
     #container
-        .buttons.q-gutter-sm.q-ma-sm
-            q-btn.full-width(
-                    color="primary"
-                    label="Back"
-                    size="md"
-                    unelevated
-                )
-            q-btn.full-width(
-                    color="primary"
-                    label="Next"
-                    size="md"
-                    unelevated
-                )
         q-scroll-area.scroll-container
             .template-form
                 q-form.q-ma-md.q-gutter-y-md
@@ -222,6 +209,9 @@
                         type="number"
                         lazy-rules
                         :rules="[ val => val && val.length > 0 || 'Please type something']")
+        .buttons.q-gutter-sm.q-ma-sm.text-center
+            q-btn(round color="primary" icon="skip_previous")
+            q-btn(round color="primary" icon="skip_next")
 </template>
 
 <script>
@@ -278,12 +268,7 @@ export default {
     border: 1px solid
     border-color: gray
     padding: 5px
-// .template-form
-//     margin-top: 60px
-// .fixed-buttons
-//     margin-bottom: 50px
 .scroll-container
-    height: calc(100vh - 170px)
+    height: calc(100vh - 120px)
     max-width: 100%
 </style>
-cycle-form
