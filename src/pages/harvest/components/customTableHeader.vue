@@ -2,8 +2,8 @@
     .full-width(ref="container")
         div.container-title
             p.text-h6.text-center {{titleTable}}
-        div.container-subtitle
-            p.text-overline.text-center {{subtitleTable}}
+        div.container-subtitle(v-if="subtitleTable")
+            p.text-overline.text-center Total Amount: {{subtitleTable}}
 </template>
 
 <script>
@@ -17,7 +17,7 @@ export default {
       default: 'Title'
     },
     subtitleTable: {
-      default: 'Subtitle'
+      default: undefined
     }
   },
   mounted () {
@@ -29,11 +29,11 @@ export default {
 
 <style lang="sass" scoped>
   .container-title
-    color: blue
-    background-color: red
+    color: #ffffff
+    background-color: #1a237e
   .container-subtitle
-    color: red
-    background-color: blue
+    color: #ffffff
+    background-color: #514aac
   p
     margin: 0px
 </style>

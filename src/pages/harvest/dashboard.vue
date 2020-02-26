@@ -3,47 +3,51 @@
 
         .div(@click="selectTable(constant.SEEDS_GROWN)")
             q-table(
-            title="Test"
-            :data="dataTableGROWN"
+            :data="dataTableGROWN.rows"
             :columns="columnsTableGrown"
             row-key="name"
             :card-class="{'bg-grey-5': tableSelected == constant.SEEDS_GROWN}"
             )
               template(v-slot:top)
-                custom-table-header
+                custom-table-header(:titleTable="dataTableGROWN.tableName")
 
-        //- .div(@click="selectTable(constant.SEEDS_IND_ACCNTS)")
-        //-     q-table(
-        //-     :data="dataTableIND"
-        //-     :columns="columnsTableInd"
-        //-     row-key="name"
-        //-     :card-class="{'bg-grey-5': tableSelected == constant.SEEDS_IND_ACCNTS}"
-        //-     )
-
-        //- .div(@click="selectTable(constant.SEEDS_ORG_ACCNTS)")
-        //-     q-table(
-        //-     :data="dataTableORG"
-        //-     :columns="columnsTableOrg"
-        //-     row-key="name"
-        //-     :card-class="{'bg-grey-5': tableSelected == constant.SEEDS_ORG_ACCNTS}"
-        //-     )
+        .div(@click="selectTable(constant.SEEDS_IND_ACCNTS)")
+            q-table(
+            :data="dataTableIND.rows"
+            :columns="columnsTableInd"
+            row-key="name"
+            :card-class="{'bg-grey-5': tableSelected == constant.SEEDS_IND_ACCNTS}"
+            )
+              template(v-slot:top)
+                custom-table-header(:titleTable="dataTableIND.tableName" :subtitleTable="dataTableIND.totalAmount")
+        .div(@click="selectTable(constant.SEEDS_ORG_ACCNTS)")
+            q-table(
+            :data="dataTableORG.rows"
+            :columns="columnsTableOrg"
+            row-key="name"
+            :card-class="{'bg-grey-5': tableSelected == constant.SEEDS_ORG_ACCNTS}"
+            )
+              template(v-slot:top)
+                custom-table-header(:titleTable="dataTableORG.tableName" :subtitleTable="dataTableORG.totalAmount")
 
         .div(@click="selectTable(constant.SEEDS_BDC)")
             q-table(
-            :data="dataTableBDC"
+            :data="dataTableBDC.rows"
             :columns="columnsTableBDC"
             row-key="name"
             :card-class="{'bg-grey-5': tableSelected == constant.SEEDS_BDC}"
             )
-
+              template(v-slot:top)
+                custom-table-header(:titleTable="dataTableBDC.tableName" :subtitleTable="dataTableBDC.totalAmount")
         .div(@click="selectTable(constant.SEEDS_GDC)")
             q-table(
-            :data="dataTableGDC"
+            :data="dataTableGDC.rows"
             :columns="columnsTableGDC"
             row-key="name"
             :card-class="{'bg-grey-5': tableSelected == constant.SEEDS_GDC}"
             )
-
+              template(v-slot:top)
+                  custom-table-header(:titleTable="dataTableGDC.tableName" :subtitleTable="dataTableGDC.totalAmount")
         custom-chart(
           :dataChart="myDataChart",
           :chartName="myDataChart.chartName",
@@ -64,9 +68,10 @@ export default {
     this.constant = harvestConstant
   },
   mounted () {
-    this.getDataTable('None')
+    // this.getDataTable('None')
     this.fillToTest()
     this.fillToTest()
+    this.tableSelected = 1
   },
   watch: {
     tableSelected () {
@@ -234,8 +239,7 @@ export default {
           label: 'Rank',
           align: 'left',
           field: 'position',
-          sortable: true,
-          headerClasses: 'bg-primary text-white',
+          headerClasses: 'bg-primary text-white text-weight-bold',
           style: 'max-width: 100px'
         },
         { name: 'numberUsers', align: 'center', label: 'Number People Accounts', field: 'numberUsers', sortable: true, headerClasses: 'bg-primary text-white' },
@@ -244,7 +248,7 @@ export default {
           label: 'Total Amount',
           field: 'totalAmount',
           sortable: true,
-          headerClasses: 'bg-primary text-white',
+          headerClasses: 'bg-primary text-white text-weight-bold',
           format: val => `${val.toFixed(2)}`
         },
         { name: 'totalAmountPerUser', label: 'Total Amount per Account', field: 'totalAmountPerUser', sortable: true, headerClasses: 'bg-primary text-white', format: val => `${val.toFixed(2)}` }
@@ -257,7 +261,6 @@ export default {
           align: 'left',
           field: 'position',
           // format: val => `${val}`,
-          sortable: true,
           headerClasses: 'bg-primary text-white',
           style: 'max-width: 100px'
         },
@@ -273,13 +276,14 @@ export default {
           align: 'left',
           field: 'position',
           // format: val => `${val}`,
-          sortable: true,
           headerClasses: 'bg-primary text-white',
           style: 'max-width: 100px'
         },
-        { name: 'numBdc', align: 'center', label: 'Number BDC', field: 'numBdc', sortable: true, headerClasses: 'bg-primary text-white' },
-        { name: 'budget', label: 'Total Amount', field: 'budget', sortable: true, headerClasses: 'bg-primary text-white' },
-        { name: 'budgetPerBdc', label: 'Something strange', field: 'budgetPerBdc', sortable: true, headerClasses: 'bg-primary text-white' }
+        { name: 'numBdc', align: 'left', label: 'Number BDC', field: 'numBdc', sortable: true, headerClasses: 'bg-primary text-white', format: val => `${val.toFixed(2)}` },
+        { name: 'openProposal', label: 'Open Proposal', field: 'openProposal', sortable: true, headerClasses: 'bg-primary text-white', format: val => `${val.toFixed(2)}` },
+        { name: 'regenGrants', label: 'Regen Grants', field: 'regenGrants', sortable: true, headerClasses: 'bg-primary text-white', format: val => `${val.toFixed(2)}` },
+        { name: 'regenLoans', label: 'Regen Loans', field: 'regenLoans', sortable: true, headerClasses: 'bg-primary text-white', format: val => `${val.toFixed(2)}` },
+        { name: 'totalAmount', label: 'Total Amount', field: 'budget', sortable: true, headerClasses: 'bg-primary text-white', format: val => `${val.toFixed(2)}` }
       ],
       columnsTableGDC: [
         {
