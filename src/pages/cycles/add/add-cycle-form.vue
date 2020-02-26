@@ -1,227 +1,227 @@
 <template lang="pug">
     #container
-        .fixed-buttons.fixed.fixed-top.vertical-top
+        .buttons.q-gutter-sm.q-ma-sm
             q-btn.full-width(
                     color="primary"
-                    label="Send"
-                    size="lg"
+                    label="Back"
+                    size="md"
                     unelevated
                 )
-        .template-form
-            q-form.q-ma-md.q-gutter-y-md
-                q-input(filled
-                    v-model="circulatingSeeds"
-                    label="circulatingSeeds"
-                    hint="circulatingSeeds"
-                    type="number"
-                    lazy-rules
-                    :rules="[ val => val && val.length > 0 || 'Please type something']")
-                q-input(filled
-                    v-model="volumeGrowth"
-                    label="volumeGrowth"
-                    hint="volumeGrowth"
-                    type="number"
-                    lazy-rules
-                    :rules="[ val => val && val.length > 0 || 'Please type something']")
-                q-input(filled
-                    v-model="seedsDestroyed"
-                    label="seedsDestroyed"
-                    hint="seedsDestroyed"
-                    type="number"
-                    lazy-rules
-                    :rules="[ val => val && val.length > 0 || 'Please type something']")
-                q-input(filled
-                    v-model="plantedSeeds"
-                    label="plantedSeeds"
-                    hint="plantedSeeds"
-                    type="number"
-                    lazy-rules
-                    :rules="[ val => val && val.length > 0 || 'Please type something']")
-                q-input(filled
-                    v-model="enterExchanges"
-                    label="enterExchanges"
-                    hint="enterExchanges"
-                    type="number"
-                    lazy-rules
-                    :rules="[ val => val && val.length > 0 || 'Please type something']")
-                q-input(filled
-                    v-model="enterExchangesWeight"
-                    label="enterExchangesWeight"
-                    hint="enterExchangesWeight"
-                    type="number"
-                    lazy-rules
-                    :rules="[ val => val && val.length > 0 || 'Please type something']")
-                q-input(filled
-                    v-model="enterSeedsBank"
-                    label="enterSeedsBank"
-                    hint="enterSeedsBank"
-                    type="number"
-                    lazy-rules
-                    :rules="[ val => val && val.length > 0 || 'Please type something']")
-                q-input(filled
-                    v-model="unplantedSeeds"
-                    label="unplantedSeeds"
-                    hint="unplantedSeeds"
-                    type="number"
-                    lazy-rules
-                    :rules="[ val => val && val.length > 0 || 'Please type something']")
-                q-input(filled
-                    v-model="exitExchanges"
-                    label="exitExchanges"
-                    hint="exitExchanges"
-                    type="number"
-                    lazy-rules
-                    :rules="[ val => val && val.length > 0 || 'Please type something']")
-                q-input(filled
-                    v-model="exitExchangesWeight"
-                    label="exitExchangesWeight"
-                    hint="exitExchangesWeight"
-                    type="number"
-                    lazy-rules
-                    :rules="[ val => val && val.length > 0 || 'Please type something']")
-                q-input(filled
-                    v-model="exitSeedsBank"
-                    label="exitSeedsBank"
-                    hint="exitSeedsBank"
-                    type="number"
-                    lazy-rules
-                    :rules="[ val => val && val.length > 0 || 'Please type something']")
-                q-input(filled
-                    v-model="percentageOfHarvestAssignedCirculating"
-                    label="percentageOfHarvestAssignedCirculating"
-                    hint="percentageOfHarvestAssignedCirculating"
-                    type="number"
-                    lazy-rules
-                    :rules="[ val => val && val.length > 0 || 'Please type something']")
-                div.form-group
-                    q-input(filled
-                        v-model="gdc"
-                        label="gdc"
-                        hint="gdc"
-                        type="number"
-                        lazy-rules
-                        :rules="[ val => val && val.length > 0 || 'Please type something']")
-                    q-input(filled
-                        v-model="bdc"
-                        label="bdc"
-                        hint="bdc"
-                        type="number"
-                        lazy-rules
-                        :rules="[ val => val && val.length > 0 || 'Please type something']")
-                    q-input(filled
-                        v-model="organizations"
-                        label="organizations"
-                        hint="organizations"
-                        type="number"
-                        lazy-rules
-                        :rules="[ val => val && val.length > 0 || 'Please type something']")
-                    q-input(filled
-                        v-model="accounts"
-                        label="accounts"
-                        hint="accounts"
-                        type="number"
-                        lazy-rules
-                        :rules="[ val => val && val.length > 0 || 'Please type something']")
-                q-input(filled
-                    v-model="maxPercentageAccounts"
-                    label="maxPercentageAccounts"
-                    hint="maxPercentageAccounts"
-                    type="number"
-                    lazy-rules
-                    :rules="[ val => val && val.length > 0 || 'Please type something']")
-                q-input(filled
-                    v-model="maxPercentageOrganizations"
-                    label="maxPercentageOrganizations"
-                    hint="maxPercentageOrganizations"
-                    type="number"
-                    lazy-rules
-                    :rules="[ val => val && val.length > 0 || 'Please type something']")
-                q-input(filled
-                    v-model="maxPercentageBdc"
-                    label="maxPercentageBdc"
-                    hint="maxPercentageBdc"
-                    type="number"
-                    lazy-rules
-                    :rules="[ val => val && val.length > 0 || 'Please type something']")
-                div.form-group
-                    q-input(filled
-                        v-model="regenGrantsBDC"
-                        label="regenGrantsBDC"
-                        hint="regenGrantsBDC"
-                        type="number"
-                        lazy-rules
-                        :rules="[ val => val && val.length > 0 || 'Please type something']")
-                    q-input(filled
-                        v-model="regenLoans"
-                        label="regenLoans"
-                        hint="regenLoans"
-                        type="number"
-                        lazy-rules
-                        :rules="[ val => val && val.length > 0 || 'Please type something']")
-                    q-input(filled
-                        v-model="openProposal"
-                        label="openProposal"
-                        hint="openProposal"
-                        type="number"
-                        lazy-rules
-                        :rules="[ val => val && val.length > 0 || 'Please type something']")
-                div.form-group
-                    q-input(filled
-                        v-model="networkMaintenance"
-                        label="networkMaintenance"
-                        hint="networkMaintenance"
-                        type="number"
-                        lazy-rules
-                        :rules="[ val => val && val.length > 0 || 'Please type something']")
-                    q-input(filled
-                        v-model="regenGrantsGDC"
-                        label="regenGrantsGDC"
-                        hint="regenGrantsGDC"
-                        type="number"
-                        lazy-rules
-                        :rules="[ val => val && val.length > 0 || 'Please type something']")
-                    q-input(filled
-                        v-model="coreDevelopment"
-                        label="coreDevelopment"
-                        hint="coreDevelopment"
-                        type="number"
-                        lazy-rules
-                        :rules="[ val => val && val.length > 0 || 'Please type something']")
-                    q-input(filled
-                        v-model="interestFreeLoans"
-                        label="interestFreeLoans"
-                        hint="interestFreeLoans"
-                        type="number"
-                        lazy-rules
-                        :rules="[ val => val && val.length > 0 || 'Please type something']")
-                q-input(filled
-                    v-model="numPeopleAccounts"
-                    label="numPeopleAccounts"
-                    hint="numPeopleAccounts"
-                    type="number"
-                    lazy-rules
-                    :rules="[ val => val && val.length > 0 || 'Please type something']")
-                q-input(filled
-                    v-model="numOrganizationAccounts"
-                    label="numOrganizationAccounts"
-                    hint="numOrganizationAccounts"
-                    type="number"
-                    lazy-rules
-                    :rules="[ val => val && val.length > 0 || 'Please type something']")
-                q-input(filled
-                    v-model="numBdcs"
-                    label="numBdcs"
-                    hint="numBdcs"
-                    type="number"
-                    lazy-rules
-                    :rules="[ val => val && val.length > 0 || 'Please type something']")
-                q-btn.full-width(
+            q-btn.full-width(
                     color="primary"
-                    label="Send"
-                    size="lg"
+                    label="Next"
+                    size="md"
                     unelevated
                 )
-
+        q-scroll-area.scroll-container
+            .template-form
+                q-form.q-ma-md.q-gutter-y-md
+                    q-input(filled
+                        v-model="circulatingSeeds"
+                        label="circulatingSeeds"
+                        hint="circulatingSeeds"
+                        type="number"
+                        lazy-rules
+                        :rules="[ val => val && val.length > 0 || 'Please type something']")
+                    q-input(filled
+                        v-model="volumeGrowth"
+                        label="volumeGrowth"
+                        hint="volumeGrowth"
+                        type="number"
+                        lazy-rules
+                        :rules="[ val => val && val.length > 0 || 'Please type something']")
+                    q-input(filled
+                        v-model="seedsDestroyed"
+                        label="seedsDestroyed"
+                        hint="seedsDestroyed"
+                        type="number"
+                        lazy-rules
+                        :rules="[ val => val && val.length > 0 || 'Please type something']")
+                    q-input(filled
+                        v-model="plantedSeeds"
+                        label="plantedSeeds"
+                        hint="plantedSeeds"
+                        type="number"
+                        lazy-rules
+                        :rules="[ val => val && val.length > 0 || 'Please type something']")
+                    q-input(filled
+                        v-model="enterExchanges"
+                        label="enterExchanges"
+                        hint="enterExchanges"
+                        type="number"
+                        lazy-rules
+                        :rules="[ val => val && val.length > 0 || 'Please type something']")
+                    q-input(filled
+                        v-model="enterExchangesWeight"
+                        label="enterExchangesWeight"
+                        hint="enterExchangesWeight"
+                        type="number"
+                        lazy-rules
+                        :rules="[ val => val && val.length > 0 || 'Please type something']")
+                    q-input(filled
+                        v-model="enterSeedsBank"
+                        label="enterSeedsBank"
+                        hint="enterSeedsBank"
+                        type="number"
+                        lazy-rules
+                        :rules="[ val => val && val.length > 0 || 'Please type something']")
+                    q-input(filled
+                        v-model="unplantedSeeds"
+                        label="unplantedSeeds"
+                        hint="unplantedSeeds"
+                        type="number"
+                        lazy-rules
+                        :rules="[ val => val && val.length > 0 || 'Please type something']")
+                    q-input(filled
+                        v-model="exitExchanges"
+                        label="exitExchanges"
+                        hint="exitExchanges"
+                        type="number"
+                        lazy-rules
+                        :rules="[ val => val && val.length > 0 || 'Please type something']")
+                    q-input(filled
+                        v-model="exitExchangesWeight"
+                        label="exitExchangesWeight"
+                        hint="exitExchangesWeight"
+                        type="number"
+                        lazy-rules
+                        :rules="[ val => val && val.length > 0 || 'Please type something']")
+                    q-input(filled
+                        v-model="exitSeedsBank"
+                        label="exitSeedsBank"
+                        hint="exitSeedsBank"
+                        type="number"
+                        lazy-rules
+                        :rules="[ val => val && val.length > 0 || 'Please type something']")
+                    q-input(filled
+                        v-model="percentageOfHarvestAssignedCirculating"
+                        label="percentageOfHarvestAssignedCirculating"
+                        hint="percentageOfHarvestAssignedCirculating"
+                        type="number"
+                        lazy-rules
+                        :rules="[ val => val && val.length > 0 || 'Please type something']")
+                    div.form-group
+                        q-input(filled
+                            v-model="gdc"
+                            label="gdc"
+                            hint="gdc"
+                            type="number"
+                            lazy-rules
+                            :rules="[ val => val && val.length > 0 || 'Please type something']")
+                        q-input(filled
+                            v-model="bdc"
+                            label="bdc"
+                            hint="bdc"
+                            type="number"
+                            lazy-rules
+                            :rules="[ val => val && val.length > 0 || 'Please type something']")
+                        q-input(filled
+                            v-model="organizations"
+                            label="organizations"
+                            hint="organizations"
+                            type="number"
+                            lazy-rules
+                            :rules="[ val => val && val.length > 0 || 'Please type something']")
+                        q-input(filled
+                            v-model="accounts"
+                            label="accounts"
+                            hint="accounts"
+                            type="number"
+                            lazy-rules
+                            :rules="[ val => val && val.length > 0 || 'Please type something']")
+                    q-input(filled
+                        v-model="maxPercentageAccounts"
+                        label="maxPercentageAccounts"
+                        hint="maxPercentageAccounts"
+                        type="number"
+                        lazy-rules
+                        :rules="[ val => val && val.length > 0 || 'Please type something']")
+                    q-input(filled
+                        v-model="maxPercentageOrganizations"
+                        label="maxPercentageOrganizations"
+                        hint="maxPercentageOrganizations"
+                        type="number"
+                        lazy-rules
+                        :rules="[ val => val && val.length > 0 || 'Please type something']")
+                    q-input(filled
+                        v-model="maxPercentageBdc"
+                        label="maxPercentageBdc"
+                        hint="maxPercentageBdc"
+                        type="number"
+                        lazy-rules
+                        :rules="[ val => val && val.length > 0 || 'Please type something']")
+                    div.form-group
+                        q-input(filled
+                            v-model="regenGrantsBDC"
+                            label="regenGrantsBDC"
+                            hint="regenGrantsBDC"
+                            type="number"
+                            lazy-rules
+                            :rules="[ val => val && val.length > 0 || 'Please type something']")
+                        q-input(filled
+                            v-model="regenLoans"
+                            label="regenLoans"
+                            hint="regenLoans"
+                            type="number"
+                            lazy-rules
+                            :rules="[ val => val && val.length > 0 || 'Please type something']")
+                        q-input(filled
+                            v-model="openProposal"
+                            label="openProposal"
+                            hint="openProposal"
+                            type="number"
+                            lazy-rules
+                            :rules="[ val => val && val.length > 0 || 'Please type something']")
+                    div.form-group
+                        q-input(filled
+                            v-model="networkMaintenance"
+                            label="networkMaintenance"
+                            hint="networkMaintenance"
+                            type="number"
+                            lazy-rules
+                            :rules="[ val => val && val.length > 0 || 'Please type something']")
+                        q-input(filled
+                            v-model="regenGrantsGDC"
+                            label="regenGrantsGDC"
+                            hint="regenGrantsGDC"
+                            type="number"
+                            lazy-rules
+                            :rules="[ val => val && val.length > 0 || 'Please type something']")
+                        q-input(filled
+                            v-model="coreDevelopment"
+                            label="coreDevelopment"
+                            hint="coreDevelopment"
+                            type="number"
+                            lazy-rules
+                            :rules="[ val => val && val.length > 0 || 'Please type something']")
+                        q-input(filled
+                            v-model="interestFreeLoans"
+                            label="interestFreeLoans"
+                            hint="interestFreeLoans"
+                            type="number"
+                            lazy-rules
+                            :rules="[ val => val && val.length > 0 || 'Please type something']")
+                    q-input(filled
+                        v-model="numPeopleAccounts"
+                        label="numPeopleAccounts"
+                        hint="numPeopleAccounts"
+                        type="number"
+                        lazy-rules
+                        :rules="[ val => val && val.length > 0 || 'Please type something']")
+                    q-input(filled
+                        v-model="numOrganizationAccounts"
+                        label="numOrganizationAccounts"
+                        hint="numOrganizationAccounts"
+                        type="number"
+                        lazy-rules
+                        :rules="[ val => val && val.length > 0 || 'Please type something']")
+                    q-input(filled
+                        v-model="numBdcs"
+                        label="numBdcs"
+                        hint="numBdcs"
+                        type="number"
+                        lazy-rules
+                        :rules="[ val => val && val.length > 0 || 'Please type something']")
 </template>
 
 <script>
@@ -278,5 +278,12 @@ export default {
     border: 1px solid
     border-color: gray
     padding: 5px
+// .template-form
+//     margin-top: 60px
+// .fixed-buttons
+//     margin-bottom: 50px
+.scroll-container
+    height: calc(100vh - 170px)
+    max-width: 100%
 </style>
 cycle-form
