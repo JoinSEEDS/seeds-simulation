@@ -19,11 +19,8 @@
                         :rules="[ val => val && val.length > 0 || 'Please type something']")
                     q-input(filled
                         v-model="seedsDestroyed"
-                        label="seedsDestroyed"
                         hint="seedsDestroyed"
-                        type="number"
-                        lazy-rules
-                        :rules="[ val => val && val.length > 0 || 'Please type something']")
+                        type="number")
                     q-input(filled
                         v-model="plantedSeeds"
                         label="plantedSeeds"
@@ -209,16 +206,16 @@
                         type="number"
                         lazy-rules
                         :rules="[ val => val && val.length > 0 || 'Please type something']")
-        .row.justify-around
-            .column
-                .col.self-center
+        .row.justify-around.items-center
+            .column.justify-center
+                .col-4
                     q-btn(round :disabled="simulationStep == 1" color="secondary" icon="skip_previous" @click="backCycle")
-            .column
-                .col.self-center
-                    p {{simulationStep}} / {{totalSimulationSteps}}
-            .column
-                .col.self-center
-                    q-btn(round color="secondary" icon="skip_next" @click="nextCycle")
+            .column.justify-center
+                .col-6
+                 p {{simulationStep}} / {{totalSimulationSteps}}
+            .column.justify-center
+                .col-3
+                 q-btn(round color="secondary" icon="skip_next" @click="nextCycle")
 </template>
 
 <script>
@@ -281,36 +278,36 @@ export default {
       this.doCycle(
         {
           simulationState: {
-            circulatingSeeds: this.circulatingSeeds,
-            volumeGrowth: this.volumeGrowth,
+            circulatingSeeds: parseFloat(this.circulatingSeeds),
+            volumeGrowth: parseFloat(this.volumeGrowth),
             // changeRequiredToMeetDemand: 33339041.096,
-            seedsDestroyed: this.seedsDestroyed,
-            plantedSeeds: this.plantedSeeds,
-            enterExchanges: this.enterExchanges,
-            enterExchangesWeight: this.enterExchangesWeight,
-            enterSeedsBank: this.enterSeedsBank,
+            seedsDestroyed: parseFloat(this.seedsDestroyed),
+            plantedSeeds: parseFloat(this.plantedSeeds),
+            enterExchanges: parseFloat(this.enterExchanges),
+            enterExchangesWeight: parseFloat(this.enterExchangesWeight),
+            enterSeedsBank: parseFloat(this.enterSeedsBank),
             // seedsRemoved3Cycles: 26681232.878,
-            unplantedSeeds: this.unplantedSeeds,
-            exitExchanges: this.exitExchanges,
-            exitExchangesWeight: this.exitExchangesWeight,
-            exitSeedsBank: this.exitSeedsBank,
+            unplantedSeeds: parseFloat(this.unplantedSeeds),
+            exitExchanges: parseFloat(this.exitExchanges),
+            exitExchangesWeight: parseFloat(this.exitExchangesWeight),
+            exitSeedsBank: parseFloat(this.exitSeedsBank),
             // seedsIntroducedPrevious3Cycles: 14669178.079,
             // seedsGrownPerCycle: 15117031.964999998,
-            percentageOfHarvestAssignedCirculating: this.percentageOfHarvestAssignedCirculating,
-            percentageDistributionOfNewHarvest: { gdc: this.gdc, bdc: this.bdc, organizations: this.organizations, accounts: this.accounts },
-            maxPercentageAccounts: this.maxPercentageAccounts,
-            maxPercentageOrganizations: this.maxPercentageOrganizations,
-            maxPercentageBdc: this.maxPercentageBdc,
-            bdcPercentagesDistribution: { regenGrants: this.regenGrantsBDC, regenLoans: this.regenLoans, openProposal: this.openProposal },
+            percentageOfHarvestAssignedCirculating: parseFloat(this.percentageOfHarvestAssignedCirculating),
+            percentageDistributionOfNewHarvest: { gdc: parseFloat(this.gdc), bdc: parseFloat(this.bdc), organizations: parseFloat(this.organizations), accounts: parseFloat(this.accounts) },
+            maxPercentageAccounts: parseFloat(this.maxPercentageAccounts),
+            maxPercentageOrganizations: parseFloat(this.maxPercentageOrganizations),
+            maxPercentageBdc: parseFloat(this.maxPercentageBdc),
+            bdcPercentagesDistribution: { regenGrants: parseFloat(this.regenGrantsBDC), regenLoans: parseFloat(this.regenLoans), openProposal: parseFloat(this.openProposal) },
             gdcPercentagesDistribution: {
-              networkMaintenance: this.networkMaintenance,
-              regenGrants: this.regenGrantsGDC,
-              coreDevelopment: this.coreDevelopment,
-              interestFreeLoans: this.interestFreeLoans
+              networkMaintenance: parseFloat(this.networkMaintenance),
+              regenGrants: parseFloat(this.regenGrantsGDC),
+              coreDevelopment: parseFloat(this.coreDevelopment),
+              interestFreeLoans: parseFloat(this.interestFreeLoans)
             },
-            numPeopleAccounts: 10000000,
-            numOrganizationAccounts: 100000,
-            numBdcs: 100
+            numPeopleAccounts: parseFloat(this.numPeopleAccounts),
+            numOrganizationAccounts: parseFloat(this.numOrganizationAccounts),
+            numBdcs: parseFloat(this.numBdcs)
             // harvestDistribution: {}
           }
         })
