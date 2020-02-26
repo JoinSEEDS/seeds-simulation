@@ -212,7 +212,7 @@
         .row.justify-around
             .column
                 .col.self-center
-                    q-btn(round color="secondary" icon="skip_previous" @click="backCycle")
+                    q-btn(round :disabled="simulationStep == 1" color="secondary" icon="skip_previous" @click="backCycle")
             .column
                 .col.self-center
                     p {{simulationStep}} / {{totalSimulationSteps}}
