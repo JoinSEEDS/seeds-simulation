@@ -270,6 +270,12 @@ export default {
   mounted () {
     this.syncFormData()
   },
+  watch: {
+    simulationStep (currentStep, prevStep) {
+      console.log('Form data syncronized', prevStep)
+      this.syncFormData()
+    }
+  },
   methods: {
     ...mapActions('harvest', ['getInitSimulationStep', 'doCycle']),
     ...mapMutations('harvest', ['setSimulationStep']),
@@ -328,20 +334,20 @@ export default {
       this.exitExchangesWeight = this.cycleDataForm.exitExchangesWeight
       this.exitSeedsBank = this.cycleDataForm.exitSeedsBank
       this.percentageOfHarvestAssignedCirculating = this.cycleDataForm.percentageOfHarvestAssignedCirculating
-      this.gdc = this.cycleDataForm.gdc
-      this.bdc = this.cycleDataForm.bdc
-      this.organizations = this.cycleDataForm.organizations
-      this.accounts = this.cycleDataForm.accounts
+      this.gdc = this.cycleDataForm.percentageDistributionOfNewHarvest.gdc
+      this.bdc = this.cycleDataForm.percentageDistributionOfNewHarvest.bdc
+      this.organizations = this.cycleDataForm.percentageDistributionOfNewHarvest.organizations
+      this.accounts = this.cycleDataForm.percentageDistributionOfNewHarvest.accounts
       this.maxPercentageAccounts = this.cycleDataForm.maxPercentageAccounts
       this.maxPercentageOrganizations = this.cycleDataForm.maxPercentageOrganizations
       this.maxPercentageBdc = this.cycleDataForm.maxPercentageBdc
-      this.regenGrantsBDC = this.cycleDataForm.regenGrantsBDC
-      this.regenLoans = this.cycleDataForm.regenLoans
-      this.openProposal = this.cycleDataForm.openProposal
-      this.networkMaintenance = this.cycleDataForm.networkMaintenance
-      this.regenGrantsGDC = this.cycleDataForm.regenGrantsGDC
-      this.coreDevelopment = this.cycleDataForm.coreDevelopment
-      this.interestFreeLoans = this.cycleDataForm.interestFreeLoans
+      this.regenGrantsBDC = this.cycleDataForm.bdcPercentagesDistribution.regenGrants
+      this.regenLoans = this.cycleDataForm.bdcPercentagesDistribution.regenLoans
+      this.openProposal = this.cycleDataForm.bdcPercentagesDistribution.openProposal
+      this.networkMaintenance = this.cycleDataForm.gdcPercentagesDistribution.networkMaintenance
+      this.regenGrantsGDC = this.cycleDataForm.gdcPercentagesDistribution.regenGrantsGDC
+      this.coreDevelopment = this.cycleDataForm.gdcPercentagesDistribution.coreDevelopment
+      this.interestFreeLoans = this.cycleDataForm.gdcPercentagesDistribution.interestFreeLoans
       this.numPeopleAccounts = this.cycleDataForm.numPeopleAccounts
       this.numOrganizationAccounts = this.cycleDataForm.numOrganizationAccounts
       this.numBdcs = this.cycleDataForm.numBdcs

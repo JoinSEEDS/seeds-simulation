@@ -311,7 +311,7 @@ export const doCycle = async function ({ dispatch, commit, state }, { simulation
 
   setCycleTables({ dispatch, commit, state }, { step: step })
   commit('setSimulationStep', state.simulationState.length)
-  commit('setDataForm', simulationState)
+  // commit('setDataForm', simulationState)
 
   return true
 }
