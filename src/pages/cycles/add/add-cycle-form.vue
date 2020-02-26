@@ -272,13 +272,48 @@ export default {
     ...mapGetters('harvest', ['simulationStep', 'totalSimulationSteps'])
   },
   methods: {
-    ...mapActions('harvest', ['getInitSimulationStep']),
+    ...mapActions('harvest', ['getInitSimulationStep', 'doCycle']),
     ...mapMutations('harvest', ['setSimulationStep']),
     backCycle () {
       this.setSimulationStep((this.simulationStep - 1))
     },
     nextCycle () {
-      alert('next')
+      this.doCycle(
+        {
+          simulationState: {
+            circulatingSeeds: this.circulatingSeeds,
+            volumeGrowth: this.volumeGrowth,
+            // changeRequiredToMeetDemand: 33339041.096,
+            seedsDestroyed: this.seedsDestroyed,
+            plantedSeeds: this.plantedSeeds,
+            enterExchanges: this.enterExchanges,
+            enterExchangesWeight: this.enterExchangesWeight,
+            enterSeedsBank: this.enterSeedsBank,
+            // seedsRemoved3Cycles: 26681232.878,
+            unplantedSeeds: this.unplantedSeeds,
+            exitExchanges: this.exitExchanges,
+            exitExchangesWeight: this.exitExchangesWeight,
+            exitSeedsBank: this.exitSeedsBank,
+            // seedsIntroducedPrevious3Cycles: 14669178.079,
+            // seedsGrownPerCycle: 15117031.964999998,
+            percentageOfHarvestAssignedCirculating: this.percentageOfHarvestAssignedCirculating,
+            percentageDistributionOfNewHarvest: { gdc: this.gdc, bdc: this.bdc, organizations: this.organizations, accounts: this.accounts },
+            maxPercentageAccounts: this.maxPercentageAccounts,
+            maxPercentageOrganizations: this.maxPercentageOrganizations,
+            maxPercentageBdc: this.maxPercentageBdc,
+            bdcPercentagesDistribution: { regenGrants: this.regenGrantsBDC, regenLoans: this.regenLoans, openProposal: this.openProposal },
+            gdcPercentagesDistribution: {
+              networkMaintenance: this.networkMaintenance,
+              regenGrants: this.regenGrantsGDC,
+              coreDevelopment: this.coreDevelopment,
+              interestFreeLoans: this.interestFreeLoans
+            },
+            numPeopleAccounts: 10000000,
+            numOrganizationAccounts: 100000,
+            numBdcs: 100
+            // harvestDistribution: {}
+          }
+        })
     }
   }
 }

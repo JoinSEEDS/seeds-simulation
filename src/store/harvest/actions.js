@@ -310,6 +310,7 @@ export const doCycle = async function ({ dispatch, commit, state }, { simulation
   }
 
   setCycleTables({ dispatch, commit, state }, { step: step })
+  commit('setSimulationStep', state.simulationState.length)
 
   return true
 }
