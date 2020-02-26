@@ -1,8 +1,8 @@
 <template lang="pug">
-    #container
+    #container.q-ma-md.q-gutter-y-sm
         q-scroll-area.scroll-container
             .template-form
-                q-form.q-ma-md.q-gutter-y-md
+                q-form.q-gutter-y-md
                     q-input(filled
                         v-model="circulatingSeeds"
                         label="circulatingSeeds"
@@ -209,9 +209,13 @@
                         type="number"
                         lazy-rules
                         :rules="[ val => val && val.length > 0 || 'Please type something']")
-        .buttons.q-gutter-sm.q-ma-sm.text-center
-            q-btn(round color="primary" icon="skip_previous")
-            q-btn(round color="primary" icon="skip_next")
+        .row.justify-around
+            .column
+                .col.self-center
+                    q-btn(round color="secondary" icon="skip_previous")
+            .column
+                .col.self-center
+                    q-btn(round color="secondary" icon="skip_next")
 </template>
 
 <script>
@@ -269,6 +273,6 @@ export default {
     border-color: gray
     padding: 5px
 .scroll-container
-    height: calc(100vh - 120px)
+    height: calc(100vh - 130px)
     max-width: 100%
 </style>
