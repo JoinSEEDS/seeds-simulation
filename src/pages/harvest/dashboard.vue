@@ -69,11 +69,19 @@ export default {
   },
   mounted () {
     // this.getDataTable('None')
-    this.fillToTest()
-    this.fillToTest()
     this.tableSelected = 1
+    this.getInitSimulationStep()
   },
   watch: {
+    simulationStep () {
+      console.log('The simulation step was changed')
+      this.getDataTable(this.constant.SEEDS_GROWN, this.simulationStep)
+      this.getDataTable(this.constant.SEEDS_IND_ACCNTS, this.simulationStep)
+      this.getDataTable(this.constant.SEEDS_ORG_ACCNTS, this.simulationStep)
+      this.getDataTable(this.constant.SEEDS_BDC, this.simulationStep)
+      this.getDataTable(this.constant.SEEDS_GDC, this.simulationStep)
+      console.log('Tables updated')
+    },
     tableSelected () {
       // this.doCycle(
       //   {
@@ -155,7 +163,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('harvest', ['dataTableGROWN', 'dataTableIND', 'dataTableORG', 'dataTableBDC', 'dataTableGDC']),
+    ...mapGetters('harvest', ['dataTableGROWN', 'dataTableIND', 'dataTableORG', 'dataTableBDC', 'dataTableGDC', 'simulationStep']),
     myDataTable1 () {
       return this.$store.state.harvest.dataTable1
     },
@@ -164,7 +172,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('harvest', ['getDataTable', 'getDataChart', 'doCycle', 'editSimulationState', 'setCycleTables']),
+    ...mapActions('harvest', ['getDataTable', 'getDataChart', 'doCycle', 'editSimulationState', 'setCycleTables', 'getInitSimulationStep']),
     /**
      * This method toggle select between the tables
      */

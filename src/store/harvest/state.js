@@ -217,6 +217,6 @@ export default () => ({
   },
   stateForm: {
     // Data to fill cycle form
-  }
-
+  },
+  simulationStep: 0
 })

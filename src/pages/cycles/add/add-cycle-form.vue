@@ -212,13 +212,18 @@
         .row.justify-around
             .column
                 .col.self-center
-                    q-btn(round color="secondary" icon="skip_previous")
+                    q-btn(round color="secondary" icon="skip_previous" @click="backCycle")
             .column
                 .col.self-center
-                    q-btn(round color="secondary" icon="skip_next")
+                    p {{simulationStep}} / {{totalSimulationSteps}}
+            .column
+                .col.self-center
+                    q-btn(round color="secondary" icon="skip_next" @click="nextCycle")
 </template>
 
 <script>
+import { mapActions, mapGetters, mapMutations } from 'vuex'
+
 export default {
   name: 'add-cycle-form',
   data () {
@@ -261,6 +266,19 @@ export default {
       numPeopleAccounts: 10000000,
       numOrganizationAccounts: 100000,
       numBdcs: 100
+    }
+  },
+  computed: {
+    ...mapGetters('harvest', ['simulationStep', 'totalSimulationSteps'])
+  },
+  methods: {
+    ...mapActions('harvest', ['getInitSimulationStep']),
+    ...mapMutations('harvest', ['setSimulationStep']),
+    backCycle () {
+      this.setSimulationStep((this.simulationStep - 1))
+    },
+    nextCycle () {
+      alert('next')
     }
   }
 }

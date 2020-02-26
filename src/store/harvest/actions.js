@@ -323,3 +323,8 @@ export const editSimulationState = async function ({ dispatch, commit, state }, 
 
   return true
 }
+
+export const getInitSimulationStep = async function ({ dispatch, commit, state }) {
+  commit('setSimulationStep', state.simulationState.length)
+  return true
+}
