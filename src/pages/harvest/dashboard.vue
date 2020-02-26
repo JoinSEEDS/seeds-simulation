@@ -1,59 +1,59 @@
 <template lang="pug">
+  q-scroll-area.scroll-container(ref="scrollArea")
     div.q-ma-xl.q-gutter-y-xl
-
-        .div(@click="selectTable(constant.SEEDS_GROWN)")
-            q-table(
-            :data="dataTableGROWN.rows"
-            :columns="columnsTableGrown"
-            row-key="name"
-            :card-class="{'bg-grey-5': tableSelected == constant.SEEDS_GROWN}"
-            )
-              template(v-slot:top)
-                custom-table-header(:titleTable="dataTableGROWN.tableName")
-
-        .div(@click="selectTable(constant.SEEDS_IND_ACCNTS)")
-            q-table(
-            :data="dataTableIND.rows"
-            :columns="columnsTableInd"
-            row-key="name"
-            :card-class="{'bg-grey-5': tableSelected == constant.SEEDS_IND_ACCNTS}"
-            )
-              template(v-slot:top)
-                custom-table-header(:titleTable="dataTableIND.tableName" :subtitleTable="dataTableIND.totalAmount")
-        .div(@click="selectTable(constant.SEEDS_ORG_ACCNTS)")
-            q-table(
-            :data="dataTableORG.rows"
-            :columns="columnsTableOrg"
-            row-key="name"
-            :card-class="{'bg-grey-5': tableSelected == constant.SEEDS_ORG_ACCNTS}"
-            )
-              template(v-slot:top)
-                custom-table-header(:titleTable="dataTableORG.tableName" :subtitleTable="dataTableORG.totalAmount")
-
-        .div(@click="selectTable(constant.SEEDS_BDC)")
-            q-table(
-            :data="dataTableBDC.rows"
-            :columns="columnsTableBDC"
-            row-key="name"
-            :card-class="{'bg-grey-5': tableSelected == constant.SEEDS_BDC}"
-            )
-              template(v-slot:top)
-                custom-table-header(:titleTable="dataTableBDC.tableName" :subtitleTable="dataTableBDC.totalAmount")
-        .div(@click="selectTable(constant.SEEDS_GDC)")
-            q-table(
-            :data="dataTableGDC.rows"
-            :columns="columnsTableGDC"
-            row-key="name"
-            :card-class="{'bg-grey-5': tableSelected == constant.SEEDS_GDC}"
-            )
-              template(v-slot:top)
-                  custom-table-header(:titleTable="dataTableGDC.tableName" :subtitleTable="dataTableGDC.totalAmount")
-        custom-chart(
-          :dataChart="myDataChart",
-          :chartName="myDataChart.chartName",
-          xAxisTitle="Cycles",
-          yAxisTitle="Seeds"
+      .div(@click="selectTable(constant.SEEDS_GROWN)")
+          q-table(
+          :data="dataTableGROWN.rows"
+          :columns="columnsTableGrown"
+          row-key="name"
+          :card-class="{'bg-grey-5': tableSelected == constant.SEEDS_GROWN}"
           )
+            template(v-slot:top)
+              custom-table-header(:titleTable="dataTableGROWN.tableName")
+
+      .div(@click="selectTable(constant.SEEDS_IND_ACCNTS)")
+          q-table(
+          :data="dataTableIND.rows"
+          :columns="columnsTableInd"
+          row-key="name"
+          :card-class="{'bg-grey-5': tableSelected == constant.SEEDS_IND_ACCNTS}"
+          )
+            template(v-slot:top)
+              custom-table-header(:titleTable="dataTableIND.tableName" :subtitleTable="dataTableIND.totalAmount")
+      .div(@click="selectTable(constant.SEEDS_ORG_ACCNTS)")
+          q-table(
+          :data="dataTableORG.rows"
+          :columns="columnsTableOrg"
+          row-key="name"
+          :card-class="{'bg-grey-5': tableSelected == constant.SEEDS_ORG_ACCNTS}"
+          )
+            template(v-slot:top)
+              custom-table-header(:titleTable="dataTableORG.tableName" :subtitleTable="dataTableORG.totalAmount")
+
+      .div(@click="selectTable(constant.SEEDS_BDC)")
+          q-table(
+          :data="dataTableBDC.rows"
+          :columns="columnsTableBDC"
+          row-key="name"
+          :card-class="{'bg-grey-5': tableSelected == constant.SEEDS_BDC}"
+          )
+            template(v-slot:top)
+              custom-table-header(:titleTable="dataTableBDC.tableName" :subtitleTable="dataTableBDC.totalAmount")
+      .div(@click="selectTable(constant.SEEDS_GDC)")
+          q-table(
+          :data="dataTableGDC.rows"
+          :columns="columnsTableGDC"
+          row-key="name"
+          :card-class="{'bg-grey-5': tableSelected == constant.SEEDS_GDC}"
+          )
+            template(v-slot:top)
+                custom-table-header(:titleTable="dataTableGDC.tableName" :subtitleTable="dataTableGDC.totalAmount")
+      custom-chart(
+        :dataChart="myDataChart",
+        :chartName="myDataChart.chartName",
+        xAxisTitle="Cycles",
+        yAxisTitle="Seeds"
+        )
 </template>
 
 <script>
@@ -307,3 +307,9 @@ export default {
   }
 }
 </script>
+
+<style lang="sass" scoped>
+  .scroll-container
+    height: calc(100vh - 50px)
+    max-width: 100%
+</style>
