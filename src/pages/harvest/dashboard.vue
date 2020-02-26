@@ -49,7 +49,6 @@
             template(v-slot:top)
                 custom-table-header(:titleTable="dataTableGDC.tableName" :subtitleTable="dataTableGDC.totalAmount")
       custom-chart(
-        v-if="totalSimulationSteps > 0"
         :dataChart="myDataChart",
         :chartName="myDataChart.chartName",
         xAxisTitle="Cycles",
@@ -69,62 +68,23 @@ export default {
     this.constant = harvestConstant
   },
   mounted () {
-    // this.getDataTable('None')
-    this.tableSelected = 1
     this.getInitSimulationStep()
+    this.tableSelected = 0
   },
   watch: {
     simulationStep (currentStep, prevStep) {
       console.log('The simulation step was changed', currentStep, prevStep)
       this.setCycleTables({ step: this.simulationStep - 1 })
-      // this.getDataTable({ tableId: this.constant.SEEDS_GROWN, step: (this.simulationStep - 1) })
-      // this.getDataTable({ tableId: this.constant.SEEDS_IND_ACCNTS, step: (this.simulationStep - 1) })
-      // this.getDataTable({ tableId: this.constant.SEEDS_ORG_ACCNTS, step: (this.simulationStep - 1) })
-      // this.getDataTable({ tableId: this.constant.SEEDS_BDC, step: (this.simulationStep - 1) })
-      // this.getDataTable({ tableId: this.constant.SEEDS_GDC, step: (this.simulationStep - 1) })
       if (this.simulationStep > prevStep) this.getDataChart({ tableId: this.tableSelected })
       console.log('Tables updated')
     },
+    totalSimulationSteps (newV, oldV) {
+      if (this.totalSimulationSteps > 0 && oldV === 0) {
+        this.getDataChart({ tableId: this.tableSelected })
+        this.tableSelected = 1
+      }
+    },
     tableSelected () {
-      // this.editSimulationState(
-      //   {
-      //     stateEdited: {
-      //       circulatingSeeds: 23.84,
-      //       volumeGrowth: 0.025,
-      //       changeRequiredToMeetDemand: 33339041.096,
-      //       seedsDestroyed: 10000,
-      //       plantedSeeds: 13335616.44,
-      //       enterExchanges: 133356164.38,
-      //       enterExchangesWeight: 0.1,
-      //       enterSeedsBank: 0,
-      //       seedsRemoved3Cycles: 26681232.878,
-      //       unplantedSeeds: 1333561.64,
-      //       exitExchanges: 66678082.19,
-      //       exitExchangesWeight: 0.1,
-      //       exitSeedsBank: 6667808.22,
-      //       seedsIntroducedPrevious3Cycles: 14669178.079,
-      //       seedsGrownPerCycle: 15117031.964999998,
-      //       percentageOfHarvestAssignedCirculating: 0.5,
-      //       percentageDistributionOfNewHarvest: { gdc: 0.3, bdc: 0.2, organizations: 0.2, accounts: 0.3 },
-      //       maxPercentageAccounts: 0.012,
-      //       maxPercentageOrganizations: 0.011,
-      //       maxPercentageBdc: 0.013,
-      //       bdcPercentagesDistribution: { regenGrants: 0.25, regenLoans: 0.25, openProposal: 0.5 },
-      //       gdcPercentagesDistribution: {
-      //         networkMaintenance: 0.15,
-      //         regenGrants: 0.2,
-      //         coreDevelopment: 0.45,
-      //         interestFreeLoans: 0.2
-      //       },
-      //       numPeopleAccounts: 10000000,
-      //       numOrganizationAccounts: 100000,
-      //       numBdcs: 100,
-      //       harvestDistribution: {}
-      //     },
-      //     step: 0
-      //   }
-      // )
-      // this.getDataTable(this.tableSelected)
       this.getDataChart({ tableId: this.tableSelected })
     }
   },
@@ -145,51 +105,14 @@ export default {
     selectTable (table) {
       if (this.tableSelected !== table) {
         this.tableSelected = table
-        window.scrollTo(0, document.body.scrollHeight || document.documentElement.scrollHeight)
+        // window.scrollTo(0, document.body.scrollHeight || document.documentElement.scrollHeight)
+        this.$refs.scrollArea.setScrollPosition(10000, 500)
       }
-    },
-    fillToTest () {
-      this.doCycle(
-        {
-          simulationState: {
-            circulatingSeeds: 1333561643.84,
-            volumeGrowth: 0.025,
-            // changeRequiredToMeetDemand: 33339041.096,
-            seedsDestroyed: 10000,
-            plantedSeeds: 13335616.44,
-            enterExchanges: 133356164.38,
-            enterExchangesWeight: 0.1,
-            enterSeedsBank: 0,
-            // seedsRemoved3Cycles: 26681232.878,
-            unplantedSeeds: 1333561.64,
-            exitExchanges: 66678082.19,
-            exitExchangesWeight: 0.1,
-            exitSeedsBank: 6667808.22,
-            // seedsIntroducedPrevious3Cycles: 14669178.079,
-            // seedsGrownPerCycle: 15117031.964999998,
-            percentageOfHarvestAssignedCirculating: 0.5,
-            percentageDistributionOfNewHarvest: { gdc: 0.3, bdc: 0.2, organizations: 0.2, accounts: 0.3 },
-            maxPercentageAccounts: 0.012,
-            maxPercentageOrganizations: 0.011,
-            maxPercentageBdc: 0.013,
-            bdcPercentagesDistribution: { regenGrants: 0.25, regenLoans: 0.25, openProposal: 0.5 },
-            gdcPercentagesDistribution: {
-              networkMaintenance: 0.15,
-              regenGrants: 0.2,
-              coreDevelopment: 0.45,
-              interestFreeLoans: 0.2
-            },
-            numPeopleAccounts: 10000000,
-            numOrganizationAccounts: 100000,
-            numBdcs: 100
-            // harvestDistribution: {}
-          }
-        })
     }
   },
   data () {
     return {
-      tableSelected: 0,
+      tableSelected: undefined,
       constant: undefined,
       columnsTableGrown: [
         {
