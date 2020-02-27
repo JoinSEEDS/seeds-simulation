@@ -1,5 +1,5 @@
 <template lang="pug">
-    div.column(ref='container')
+    div.column(ref='container' v-if="dataChart")
       //- slot(name='container')
       #chart-area
 </template>

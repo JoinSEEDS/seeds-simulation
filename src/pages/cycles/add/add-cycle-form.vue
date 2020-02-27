@@ -5,148 +5,148 @@
                 q-form.q-gutter-y-sm
                     q-input(filled
                         v-model="circulatingSeeds"
-                        label="circulatingSeeds"
+                        :label="$t('forms.cycles.circulatingSeeds')"
                         type="number")
                     q-input(filled
                         v-model="volumeGrowth"
-                        label="volumeGrowth"
+                        :label="$t('forms.cycles.volumeGrowth')"
                         type="number"
                         )
                     q-input(filled
                         v-model="seedsDestroyed"
-                        label="seedsDestroyed"
+                        :label="$t('forms.cycles.seedsDestroyed')"
                         type="number")
                     q-input(filled
                         v-model="plantedSeeds"
-                        label="plantedSeeds"
+                        :label="$t('forms.cycles.plantedSeeds')"
                         type="number"
                         )
                     q-input(filled
                         v-model="enterExchanges"
-                        label="enterExchanges"
+                        :label="$t('forms.cycles.enterExchanges')"
                         type="number"
                         )
                     q-input(filled
                         v-model="enterExchangesWeight"
-                        label="enterExchangesWeight"
+                        :label="$t('forms.cycles.enterExchangesWeight')"
                         type="number"
                         )
                     q-input(filled
                         v-model="enterSeedsBank"
-                        label="enterSeedsBank"
+                        :label="$t('forms.cycles.enterSeedsBank')"
                         type="number"
                         )
                     q-input(filled
                         v-model="unplantedSeeds"
-                        label="unplantedSeeds"
+                        :label="$t('forms.cycles.unplantedSeeds')"
                         type="number"
                         )
                     q-input(filled
                         v-model="exitExchanges"
-                        label="exitExchanges"
+                        :label="$t('forms.cycles.exitExchanges')"
                         type="number"
                         )
                     q-input(filled
                         v-model="exitExchangesWeight"
-                        label="exitExchangesWeight"
+                        :label="$t('forms.cycles.exitExchangesWeight')"
                         type="number"
                         )
                     q-input(filled
                         v-model="exitSeedsBank"
-                        label="exitSeedsBank"
+                        :label="$t('forms.cycles.exitSeedsBank')"
                         type="number"
                         )
                     q-input(filled
                         v-model="percentageOfHarvestAssignedCirculating"
-                        label="percentageOfHarvestAssignedCirculating"
+                        :label="$t('forms.cycles.percentageOfHarvestAssignedCirculating')"
                         type="number"
                         )
                     div.form-group
                         q-input(filled
                             v-model="gdc"
-                            label="gdc"
+                            :label="$t('forms.cycles.gdc')"
                             type="number"
                             )
                         q-input(filled
                             v-model="bdc"
-                            label="bdc"
+                            :label="$t('forms.cycles.bdc')"
                             type="number"
                             )
                         q-input(filled
                             v-model="organizations"
-                            label="organizations"
+                            :label="$t('forms.cycles.organizations')"
                             type="number"
                             )
                         q-input(filled
                             v-model="accounts"
-                            label="accounts"
+                            :label="$t('forms.cycles.accounts')"
                             type="number"
                             )
                     q-input(filled
                         v-model="maxPercentageAccounts"
-                        label="maxPercentageAccounts"
+                        :label="$t('forms.cycles.maxPercentageAccounts')"
                         type="number"
                         )
                     q-input(filled
                         v-model="maxPercentageOrganizations"
-                        label="maxPercentageOrganizations"
+                        :label="$t('forms.cycles.maxPercentageOrganizations')"
                         type="number"
                         )
                     q-input(filled
                         v-model="maxPercentageBdc"
-                        label="maxPercentageBdc"
+                        :label="$t('forms.cycles.maxPercentageBdc')"
                         type="number"
                         )
                     div.form-group
                         q-input(filled
                             v-model="regenGrantsBDC"
-                            label="regenGrantsBDC"
+                            :label="$t('forms.cycles.regenGrantsBDC')"
                             type="number"
                             )
                         q-input(filled
                             v-model="regenLoans"
-                            label="regenLoans"
+                            :label="$t('forms.cycles.regenLoans')"
                             type="number"
                             )
                         q-input(filled
                             v-model="openProposal"
-                            label="openProposal"
+                            :label="$t('forms.cycles.openProposal')"
                             type="number"
                             )
                     div.form-group
                         q-input(filled
                             v-model="networkMaintenance"
-                            label="networkMaintenance"
+                            :label="$t('forms.cycles.networkMaintenance')"
                             type="number"
                             )
                         q-input(filled
                             v-model="regenGrantsGDC"
-                            label="regenGrantsGDC"
+                            :label="$t('forms.cycles.regenGrantsGDC')"
                             type="number"
                             )
                         q-input(filled
                             v-model="coreDevelopment"
-                            label="coreDevelopment"
+                            :label="$t('forms.cycles.coreDevelopment')"
                             type="number"
                             )
                         q-input(filled
                             v-model="interestFreeLoans"
-                            label="interestFreeLoans"
+                            :label="$t('forms.cycles.interestFreeLoans')"
                             type="number"
                             )
                     q-input(filled
                         v-model="numPeopleAccounts"
-                        label="numPeopleAccounts"
+                        :label="$t('forms.cycles.numPeopleAccounts')"
                         type="number"
                         )
                     q-input(filled
                         v-model="numOrganizationAccounts"
-                        label="numOrganizationAccounts"
+                        :label="$t('forms.cycles.numOrganizationAccounts')"
                         type="number"
                         )
                     q-input(filled
                         v-model="numBdcs"
-                        label="numBdcs"
+                        :label="$t('forms.cycles.numBdcs')"
                         type="number"
                         )
         .row.justify-around.items-center

@@ -15,9 +15,7 @@ export default () => ({
   gdcTable: {
     tableName: 'Seeds for GDC'
   },
-  dataChart: {
-    // Data for Chart 1
-  },
+  dataChart: undefined,
   stateForm2: {
     // Data to fill cycle form
     circulatingSeeds: 1333561643.84,

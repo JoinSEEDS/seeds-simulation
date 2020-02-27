@@ -29,6 +29,45 @@ export default {
       required: 'This field is required',
       token: 'The field must contain between 2 and 6 characters',
       tokenDecimals: 'The decimals must be between 2 and 9'
+    },
+    cycles: {
+      circulatingSeeds: 'Circulating Seeds',
+      volumeGrowth: 'Volume Growth',
+      // changeRequiredToMeetDemand: 33339041.096,
+      seedsDestroyed: 'Seeds Destroyed',
+      plantedSeeds: 'Planted Seeds',
+      enterExchanges: 'Enter Exchanges',
+      enterExchangesWeight: 'Enter Exchanges Weight',
+      enterSeedsBank: 'Enter Seeds Bank',
+      // seedsRemoved3Cycles: 26681232.878,
+      unplantedSeeds: 'Unplanted Seeds',
+      exitExchanges: 'Exit Exchanges',
+      exitExchangesWeight: 'Exit Exchanges Weight',
+      exitSeedsBank: 'Exit Seeds Bank',
+      percentageOfHarvestAssignedCirculating: '% Of Harvest Assigned Circulating',
+      // Interface - START percentageDistributionOfNewHarvest
+      gdc: 'GDC',
+      bdc: 'BDC',
+      organizations: 'Organizations',
+      accounts: 'Accounts',
+      // -END
+      maxPercentageAccounts: 'Max % Accounts',
+      maxPercentageOrganizations: 'Max % Organizations',
+      maxPercentageBdc: 'Max % BDC',
+      // Interface - Start bdcPercentagesDistribution
+      regenGrantsBDC: 'Regen Grants BDC',
+      regenLoans: 'Regen Loans',
+      openProposal: 'Open Proposal',
+      // -END
+      // Interface - Start gdcPercentagesDistribution
+      networkMaintenance: 'Network Maintenance',
+      regenGrantsGDC: 'Regen Grants GDC',
+      coreDevelopment: 'Core Development',
+      interestFreeLoans: 'Interest Free Loans',
+      // -END
+      numPeopleAccounts: 'Number of People Accounts',
+      numOrganizationAccounts: 'Number of Organization Accounts',
+      numBdcs: 'Number of Bdcs'
     }
   },
   menu: {

@@ -49,8 +49,9 @@
             template(v-slot:top)
                 custom-table-header(:titleTable="dataTableGDC.tableName" :subtitleTable="dataTableGDC.totalAmount")
       custom-chart(
-        :dataChart="myDataChart",
-        :chartName="myDataChart.chartName",
+        v-if="dataChart"
+        :dataChart="dataChart",
+        :chartName="dataChart.chartName",
         xAxisTitle="Cycles",
         yAxisTitle="Seeds"
       )
@@ -85,17 +86,14 @@ export default {
       }
     },
     tableSelected () {
-      this.getDataChart({ tableId: this.tableSelected })
+      setTimeout(() => {
+        this.getDataChart({ tableId: this.tableSelected })
+      },
+      2000)
     }
   },
   computed: {
-    ...mapGetters('harvest', ['dataTableGROWN', 'dataTableIND', 'dataTableORG', 'dataTableBDC', 'dataTableGDC', 'simulationStep', 'totalSimulationSteps']),
-    myDataTable1 () {
-      return this.$store.state.harvest.dataTable1
-    },
-    myDataChart () {
-      return this.$store.state.harvest.dataChart
-    }
+    ...mapGetters('harvest', ['dataTableGROWN', 'dataTableIND', 'dataTableORG', 'dataTableBDC', 'dataTableGDC', 'simulationStep', 'totalSimulationSteps', 'dataChart'])
   },
   methods: {
     ...mapActions('harvest', ['getDataTable', 'getDataChart', 'doCycle', 'editSimulationState', 'setCycleTables', 'getInitSimulationStep']),
