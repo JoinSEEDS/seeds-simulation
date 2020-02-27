@@ -293,7 +293,7 @@ export default {
       this.regenLoans = this.cycleDataForm.bdcPercentagesDistribution.regenLoans
       this.openProposal = this.cycleDataForm.bdcPercentagesDistribution.openProposal
       this.networkMaintenance = this.cycleDataForm.gdcPercentagesDistribution.networkMaintenance
-      this.regenGrantsGDC = this.cycleDataForm.gdcPercentagesDistribution.regenGrantsGDC
+      this.regenGrantsGDC = this.cycleDataForm.gdcPercentagesDistribution.regenGrants
       this.coreDevelopment = this.cycleDataForm.gdcPercentagesDistribution.coreDevelopment
       this.interestFreeLoans = this.cycleDataForm.gdcPercentagesDistribution.interestFreeLoans
       this.numPeopleAccounts = this.cycleDataForm.numPeopleAccounts
