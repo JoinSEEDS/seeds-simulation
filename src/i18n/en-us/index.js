@@ -72,7 +72,7 @@ export default {
   },
   menu: {
     transfer: 'Transfer',
-    example: 'Example Dashboard'
+    simulation: 'Simulation'
   },
   pages: {
     index: {
