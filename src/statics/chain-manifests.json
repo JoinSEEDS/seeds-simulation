@@ -4,9 +4,9 @@
         {
             "chainId": "1eaa0824707c8c16bd25145493bf062aecddfeb56c736f6ba6397f3195f33c9f",
             "manifest": {
-                "account": "app.tf",
-                "domain": "http://localhost:8080",
-                "appmeta": "http://localhost:8080/app-metadata.json#bc204f962e5cc6879c926826b11a46034aba37450d956a847afaa878079476b1",
+                "account": "sebastianmb2",
+                "domain": "https://seeds-sim-dev.hypha.earth",
+                "appmeta": "https://seeds-sim-dev.hypha.earth/app-metadata.json#445d3b59f3ef7644d6a619f82f60a222126370e8036ea6f7154c535636b01031",
                 "whitelist": [
                     {
                         "contract": "eosio.token",
@@ -18,14 +18,6 @@
                     },
                     {
                         "contract": "eosio.login",
-                        "action": ""
-                    },
-                    {
-                        "contract": "trailservice",
-                        "action": ""
-                    },
-                    {
-                        "contract": "safe.poc.tbs",
                         "action": ""
                     }
                 ]
