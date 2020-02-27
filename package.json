@@ -1,8 +1,8 @@
 {
-  "name": "telos-net",
+  "name": "seeds-simulation",
   "version": "0.0.1",
-  "description": "Telos Network Portal",
-  "productName": "Telos",
+  "description": "Seeds Simulation Portal",
+  "productName": "Seeds Simulation",
   "cordovaId": "org.cordova.quasar.app",
   "author": "gregory-latinier <gregory.latinier@gmail.com>",
   "private": true,

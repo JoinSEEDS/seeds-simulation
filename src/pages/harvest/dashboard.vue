@@ -48,8 +48,8 @@
           )
             template(v-slot:top)
                 custom-table-header(:titleTable="dataTableGDC.tableName" :subtitleTable="dataTableGDC.totalAmount")
+      //- div(v-if="dataChart")
       custom-chart(
-        v-if="dataChart"
         :dataChart="dataChart",
         :chartName="dataChart.chartName",
         xAxisTitle="Cycles",
@@ -102,6 +102,7 @@ export default {
      * This method toggle select between the tables
      */
     selectTable (table) {
+      if (this.getSimulationState.length <= 0) return
       if (this.tableSelected !== table) {
         this.tableSelected = table
         // window.scrollTo(0, document.body.scrollHeight || document.documentElement.scrollHeight)

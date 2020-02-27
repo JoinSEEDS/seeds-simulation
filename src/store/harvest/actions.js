@@ -132,7 +132,7 @@ export const getDataChart = async function ({ dispatch, commit, state }, { table
 
   if (state.simulationState.length === 0) {
     // commit('setDataChart', { chartName: 'First Select a table' })
-    commit('setDataChart', undefined)
+    // commit('setDataChart', undefined)
   }
 
   switch (tableId) {
@@ -278,7 +278,7 @@ export const getDataChart = async function ({ dispatch, commit, state }, { table
       break
     default:
       data = undefined
-      break
+      return
   }
   commit('setDataChart', data)
   return true

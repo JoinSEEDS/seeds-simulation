@@ -1,6 +1,6 @@
 export default {
   common: {
-    appName: 'Telos Communities',
+    appName: 'Seeds Simulation',
     buttons: {
       cancel: 'Cancel',
       continue: 'Continue',
@@ -78,7 +78,7 @@ export default {
     index: {
       buttons: {
         createAccount: 'Create account',
-        login: 'Login with Telos'
+        login: 'Login'
       }
     },
     general: {

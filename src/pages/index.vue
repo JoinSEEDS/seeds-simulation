@@ -7,7 +7,7 @@ export default {
 <template lang="pug">
   q-page.flex.column
     .main-splash
-      img.imgSplash(src="../app-splashscreen.png")
+      img.imgSplash(src="statics/seeds-logo-with-text.png")
     .col-9.flex.flex-center.col-grow.q-pa-lg
       div
         q-btn.full-width.q-mb-lg(
