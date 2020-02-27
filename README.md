@@ -1,4 +1,4 @@
-# Telos (telos)
+# Seeds Simulation (Seeds)
 
 TODO desc
 

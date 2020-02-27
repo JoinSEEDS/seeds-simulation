@@ -1,167 +1,212 @@
 <template lang="pug">
-    div.q-ma-xl.q-gutter-xl
+  q-scroll-area.scroll-container(ref="scrollArea")
+    div.q-ma-xl.q-gutter-y-xl
+      .div(@click="selectTable(constant.SEEDS_GROWN)")
+          q-table(
+          :data="dataTableGROWN.rows"
+          :columns="columnsTableGrown"
+          row-key="name"
+          :card-class="{'bg-grey-5': tableSelected == constant.SEEDS_GROWN}"
+          )
+            template(v-slot:top)
+              custom-table-header(:titleTable="dataTableGROWN.tableName")
 
-        .div(@click="selectTable(1)")
-            q-table(
-            :data="data"
-            :columns="columns"
-            row-key="name"
-            :card-class="{'bg-grey-5': tableSelected == 1}"
-            )
+      .div(@click="selectTable(constant.SEEDS_IND_ACCNTS)")
+          q-table(
+          :data="dataTableIND.rows"
+          :columns="columnsTableInd"
+          row-key="name"
+          :card-class="{'bg-grey-5': tableSelected == constant.SEEDS_IND_ACCNTS}"
+          )
+            template(v-slot:top)
+              custom-table-header(:titleTable="dataTableIND.tableName" :subtitleTable="dataTableIND.totalAmount")
+      .div(@click="selectTable(constant.SEEDS_ORG_ACCNTS)")
+          q-table(
+          :data="dataTableORG.rows"
+          :columns="columnsTableOrg"
+          row-key="name"
+          :card-class="{'bg-grey-5': tableSelected == constant.SEEDS_ORG_ACCNTS}"
+          )
+            template(v-slot:top)
+              custom-table-header(:titleTable="dataTableORG.tableName" :subtitleTable="dataTableORG.totalAmount")
 
-        .div(@click="selectTable(2)")
-            q-table(
-            :data="data"
-            :columns="columns"
-            row-key="name"
-            :card-class="{'bg-grey-5': tableSelected == 2}"
-            )
-
-        custom-chart
+      .div(@click="selectTable(constant.SEEDS_BDC)")
+          q-table(
+          :data="dataTableBDC.rows"
+          :columns="columnsTableBDC"
+          row-key="name"
+          :card-class="{'bg-grey-5': tableSelected == constant.SEEDS_BDC}"
+          )
+            template(v-slot:top)
+              custom-table-header(:titleTable="dataTableBDC.tableName" :subtitleTable="dataTableBDC.totalAmount")
+      .div(@click="selectTable(constant.SEEDS_GDC)")
+          q-table(
+          :data="dataTableGDC.rows"
+          :columns="columnsTableGDC"
+          row-key="name"
+          :card-class="{'bg-grey-5': tableSelected == constant.SEEDS_GDC}"
+          )
+            template(v-slot:top)
+                custom-table-header(:titleTable="dataTableGDC.tableName" :subtitleTable="dataTableGDC.totalAmount")
+      //- div(v-if="dataChart")
+      custom-chart(
+        :dataChart="dataChart",
+        :chartName="dataChart.chartName",
+        xAxisTitle="Cycles",
+        yAxisTitle="Seeds"
+      )
 </template>
 
 <script>
 import CustomChart from '~/pages/harvest/chart'
-import { seeds } from '~/mixins/seeds'
+import CustomTableHeader from '~/pages/harvest/components/customTableHeader'
+import harvestConstant from '~/const/harvestConstants'
+import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'harvest-dashboard',
-  components: { CustomChart },
-  mixins: [ seeds ],
+  components: { CustomChart, CustomTableHeader },
+  beforeMount () {
+    this.constant = harvestConstant
+  },
   mounted () {
-    this.getDataTable('None')
+    this.getInitSimulationStep()
+    this.tableSelected = 0
   },
   watch: {
+    simulationStep (currentStep, prevStep) {
+      console.log('The simulation step was changed', currentStep, prevStep)
+      console.log('Before Cycle Tables', this.getSimulationState)
+      this.setCycleTables({ step: this.simulationStep - 1 })
+      console.log('After Cycle Tables', this.getSimulationState)
+      if (this.simulationStep > prevStep) this.getDataChart({ tableId: this.tableSelected })
+      console.log('Tables updated')
+      console.log('After Tables updated', this.getSimulationState)
+    },
+    totalSimulationSteps (newV, oldV) {
+      if (this.totalSimulationSteps > 0 && oldV === 0) {
+        this.getDataChart({ tableId: this.tableSelected })
+        console.log('After Updated simulation steps', this.getSimulationState)
+        this.tableSelected = 1
+      }
+    },
     tableSelected () {
-      this.getDataTable(this.tableSelected)
+      this.getDataChart({ tableId: this.tableSelected })
     }
   },
+  computed: {
+    ...mapGetters('harvest', ['dataTableGROWN', 'dataTableIND', 'dataTableORG', 'dataTableBDC', 'dataTableGDC', 'simulationStep', 'totalSimulationSteps', 'dataChart', 'getSimulationState'])
+  },
   methods: {
+    ...mapActions('harvest', ['getDataTable', 'getDataChart', 'doCycle', 'setCycleTables', 'getInitSimulationStep']),
     /**
      * This method toggle select between the tables
      */
     selectTable (table) {
-      this.tableSelected = table
+      if (this.getSimulationState.length <= 0) return
+      if (this.tableSelected !== table) {
+        this.tableSelected = table
+        // window.scrollTo(0, document.body.scrollHeight || document.documentElement.scrollHeight)
+        this.$refs.scrollArea.setScrollPosition(10000, 500)
+      }
     }
   },
   data () {
     return {
-      tableSelected: 0,
-      columns: [
+      tableSelected: undefined,
+      constant: undefined,
+      columnsTableGrown: [
         {
-          name: 'name',
+          name: 'seeds3cycles',
           required: true,
-          label: 'Dessert (100g serving)',
+          label: 'Seeds Grown 3 Cycles',
           align: 'left',
-          field: row => row.name,
-          format: val => `${val}`,
+          field: 'seeds3cycles',
+          format: val => `${val.toFixed(2)}`,
           sortable: true,
-          // classes: 'bg-grey-2 ellipsis',
           headerClasses: 'bg-primary text-white',
           style: 'max-width: 100px'
         },
-        { name: 'calories', align: 'center', label: 'Calories', field: 'calories', sortable: true, headerClasses: 'bg-primary text-white' },
-        { name: 'sodium', label: 'Sodium (mg)', field: 'sodium', headerClasses: 'bg-primary text-white' },
-        { name: 'iron', label: 'Iron (%)', field: 'iron', sortable: true, headerClasses: 'bg-primary text-white', sort: (a, b) => parseInt(a, 10) - parseInt(b, 10) }
+        { name: 'seedsPerCycle', align: 'center', label: 'Seeds Grown Per Cycle', field: 'seedsPerCycle', sortable: true, headerClasses: 'bg-primary text-white', format: val => `${val.toFixed(2)}` },
+        { name: 'seedsPerBlock', align: 'right', label: 'Seeds Grown Per Block', field: 'seedsPerBlock', sortable: true, headerClasses: 'bg-primary text-white', format: val => `${val.toFixed(2)}` }
       ],
-      data: [
+      columnsTableInd: [
         {
-          name: 'Frozen Yogurt',
-          calories: 159,
-          sodium: 87,
-          calcium: '14%'
+          name: 'position',
+          required: true,
+          label: 'Rank',
+          align: 'left',
+          field: 'position',
+          headerClasses: 'bg-primary text-white text-weight-bold',
+          style: 'max-width: 100px'
         },
+        { name: 'numberUsers', align: 'center', label: 'Number People Accounts', field: 'numberUsers', sortable: true, headerClasses: 'bg-primary text-white' },
         {
-          name: 'Ice cream sandwich',
-          calories: 237,
-          fat: 9.0,
-          carbs: 37,
-          protein: 4.3,
-          sodium: 129,
-          calcium: '8%',
-          iron: '1%'
+          name: 'totalAmount',
+          label: 'Total Amount',
+          field: 'totalAmount',
+          sortable: true,
+          headerClasses: 'bg-primary text-white text-weight-bold',
+          format: val => `${val.toFixed(2)}`
         },
+        { name: 'totalAmountPerUser', label: 'Total Amount per Account', field: 'totalAmountPerUser', sortable: true, headerClasses: 'bg-primary text-white', format: val => `${val.toFixed(2)}` }
+      ],
+      columnsTableOrg: [
         {
-          name: 'Eclair',
-          calories: 262,
-          fat: 16.0,
-          carbs: 23,
-          protein: 6.0,
-          sodium: 337,
-          calcium: '6%',
-          iron: '7%'
+          name: 'position',
+          required: true,
+          label: 'Rank',
+          align: 'left',
+          field: 'position',
+          // format: val => `${val}`,
+          headerClasses: 'bg-primary text-white',
+          style: 'max-width: 100px'
         },
+        { name: 'numberUsers', align: 'center', label: 'Number Organization Accounts', field: 'numberUsers', sortable: true, headerClasses: 'bg-primary text-white' },
+        { name: 'totalAmount', label: 'Total Amount', field: 'totalAmount', sortable: true, headerClasses: 'bg-primary text-white', format: val => `${val.toFixed(2)}` },
+        { name: 'totalAmountPerOrganization', label: 'Total Amount per Organization', field: 'totalAmountPerOrganization', sortable: true, headerClasses: 'bg-primary text-white', format: val => `${val.toFixed(2)}` }
+      ],
+      columnsTableBDC: [
         {
-          name: 'Cupcake',
-          calories: 305,
-          fat: 3.7,
-          carbs: 67,
-          protein: 4.3,
-          sodium: 413,
-          calcium: '3%',
-          iron: '8%'
+          name: 'position',
+          required: true,
+          label: 'Rank',
+          align: 'left',
+          field: 'position',
+          // format: val => `${val}`,
+          headerClasses: 'bg-primary text-white',
+          style: 'max-width: 100px'
         },
+        { name: 'numBdc', align: 'left', label: 'Number BDC', field: 'numBdc', sortable: true, headerClasses: 'bg-primary text-white', format: val => `${val.toFixed(2)}` },
+        { name: 'openProposal', label: 'Open Proposal', field: 'openProposal', sortable: true, headerClasses: 'bg-primary text-white', format: val => `${val.toFixed(2)}` },
+        { name: 'regenGrants', label: 'Regen Grants', field: 'regenGrants', sortable: true, headerClasses: 'bg-primary text-white', format: val => `${val.toFixed(2)}` },
+        { name: 'regenLoans', label: 'Regen Loans', field: 'regenLoans', sortable: true, headerClasses: 'bg-primary text-white', format: val => `${val.toFixed(2)}` },
+        { name: 'totalAmount', label: 'Total Amount', field: 'budget', sortable: true, headerClasses: 'bg-primary text-white', format: val => `${val.toFixed(2)}` }
+      ],
+      columnsTableGDC: [
         {
-          name: 'Gingerbread',
-          calories: 356,
-          fat: 16.0,
-          carbs: 49,
-          protein: 3.9,
-          sodium: 327,
-          calcium: '7%',
-          iron: '16%'
+          name: 'totalAmountForGdc',
+          required: true,
+          label: 'Total Amount',
+          align: 'left',
+          field: 'totalAmountForGdc',
+          // format: val => `${val}`,
+          sortable: true,
+          headerClasses: 'bg-primary text-white',
+          style: 'max-width: 100px',
+          format: val => `${val.toFixed(2)}`
         },
-        {
-          name: 'Jelly bean',
-          calories: 375,
-          fat: 0.0,
-          carbs: 94,
-          protein: 0.0,
-          sodium: 50,
-          calcium: '0%',
-          iron: '0%'
-        },
-        {
-          name: 'Lollipop',
-          calories: 392,
-          fat: 0.2,
-          carbs: 98,
-          protein: 0,
-          sodium: 38,
-          calcium: '0%',
-          iron: '2%'
-        },
-        {
-          name: 'Honeycomb',
-          calories: 408,
-          fat: 3.2,
-          carbs: 87,
-          protein: 6.5,
-          sodium: 562,
-          calcium: '0%',
-          iron: '45%'
-        },
-        {
-          name: 'Donut',
-          calories: 452,
-          fat: 25.0,
-          carbs: 51,
-          protein: 4.9,
-          sodium: 326,
-          calcium: '2%',
-          iron: '22%'
-        },
-        {
-          name: 'KitKat',
-          calories: 518,
-          fat: 26.0,
-          carbs: 65,
-          protein: 7,
-          sodium: 54,
-          calcium: '12%',
-          iron: '6%'
-        }
+        { name: 'networkMaintenance', align: 'center', label: 'Network Maintenance', field: 'networkMaintenance', sortable: true, headerClasses: 'bg-primary text-white', format: val => `${val.toFixed(2)}` },
+        { name: 'regenGrants', label: 'Regen Grants', field: 'regenGrants', sortable: true, headerClasses: 'bg-primary text-white', format: val => `${val.toFixed(2)}` },
+        { name: 'coreDevelopment', label: 'Core Development', field: 'coreDevelopment', sortable: true, headerClasses: 'bg-primary text-white', format: val => `${val.toFixed(2)}` },
+        { name: 'interestFreeLoans', label: 'Interest Free Loans', field: 'interestFreeLoans', sortable: true, headerClasses: 'bg-primary text-white', format: val => `${val.toFixed(2)}` }
       ]
     }
   }
 }
 </script>
+
+<style lang="sass" scoped>
+  .scroll-container
+    height: calc(100vh - 50px)
+    max-width: 100%
+</style>

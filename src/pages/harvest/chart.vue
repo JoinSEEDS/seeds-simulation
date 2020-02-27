@@ -1,55 +1,92 @@
 <template lang="pug">
-    div
-        #chart-area
+    div.column(ref='container' v-if="dataChart")
+      //- slot(name='container')
+      #chart-area
 </template>
 
 <script>
+// https://github.com/nhn/tui.chart/blob/master/docs/wiki/README.md
 import chart from 'tui-chart'
-
+import { dom } from 'quasar'
+const { width } = dom
 export default {
   name: 'custom-chart',
+  model: {
+    prop: ['dataChart', 'chartName', 'xAxisTitle', 'yAxisTitle']
+  },
+  props: {
+    dataChart: {
+      default: null
+    },
+    chartName: {
+      default: 'Title'
+    },
+    xAxisTitle: {
+      default: 'XTitle'
+    },
+    yAxisTitle: {
+      default: 'YTitle'
+    }
+  },
+  data () {
+    return {
+      chartWidth: 200
+    }
+  },
+  watch: {
+    dataChart () {
+      this.resizeChart()
+    }
+  },
   mounted () {
-    this.loadChart()
+    window.addEventListener('resize', () => { this.resizeChart() })
+    console.log('Container ref', this.$refs)
+  },
+  beforeDestroy () {
+    document.removeEventListener('resize', () => { this.resizeChart() })
   },
   methods: {
+    getWidth () {
+      // var customTable = document.getElementById('chart-area')
+      var customTable = this.$refs.container.children[0]
+      this.chartWidth = width(customTable)
+    },
+    resizeChart () {
+      this.$refs.container.children[0].innerHTML = ''
+      this.getWidth()
+      this.loadChart()
+    },
     loadChart () {
-      var container = document.getElementById('chart-area')
+      var container = this.$refs.container.children[0]
+      // var container = document.getElementById('chart-area')
       var data = {
-        categories: ['June', 'July', 'Aug', 'Sep', 'Oct', 'Nov'],
-        series: [
-          {
-            name: 'Budget',
-            data: [5000, 3000, 6000, 3000, 6000, 4000]
-          },
-          {
-            name: 'Income',
-            data: [8000, 1000, 7000, 2000, 5000, 3000]
-          },
-          {
-            name: 'Outgo',
-            data: [900, 6000, 1000, 9000, 3000, 1000]
-          }
-        ]
+        categories: this.dataChart.categories,
+        series: this.dataChart.series
       }
       var options = {
         chart: {
-          width: 1000,
-          height: 540,
-          title: '24-hr Average Temperature'
+          title: this.chartName,
+          width: this.chartWidth
         },
         yAxis: {
-          title: 'Amount',
+          title: this.yAxisTitle,
           pointOnColumn: true
         },
         xAxis: {
-          title: 'Month'
+          title: this.xAxisTitle
         },
         series: {
           spline: true,
-          showDot: false
+          showDot: true,
+          animation: {
+            duration: 300
+          }
         },
         tooltip: {
-          suffix: '°C'
+          suffix: this.yAxisTitle
+        },
+        legend: {
+          align: 'top'
         }
       }
       //   var theme = {

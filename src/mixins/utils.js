@@ -1,4 +1,6 @@
 import { mapMutations } from 'vuex'
+import Vue from 'vue'
+export const EventBus = new Vue()
 export const utils = {
   methods: {
     ...mapMutations('general', ['setErrorMsg', 'setSuccessMsg', 'setIsLoading']),

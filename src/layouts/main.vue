@@ -32,7 +32,7 @@ export default {
 <template lang="pug">
   q-layout(view="hHh lpr lff")
     q-header(elevated)
-      q-toolbar
+      q-toolbar.bg-accent
         //- q-btn(
         //-   flat
         //-   dense
@@ -42,7 +42,7 @@ export default {
         //-   aria-label="Menu"
         //- )
         q-toolbar-title.flex.items-center
-          img.logo(src="statics/telos-logo-white.svg")
+          img.logo(src="statics/seeds-logo-with-text.png")
         right-menu-authenticated(v-if="isAuthenticated")
         right-menu-guest(v-if="!isAuthenticated")
         q-btn(
@@ -58,6 +58,7 @@ export default {
       v-model="menu"
       side="left"
       bordered
+      width="200"
       mini-to-overlay
       :mini="miniState"
       @mouseover="miniState = false"
@@ -78,8 +79,11 @@ export default {
 <style lang="sass" scoped>
 .logo
   max-height: 30px
-  max-width: 100px
+  max-width: 120px
 .badge-left
   left: -5px
   right: auto
+.accent
+  color: 'red'
+  background-color: 'red'
 </style>
