@@ -75,28 +75,29 @@ export default {
   watch: {
     simulationStep (currentStep, prevStep) {
       console.log('The simulation step was changed', currentStep, prevStep)
+      console.log('Before Cycle Tables', this.getSimulationState)
       this.setCycleTables({ step: this.simulationStep - 1 })
+      console.log('After Cycle Tables', this.getSimulationState)
       if (this.simulationStep > prevStep) this.getDataChart({ tableId: this.tableSelected })
       console.log('Tables updated')
+      console.log('After Tables updated', this.getSimulationState)
     },
     totalSimulationSteps (newV, oldV) {
       if (this.totalSimulationSteps > 0 && oldV === 0) {
         this.getDataChart({ tableId: this.tableSelected })
+        console.log('After Updated simulation steps', this.getSimulationState)
         this.tableSelected = 1
       }
     },
     tableSelected () {
-      setTimeout(() => {
-        this.getDataChart({ tableId: this.tableSelected })
-      },
-      2000)
+      this.getDataChart({ tableId: this.tableSelected })
     }
   },
   computed: {
-    ...mapGetters('harvest', ['dataTableGROWN', 'dataTableIND', 'dataTableORG', 'dataTableBDC', 'dataTableGDC', 'simulationStep', 'totalSimulationSteps', 'dataChart'])
+    ...mapGetters('harvest', ['dataTableGROWN', 'dataTableIND', 'dataTableORG', 'dataTableBDC', 'dataTableGDC', 'simulationStep', 'totalSimulationSteps', 'dataChart', 'getSimulationState'])
   },
   methods: {
-    ...mapActions('harvest', ['getDataTable', 'getDataChart', 'doCycle', 'editSimulationState', 'setCycleTables', 'getInitSimulationStep']),
+    ...mapActions('harvest', ['getDataTable', 'getDataChart', 'doCycle', 'setCycleTables', 'getInitSimulationStep']),
     /**
      * This method toggle select between the tables
      */

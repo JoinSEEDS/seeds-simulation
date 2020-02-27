@@ -300,7 +300,8 @@ export const doCycle = async function ({ dispatch, commit, state }, { simulation
   if (step === -1) {
     step = state.simulationState.length
   }
-
+  console.log('Inicio de DoCycle', state.simulationState)
+  console.log('Inicio de DoCycle my', simulationState)
   if (state.simulationState.length === 0) {
     let initState = doNextCycle(Object.assign({}, simulationState), false)
     let newState = doNextCycle(Object.assign({}, simulationState), true)
@@ -314,18 +315,6 @@ export const doCycle = async function ({ dispatch, commit, state }, { simulation
   setCycleTables({ dispatch, commit, state }, { step: step })
   commit('setSimulationStep', state.simulationState.length)
   // commit('setDataForm', simulationState)
-
-  return true
-}
-
-export const editSimulationState = async function ({ dispatch, commit, state }, { stateEdited, step = -1 }) {
-  if (step) {
-    step = state.simulationState.length - 1
-  }
-
-  let newState = doNextCycle(stateEdited, false)
-
-  commit('setDataSimulationState', { simulation: newState, append: false, step: step })
 
   return true
 }

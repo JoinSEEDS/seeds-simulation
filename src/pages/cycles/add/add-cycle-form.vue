@@ -152,13 +152,13 @@
         .row.justify-around.items-center
             .column.justify-center
                 .col-4
-                    q-btn(round :disabled="simulationStep == 0" color="secondary" icon="skip_previous" @click="backCycle")
+                    q-btn(round :disabled="simulationStep == 0" color="secondary" icon="skip_previous" @click="() => backCycle()")
             .column.justify-center
                 .col-6
                  p {{simulationStep}} / {{totalSimulationSteps}}
             .column.justify-center
                 .col-3
-                 q-btn(round color="secondary" icon="skip_next" @click="nextCycle")
+                 q-btn(round color="secondary" icon="skip_next" @click="() => nextCycle()")
 </template>
 
 <script>
@@ -208,7 +208,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('harvest', ['simulationStep', 'totalSimulationSteps', 'cycleDataForm'])
+    ...mapGetters('harvest', ['simulationStep', 'totalSimulationSteps', 'cycleDataForm', 'getSimulationState'])
   },
   mounted () {
     this.syncFormData()
@@ -223,9 +223,12 @@ export default {
     ...mapActions('harvest', ['getInitSimulationStep', 'doCycle']),
     ...mapMutations('harvest', ['setSimulationStep']),
     backCycle () {
+      console.log('Before back:', this.getSimulationState)
       this.setSimulationStep((this.simulationStep - 1))
+      console.log('After back:', this.getSimulationState)
     },
     nextCycle () {
+      console.log('Before next:', JSON.stringify(this.getSimulationState, null, 4))
       this.doCycle(
         {
           simulationState: {
@@ -263,8 +266,10 @@ export default {
           },
           step: (this.simulationStep - 1)
         })
+      console.log('After next:', this.getSimulationState)
     },
     syncFormData () {
+      console.log('Before Sync Form:', this.getSimulationState)
       this.circulatingSeeds = this.cycleDataForm.circulatingSeeds
       this.volumeGrowth = this.cycleDataForm.volumeGrowth
       this.seedsDestroyed = this.cycleDataForm.seedsDestroyed
@@ -294,6 +299,7 @@ export default {
       this.numPeopleAccounts = this.cycleDataForm.numPeopleAccounts
       this.numOrganizationAccounts = this.cycleDataForm.numOrganizationAccounts
       this.numBdcs = this.cycleDataForm.numBdcs
+      console.log('After Sync Form:', this.getSimulationState)
     }
   }
 }
