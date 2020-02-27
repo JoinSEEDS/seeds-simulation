@@ -10,15 +10,12 @@ build_dev:
   environment:
     name: dev
   variables:
-    APP_NAME: '"Telos Test Net"'
+    APP_NAME: '"Seeds Simulation Dev"'
     NETWORK_BLOCKCHAIN: '"eos"'
     NETWORK_CHAIN_ID: '"1eaa0824707c8c16bd25145493bf062aecddfeb56c736f6ba6397f3195f33c9f"'
     NETWORK_HOST: '"test.telos.kitchen"'
     NETWORK_PORT: '443'
     NETWORK_PROTOCOL: '"https"'
-    BLOCKCHAIN_EXPLORER: '"https://telos-test.bloks.io"'
-    WEBSERVICES_URL: '"https://api-dev.telos.net"'
-    GOOGLE_ANALYTICS: '"UA-154600181-3"'
   cache:
     paths:
       - node_modules/
@@ -45,15 +42,12 @@ build_prod:
   environment:
     name: production
   variables:
-    APP_NAME: '"Telos Net"'
+    APP_NAME: '"Seeds Simulation"'
     NETWORK_BLOCKCHAIN: '"eos"'
     NETWORK_CHAIN_ID: '"4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11"'
     NETWORK_HOST: '"telos.caleos.io"'
     NETWORK_PORT: '443'
     NETWORK_PROTOCOL: '"https"'
-    BLOCKCHAIN_EXPLORER: '"https://telos.bloks.io"'
-    WEBSERVICES_URL: '"https://api.telos.net"'
-    GOOGLE_ANALYTICS: '"UA-154600181-2"'
   cache:
     paths:
       - node_modules/
@@ -85,8 +79,8 @@ deploy_dev:
     - pip install awscli    
     - aws configure set aws_access_key_id $AWS_KEY
     - aws configure set aws_secret_access_key $AWS_SECRET
-    - aws s3 rm s3://telos-toolkit-dev
-    - aws s3 sync ./dist/spa s3://telos-toolkit-dev
+    - aws s3 rm s3://seeds-simulation-dev
+    - aws s3 sync ./dist/spa s3://seeds-simulation-dev
     - aws cloudfront create-invalidation --distribution-id $AWS_DIST_ID --paths "/*"
 
 deploy_prod:  
@@ -101,6 +95,6 @@ deploy_prod:
     - pip install awscli    
     - aws configure set aws_access_key_id $AWS_KEY
     - aws configure set aws_secret_access_key $AWS_SECRET
-    - aws s3 rm s3://telos-toolkit-prod
-    - aws s3 sync ./dist/spa s3://telos-toolkit-prod
+    - aws s3 rm s3://seeds-simulation-prod
+    - aws s3 sync ./dist/spa s3://seeds-simulation-prod
     - aws cloudfront create-invalidation --distribution-id $AWS_DIST_ID --paths "/*"
