@@ -3,7 +3,7 @@
         div.container-title
             p.text-h6.text-center {{titleTable}}
         div.container-subtitle(v-if="subtitleTable")
-            p.text-overline.text-center Total Amount: {{subtitleTable}}
+            p.text-overline.text-center Total Amount: {{subtitleTable.toFixed(2)}}
 </template>
 
 <script>

@@ -58,6 +58,7 @@ export default {
       v-model="menu"
       side="left"
       bordered
+      width="200"
       mini-to-overlay
       :mini="miniState"
       @mouseover="miniState = false"
@@ -78,7 +79,7 @@ export default {
 <style lang="sass" scoped>
 .logo
   max-height: 30px
-  max-width: 100px
+  max-width: 120px
 .badge-left
   left: -5px
   right: auto
