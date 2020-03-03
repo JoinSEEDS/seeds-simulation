@@ -3,14 +3,9 @@
         q-scroll-area.scroll-container
             .template-form
                 q-form.q-gutter-y-sm
-                    q-field(filled v-model='circulatingSeeds' label='Price with v-money directive' hint='Mask: $ #,###.00 #')
+                    q-field(filled v-model='circulatingSeeds' :label="$t('forms.cycles.circulatingSeeds')")
                         template(v-slot:control='{ id, floatingLabel, value, emitValue }')
-                            input.q-field__input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
-                    //- q-input(filled
-                    //-     v-model.lazy="circulatingSeeds"
-                    //-     :label="$t('forms.cycles.circulatingSeeds')"
-                    //-     v-money="moneyFormat"
-                    //-     )
+                            input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
                     //- q-input(filled
                     //-     v-model="circulatingSeeds"
                     //-     :label="$t('forms.cycles.circulatingSeeds')"
@@ -287,35 +282,35 @@ export default {
     },
     syncFormData () {
       console.log('Before Sync Form:', this.getSimulationState)
-      this.circulatingSeeds = this.cycleDataForm.circulatingSeeds
-      this.volumeGrowth = this.cycleDataForm.volumeGrowth
-      this.seedsDestroyed = this.cycleDataForm.seedsDestroyed
-      this.plantedSeeds = this.cycleDataForm.plantedSeeds
-      this.enterExchanges = this.cycleDataForm.enterExchanges
-      this.enterExchangesWeight = this.cycleDataForm.enterExchangesWeight
-      this.enterSeedsBank = this.cycleDataForm.enterSeedsBank
-      this.unplantedSeeds = this.cycleDataForm.unplantedSeeds
-      this.exitExchanges = this.cycleDataForm.exitExchanges
-      this.exitExchangesWeight = this.cycleDataForm.exitExchangesWeight
-      this.exitSeedsBank = this.cycleDataForm.exitSeedsBank
-      this.percentageOfHarvestAssignedCirculating = this.cycleDataForm.percentageOfHarvestAssignedCirculating
-      this.gdc = this.cycleDataForm.percentageDistributionOfNewHarvest.gdc
-      this.bdc = this.cycleDataForm.percentageDistributionOfNewHarvest.bdc
-      this.organizations = this.cycleDataForm.percentageDistributionOfNewHarvest.organizations
-      this.accounts = this.cycleDataForm.percentageDistributionOfNewHarvest.accounts
-      this.maxPercentageAccounts = this.cycleDataForm.maxPercentageAccounts
-      this.maxPercentageOrganizations = this.cycleDataForm.maxPercentageOrganizations
-      this.maxPercentageBdc = this.cycleDataForm.maxPercentageBdc
-      this.regenGrantsBDC = this.cycleDataForm.bdcPercentagesDistribution.regenGrants
-      this.regenLoans = this.cycleDataForm.bdcPercentagesDistribution.regenLoans
-      this.openProposal = this.cycleDataForm.bdcPercentagesDistribution.openProposal
-      this.networkMaintenance = this.cycleDataForm.gdcPercentagesDistribution.networkMaintenance
-      this.regenGrantsGDC = this.cycleDataForm.gdcPercentagesDistribution.regenGrants
-      this.coreDevelopment = this.cycleDataForm.gdcPercentagesDistribution.coreDevelopment
-      this.interestFreeLoans = this.cycleDataForm.gdcPercentagesDistribution.interestFreeLoans
-      this.numPeopleAccounts = this.cycleDataForm.numPeopleAccounts
-      this.numOrganizationAccounts = this.cycleDataForm.numOrganizationAccounts
-      this.numBdcs = this.cycleDataForm.numBdcs
+      this.circulatingSeeds = this.cycleDataForm.circulatingSeeds.toFixed(2)
+      this.volumeGrowth = this.cycleDataForm.volumeGrowth.toFixed(2)
+      this.seedsDestroyed = this.cycleDataForm.seedsDestroyed.toFixed(2)
+      this.plantedSeeds = this.cycleDataForm.plantedSeeds.toFixed(2)
+      this.enterExchanges = this.cycleDataForm.enterExchanges.toFixed(2)
+      this.enterExchangesWeight = this.cycleDataForm.enterExchangesWeight.toFixed(2)
+      this.enterSeedsBank = this.cycleDataForm.enterSeedsBank.toFixed(2)
+      this.unplantedSeeds = this.cycleDataForm.unplantedSeeds.toFixed(2)
+      this.exitExchanges = this.cycleDataForm.exitExchanges.toFixed(2)
+      this.exitExchangesWeight = this.cycleDataForm.exitExchangesWeight.toFixed(2)
+      this.exitSeedsBank = this.cycleDataForm.exitSeedsBank.toFixed(2)
+      this.percentageOfHarvestAssignedCirculating = this.cycleDataForm.percentageOfHarvestAssignedCirculating.toFixed(2)
+      this.gdc = this.cycleDataForm.percentageDistributionOfNewHarvest.gdc.toFixed(2)
+      this.bdc = this.cycleDataForm.percentageDistributionOfNewHarvest.bdc.toFixed(2)
+      this.organizations = this.cycleDataForm.percentageDistributionOfNewHarvest.organizations.toFixed(2)
+      this.accounts = this.cycleDataForm.percentageDistributionOfNewHarvest.accounts.toFixed(2)
+      this.maxPercentageAccounts = this.cycleDataForm.maxPercentageAccounts.toFixed(2)
+      this.maxPercentageOrganizations = this.cycleDataForm.maxPercentageOrganizations.toFixed(2)
+      this.maxPercentageBdc = this.cycleDataForm.maxPercentageBdc.toFixed(2)
+      this.regenGrantsBDC = this.cycleDataForm.bdcPercentagesDistribution.regenGrants.toFixed(2)
+      this.regenLoans = this.cycleDataForm.bdcPercentagesDistribution.regenLoans.toFixed(2)
+      this.openProposal = this.cycleDataForm.bdcPercentagesDistribution.openProposal.toFixed(2)
+      this.networkMaintenance = this.cycleDataForm.gdcPercentagesDistribution.networkMaintenance.toFixed(2)
+      this.regenGrantsGDC = this.cycleDataForm.gdcPercentagesDistribution.regenGrants.toFixed(2)
+      this.coreDevelopment = this.cycleDataForm.gdcPercentagesDistribution.coreDevelopment.toFixed(2)
+      this.interestFreeLoans = this.cycleDataForm.gdcPercentagesDistribution.interestFreeLoans.toFixed(2)
+      this.numPeopleAccounts = this.cycleDataForm.numPeopleAccounts.toFixed(2)
+      this.numOrganizationAccounts = this.cycleDataForm.numOrganizationAccounts.toFixed(2)
+      this.numBdcs = this.cycleDataForm.numBdcs.toFixed(2)
       console.log('After Sync Form:', this.getSimulationState)
     }
   },
@@ -353,4 +348,14 @@ export default {
 .scroll-container
     height: calc(100vh - 130px)
     max-width: 100%
+.c_input
+    background-color: inherit
+    flex: 1
+    border: none
+.c_input:focus
+    background-color: inherit
+    flex: 1
+    border: none !important
+input:focus, textarea:focus, select:focus
+    outline: none
 </style>
