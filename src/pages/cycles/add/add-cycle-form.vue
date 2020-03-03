@@ -3,10 +3,18 @@
         q-scroll-area.scroll-container
             .template-form
                 q-form.q-gutter-y-sm
-                    q-input(filled
-                        v-model="circulatingSeeds"
-                        :label="$t('forms.cycles.circulatingSeeds')"
-                        type="number")
+                    q-field(filled v-model='circulatingSeeds' label='Price with v-money directive' hint='Mask: $ #,###.00 #')
+                        template(v-slot:control='{ id, floatingLabel, value, emitValue }')
+                            input.q-field__input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
+                    //- q-input(filled
+                    //-     v-model.lazy="circulatingSeeds"
+                    //-     :label="$t('forms.cycles.circulatingSeeds')"
+                    //-     v-money="moneyFormat"
+                    //-     )
+                    //- q-input(filled
+                    //-     v-model="circulatingSeeds"
+                    //-     :label="$t('forms.cycles.circulatingSeeds')"
+                    //-     type="text")
                     q-input(filled
                         v-model="volumeGrowth"
                         :label="$t('forms.cycles.volumeGrowth')"
@@ -163,11 +171,20 @@
 
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
+// import Vue from 'vue'
+import { VMoney } from 'v-money'
 
 export default {
   name: 'add-cycle-form',
+  directives: { money: VMoney },
   data () {
     return {
+      price: 0,
+      moneyFormat: {
+        decimal: '.',
+        thousands: ',',
+        precision: 2
+      },
       circulatingSeeds: 0,
       volumeGrowth: 0,
       // changeRequiredToMeetDemand: 33339041.096,
@@ -301,8 +318,30 @@ export default {
       this.numBdcs = this.cycleDataForm.numBdcs
       console.log('After Sync Form:', this.getSimulationState)
     }
+  },
+  filters: {
+    format (price) {
+      console.log('price', price)
+      let format = new Intl.NumberFormat('nl-NL').format(price)
+      console.log('format', format)
+      return format
+    }
   }
 }
+
+// Vue.filter('currencyDisplay', {
+//   // model -> view
+//   // formats the value when updating the input element.
+//   read: function (val) {
+//     return '$' + val.toFixed(2)
+//   },
+//   // view -> model
+//   // formats the value when updating the data.
+//   write: function (val, oldVal) {
+//     var number = +val.replace(/[^\d.]/g, '')
+//     return isNaN(number) ? 0 : number
+//   }
+// })
 </script>
 
 <style lang="sass" scoped>

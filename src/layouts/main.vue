@@ -58,7 +58,6 @@ export default {
       v-model="menu"
       side="left"
       bordered
-      width="200"
       mini-to-overlay
       :mini="miniState"
       @mouseover="miniState = false"
