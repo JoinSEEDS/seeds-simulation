@@ -3,152 +3,96 @@
         q-scroll-area.scroll-container
             .template-form
                 q-form.q-gutter-y-sm
-                    q-input(filled
-                        v-model="circulatingSeeds"
-                        :label="$t('forms.cycles.circulatingSeeds')"
-                        type="number")
-                    q-input(filled
-                        v-model="volumeGrowth"
-                        :label="$t('forms.cycles.volumeGrowth')"
-                        type="number"
-                        )
-                    q-input(filled
-                        v-model="seedsDestroyed"
-                        :label="$t('forms.cycles.seedsDestroyed')"
-                        type="number")
-                    q-input(filled
-                        v-model="plantedSeeds"
-                        :label="$t('forms.cycles.plantedSeeds')"
-                        type="number"
-                        )
-                    q-input(filled
-                        v-model="enterExchanges"
-                        :label="$t('forms.cycles.enterExchanges')"
-                        type="number"
-                        )
-                    q-input(filled
-                        v-model="enterExchangesWeight"
-                        :label="$t('forms.cycles.enterExchangesWeight')"
-                        type="number"
-                        )
-                    q-input(filled
-                        v-model="enterSeedsBank"
-                        :label="$t('forms.cycles.enterSeedsBank')"
-                        type="number"
-                        )
-                    q-input(filled
-                        v-model="unplantedSeeds"
-                        :label="$t('forms.cycles.unplantedSeeds')"
-                        type="number"
-                        )
-                    q-input(filled
-                        v-model="exitExchanges"
-                        :label="$t('forms.cycles.exitExchanges')"
-                        type="number"
-                        )
-                    q-input(filled
-                        v-model="exitExchangesWeight"
-                        :label="$t('forms.cycles.exitExchangesWeight')"
-                        type="number"
-                        )
-                    q-input(filled
-                        v-model="exitSeedsBank"
-                        :label="$t('forms.cycles.exitSeedsBank')"
-                        type="number"
-                        )
-                    q-input(filled
-                        v-model="percentageOfHarvestAssignedCirculating"
-                        :label="$t('forms.cycles.percentageOfHarvestAssignedCirculating')"
-                        type="number"
-                        )
+                    q-field(filled v-model='circulatingSeeds' :label="$t('forms.cycles.circulatingSeeds')")
+                        template(v-slot:control='{ id, floatingLabel, value, emitValue }')
+                            input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
+                    q-field(filled v-model='volumeGrowth' :label="$t('forms.cycles.volumeGrowth')")
+                        template(v-slot:control='{ id, floatingLabel, value, emitValue }')
+                            input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
+                    q-field(filled v-model='seedsDestroyed' :label="$t('forms.cycles.seedsDestroyed')")
+                        template(v-slot:control='{ id, floatingLabel, value, emitValue }')
+                            input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
+                    q-field(filled v-model='plantedSeeds' :label="$t('forms.cycles.plantedSeeds')")
+                        template(v-slot:control='{ id, floatingLabel, value, emitValue }')
+                            input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
+                    q-field(filled v-model='enterExchanges' :label="$t('forms.cycles.enterExchanges')")
+                        template(v-slot:control='{ id, floatingLabel, value, emitValue }')
+                            input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
+                    q-field(filled v-model='enterExchangesWeight' :label="$t('forms.cycles.enterExchangesWeight')")
+                        template(v-slot:control='{ id, floatingLabel, value, emitValue }')
+                            input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
+                    q-field(filled v-model='enterSeedsBank' :label="$t('forms.cycles.enterSeedsBank')")
+                        template(v-slot:control='{ id, floatingLabel, value, emitValue }')
+                            input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
+                    q-field(filled v-model='unplantedSeeds' :label="$t('forms.cycles.unplantedSeeds')")
+                        template(v-slot:control='{ id, floatingLabel, value, emitValue }')
+                            input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
+                    q-field(filled v-model='exitExchanges' :label="$t('forms.cycles.exitExchanges')")
+                        template(v-slot:control='{ id, floatingLabel, value, emitValue }')
+                            input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
+                    q-field(filled v-model='exitExchangesWeight' :label="$t('forms.cycles.exitExchangesWeight')")
+                        template(v-slot:control='{ id, floatingLabel, value, emitValue }')
+                            input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
+                    q-field(filled v-model='exitSeedsBank' :label="$t('forms.cycles.exitSeedsBank')")
+                        template(v-slot:control='{ id, floatingLabel, value, emitValue }')
+                            input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
+                    q-field(filled v-model='percentageOfHarvestAssignedCirculating' :label="$t('forms.cycles.percentageOfHarvestAssignedCirculating')")
+                        template(v-slot:control='{ id, floatingLabel, value, emitValue }')
+                            input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
                     div.form-group
-                        q-input(filled
-                            v-model="gdc"
-                            :label="$t('forms.cycles.gdc')"
-                            type="number"
-                            )
-                        q-input(filled
-                            v-model="bdc"
-                            :label="$t('forms.cycles.bdc')"
-                            type="number"
-                            )
-                        q-input(filled
-                            v-model="organizations"
-                            :label="$t('forms.cycles.organizations')"
-                            type="number"
-                            )
-                        q-input(filled
-                            v-model="accounts"
-                            :label="$t('forms.cycles.accounts')"
-                            type="number"
-                            )
-                    q-input(filled
-                        v-model="maxPercentageAccounts"
-                        :label="$t('forms.cycles.maxPercentageAccounts')"
-                        type="number"
-                        )
-                    q-input(filled
-                        v-model="maxPercentageOrganizations"
-                        :label="$t('forms.cycles.maxPercentageOrganizations')"
-                        type="number"
-                        )
-                    q-input(filled
-                        v-model="maxPercentageBdc"
-                        :label="$t('forms.cycles.maxPercentageBdc')"
-                        type="number"
-                        )
+                        q-field(filled v-model='gdc' :label="$t('forms.cycles.gdc')")
+                            template(v-slot:control='{ id, floatingLabel, value, emitValue }')
+                                input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
+                        q-field(filled v-model='bdc' :label="$t('forms.cycles.bdc')")
+                            template(v-slot:control='{ id, floatingLabel, value, emitValue }')
+                                input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
+                        q-field(filled v-model='organizations' :label="$t('forms.cycles.organizations')")
+                            template(v-slot:control='{ id, floatingLabel, value, emitValue }')
+                                input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
+                        q-field(filled v-model='accounts' :label="$t('forms.cycles.accounts')")
+                            template(v-slot:control='{ id, floatingLabel, value, emitValue }')
+                                input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
+                    q-field(filled v-model='maxPercentageAccounts' :label="$t('forms.cycles.maxPercentageAccounts')")
+                        template(v-slot:control='{ id, floatingLabel, value, emitValue }')
+                            input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
+                    q-field(filled v-model='maxPercentageOrganizations' :label="$t('forms.cycles.maxPercentageOrganizations')")
+                        template(v-slot:control='{ id, floatingLabel, value, emitValue }')
+                            input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
+                    q-field(filled v-model='maxPercentageBdc' :label="$t('forms.cycles.maxPercentageBdc')")
+                        template(v-slot:control='{ id, floatingLabel, value, emitValue }')
+                            input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
                     div.form-group
-                        q-input(filled
-                            v-model="regenGrantsBDC"
-                            :label="$t('forms.cycles.regenGrantsBDC')"
-                            type="number"
-                            )
-                        q-input(filled
-                            v-model="regenLoans"
-                            :label="$t('forms.cycles.regenLoans')"
-                            type="number"
-                            )
-                        q-input(filled
-                            v-model="openProposal"
-                            :label="$t('forms.cycles.openProposal')"
-                            type="number"
-                            )
+                        q-field(filled v-model='regenGrantsBDC' :label="$t('forms.cycles.regenGrantsBDC')")
+                            template(v-slot:control='{ id, floatingLabel, value, emitValue }')
+                                input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
+                        q-field(filled v-model='regenLoans' :label="$t('forms.cycles.regenLoans')")
+                            template(v-slot:control='{ id, floatingLabel, value, emitValue }')
+                                input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
+                        q-field(filled v-model='openProposal' :label="$t('forms.cycles.openProposal')")
+                            template(v-slot:control='{ id, floatingLabel, value, emitValue }')
+                                input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
                     div.form-group
-                        q-input(filled
-                            v-model="networkMaintenance"
-                            :label="$t('forms.cycles.networkMaintenance')"
-                            type="number"
-                            )
-                        q-input(filled
-                            v-model="regenGrantsGDC"
-                            :label="$t('forms.cycles.regenGrantsGDC')"
-                            type="number"
-                            )
-                        q-input(filled
-                            v-model="coreDevelopment"
-                            :label="$t('forms.cycles.coreDevelopment')"
-                            type="number"
-                            )
-                        q-input(filled
-                            v-model="interestFreeLoans"
-                            :label="$t('forms.cycles.interestFreeLoans')"
-                            type="number"
-                            )
-                    q-input(filled
-                        v-model="numPeopleAccounts"
-                        :label="$t('forms.cycles.numPeopleAccounts')"
-                        type="number"
-                        )
-                    q-input(filled
-                        v-model="numOrganizationAccounts"
-                        :label="$t('forms.cycles.numOrganizationAccounts')"
-                        type="number"
-                        )
-                    q-input(filled
-                        v-model="numBdcs"
-                        :label="$t('forms.cycles.numBdcs')"
-                        type="number"
-                        )
+                        q-field(filled v-model='networkMaintenance' :label="$t('forms.cycles.networkMaintenance')")
+                            template(v-slot:control='{ id, floatingLabel, value, emitValue }')
+                                input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
+                        q-field(filled v-model='regenGrantsGDC' :label="$t('forms.cycles.regenGrantsGDC')")
+                            template(v-slot:control='{ id, floatingLabel, value, emitValue }')
+                                input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
+                        q-field(filled v-model='coreDevelopment' :label="$t('forms.cycles.coreDevelopment')")
+                            template(v-slot:control='{ id, floatingLabel, value, emitValue }')
+                                input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
+                        q-field(filled v-model='interestFreeLoans' :label="$t('forms.cycles.interestFreeLoans')")
+                            template(v-slot:control='{ id, floatingLabel, value, emitValue }')
+                                input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
+                    q-field(filled v-model='numPeopleAccounts' :label="$t('forms.cycles.numPeopleAccounts')")
+                        template(v-slot:control='{ id, floatingLabel, value, emitValue }')
+                            input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
+                    q-field(filled v-model='numOrganizationAccounts' :label="$t('forms.cycles.numOrganizationAccounts')")
+                        template(v-slot:control='{ id, floatingLabel, value, emitValue }')
+                            input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
+                    q-field(filled v-model='numBdcs' :label="$t('forms.cycles.numBdcs')")
+                        template(v-slot:control='{ id, floatingLabel, value, emitValue }')
+                            input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
         .row.justify-around.items-center
             .column.justify-center
                 .col-4
@@ -163,11 +107,20 @@
 
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
+// import Vue from 'vue'
+import { VMoney } from 'v-money'
 
 export default {
   name: 'add-cycle-form',
+  directives: { money: VMoney },
   data () {
     return {
+      price: 0,
+      moneyFormat: {
+        decimal: '.',
+        thousands: ',',
+        precision: 2
+      },
       circulatingSeeds: 0,
       volumeGrowth: 0,
       // changeRequiredToMeetDemand: 33339041.096,
@@ -232,36 +185,36 @@ export default {
       this.doCycle(
         {
           simulationState: {
-            circulatingSeeds: parseFloat(this.circulatingSeeds),
-            volumeGrowth: parseFloat(this.volumeGrowth),
+            circulatingSeeds: parseFloat(this.cleanFormat(this.circulatingSeeds)),
+            volumeGrowth: parseFloat(this.cleanFormat(this.volumeGrowth)),
             // changeRequiredToMeetDemand: 33339041.096,
-            seedsDestroyed: parseFloat(this.seedsDestroyed),
-            plantedSeeds: parseFloat(this.plantedSeeds),
-            enterExchanges: parseFloat(this.enterExchanges),
-            enterExchangesWeight: parseFloat(this.enterExchangesWeight),
-            enterSeedsBank: parseFloat(this.enterSeedsBank),
+            seedsDestroyed: parseFloat(this.cleanFormat(this.seedsDestroyed)),
+            plantedSeeds: parseFloat(this.cleanFormat(this.plantedSeeds)),
+            enterExchanges: parseFloat(this.cleanFormat(this.enterExchanges)),
+            enterExchangesWeight: parseFloat(this.cleanFormat(this.enterExchangesWeight)),
+            enterSeedsBank: parseFloat(this.cleanFormat(this.enterSeedsBank)),
             // seedsRemoved3Cycles: 26681232.878,
-            unplantedSeeds: parseFloat(this.unplantedSeeds),
-            exitExchanges: parseFloat(this.exitExchanges),
-            exitExchangesWeight: parseFloat(this.exitExchangesWeight),
-            exitSeedsBank: parseFloat(this.exitSeedsBank),
+            unplantedSeeds: parseFloat(this.cleanFormat(this.unplantedSeeds)),
+            exitExchanges: parseFloat(this.cleanFormat(this.exitExchanges)),
+            exitExchangesWeight: parseFloat(this.cleanFormat(this.exitExchangesWeight)),
+            exitSeedsBank: parseFloat(this.cleanFormat(this.exitSeedsBank)),
             // seedsIntroducedPrevious3Cycles: 14669178.079,
             // seedsGrownPerCycle: 15117031.964999998,
-            percentageOfHarvestAssignedCirculating: parseFloat(this.percentageOfHarvestAssignedCirculating),
-            percentageDistributionOfNewHarvest: { gdc: parseFloat(this.gdc), bdc: parseFloat(this.bdc), organizations: parseFloat(this.organizations), accounts: parseFloat(this.accounts) },
-            maxPercentageAccounts: parseFloat(this.maxPercentageAccounts),
-            maxPercentageOrganizations: parseFloat(this.maxPercentageOrganizations),
-            maxPercentageBdc: parseFloat(this.maxPercentageBdc),
-            bdcPercentagesDistribution: { regenGrants: parseFloat(this.regenGrantsBDC), regenLoans: parseFloat(this.regenLoans), openProposal: parseFloat(this.openProposal) },
+            percentageOfHarvestAssignedCirculating: parseFloat(this.cleanFormat(this.percentageOfHarvestAssignedCirculating)),
+            percentageDistributionOfNewHarvest: { gdc: parseFloat(this.cleanFormat(this.gdc)), bdc: parseFloat(this.cleanFormat(this.bdc)), organizations: parseFloat(this.cleanFormat(this.organizations)), accounts: parseFloat(this.cleanFormat(this.accounts)) },
+            maxPercentageAccounts: parseFloat(this.cleanFormat(this.maxPercentageAccounts)),
+            maxPercentageOrganizations: parseFloat(this.cleanFormat(this.maxPercentageOrganizations)),
+            maxPercentageBdc: parseFloat(this.cleanFormat(this.maxPercentageBdc)),
+            bdcPercentagesDistribution: { regenGrants: parseFloat(this.cleanFormat(this.regenGrantsBDC)), regenLoans: parseFloat(this.cleanFormat(this.regenLoans)), openProposal: parseFloat(this.cleanFormat(this.openProposal)) },
             gdcPercentagesDistribution: {
-              networkMaintenance: parseFloat(this.networkMaintenance),
-              regenGrants: parseFloat(this.regenGrantsGDC),
-              coreDevelopment: parseFloat(this.coreDevelopment),
-              interestFreeLoans: parseFloat(this.interestFreeLoans)
+              networkMaintenance: parseFloat(this.cleanFormat(this.networkMaintenance)),
+              regenGrants: parseFloat(this.cleanFormat(this.regenGrantsGDC)),
+              coreDevelopment: parseFloat(this.cleanFormat(this.coreDevelopment)),
+              interestFreeLoans: parseFloat(this.cleanFormat(this.interestFreeLoans))
             },
-            numPeopleAccounts: parseFloat(this.numPeopleAccounts),
-            numOrganizationAccounts: parseFloat(this.numOrganizationAccounts),
-            numBdcs: parseFloat(this.numBdcs)
+            numPeopleAccounts: parseFloat(this.cleanFormat(this.numPeopleAccounts)),
+            numOrganizationAccounts: parseFloat(this.cleanFormat(this.numOrganizationAccounts)),
+            numBdcs: parseFloat(this.cleanFormat(this.numBdcs))
             // harvestDistribution: {}
           },
           step: (this.simulationStep - 1)
@@ -270,39 +223,69 @@ export default {
     },
     syncFormData () {
       console.log('Before Sync Form:', this.getSimulationState)
-      this.circulatingSeeds = this.cycleDataForm.circulatingSeeds
-      this.volumeGrowth = this.cycleDataForm.volumeGrowth
-      this.seedsDestroyed = this.cycleDataForm.seedsDestroyed
-      this.plantedSeeds = this.cycleDataForm.plantedSeeds
-      this.enterExchanges = this.cycleDataForm.enterExchanges
-      this.enterExchangesWeight = this.cycleDataForm.enterExchangesWeight
-      this.enterSeedsBank = this.cycleDataForm.enterSeedsBank
-      this.unplantedSeeds = this.cycleDataForm.unplantedSeeds
-      this.exitExchanges = this.cycleDataForm.exitExchanges
-      this.exitExchangesWeight = this.cycleDataForm.exitExchangesWeight
-      this.exitSeedsBank = this.cycleDataForm.exitSeedsBank
-      this.percentageOfHarvestAssignedCirculating = this.cycleDataForm.percentageOfHarvestAssignedCirculating
-      this.gdc = this.cycleDataForm.percentageDistributionOfNewHarvest.gdc
-      this.bdc = this.cycleDataForm.percentageDistributionOfNewHarvest.bdc
-      this.organizations = this.cycleDataForm.percentageDistributionOfNewHarvest.organizations
-      this.accounts = this.cycleDataForm.percentageDistributionOfNewHarvest.accounts
-      this.maxPercentageAccounts = this.cycleDataForm.maxPercentageAccounts
-      this.maxPercentageOrganizations = this.cycleDataForm.maxPercentageOrganizations
-      this.maxPercentageBdc = this.cycleDataForm.maxPercentageBdc
-      this.regenGrantsBDC = this.cycleDataForm.bdcPercentagesDistribution.regenGrants
-      this.regenLoans = this.cycleDataForm.bdcPercentagesDistribution.regenLoans
-      this.openProposal = this.cycleDataForm.bdcPercentagesDistribution.openProposal
-      this.networkMaintenance = this.cycleDataForm.gdcPercentagesDistribution.networkMaintenance
-      this.regenGrantsGDC = this.cycleDataForm.gdcPercentagesDistribution.regenGrants
-      this.coreDevelopment = this.cycleDataForm.gdcPercentagesDistribution.coreDevelopment
-      this.interestFreeLoans = this.cycleDataForm.gdcPercentagesDistribution.interestFreeLoans
-      this.numPeopleAccounts = this.cycleDataForm.numPeopleAccounts
-      this.numOrganizationAccounts = this.cycleDataForm.numOrganizationAccounts
-      this.numBdcs = this.cycleDataForm.numBdcs
+      this.circulatingSeeds = this.cycleDataForm.circulatingSeeds.toFixed(2)
+      this.volumeGrowth = this.cycleDataForm.volumeGrowth.toFixed(2)
+      this.seedsDestroyed = this.cycleDataForm.seedsDestroyed.toFixed(2)
+      this.plantedSeeds = this.cycleDataForm.plantedSeeds.toFixed(2)
+      this.enterExchanges = this.cycleDataForm.enterExchanges.toFixed(2)
+      this.enterExchangesWeight = this.cycleDataForm.enterExchangesWeight.toFixed(2)
+      this.enterSeedsBank = this.cycleDataForm.enterSeedsBank.toFixed(2)
+      this.unplantedSeeds = this.cycleDataForm.unplantedSeeds.toFixed(2)
+      this.exitExchanges = this.cycleDataForm.exitExchanges.toFixed(2)
+      this.exitExchangesWeight = this.cycleDataForm.exitExchangesWeight.toFixed(2)
+      this.exitSeedsBank = this.cycleDataForm.exitSeedsBank.toFixed(2)
+      this.percentageOfHarvestAssignedCirculating = this.cycleDataForm.percentageOfHarvestAssignedCirculating.toFixed(2)
+      this.gdc = this.cycleDataForm.percentageDistributionOfNewHarvest.gdc.toFixed(2)
+      this.bdc = this.cycleDataForm.percentageDistributionOfNewHarvest.bdc.toFixed(2)
+      this.organizations = this.cycleDataForm.percentageDistributionOfNewHarvest.organizations.toFixed(2)
+      this.accounts = this.cycleDataForm.percentageDistributionOfNewHarvest.accounts.toFixed(2)
+      this.maxPercentageAccounts = this.cycleDataForm.maxPercentageAccounts.toFixed(2)
+      this.maxPercentageOrganizations = this.cycleDataForm.maxPercentageOrganizations.toFixed(2)
+      this.maxPercentageBdc = this.cycleDataForm.maxPercentageBdc.toFixed(2)
+      this.regenGrantsBDC = this.cycleDataForm.bdcPercentagesDistribution.regenGrants.toFixed(2)
+      this.regenLoans = this.cycleDataForm.bdcPercentagesDistribution.regenLoans.toFixed(2)
+      this.openProposal = this.cycleDataForm.bdcPercentagesDistribution.openProposal.toFixed(2)
+      this.networkMaintenance = this.cycleDataForm.gdcPercentagesDistribution.networkMaintenance.toFixed(2)
+      this.regenGrantsGDC = this.cycleDataForm.gdcPercentagesDistribution.regenGrants.toFixed(2)
+      this.coreDevelopment = this.cycleDataForm.gdcPercentagesDistribution.coreDevelopment.toFixed(2)
+      this.interestFreeLoans = this.cycleDataForm.gdcPercentagesDistribution.interestFreeLoans.toFixed(2)
+      this.numPeopleAccounts = this.cycleDataForm.numPeopleAccounts.toFixed(2)
+      this.numOrganizationAccounts = this.cycleDataForm.numOrganizationAccounts.toFixed(2)
+      this.numBdcs = this.cycleDataForm.numBdcs.toFixed(2)
       console.log('After Sync Form:', this.getSimulationState)
+    },
+    cleanFormat (value) {
+      var match = value.match(/[0-9,.]*/)
+      let amount
+      if (match !== null) {
+        amount = parseFloat(match[0].replace(/,/g, '')) // replace , thousands separator
+      }
+      return amount
+    }
+  },
+  filters: {
+    format (price) {
+      console.log('price', price)
+      let format = new Intl.NumberFormat('nl-NL').format(price)
+      console.log('format', format)
+      return format
     }
   }
 }
+
+// Vue.filter('currencyDisplay', {
+//   // model -> view
+//   // formats the value when updating the input element.
+//   read: function (val) {
+//     return '$' + val.toFixed(2)
+//   },
+//   // view -> model
+//   // formats the value when updating the data.
+//   write: function (val, oldVal) {
+//     var number = +val.replace(/[^\d.]/g, '')
+//     return isNaN(number) ? 0 : number
+//   }
+// })
 </script>
 
 <style lang="sass" scoped>
@@ -314,4 +297,14 @@ export default {
 .scroll-container
     height: calc(100vh - 130px)
     max-width: 100%
+.c_input
+    background-color: inherit
+    flex: 1
+    border: none
+.c_input:focus
+    background-color: inherit
+    flex: 1
+    border: none !important
+input:focus, textarea:focus, select:focus
+    outline: none
 </style>

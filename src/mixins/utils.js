@@ -43,6 +43,10 @@ export const utils = {
     },
     showIsLoading (state) {
       this.setIsLoading(state)
+    },
+    formatToMoney (price) {
+      let format = new Intl.NumberFormat().format(price)
+      return format
     }
   }
 }

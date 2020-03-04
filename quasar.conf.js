@@ -66,6 +66,7 @@ module.exports = function (ctx) {
         'QDrawer',
         'QEditor',
         'QExpansionItem',
+        'QField',
         'QFab',
         'QFabAction',
         'QForm',
