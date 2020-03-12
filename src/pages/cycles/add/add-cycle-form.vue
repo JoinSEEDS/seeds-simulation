@@ -19,7 +19,7 @@
                                     :rules="[rules.positiveInteger]"
                                     prefix="$"
                                 )
-                                p Hi {{ numBdcs }}
+                                p Hi {{ volumeGrowth }}
                                 money-input(
                                     v-model='volumeGrowth'
                                     :label="$t('forms.cycles.volumeGrowth')"
