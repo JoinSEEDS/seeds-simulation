@@ -8,6 +8,7 @@
         suffix="%"
         :rules="rules"
         :readonly="readonly"
+        filled
     )
 </template>
 

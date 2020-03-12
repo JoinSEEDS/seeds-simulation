@@ -84,7 +84,7 @@
                                 //- q-field(filled v-model='enterExchanges' :label="$t('forms.cycles.enterExchanges')")
                                 //-     template(v-slot:control='{ id, floatingLabel, value, emitValue }')
                                 //-         input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
-                                money-input(
+                                percentage-input(
                                     v-model='enterExchangesWeight'
                                     :label="$t('forms.cycles.enterExchangesWeight')"
                                     :rules="[rules.positiveInteger]"
@@ -125,7 +125,7 @@
                                 //- q-field(filled v-model='exitExchanges' :label="$t('forms.cycles.exitExchanges')")
                                 //-     template(v-slot:control='{ id, floatingLabel, value, emitValue }')
                                 //-         input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
-                                money-input(
+                                percentage-input(
                                     v-model='exitExchangesWeight'
                                     :label="$t('forms.cycles.exitExchangesWeight')"
                                     :rules="[rules.positiveInteger]"
@@ -150,7 +150,7 @@
                         )
                           q-card
                             q-card-section.q-gutter-y-sm
-                                money-input(
+                                percentage-input(
                                     v-model='gdc'
                                     :label="$t('forms.cycles.gdc')"
                                     :rules="[rules.positiveInteger]"
@@ -158,7 +158,7 @@
                                 //- q-field(filled v-model='gdc' :label="$t('forms.cycles.gdc')")
                                 //-     template(v-slot:control='{ id, floatingLabel, value, emitValue }')
                                 //-         input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
-                                money-input(
+                                percentage-input(
                                     v-model='bdc'
                                     :label="$t('forms.cycles.bdc')"
                                     :rules="[rules.positiveInteger]"
@@ -166,7 +166,7 @@
                                 //- q-field(filled v-model='bdc' :label="$t('forms.cycles.bdc')")
                                 //-     template(v-slot:control='{ id, floatingLabel, value, emitValue }')
                                 //-         input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
-                                money-input(
+                                percentage-input(
                                     v-model='organizations'
                                     :label="$t('forms.cycles.organizations')"
                                     :rules="[rules.positiveInteger]"
@@ -174,7 +174,7 @@
                                 //- q-field(filled v-model='organizations' :label="$t('forms.cycles.organizations')")
                                 //-     template(v-slot:control='{ id, floatingLabel, value, emitValue }')
                                 //-         input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
-                                money-input(
+                                percentage-input(
                                     v-model='accounts'
                                     :label="$t('forms.cycles.accounts')"
                                     :rules="[rules.positiveInteger]"
@@ -191,7 +191,7 @@
                         )
                           q-card
                             q-card-section.q-gutter-y-sm
-                                money-input(
+                                percentage-input(
                                     v-model='regenGrantsBDC'
                                     :label="$t('forms.cycles.regenGrantsBDC')"
                                     :rules="[rules.positiveInteger]"
@@ -199,7 +199,7 @@
                                 //- q-field(filled v-model='regenGrantsBDC' :label="$t('forms.cycles.regenGrantsBDC')")
                                 //-     template(v-slot:control='{ id, floatingLabel, value, emitValue }')
                                 //-         input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
-                                money-input(
+                                percentage-input(
                                     v-model='regenLoans'
                                     :label="$t('forms.cycles.regenLoans')"
                                     :rules="[rules.positiveInteger]"
@@ -207,7 +207,7 @@
                                 //- q-field(filled v-model='regenLoans' :label="$t('forms.cycles.regenLoans')")
                                 //-     template(v-slot:control='{ id, floatingLabel, value, emitValue }')
                                 //-         input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
-                                money-input(
+                                percentage-input(
                                     v-model='openProposal'
                                     :label="$t('forms.cycles.openProposal')"
                                     :rules="[rules.positiveInteger]"
@@ -224,7 +224,7 @@
                         )
                           q-card
                             q-card-section.q-gutter-y-sm
-                                money-input(
+                                percentage-input(
                                     v-model='networkMaintenance'
                                     :label="$t('forms.cycles.networkMaintenance')"
                                     :rules="[rules.positiveInteger]"
@@ -232,7 +232,7 @@
                                 //- q-field(filled v-model='networkMaintenance' :label="$t('forms.cycles.networkMaintenance')")
                                 //-     template(v-slot:control='{ id, floatingLabel, value, emitValue }')
                                 //-         input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
-                                money-input(
+                                percentage-input(
                                     v-model='regenGrantsGDC'
                                     :label="$t('forms.cycles.regenGrantsGDC')"
                                     :rules="[rules.positiveInteger]"
@@ -240,7 +240,7 @@
                                 //- q-field(filled v-model='regenGrantsGDC' :label="$t('forms.cycles.regenGrantsGDC')")
                                 //-     template(v-slot:control='{ id, floatingLabel, value, emitValue }')
                                 //-         input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
-                                money-input(
+                                percentage-input(
                                     v-model='coreDevelopment'
                                     :label="$t('forms.cycles.coreDevelopment')"
                                     :rules="[rules.positiveInteger]"
@@ -248,7 +248,7 @@
                                 //- q-field(filled v-model='coreDevelopment' :label="$t('forms.cycles.coreDevelopment')")
                                 //-     template(v-slot:control='{ id, floatingLabel, value, emitValue }')
                                 //-         input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
-                                money-input(
+                                percentage-input(
                                     v-model='interestFreeLoans'
                                     :label="$t('forms.cycles.interestFreeLoans')"
                                     :rules="[rules.positiveInteger]"
@@ -413,27 +413,27 @@ export default {
       this.seedsDestroyed = parseFloat(this.cycleDataForm.seedsDestroyed).toFixed(2)
       this.plantedSeeds = parseFloat(this.cycleDataForm.plantedSeeds).toFixed(2)
       this.enterExchanges = parseFloat(this.cycleDataForm.enterExchanges).toFixed(2)
-      this.enterExchangesWeight = parseFloat(this.cycleDataForm.enterExchangesWeight).toFixed(2)
+      this.enterExchangesWeight = parseFloat(this.cycleDataForm.enterExchangesWeight)
       this.enterSeedsBank = parseFloat(this.cycleDataForm.enterSeedsBank).toFixed(2)
       this.unplantedSeeds = parseFloat(this.cycleDataForm.unplantedSeeds).toFixed(2)
       this.exitExchanges = parseFloat(this.cycleDataForm.exitExchanges).toFixed(2)
-      this.exitExchangesWeight = parseFloat(this.cycleDataForm.exitExchangesWeight).toFixed(2)
+      this.exitExchangesWeight = parseFloat(this.cycleDataForm.exitExchangesWeight)
       this.exitSeedsBank = parseFloat(this.cycleDataForm.exitSeedsBank).toFixed(2)
       this.percentageOfHarvestAssignedCirculating = parseFloat(this.cycleDataForm.percentageOfHarvestAssignedCirculating).toFixed(2)
-      this.gdc = parseFloat(this.cycleDataForm.percentageDistributionOfNewHarvest.gdc).toFixed(2)
-      this.bdc = parseFloat(this.cycleDataForm.percentageDistributionOfNewHarvest.bdc).toFixed(2)
-      this.organizations = parseFloat(this.cycleDataForm.percentageDistributionOfNewHarvest.organizations).toFixed(2)
-      this.accounts = parseFloat(this.cycleDataForm.percentageDistributionOfNewHarvest.accounts).toFixed(2)
+      this.gdc = parseFloat(this.cycleDataForm.percentageDistributionOfNewHarvest.gdc)
+      this.bdc = parseFloat(this.cycleDataForm.percentageDistributionOfNewHarvest.bdc)
+      this.organizations = parseFloat(this.cycleDataForm.percentageDistributionOfNewHarvest.organizations)
+      this.accounts = parseFloat(this.cycleDataForm.percentageDistributionOfNewHarvest.accounts)
       this.maxPercentageAccounts = parseFloat(this.cycleDataForm.maxPercentageAccounts).toFixed(2)
       this.maxPercentageOrganizations = parseFloat(this.cycleDataForm.maxPercentageOrganizations).toFixed(2)
       this.maxPercentageBdc = parseFloat(this.cycleDataForm.maxPercentageBdc).toFixed(2)
-      this.regenGrantsBDC = parseFloat(this.cycleDataForm.bdcPercentagesDistribution.regenGrants).toFixed(2)
-      this.regenLoans = parseFloat(this.cycleDataForm.bdcPercentagesDistribution.regenLoans).toFixed(2)
-      this.openProposal = parseFloat(this.cycleDataForm.bdcPercentagesDistribution.openProposal).toFixed(2)
-      this.networkMaintenance = parseFloat(this.cycleDataForm.gdcPercentagesDistribution.networkMaintenance).toFixed(2)
-      this.regenGrantsGDC = parseFloat(this.cycleDataForm.gdcPercentagesDistribution.regenGrants).toFixed(2)
-      this.coreDevelopment = parseFloat(this.cycleDataForm.gdcPercentagesDistribution.coreDevelopment).toFixed(2)
-      this.interestFreeLoans = parseFloat(this.cycleDataForm.gdcPercentagesDistribution.interestFreeLoans).toFixed(2)
+      this.regenGrantsBDC = parseFloat(this.cycleDataForm.bdcPercentagesDistribution.regenGrants)
+      this.regenLoans = parseFloat(this.cycleDataForm.bdcPercentagesDistribution.regenLoans)
+      this.openProposal = parseFloat(this.cycleDataForm.bdcPercentagesDistribution.openProposal)
+      this.networkMaintenance = parseFloat(this.cycleDataForm.gdcPercentagesDistribution.networkMaintenance)
+      this.regenGrantsGDC = parseFloat(this.cycleDataForm.gdcPercentagesDistribution.regenGrants)
+      this.coreDevelopment = parseFloat(this.cycleDataForm.gdcPercentagesDistribution.coreDevelopment)
+      this.interestFreeLoans = parseFloat(this.cycleDataForm.gdcPercentagesDistribution.interestFreeLoans)
       this.numPeopleAccounts = parseFloat(this.cycleDataForm.numPeopleAccounts).toFixed(2)
       this.numOrganizationAccounts = parseFloat(this.cycleDataForm.numOrganizationAccounts).toFixed(2)
       this.numBdcs = parseFloat(this.cycleDataForm.numBdcs).toFixed(2)
