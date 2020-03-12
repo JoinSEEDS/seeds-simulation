@@ -1,96 +1,151 @@
 <template lang="pug">
-    #container.q-ma-md.q-gutter-y-sm
+    #container.q-gutter-y-sm
         q-scroll-area.scroll-container
             .template-form
                 q-form.q-gutter-y-sm
-                    q-field(filled v-model='circulatingSeeds' :label="$t('forms.cycles.circulatingSeeds')")
+                    q-list(bordered)
+                        //- GPD
+                        q-expansion-item(
+                            group="formGroup"
+                            :label="$t('forms.cycles.groupGDP')"
+                            default-opened
+                            header-class="text-primary"
+                        )
+                          q-card
+                            q-card-section.q-gutter-y-sm
+                                q-field(filled v-model='circulatingSeeds' :label="$t('forms.cycles.circulatingSeeds')")
+                                    template(v-slot:control='{ id, floatingLabel, value, emitValue }')
+                                        input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
+                                q-field(filled v-model='volumeGrowth' :label="$t('forms.cycles.volumeGrowth')")
+                                    template(v-slot:control='{ id, floatingLabel, value, emitValue }')
+                                        input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
+                                q-field(filled v-model='numPeopleAccounts' :label="$t('forms.cycles.numPeopleAccounts')")
+                                    template(v-slot:control='{ id, floatingLabel, value, emitValue }')
+                                        input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
+                                q-field(filled v-model='numOrganizationAccounts' :label="$t('forms.cycles.numOrganizationAccounts')")
+                                    template(v-slot:control='{ id, floatingLabel, value, emitValue }')
+                                        input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
+                                q-field(filled v-model='numBdcs' :label="$t('forms.cycles.numBdcs')")
+                                    template(v-slot:control='{ id, floatingLabel, value, emitValue }')
+                                        input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
+
+                        q-separator
+                        //- Seeds Remove
+                        q-expansion-item(
+                            group="formGroup"
+                            :label="$t('forms.cycles.groupSeedsRemove')"
+                            header-class="text-primary"
+                        )
+                          q-card
+                            q-card-section.q-gutter-y-sm
+                                q-field(filled v-model='seedsDestroyed' :label="$t('forms.cycles.seedsDestroyed')")
+                                    template(v-slot:control='{ id, floatingLabel, value, emitValue }')
+                                        input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
+                                q-field(filled v-model='plantedSeeds' :label="$t('forms.cycles.plantedSeeds')")
+                                    template(v-slot:control='{ id, floatingLabel, value, emitValue }')
+                                        input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
+                                q-field(filled v-model='enterExchanges' :label="$t('forms.cycles.enterExchanges')")
+                                    template(v-slot:control='{ id, floatingLabel, value, emitValue }')
+                                        input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
+                                q-field(filled v-model='enterExchangesWeight' :label="$t('forms.cycles.enterExchangesWeight')")
+                                    template(v-slot:control='{ id, floatingLabel, value, emitValue }')
+                                        input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
+                                q-field(filled v-model='enterSeedsBank' :label="$t('forms.cycles.enterSeedsBank')")
+                                    template(v-slot:control='{ id, floatingLabel, value, emitValue }')
+                                        input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
+                        q-separator
+                        //- Seeds Introduce
+                        q-expansion-item(
+                            group="formGroup"
+                            :label="$t('forms.cycles.groupSeedsIntroduce')"
+                            header-class="text-primary"
+                        )
+                          q-card
+                            q-card-section.q-gutter-y-sm
+                                q-field(filled v-model='unplantedSeeds' :label="$t('forms.cycles.unplantedSeeds')")
+                                    template(v-slot:control='{ id, floatingLabel, value, emitValue }')
+                                        input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
+                                q-field(filled v-model='exitExchanges' :label="$t('forms.cycles.exitExchanges')")
+                                    template(v-slot:control='{ id, floatingLabel, value, emitValue }')
+                                        input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
+                                q-field(filled v-model='exitExchangesWeight' :label="$t('forms.cycles.exitExchangesWeight')")
+                                    template(v-slot:control='{ id, floatingLabel, value, emitValue }')
+                                        input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
+                                q-field(filled v-model='exitSeedsBank' :label="$t('forms.cycles.exitSeedsBank')")
+                                    template(v-slot:control='{ id, floatingLabel, value, emitValue }')
+                                        input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
+                        q-separator
+                        //- Harvest Distribution
+                        q-expansion-item(
+                            group="formGroup"
+                            :label="$t('forms.cycles.groupHarvestDistribution')"
+                            header-class="text-primary"
+                        )
+                          q-card
+                            q-card-section.q-gutter-y-sm
+                                q-field(filled v-model='gdc' :label="$t('forms.cycles.gdc')")
+                                    template(v-slot:control='{ id, floatingLabel, value, emitValue }')
+                                        input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
+                                q-field(filled v-model='bdc' :label="$t('forms.cycles.bdc')")
+                                    template(v-slot:control='{ id, floatingLabel, value, emitValue }')
+                                        input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
+                                q-field(filled v-model='organizations' :label="$t('forms.cycles.organizations')")
+                                    template(v-slot:control='{ id, floatingLabel, value, emitValue }')
+                                        input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
+                                q-field(filled v-model='accounts' :label="$t('forms.cycles.accounts')")
+                                    template(v-slot:control='{ id, floatingLabel, value, emitValue }')
+                                        input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
+                        q-separator
+                        //- BDC Distribution
+                        q-expansion-item(
+                            group="formGroup"
+                            :label="$t('forms.cycles.groupBDCDistribution')"
+                            header-class="text-primary"
+                        )
+                          q-card
+                            q-card-section.q-gutter-y-sm
+                                q-field(filled v-model='regenGrantsBDC' :label="$t('forms.cycles.regenGrantsBDC')")
+                                    template(v-slot:control='{ id, floatingLabel, value, emitValue }')
+                                        input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
+                                q-field(filled v-model='regenLoans' :label="$t('forms.cycles.regenLoans')")
+                                    template(v-slot:control='{ id, floatingLabel, value, emitValue }')
+                                        input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
+                                q-field(filled v-model='openProposal' :label="$t('forms.cycles.openProposal')")
+                                    template(v-slot:control='{ id, floatingLabel, value, emitValue }')
+                                        input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
+                        q-separator
+                        //- GDC Distribution
+                        q-expansion-item(
+                            group="formGroup"
+                            :label="$t('forms.cycles.groupGDCDistribution')"
+                            header-class="text-primary"
+                        )
+                          q-card
+                            q-card-section.q-gutter-y-sm
+                                q-field(filled v-model='networkMaintenance' :label="$t('forms.cycles.networkMaintenance')")
+                                    template(v-slot:control='{ id, floatingLabel, value, emitValue }')
+                                        input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
+                                q-field(filled v-model='regenGrantsGDC' :label="$t('forms.cycles.regenGrantsGDC')")
+                                    template(v-slot:control='{ id, floatingLabel, value, emitValue }')
+                                        input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
+                                q-field(filled v-model='coreDevelopment' :label="$t('forms.cycles.coreDevelopment')")
+                                    template(v-slot:control='{ id, floatingLabel, value, emitValue }')
+                                        input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
+                                q-field(filled v-model='interestFreeLoans' :label="$t('forms.cycles.interestFreeLoans')")
+                                    template(v-slot:control='{ id, floatingLabel, value, emitValue }')
+                                        input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
+                        q-separator
+                    //- Hidden Fields
+                    q-field(v-if="!hideFields" filled v-model='percentageOfHarvestAssignedCirculating' :label="$t('forms.cycles.percentageOfHarvestAssignedCirculating')")
                         template(v-slot:control='{ id, floatingLabel, value, emitValue }')
                             input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
-                    q-field(filled v-model='volumeGrowth' :label="$t('forms.cycles.volumeGrowth')")
+                    q-field(v-if="!hideFields" filled v-model='maxPercentageAccounts' :label="$t('forms.cycles.maxPercentageAccounts')")
                         template(v-slot:control='{ id, floatingLabel, value, emitValue }')
                             input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
-                    q-field(filled v-model='seedsDestroyed' :label="$t('forms.cycles.seedsDestroyed')")
+                    q-field(v-if="!hideFields" filled v-model='maxPercentageOrganizations' :label="$t('forms.cycles.maxPercentageOrganizations')")
                         template(v-slot:control='{ id, floatingLabel, value, emitValue }')
                             input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
-                    q-field(filled v-model='plantedSeeds' :label="$t('forms.cycles.plantedSeeds')")
-                        template(v-slot:control='{ id, floatingLabel, value, emitValue }')
-                            input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
-                    q-field(filled v-model='enterExchanges' :label="$t('forms.cycles.enterExchanges')")
-                        template(v-slot:control='{ id, floatingLabel, value, emitValue }')
-                            input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
-                    q-field(filled v-model='enterExchangesWeight' :label="$t('forms.cycles.enterExchangesWeight')")
-                        template(v-slot:control='{ id, floatingLabel, value, emitValue }')
-                            input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
-                    q-field(filled v-model='enterSeedsBank' :label="$t('forms.cycles.enterSeedsBank')")
-                        template(v-slot:control='{ id, floatingLabel, value, emitValue }')
-                            input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
-                    q-field(filled v-model='unplantedSeeds' :label="$t('forms.cycles.unplantedSeeds')")
-                        template(v-slot:control='{ id, floatingLabel, value, emitValue }')
-                            input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
-                    q-field(filled v-model='exitExchanges' :label="$t('forms.cycles.exitExchanges')")
-                        template(v-slot:control='{ id, floatingLabel, value, emitValue }')
-                            input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
-                    q-field(filled v-model='exitExchangesWeight' :label="$t('forms.cycles.exitExchangesWeight')")
-                        template(v-slot:control='{ id, floatingLabel, value, emitValue }')
-                            input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
-                    q-field(filled v-model='exitSeedsBank' :label="$t('forms.cycles.exitSeedsBank')")
-                        template(v-slot:control='{ id, floatingLabel, value, emitValue }')
-                            input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
-                    q-field(filled v-model='percentageOfHarvestAssignedCirculating' :label="$t('forms.cycles.percentageOfHarvestAssignedCirculating')")
-                        template(v-slot:control='{ id, floatingLabel, value, emitValue }')
-                            input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
-                    div.form-group
-                        q-field(filled v-model='gdc' :label="$t('forms.cycles.gdc')")
-                            template(v-slot:control='{ id, floatingLabel, value, emitValue }')
-                                input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
-                        q-field(filled v-model='bdc' :label="$t('forms.cycles.bdc')")
-                            template(v-slot:control='{ id, floatingLabel, value, emitValue }')
-                                input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
-                        q-field(filled v-model='organizations' :label="$t('forms.cycles.organizations')")
-                            template(v-slot:control='{ id, floatingLabel, value, emitValue }')
-                                input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
-                        q-field(filled v-model='accounts' :label="$t('forms.cycles.accounts')")
-                            template(v-slot:control='{ id, floatingLabel, value, emitValue }')
-                                input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
-                    q-field(filled v-model='maxPercentageAccounts' :label="$t('forms.cycles.maxPercentageAccounts')")
-                        template(v-slot:control='{ id, floatingLabel, value, emitValue }')
-                            input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
-                    q-field(filled v-model='maxPercentageOrganizations' :label="$t('forms.cycles.maxPercentageOrganizations')")
-                        template(v-slot:control='{ id, floatingLabel, value, emitValue }')
-                            input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
-                    q-field(filled v-model='maxPercentageBdc' :label="$t('forms.cycles.maxPercentageBdc')")
-                        template(v-slot:control='{ id, floatingLabel, value, emitValue }')
-                            input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
-                    div.form-group
-                        q-field(filled v-model='regenGrantsBDC' :label="$t('forms.cycles.regenGrantsBDC')")
-                            template(v-slot:control='{ id, floatingLabel, value, emitValue }')
-                                input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
-                        q-field(filled v-model='regenLoans' :label="$t('forms.cycles.regenLoans')")
-                            template(v-slot:control='{ id, floatingLabel, value, emitValue }')
-                                input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
-                        q-field(filled v-model='openProposal' :label="$t('forms.cycles.openProposal')")
-                            template(v-slot:control='{ id, floatingLabel, value, emitValue }')
-                                input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
-                    div.form-group
-                        q-field(filled v-model='networkMaintenance' :label="$t('forms.cycles.networkMaintenance')")
-                            template(v-slot:control='{ id, floatingLabel, value, emitValue }')
-                                input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
-                        q-field(filled v-model='regenGrantsGDC' :label="$t('forms.cycles.regenGrantsGDC')")
-                            template(v-slot:control='{ id, floatingLabel, value, emitValue }')
-                                input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
-                        q-field(filled v-model='coreDevelopment' :label="$t('forms.cycles.coreDevelopment')")
-                            template(v-slot:control='{ id, floatingLabel, value, emitValue }')
-                                input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
-                        q-field(filled v-model='interestFreeLoans' :label="$t('forms.cycles.interestFreeLoans')")
-                            template(v-slot:control='{ id, floatingLabel, value, emitValue }')
-                                input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
-                    q-field(filled v-model='numPeopleAccounts' :label="$t('forms.cycles.numPeopleAccounts')")
-                        template(v-slot:control='{ id, floatingLabel, value, emitValue }')
-                            input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
-                    q-field(filled v-model='numOrganizationAccounts' :label="$t('forms.cycles.numOrganizationAccounts')")
-                        template(v-slot:control='{ id, floatingLabel, value, emitValue }')
-                            input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
-                    q-field(filled v-model='numBdcs' :label="$t('forms.cycles.numBdcs')")
+                    q-field(v-if="!hideFields" filled v-model='maxPercentageBdc' :label="$t('forms.cycles.maxPercentageBdc')")
                         template(v-slot:control='{ id, floatingLabel, value, emitValue }')
                             input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
         .row.justify-around.items-center
@@ -157,7 +212,9 @@ export default {
       // -END
       numPeopleAccounts: 0,
       numOrganizationAccounts: 0,
-      numBdcs: 0
+      numBdcs: 0,
+      // - Variables
+      hideFields: true
     }
   },
   computed: {

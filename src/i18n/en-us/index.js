@@ -67,7 +67,14 @@ export default {
       // -END
       numPeopleAccounts: 'Number of People Accounts',
       numOrganizationAccounts: 'Number of Organization Accounts',
-      numBdcs: 'Number of Bdcs'
+      numBdcs: 'Number of Bdcs',
+      // Groups
+      groupGDP: 'GDP',
+      groupSeedsRemove: 'Seeds Remove',
+      groupSeedsIntroduce: 'Seeds Introduce',
+      groupHarvestDistribution: 'Harvest Distribution',
+      groupBDCDistribution: 'BDC Distribution',
+      groupGDCDistribution: 'GDC Distribution'
     }
   },
   menu: {
