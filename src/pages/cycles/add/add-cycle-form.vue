@@ -20,7 +20,7 @@
                                     prefix="$"
                                 )
                                 p Hi {{ volumeGrowth }}
-                                money-input(
+                                percentage-input(
                                     v-model='volumeGrowth'
                                     :label="$t('forms.cycles.volumeGrowth')"
                                     :rules="[rules.positiveInteger]"
@@ -272,26 +272,26 @@
                             input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
         .row.justify-around.items-center
             .column.justify-center
-                .col-3
-                    q-btn(round :disabled="simulationStep == 0" color="secondary" icon="skip_previous" @click="() => backCycle()")
+              .col-2
+                  q-btn(round :disabled="simulationStep == 0" color="secondary" icon="skip_previous" @click="() => backCycle()")
             .column.justify-center
-                .col-6
-                 p {{simulationStep}} / {{totalSimulationSteps}}
+              .col-6
+                p {{simulationStep - 1}} / {{totalSimulationSteps - 1}}
             .column.justify-center
-                .col-3
-                    q-btn(round color="secondary" icon="skip_next" @click="() => nextCycle()")
+              .col-2
+                  q-btn(round color="secondary" icon="skip_next" @click="() => nextCycle()")
 </template>
 
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 // import Vue from 'vue'
 import { VMoney } from 'v-money'
-import { MoneyInput } from '~/components/jmInputs'
+import { MoneyInput, PercentageInput } from '~/components/jmInputs'
 import { validation } from '~/mixins/validation'
 export default {
   name: 'add-cycle-form',
   directives: { money: VMoney },
-  components: { MoneyInput },
+  components: { MoneyInput, PercentageInput },
   mixins: [ validation ],
   data () {
     return {
@@ -364,6 +364,7 @@ export default {
     },
     nextCycle () {
     //   console.log('Before next:', JSON.stringify(this.getSimulationState, null, 4))
+      console.log('DoCycle Init:', this)
       const simulationState = {
         circulatingSeeds: this.circulatingSeeds.value,
         volumeGrowth: this.volumeGrowth.value,
@@ -408,7 +409,7 @@ export default {
       //   console.log('Before Sync Form:', this.getSimulationState)
       console.log('Before Sync Form: volumeGrowth ', this.cycleDataForm)
       this.circulatingSeeds = parseFloat(this.cycleDataForm.circulatingSeeds).toFixed(2)
-      this.volumeGrowth = parseFloat(this.cycleDataForm.volumeGrowth).toFixed(2)
+      this.volumeGrowth = parseFloat(this.cycleDataForm.volumeGrowth)
       this.seedsDestroyed = parseFloat(this.cycleDataForm.seedsDestroyed).toFixed(2)
       this.plantedSeeds = parseFloat(this.cycleDataForm.plantedSeeds).toFixed(2)
       this.enterExchanges = parseFloat(this.cycleDataForm.enterExchanges).toFixed(2)

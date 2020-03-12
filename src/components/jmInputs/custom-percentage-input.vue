@@ -27,24 +27,43 @@ export default {
     }
   },
   mounted () {
-    if (!isNaN(this.value)) {
-      this.$emit('input', { display: this.value * Number(this.scale), value: this.value })
+    const mDisplay = parseFloat(parseFloat(this.value) * parseFloat(this.scale)).toFixed(2)
+    const mValue = parseFloat(this.value)
+    if (!isNaN(mValue)) {
+      this.$emit('input', { display: mDisplay, value: mValue })
     } else if (!this.value || this.value.display == null) {
       this.$emit('input', { display: '0', value: 0 })
     } else {
       const model = {
-        display: this.value.display * Number(this.scale),
-        value: this.value.display
+        display: mDisplay,
+        value: mValue
       }
       this.$emit('input', model)
     }
   },
   watch: {
     value (newValue) {
-      if (newValue.display === '' || isNaN(newValue.value)) {
-        this.value.display = 0
-        this.value.value = 0
+      console.log('newValue percentage', newValue)
+      if (!isNaN(parseFloat(this.value))) {
+        const mDisplay = parseFloat(this.value) * parseFloat(this.scale)
+        const mValue = parseFloat(this.value)
+        this.$emit('input', { display: mDisplay, value: mValue })
       }
+      // if (!isNaN(parseFloat(this.value))) {
+      //   this.$emit('input', { display: parseFloat(this.value) * Number(this.scale), value: parseFloat(this.value) })
+      // } else if (!this.value || this.value.display == null || newValue.display === '' || isNaN(newValue.value)) {
+      //   this.$emit('input', { display: '0', value: 0 })
+      // } else {
+      //   const model = {
+      //     display: this.value.display * Number(this.scale),
+      //     value: this.value.display
+      //   }
+      //   this.$emit('input', model)
+      // }
+      // if (newValue.display === '' || isNaN(newValue.value)) {
+      //   this.value.display = 0
+      //   this.value.value = 0
+      // }
     //   console.log('Watching value', newValue)
     }
   },
@@ -54,7 +73,7 @@ export default {
       this.last = e
       const model = {
         display: e,
-        value: parseFloat(e) / Number(this.scale)
+        value: parseFloat(e) / parseFloat(this.scale)
       }
       this.$emit('input', model)
     }
