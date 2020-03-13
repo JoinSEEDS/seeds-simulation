@@ -34,6 +34,7 @@
       .row.q-col-gutter-md
         .col-md-6.col-sm-12(@click="selectTable(constant.SEEDS_BDC)")
             q-table(
+            :class="{'height-table': getSimulationState.length != 0}"
             :data="dataTableBDC.rows"
             :columns="columnsTableBDC"
             row-key="name"
@@ -43,6 +44,7 @@
                 custom-table-header(:titleTable="dataTableBDC.tableName" :subtitleTable="dataTableBDC.totalAmount")
         .col-md-6.col-sm-12(@click="selectTable(constant.SEEDS_GDC)")
             q-table(
+            :class="{'height-table': getSimulationState.length != 0}"
             :data="dataTableGDC.rows"
             :columns="columnsTableGDC"
             row-key="name"
@@ -51,6 +53,7 @@
               template(v-slot:top)
                   custom-table-header(:titleTable="dataTableGDC.tableName" :subtitleTable="dataTableGDC.totalAmount")
       //- div(v-if="dataChart")
+      p Condition {{getSimulationState.length}}
       custom-chart(
         :dataChart="dataChart",
         :chartName="dataChart.chartName",
@@ -214,4 +217,9 @@ export default {
   .scroll-container
     height: calc(100vh - 50px)
     max-width: 100%
+  .height-table
+    height: 350px
+  // @media (min-width: 768px)
+  //   .height-table
+  //     height: 400px
 </style>

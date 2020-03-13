@@ -1,9 +1,9 @@
 <template lang="pug">
-    .full-width(ref="container")
-        div.container-title
-            p.text-h6.text-center {{titleTable}}
-        div.container-subtitle(v-if="subtitleTable")
-            p.text-overline.text-center Total Amount: {{this.formatToMoney(subtitleTable)}}
+  .full-width(ref="container")
+    div.container-title.header
+        p.text-h6.text-center {{titleTable}}
+    div.container-subtitle(v-if="subtitleTable")
+        p.text-overline.text-center Total Amount: {{this.formatToMoney(subtitleTable)}}
 </template>
 
 <script>
@@ -36,4 +36,6 @@ export default {
     background-color: #514aac
   p
     margin: 0px
+  .header
+    border-radius: 5px 5px 0px 0px
 </style>
