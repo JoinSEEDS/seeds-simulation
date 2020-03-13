@@ -9,7 +9,7 @@
                             group="formGroup"
                             :label="$t('forms.cycles.groupGDP')"
                             default-opened
-                            header-class="text-primary"
+                            header-class="text-positive"
                         )
                           q-card
                             q-card-section.q-gutter-y-sm
@@ -56,7 +56,7 @@
                         q-expansion-item(
                             group="formGroup"
                             :label="$t('forms.cycles.groupSeedsRemove')"
-                            header-class="text-primary"
+                            header-class="text-positive"
                         )
                           q-card
                             q-card-section.q-gutter-y-sm
@@ -105,7 +105,7 @@
                         q-expansion-item(
                             group="formGroup"
                             :label="$t('forms.cycles.groupSeedsIntroduce')"
-                            header-class="text-primary"
+                            header-class="text-positive"
                         )
                           q-card
                             q-card-section.q-gutter-y-sm
@@ -146,7 +146,7 @@
                         q-expansion-item(
                             group="formGroup"
                             :label="$t('forms.cycles.groupHarvestDistribution')"
-                            header-class="text-primary"
+                            header-class="text-positive"
                         )
                           q-card
                             q-card-section.q-gutter-y-sm
@@ -187,7 +187,7 @@
                         q-expansion-item(
                             group="formGroup"
                             :label="$t('forms.cycles.groupBDCDistribution')"
-                            header-class="text-primary"
+                            header-class="text-positive"
                         )
                           q-card
                             q-card-section.q-gutter-y-sm
@@ -220,7 +220,7 @@
                         q-expansion-item(
                             group="formGroup"
                             :label="$t('forms.cycles.groupGDCDistribution')"
-                            header-class="text-primary"
+                            header-class="text-positive"
                         )
                           q-card
                             q-card-section.q-gutter-y-sm

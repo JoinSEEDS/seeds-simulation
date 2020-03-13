@@ -53,7 +53,7 @@
               template(v-slot:top)
                   custom-table-header(:titleTable="dataTableGDC.tableName" :subtitleTable="dataTableGDC.totalAmount")
       //- div(v-if="dataChart")
-      p Condition {{getSimulationState.length}}
+      //- p Condition {{getSimulationState.length}}
       custom-chart(
         :dataChart="dataChart",
         :chartName="dataChart.chartName",

@@ -1,6 +1,6 @@
 <template lang="pug">
   .full-width(ref="container")
-    div.container-title.header
+    div.bg-secondary.text-white.header
         p.text-h6.text-center {{titleTable}}
     div.container-subtitle(v-if="subtitleTable")
         p.text-overline.text-center Total Amount: {{this.formatToMoney(subtitleTable)}}
