@@ -147,7 +147,7 @@ export default {
           headerClasses: 'bg-primary text-white text-weight-bold',
           style: 'max-width: 100px'
         },
-        { name: 'numberUsers', align: 'center', label: 'Number People Accounts', field: 'numberUsers', sortable: true, headerClasses: 'bg-primary text-white', format: val => this.formatToMoney(val) },
+        { name: 'numberUsers', align: 'center', label: '# People Accounts', field: 'numberUsers', sortable: true, headerClasses: 'bg-primary text-white', format: val => this.formatToMoney(val) },
         {
           name: 'totalAmount',
           label: 'Total Amount',
@@ -169,9 +169,9 @@ export default {
           headerClasses: 'bg-primary text-white',
           style: 'max-width: 100px'
         },
-        { name: 'numberUsers', align: 'center', label: 'Number Organization Accounts', field: 'numberUsers', sortable: true, headerClasses: 'bg-primary text-white', format: val => this.formatToMoney(val) },
+        { name: 'numberUsers', align: 'center', label: '# Org. Accounts', field: 'numberUsers', sortable: true, headerClasses: 'bg-primary text-white', format: val => this.formatToMoney(val) },
         { name: 'totalAmount', label: 'Total Amount', field: 'totalAmount', sortable: true, headerClasses: 'bg-primary text-white', format: val => this.formatToMoney(val) },
-        { name: 'totalAmountPerOrganization', label: 'Total Amount per Organization', field: 'totalAmountPerOrganization', sortable: true, headerClasses: 'bg-primary text-white', format: val => this.formatToMoney(val) }
+        { name: 'totalAmountPerOrganization', label: 'Total Amount per Org.', field: 'totalAmountPerOrganization', sortable: true, headerClasses: 'bg-primary text-white', format: val => this.formatToMoney(val) }
       ],
       columnsTableBDC: [
         {
@@ -184,7 +184,7 @@ export default {
           headerClasses: 'bg-primary text-white',
           style: 'max-width: 100px'
         },
-        { name: 'numBdc', align: 'left', label: 'Number BDC', field: 'numBdc', sortable: true, headerClasses: 'bg-primary text-white', format: val => this.formatToMoney(val) },
+        { name: 'numBdc', align: 'left', label: '# BDC', field: 'numBdc', sortable: true, headerClasses: 'bg-primary text-white', format: val => this.formatToMoney(val) },
         { name: 'openProposal', label: 'Open Proposal', field: 'openProposal', sortable: true, headerClasses: 'bg-primary text-white', format: val => this.formatToMoney(val) },
         { name: 'regenGrants', label: 'Regen Grants', field: 'regenGrants', sortable: true, headerClasses: 'bg-primary text-white', format: val => this.formatToMoney(val) },
         { name: 'regenLoans', label: 'Regen Loans', field: 'regenLoans', sortable: true, headerClasses: 'bg-primary text-white', format: val => this.formatToMoney(val) },
@@ -203,7 +203,7 @@ export default {
           style: 'max-width: 100px',
           format: val => this.formatToMoney(val)
         },
-        { name: 'networkMaintenance', align: 'center', label: 'Network Maintenance', field: 'networkMaintenance', sortable: true, headerClasses: 'bg-primary text-white', format: val => this.formatToMoney(val) },
+        { name: 'networkMaintenance', align: 'center', label: 'Network Mnt.', field: 'networkMaintenance', sortable: true, headerClasses: 'bg-primary text-white', format: val => this.formatToMoney(val) },
         { name: 'regenGrants', label: 'Regen Grants', field: 'regenGrants', sortable: true, headerClasses: 'bg-primary text-white', format: val => this.formatToMoney(val) },
         { name: 'coreDevelopment', label: 'Core Development', field: 'coreDevelopment', sortable: true, headerClasses: 'bg-primary text-white', format: val => this.formatToMoney(val) },
         { name: 'interestFreeLoans', label: 'Interest Free Loans', field: 'interestFreeLoans', sortable: true, headerClasses: 'bg-primary text-white', format: val => this.formatToMoney(val) }
