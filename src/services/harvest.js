@@ -1,20 +1,12 @@
-function getPercentagesDistribution (maxPercentage) {
-  if (maxPercentage < 0.01) return
-  if (0.01 - (maxPercentage - 0.01) < 0) return
+function getBudgetDistribution (budget, n) {
+  let y = Array.from(Array(n).keys())
+  let x = (2 * budget) / (n * (n + 1))
 
-  let x = Array.from(Array(100).keys())
-  let y = new Array(100)
-  let b = 0
-  let m = 0
-  b = 0.01 - (maxPercentage - 0.01)
-  m = (maxPercentage - b) / (99 - 0)
-
-  for (let i = 0; i < x.length; i++) {
-    y[i] = m * x[i] + b
-    y[i] = parseFloat(y[i].toFixed(4))
+  for (let i = 1; i <= y.length; i++) {
+    y[i - 1] = i * x
   }
 
-  return [y[0], y[49], y[99]]
+  return y
 }
 
 function getRankingsDistribution (naccounts) {
@@ -30,94 +22,124 @@ function getRankingsDistribution (naccounts) {
     ranking[pos] += 1
   }
 
-  return [ranking[0], ranking[49], ranking[99]]
+  return ranking
 }
 
-function distributeAccounts (budget, numAccounts, maxPercentage) {
+function distributeAccounts (budget, numAccounts) {
   // this function should be modified
   let accountsDistribution = getRankingsDistribution(numAccounts)
-  let percentagesDistribution = getPercentagesDistribution(maxPercentage)
+  let budgetDistribution = getBudgetDistribution(budget, 100)
 
   return {
     totalAmountForAccounts: budget,
     first: {
-      numberUsers: accountsDistribution[2],
-      totalAmount: budget * percentagesDistribution[2],
-      totalAmountPerUser: (budget * percentagesDistribution[2]) / accountsDistribution[2]
+      numberUsers: accountsDistribution[99],
+      totalAmount: budgetDistribution[99],
+      totalAmountPerUser: budgetDistribution[99] / accountsDistribution[99]
     },
     middle: {
-      numberUsers: accountsDistribution[1],
-      totalAmount: budget * percentagesDistribution[1],
-      totalAmountPerUser: (budget * percentagesDistribution[1]) / accountsDistribution[1]
+      numberUsers: accountsDistribution[49],
+      totalAmount: budgetDistribution[49],
+      totalAmountPerUser: budgetDistribution[49] / accountsDistribution[49]
     },
     last: {
       numberUsers: accountsDistribution[0],
-      totalAmount: budget * percentagesDistribution[0],
-      totalAmountPerUser: (budget * percentagesDistribution[0]) / accountsDistribution[0]
+      totalAmount: budgetDistribution[0],
+      totalAmountPerUser: budgetDistribution[0] / accountsDistribution[0]
+    },
+    all: {
+      numberUsers: accountsDistribution,
+      totalAmount: budgetDistribution,
+      totalAmountPerUser: budgetDistribution.map((distribution, index) => {
+        return distribution / accountsDistribution[index]
+      })
     }
   }
 }
 
-function distributeOrganizations (budget, numAccounts, maxPercentage) {
+function distributeOrganizations (budget, numAccounts) {
   // this function should be modified
   let accountsDistribution = getRankingsDistribution(numAccounts)
-  let percentagesDistribution = getPercentagesDistribution(maxPercentage)
+  let budgetDistribution = getBudgetDistribution(budget, 100)
 
   return {
     totalAmountForOrganizations: budget,
     first: {
-      numberUsers: accountsDistribution[2],
-      totalAmount: budget * percentagesDistribution[2],
-      totalAmountPerUser: (budget * percentagesDistribution[2]) / accountsDistribution[2]
+      numberUsers: accountsDistribution[99],
+      totalAmount: budgetDistribution[99],
+      totalAmountPerUser: budgetDistribution[99] / accountsDistribution[99]
     },
     middle: {
-      numberUsers: accountsDistribution[1],
-      totalAmount: budget * percentagesDistribution[1],
-      totalAmountPerUser: (budget * percentagesDistribution[1]) / accountsDistribution[1]
+      numberUsers: accountsDistribution[49],
+      totalAmount: budgetDistribution[49],
+      totalAmountPerUser: budgetDistribution[49] / accountsDistribution[49]
     },
     last: {
       numberUsers: accountsDistribution[0],
-      totalAmount: budget * percentagesDistribution[0],
-      totalAmountPerUser: (budget * percentagesDistribution[0]) / accountsDistribution[0]
+      totalAmount: budgetDistribution[0],
+      totalAmountPerUser: budgetDistribution[0] / accountsDistribution[0]
+    },
+    all: {
+      numberUsers: accountsDistribution,
+      totalAmount: budgetDistribution,
+      totalAmountPerUser: budgetDistribution.map((distribution, index) => {
+        return distribution / accountsDistribution[index]
+      })
     }
   }
 }
 
-function distributeBdc (budget, numAccounts, maxPercentage, percentages) {
+function distributeBdc (budget, numAccounts, percentages) {
   let accountsDistribution = getRankingsDistribution(numAccounts)
-  let percentagesDistribution = getPercentagesDistribution(maxPercentage)
+  let budgetDistribution = getBudgetDistribution(budget, 100)
+
+  let amountFirst = budgetDistribution[99] / accountsDistribution[99]
+  let amountMiddle = budgetDistribution[49] / accountsDistribution[49]
+  let amountLast = budgetDistribution[0] / accountsDistribution[0]
 
   return {
     totalAmountForBdcs: budget,
     first: {
-      numBdcs: accountsDistribution[2],
-      budget: budget * percentagesDistribution[2],
+      numBdcs: accountsDistribution[99],
+      budget: budgetDistribution[99],
       budgetPerBdc: {
-        totalAmount: budget * percentagesDistribution[2] / accountsDistribution[2],
-        regenGrants: percentages.regenGrants * (budget * percentagesDistribution[2] / accountsDistribution[2]),
-        regenLoans: percentages.regenLoans * (budget * percentagesDistribution[2] / accountsDistribution[2]),
-        openProposal: percentages.openProposal * (budget * percentagesDistribution[2] / accountsDistribution[2])
+        totalAmount: amountFirst,
+        regenGrants: percentages.regenGrants * amountFirst,
+        regenLoans: percentages.regenLoans * amountFirst,
+        openProposal: percentages.openProposal * amountFirst
       }
     },
     middle: {
-      numBdcs: accountsDistribution[1],
-      budget: budget * percentagesDistribution[1],
+      numBdcs: accountsDistribution[49],
+      budget: budgetDistribution[49],
       budgetPerBdc: {
-        totalAmount: budget * percentagesDistribution[1] / accountsDistribution[1],
-        regenGrants: percentages.regenGrants * (budget * percentagesDistribution[1] / accountsDistribution[1]),
-        regenLoans: percentages.regenLoans * (budget * percentagesDistribution[1] / accountsDistribution[1]),
-        openProposal: percentages.openProposal * (budget * percentagesDistribution[1] / accountsDistribution[1])
+        totalAmount: amountMiddle,
+        regenGrants: percentages.regenGrants * amountMiddle,
+        regenLoans: percentages.regenLoans * amountMiddle,
+        openProposal: percentages.openProposal * amountMiddle
       }
     },
     last: {
       numBdcs: accountsDistribution[0],
-      budget: budget * percentagesDistribution[0],
+      budget: budgetDistribution[0],
       budgetPerBdc: {
-        totalAmount: budget * percentagesDistribution[0] / accountsDistribution[0],
-        regenGrants: percentages.regenGrants * (budget * percentagesDistribution[0] / accountsDistribution[0]),
-        regenLoans: percentages.regenLoans * (budget * percentagesDistribution[0] / accountsDistribution[0]),
-        openProposal: percentages.openProposal * (budget * percentagesDistribution[0] / accountsDistribution[0])
+        totalAmount: amountLast,
+        regenGrants: percentages.regenGrants * amountLast,
+        regenLoans: percentages.regenLoans * amountLast,
+        openProposal: percentages.openProposal * amountLast
       }
+    },
+    all: {
+      numBdcs: accountsDistribution,
+      budget: budgetDistribution,
+      budgetPerBdc: budgetDistribution.map((distribution, index) => {
+        return {
+          totalAmount: distribution / accountsDistribution[index],
+          regenGrants: percentages.regenGrants * distribution,
+          regenLoans: percentages.regenLoans * distribution,
+          openProposal: percentages.openProposal * distribution
+        }
+      })
     }
   }
 }
@@ -129,6 +151,25 @@ function distributeGdc (budget, percentages) {
     regenGrants: percentages.regenGrants * budget,
     coreDevelopment: percentages.coreDevelopment * budget,
     interestFreeLoans: percentages.interestFreeLoans * budget
+  }
+}
+
+export const initCycle = function (state) {
+  let newState = state
+
+  newState.circulatingSeeds = (newState.gdpPerPerson * newState.numPeopleAccounts) + (newState.gdpPerOrganisation * newState.numOrganizationAccounts)
+
+  newState.changeRequiredToMeetDemand = 0
+  newState.seedsRemoved3Cycles = 0
+
+  newState.seedsIntroducedPrevious3Cycles = 0
+  newState.seedsGrownPerCycle = 0
+
+  newState.harvestDistribution = {
+    peopleAccounts: 0,
+    organizationAccounts: 0,
+    bdcs: 0,
+    gdcs: 0
   }
 }
 
@@ -152,17 +193,15 @@ export const doNextCycle = function (state, update) {
   newState.seedsGrownPerCycle /= 3
 
   if (update) {
-    console.log('I am heeere:', newState.circulatingSeeds)
     newState.circulatingSeeds += newState.percentageOfHarvestAssignedCirculating * newState.seedsGrownPerCycle
-    console.log(newState.circulatingSeeds)
   }
 
   newState.harvestDistribution = {
-    peopleAccounts: distributeAccounts(newState.seedsGrownPerCycle * newState.percentageDistributionOfNewHarvest.accounts, newState.numPeopleAccounts, newState.maxPercentageAccounts),
+    peopleAccounts: distributeAccounts(newState.seedsGrownPerCycle * newState.percentageDistributionOfNewHarvest.accounts, newState.numPeopleAccounts),
 
-    organizationAccounts: distributeOrganizations(newState.seedsGrownPerCycle * newState.percentageDistributionOfNewHarvest.organizations, newState.numOrganizationAccounts, newState.maxPercentageOrganizations),
+    organizationAccounts: distributeOrganizations(newState.seedsGrownPerCycle * newState.percentageDistributionOfNewHarvest.organizations, newState.numOrganizationAccounts),
 
-    bdcs: distributeBdc(newState.seedsGrownPerCycle * newState.percentageDistributionOfNewHarvest.bdc, newState.numBdcs, newState.maxPercentageBdc, newState.bdcPercentagesDistribution),
+    bdcs: distributeBdc(newState.seedsGrownPerCycle * newState.percentageDistributionOfNewHarvest.bdc, newState.numBdcs, newState.bdcPercentagesDistribution),
 
     gdcs: distributeGdc(newState.seedsGrownPerCycle * newState.percentageDistributionOfNewHarvest.gdc, newState.gdcPercentagesDistribution)
   }

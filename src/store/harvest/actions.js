@@ -1,5 +1,5 @@
 import { HarvestConstants } from '~/const'
-import { doNextCycle } from '~/services/harvest'
+import { doNextCycle, initCycle } from '~/services/harvest'
 
 export const getDataTable = async function ({ dispatch, commit, state }, { tableId, step = -1 }) {
   // Do your magic
@@ -303,7 +303,7 @@ export const doCycle = async function ({ dispatch, commit, state }, { simulation
   console.log('Inicio de DoCycle', state.simulationState)
   console.log('Inicio de DoCycle my', simulationState)
   if (state.simulationState.length === 0) {
-    let initState = doNextCycle(Object.assign({}, simulationState), false)
+    let initState = initCycle(Object.assign({}, simulationState))
     let newState = doNextCycle(Object.assign({}, simulationState), true)
     commit('setDataSimulationState', { simulation: [initState, newState], step: step })
     // console.log(JSON.stringify(state.simulationState[0]))
