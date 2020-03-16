@@ -158,6 +158,8 @@ export const initCycle = function (state) {
   let newState = state
 
   newState.circulatingSeeds = (newState.gdpPerPerson * newState.numPeopleAccounts) + (newState.gdpPerOrganisation * newState.numOrganizationAccounts)
+  newState.circulatingSeeds /= 365
+  newState.circulatingSeeds *= 29.5 * 3
 
   newState.changeRequiredToMeetDemand = 0
   newState.seedsRemoved3Cycles = 0
@@ -166,11 +168,16 @@ export const initCycle = function (state) {
   newState.seedsGrownPerCycle = 0
 
   newState.harvestDistribution = {
-    peopleAccounts: 0,
-    organizationAccounts: 0,
-    bdcs: 0,
-    gdcs: 0
+    peopleAccounts: distributeAccounts(0, newState.numPeopleAccounts),
+
+    organizationAccounts: distributeOrganizations(0, newState.numOrganizationAccounts),
+
+    bdcs: distributeBdc(0, newState.numBdcs, newState.bdcPercentagesDistribution),
+
+    gdcs: distributeGdc(0, newState.gdcPercentagesDistribution)
   }
+
+  return newState
 }
 
 export const doNextCycle = function (state, update) {
