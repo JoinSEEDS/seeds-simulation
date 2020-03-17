@@ -55,7 +55,7 @@
                         //- Seeds Remove
                         q-expansion-item(
                             group="formGroup"
-                            :label="$t('forms.cycles.groupSeedsRemove')"
+                            :label="labelSeedsRemoves"
                             header-class="text-positive"
                         )
                           q-card
@@ -104,7 +104,7 @@
                         //- Seeds Introduce
                         q-expansion-item(
                             group="formGroup"
-                            :label="$t('forms.cycles.groupSeedsIntroduce')"
+                            :label="labelSeedsIntroduce"
                             header-class="text-positive"
                         )
                           q-card
@@ -273,7 +273,7 @@
         .row.justify-around.items-center
             .column.justify-center
               .col-2
-                  q-btn(round :disabled="simulationStep == 0" color="secondary" icon="skip_previous" @click="() => backCycle()")
+                  q-btn(round :disabled="simulationStep == 0 || simulationStep - 1 == 0" color="secondary" icon="skip_previous" @click="() => backCycle()")
             .column.justify-center
               .col-6
                 p {{simulationStep - 1}} / {{totalSimulationSteps - 1}}
@@ -343,7 +343,13 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('harvest', ['simulationStep', 'totalSimulationSteps', 'cycleDataForm', 'getSimulationState'])
+    ...mapGetters('harvest', ['simulationStep', 'totalSimulationSteps', 'cycleDataForm', 'getSimulationState']),
+    labelSeedsRemoves () {
+      return this.getSimulationState.length > 0 ? this.$t('forms.cycles.groupSeedsRemove') + ': ' + this.getSimulationState[this.simulationStep - 1].seedsRemoved3Cycles : this.$t('forms.cycles.groupSeedsRemove')
+    },
+    labelSeedsIntroduce () {
+      return this.getSimulationState.length > 0 ? this.$t('forms.cycles.groupSeedsIntroduce') + ': ' + this.getSimulationState[this.simulationStep - 1].seedsIntroducedPrevious3Cycles : this.$t('forms.cycles.groupSeedsIntroduce')
+    }
   },
   beforeMount () {
     this.syncFormData()
