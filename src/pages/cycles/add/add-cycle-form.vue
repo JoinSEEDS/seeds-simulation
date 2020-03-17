@@ -366,7 +366,7 @@ export default {
     //   console.log('Before next:', JSON.stringify(this.getSimulationState, null, 4))
       console.log('DoCycle Init:', this)
       const simulationState = {
-        circulatingSeeds: this.circulatingSeeds.value, // now this value is going to be calculated
+        circulatingSeeds: this.circulatingSeeds.value,
         volumeGrowth: this.volumeGrowth.value,
         // ==== new values ==== //
         gdpPerPerson: 300,

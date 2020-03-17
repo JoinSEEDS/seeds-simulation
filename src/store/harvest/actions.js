@@ -138,20 +138,20 @@ export const getDataChart = async function ({ dispatch, commit, state }, { table
   switch (tableId) {
     case HarvestConstants.SEEDS_GROWN:
       data = {
-        categories: Array.from(Array(state.simulationState.length).keys()),
+        categories: Array.from(Array(state.simulationState.length - 1).keys()),
         series: [
           {
             name: 'Seeds Grown 3 Cycles',
-            data: state.simulationState.map(s => { return s.seedsGrownPerCycle * 3 })
+            data: state.simulationState.slice(1).map(s => { return s.seedsGrownPerCycle * 3 })
           },
           {
             name: 'Seeds Grown Per Cycle',
-            data: state.simulationState.map(s => { return s.seedsGrownPerCycle }),
+            data: state.simulationState.slice(1).map(s => { return s.seedsGrownPerCycle }),
             visible: false
           },
           {
             name: 'Seeds Grown Per Block',
-            data: state.simulationState.map(s => { return s.seedsGrownPerCycle / (HarvestConstants.CYCLE * 172800) }),
+            data: state.simulationState.slice(1).map(s => { return s.seedsGrownPerCycle / (HarvestConstants.CYCLE * 172800) }),
             visible: false
           }
         ],
@@ -160,25 +160,25 @@ export const getDataChart = async function ({ dispatch, commit, state }, { table
       break
     case HarvestConstants.SEEDS_IND_ACCNTS:
       data = {
-        categories: Array.from(Array(state.simulationState.length).keys()),
+        categories: Array.from(Array(state.simulationState.length - 1).keys()),
         series: [
           {
             name: 'Total Amount For People',
-            data: state.simulationState.map(s => { return s.harvestDistribution.peopleAccounts.totalAmountForAccounts })
+            data: state.simulationState.slice(1).map(s => { return s.harvestDistribution.peopleAccounts.totalAmountForAccounts })
           },
           {
             name: 'Total Amount Per User (first)',
-            data: state.simulationState.map(s => { return s.harvestDistribution.peopleAccounts.first.totalAmountPerUser }),
+            data: state.simulationState.slice(1).map(s => { return s.harvestDistribution.peopleAccounts.first.totalAmountPerUser }),
             visible: false
           },
           {
             name: 'Total Amount Per User (middle)',
-            data: state.simulationState.map(s => { return s.harvestDistribution.peopleAccounts.middle.totalAmountPerUser }),
+            data: state.simulationState.slice(1).map(s => { return s.harvestDistribution.peopleAccounts.middle.totalAmountPerUser }),
             visible: false
           },
           {
             name: 'Total Amount Per User (last)',
-            data: state.simulationState.map(s => { return s.harvestDistribution.peopleAccounts.last.totalAmountPerUser }),
+            data: state.simulationState.slice(1).map(s => { return s.harvestDistribution.peopleAccounts.last.totalAmountPerUser }),
             visible: false
           }
         ],
@@ -187,25 +187,25 @@ export const getDataChart = async function ({ dispatch, commit, state }, { table
       break
     case HarvestConstants.SEEDS_ORG_ACCNTS:
       data = {
-        categories: Array.from(Array(state.simulationState.length).keys()),
+        categories: Array.from(Array(state.simulationState.length - 1).keys()),
         series: [
           {
             name: 'Total Amount For Organizations',
-            data: state.simulationState.map(s => { return s.harvestDistribution.organizationAccounts.totalAmountForOrganizations })
+            data: state.simulationState.slice(1).map(s => { return s.harvestDistribution.organizationAccounts.totalAmountForOrganizations })
           },
           {
             name: 'Total Amount per Organization (first)',
-            data: state.simulationState.map(s => { return s.harvestDistribution.organizationAccounts.first.totalAmountPerUser }),
+            data: state.simulationState.slice(1).map(s => { return s.harvestDistribution.organizationAccounts.first.totalAmountPerUser }),
             visible: false
           },
           {
             name: 'Total Amount per Organization (middle)',
-            data: state.simulationState.map(s => { return s.harvestDistribution.organizationAccounts.middle.totalAmountPerUser }),
+            data: state.simulationState.slice(1).map(s => { return s.harvestDistribution.organizationAccounts.middle.totalAmountPerUser }),
             visible: false
           },
           {
             name: 'Total Amount per Organization (last)',
-            data: state.simulationState.map(s => { return s.harvestDistribution.organizationAccounts.last.totalAmountPerUser }),
+            data: state.simulationState.slice(1).map(s => { return s.harvestDistribution.organizationAccounts.last.totalAmountPerUser }),
             visible: false
           }
         ],
@@ -214,30 +214,30 @@ export const getDataChart = async function ({ dispatch, commit, state }, { table
       break
     case HarvestConstants.SEEDS_BDC:
       data = {
-        categories: Array.from(Array(state.simulationState.length).keys()),
+        categories: Array.from(Array(state.simulationState.length - 1).keys()),
         series: [
           {
             name: 'Total Amount For BDC',
-            data: state.simulationState.map(s => { return s.harvestDistribution.bdcs.totalAmountForBdcs })
+            data: state.simulationState.slice(1).map(s => { return s.harvestDistribution.bdcs.totalAmountForBdcs })
           },
           {
             name: 'Total Amount Per BDC (first)',
-            data: state.simulationState.map(s => { return s.harvestDistribution.bdcs.first.budgetPerBdc.totalAmount }),
+            data: state.simulationState.slice(1).map(s => { return s.harvestDistribution.bdcs.first.budgetPerBdc.totalAmount }),
             visible: false
           },
           {
             name: 'Regen Grants Per BDC (first)',
-            data: state.simulationState.map(s => { return s.harvestDistribution.bdcs.first.budgetPerBdc.regenGrants }),
+            data: state.simulationState.slice(1).map(s => { return s.harvestDistribution.bdcs.first.budgetPerBdc.regenGrants }),
             visible: false
           },
           {
             name: 'Regen Loans Per BDC (first)',
-            data: state.simulationState.map(s => { return s.harvestDistribution.bdcs.first.budgetPerBdc.regenLoans }),
+            data: state.simulationState.slice(1).map(s => { return s.harvestDistribution.bdcs.first.budgetPerBdc.regenLoans }),
             visible: false
           },
           {
             name: 'Open Proposals Per BDC (first)',
-            data: state.simulationState.map(s => { return s.harvestDistribution.bdcs.first.budgetPerBdc.openProposal }),
+            data: state.simulationState.slice(1).map(s => { return s.harvestDistribution.bdcs.first.budgetPerBdc.openProposal }),
             visible: false
           }
         ],
@@ -246,30 +246,30 @@ export const getDataChart = async function ({ dispatch, commit, state }, { table
       break
     case HarvestConstants.SEEDS_GDC:
       data = {
-        categories: Array.from(Array(state.simulationState.length).keys()),
+        categories: Array.from(Array(state.simulationState.length - 1).keys()),
         series: [
           {
             name: 'Total Amount For GDC',
-            data: state.simulationState.map(s => { return s.harvestDistribution.gdcs.totalAmountForGdc })
+            data: state.simulationState.slice(1).map(s => { return s.harvestDistribution.gdcs.totalAmountForGdc })
           },
           {
             name: 'Network Maintenance',
-            data: state.simulationState.map(s => { return s.harvestDistribution.gdcs.networkMaintenance }),
+            data: state.simulationState.slice(1).map(s => { return s.harvestDistribution.gdcs.networkMaintenance }),
             visible: false
           },
           {
             name: 'Regen Grants',
-            data: state.simulationState.map(s => { return s.harvestDistribution.gdcs.regenGrants }),
+            data: state.simulationState.slice(1).map(s => { return s.harvestDistribution.gdcs.regenGrants }),
             visible: false
           },
           {
             name: 'Core Development',
-            data: state.simulationState.map(s => { return s.harvestDistribution.gdcs.coreDevelopment }),
+            data: state.simulationState.slice(1).map(s => { return s.harvestDistribution.gdcs.coreDevelopment }),
             visible: false
           },
           {
             name: 'Interest Free Loans',
-            data: state.simulationState.map(s => { return s.harvestDistribution.gdcs.interestFreeLoans }),
+            data: state.simulationState.slice(1).map(s => { return s.harvestDistribution.gdcs.interestFreeLoans }),
             visible: false
           }
         ],
@@ -304,7 +304,7 @@ export const doCycle = async function ({ dispatch, commit, state }, { simulation
   console.log('Inicio de DoCycle my', simulationState)
   if (state.simulationState.length === 0) {
     let initState = initCycle(Object.assign({}, simulationState))
-    let newState = doNextCycle(Object.assign({}, simulationState), true)
+    let newState = doNextCycle(Object.assign({}, initState), true)
     commit('setDataSimulationState', { simulation: [initState, newState], step: step })
     // console.log(JSON.stringify(state.simulationState[0]))
   } else {
