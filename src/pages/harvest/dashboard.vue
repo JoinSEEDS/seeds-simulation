@@ -24,24 +24,24 @@
         .col-md-6.col-sm-12(@click="selectTable(constant.SEEDS_ORG_ACCNTS)")
             q-table(
             :dense="$q.screen.lt.md"
-            :data="dataTableORG.rows"
+            :data="getOrganizationAccounts"
             :columns="columnsTableOrg"
             row-key="name"
             :card-class="{'bg-grey-5': tableSelected == constant.SEEDS_ORG_ACCNTS}"
             )
               template(v-slot:top)
-                custom-table-header(:titleTable="dataTableORG.tableName" :subtitleTable="dataTableORG.totalAmount" :tableId="constant.SEEDS_ORG_ACCNTS")
+                custom-table-header(:titleTable="dataTableORG.tableName" :subtitleTable="dataTableORG.totalAmount" :tableId="constant.SEEDS_ORG_ACCNTS" v-bind:showAll.sync="showAllOrganizationAccounts")
       .row.q-col-gutter-md
         .col-md-6.col-sm-12(@click="selectTable(constant.SEEDS_BDC)")
             q-table(
             :class="{'height-table': getSimulationState.length != 0}"
-            :data="dataTableBDC.rows"
+            :data="getBdcs"
             :columns="columnsTableBDC"
             row-key="name"
             :card-class="{'bg-grey-5': tableSelected == constant.SEEDS_BDC}"
             )
               template(v-slot:top)
-                custom-table-header(:titleTable="dataTableBDC.tableName" :subtitleTable="dataTableBDC.totalAmount" :tableId="constant.SEEDS_BDC")
+                custom-table-header(:titleTable="dataTableBDC.tableName" :subtitleTable="dataTableBDC.totalAmount" :tableId="constant.SEEDS_BDC" v-bind:showAll.sync="showAllBDCs")
         .col-md-6.col-sm-12(@click="selectTable(constant.SEEDS_GDC)")
             q-table(
             :class="{'height-table': getSimulationState.length != 0}"
@@ -102,6 +102,12 @@ export default {
     ...mapGetters('harvest', ['dataTableGROWN', 'dataTableIND', 'dataTableORG', 'dataTableBDC', 'dataTableGDC', 'simulationStep', 'totalSimulationSteps', 'dataChart', 'getSimulationState']),
     getIndividualAccounts () {
       return this.showAllIndividualAccounts ? this.dataTableIND.all : this.dataTableIND.sample3
+    },
+    getOrganizationAccounts () {
+      return this.showAllOrganizationAccounts ? this.dataTableORG.all : this.dataTableORG.sample3
+    },
+    getBdcs () {
+      return this.showAllBDCs ? this.dataTableBDC.all : this.dataTableBDC.sample3
     }
   },
   methods: {
@@ -124,6 +130,8 @@ export default {
   data () {
     return {
       showAllIndividualAccounts: false,
+      showAllOrganizationAccounts: false,
+      showAllBDCs: false,
       tableGrownExpanded: false,
       tableSelected: undefined,
       constant: undefined,
@@ -176,7 +184,7 @@ export default {
         },
         { name: 'numberUsers', align: 'center', label: '# Org. Accounts', field: 'numberUsers', sortable: true, headerClasses: 'bg-primary text-white', format: val => this.formatToMoney(val) },
         { name: 'totalAmount', label: 'Total Amount', field: 'totalAmount', sortable: true, headerClasses: 'bg-primary text-white', format: val => this.formatToMoney(val) },
-        { name: 'totalAmountPerOrganization', label: 'Total Amount per Org.', field: 'totalAmountPerOrganization', sortable: true, headerClasses: 'bg-primary text-white', format: val => this.formatToMoney(val) }
+        { name: 'totalAmountPerOrganization', label: 'Total Amount per Org.', field: 'totalAmountPerUser', sortable: true, headerClasses: 'bg-primary text-white', format: val => this.formatToMoney(val) }
       ],
       columnsTableBDC: [
         {
@@ -189,7 +197,7 @@ export default {
           headerClasses: 'bg-primary text-white',
           style: 'max-width: 100px'
         },
-        { name: 'numBdc', align: 'left', label: '# BDC', field: 'numBdc', sortable: true, headerClasses: 'bg-primary text-white', format: val => this.formatToMoney(val) },
+        { name: 'numBdc', align: 'left', label: '# BDC', field: 'numBdcs', sortable: true, headerClasses: 'bg-primary text-white', format: val => this.formatToMoney(val) },
         { name: 'openProposal', label: 'Open Proposal', field: 'openProposal', sortable: true, headerClasses: 'bg-primary text-white', format: val => this.formatToMoney(val) },
         { name: 'regenGrants', label: 'Regen Grants', field: 'regenGrants', sortable: true, headerClasses: 'bg-primary text-white', format: val => this.formatToMoney(val) },
         { name: 'regenLoans', label: 'Regen Loans', field: 'regenLoans', sortable: true, headerClasses: 'bg-primary text-white', format: val => this.formatToMoney(val) },

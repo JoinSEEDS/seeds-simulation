@@ -64,22 +64,22 @@ function distributeOrganizations (budget, numAccounts) {
 
   return {
     totalAmountForOrganizations: budget,
-    first: {
+    firstOrg: {
       numberUsers: accountsDistribution[99],
       totalAmount: budgetDistribution[99],
       totalAmountPerUser: budgetDistribution[99] / accountsDistribution[99]
     },
-    middle: {
+    middleOrg: {
       numberUsers: accountsDistribution[49],
       totalAmount: budgetDistribution[49],
       totalAmountPerUser: budgetDistribution[49] / accountsDistribution[49]
     },
-    last: {
+    lastOrg: {
       numberUsers: accountsDistribution[0],
       totalAmount: budgetDistribution[0],
       totalAmountPerUser: budgetDistribution[0] / accountsDistribution[0]
     },
-    all: {
+    allOrg: {
       numberUsers: accountsDistribution,
       totalAmount: budgetDistribution,
       totalAmountPerUser: budgetDistribution.map((distribution, index) => {
@@ -93,53 +93,35 @@ function distributeBdc (budget, numAccounts, percentages) {
   let accountsDistribution = getRankingsDistribution(numAccounts)
   let budgetDistribution = getBudgetDistribution(budget, 100)
 
-  let amountFirst = budgetDistribution[99] / accountsDistribution[99]
-  let amountMiddle = budgetDistribution[49] / accountsDistribution[49]
-  let amountLast = budgetDistribution[0] / accountsDistribution[0]
-
   return {
     totalAmountForBdcs: budget,
-    first: {
+    firstBdc: {
       numBdcs: accountsDistribution[99],
       budget: budgetDistribution[99],
-      budgetPerBdc: {
-        totalAmount: amountFirst,
-        regenGrants: percentages.regenGrants * amountFirst,
-        regenLoans: percentages.regenLoans * amountFirst,
-        openProposal: percentages.openProposal * amountFirst
-      }
+      regenGrants: percentages.regenGrants * budgetDistribution[99],
+      regenLoans: percentages.regenLoans * budgetDistribution[99],
+      openProposal: percentages.openProposal * budgetDistribution[99]
     },
-    middle: {
+    middleBdc: {
       numBdcs: accountsDistribution[49],
       budget: budgetDistribution[49],
-      budgetPerBdc: {
-        totalAmount: amountMiddle,
-        regenGrants: percentages.regenGrants * amountMiddle,
-        regenLoans: percentages.regenLoans * amountMiddle,
-        openProposal: percentages.openProposal * amountMiddle
-      }
+      regenGrants: percentages.regenGrants * budgetDistribution[49],
+      regenLoans: percentages.regenLoans * budgetDistribution[49],
+      openProposal: percentages.openProposal * budgetDistribution[49]
     },
-    last: {
+    lastBdc: {
       numBdcs: accountsDistribution[0],
       budget: budgetDistribution[0],
-      budgetPerBdc: {
-        totalAmount: amountLast,
-        regenGrants: percentages.regenGrants * amountLast,
-        regenLoans: percentages.regenLoans * amountLast,
-        openProposal: percentages.openProposal * amountLast
-      }
+      regenGrants: percentages.regenGrants * budgetDistribution[0],
+      regenLoans: percentages.regenLoans * budgetDistribution[0],
+      openProposal: percentages.openProposal * budgetDistribution[0]
     },
-    all: {
+    allBdc: {
       numBdcs: accountsDistribution,
       budget: budgetDistribution,
-      budgetPerBdc: budgetDistribution.map((distribution, index) => {
-        return {
-          totalAmount: distribution / accountsDistribution[index],
-          regenGrants: percentages.regenGrants * distribution,
-          regenLoans: percentages.regenLoans * distribution,
-          openProposal: percentages.openProposal * distribution
-        }
-      })
+      regenGrants: budgetDistribution.map(d => { return percentages.regenGrants * d }),
+      regenLoans: budgetDistribution.map(d => { return percentages.regenLoans * d }),
+      openProposal: budgetDistribution.map(d => { return percentages.openProposal * d })
     }
   }
 }

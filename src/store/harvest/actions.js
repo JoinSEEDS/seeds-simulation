@@ -6,13 +6,28 @@ export const getDataTable = async function ({ dispatch, commit, state }, { table
     const rows = []
     for (let i = 0; i < numberUsers.length; i++) {
       rows.push({
-        position: i + 1,
+        position: i,
         numberUsers: numberUsers[i],
         totalAmount: totalAmount[i],
         totalAmountPerUser: totalAmountPerUser[i]
       })
     }
-    return rows
+    return rows.reverse()
+  }
+
+  const getBdcRows = ({ numBdcs, budget, regenGrants, regenLoans, openProposal }) => {
+    const rows = []
+    for (let i = 0; i < numBdcs.length; i++) {
+      rows.push({
+        position: i,
+        numBdcs: numBdcs[i],
+        budget: budget[i],
+        regenGrants: regenGrants[i],
+        regenLoans: regenLoans[i],
+        openProposal: openProposal[i]
+      })
+    }
+    return rows.reverse()
   }
   // Do your magic
   // Filter by tableID
@@ -62,62 +77,57 @@ export const getDataTable = async function ({ dispatch, commit, state }, { table
       })
       break
     case HarvestConstants.SEEDS_ORG_ACCNTS:
+      const {
+        totalAmountForOrganizations,
+        firstOrg,
+        middleOrg,
+        lastOrg,
+        allOrg
+      } = harvestDistribution.organizationAccounts
       commit('setDataOrganizationsAccountsTable', {
         tableName: 'Seeds Distributed for Organization Accounts',
-        totalAmount: harvestDistribution.organizationAccounts.totalAmountForOrganizations,
-        rows: [
+        totalAmount: totalAmountForOrganizations,
+        all: structureAll(allOrg),
+        sample3: [
           {
             position: 'first',
-            numberUsers: harvestDistribution.organizationAccounts.first.numberUsers,
-            totalAmount: harvestDistribution.organizationAccounts.first.totalAmount,
-            totalAmountPerOrganization: harvestDistribution.organizationAccounts.first.totalAmountPerUser
+            ...firstOrg
           },
           {
             position: 'middle',
-            numberUsers: harvestDistribution.organizationAccounts.middle.numberUsers,
-            totalAmount: harvestDistribution.organizationAccounts.middle.totalAmount,
-            totalAmountPerOrganization: harvestDistribution.organizationAccounts.middle.totalAmountPerUser
+            ...middleOrg
           },
           {
             position: 'last',
-            numberUsers: harvestDistribution.organizationAccounts.last.numberUsers,
-            totalAmount: harvestDistribution.organizationAccounts.last.totalAmount,
-            totalAmountPerOrganization: harvestDistribution.organizationAccounts.last.totalAmountPerUser
+            ...lastOrg
           }
         ]
       })
       break
     case HarvestConstants.SEEDS_BDC:
+      const {
+        totalAmountForBdcs,
+        firstBdc,
+        middleBdc,
+        lastBdc,
+        allBdc
+      } = harvestDistribution.bdcs
       commit('setDataBdcsTable', {
         tableName: 'Seeds Distributed for BDCs',
-        totalAmount: harvestDistribution.bdcs.totalAmountForBdcs,
-        rows: [
+        totalAmount: totalAmountForBdcs,
+        all: getBdcRows(allBdc),
+        sample3: [
           {
             position: 'first',
-            numBdc: harvestDistribution.bdcs.first.numBdcs,
-            budget: harvestDistribution.bdcs.first.budget,
-            totalAmount: harvestDistribution.bdcs.first.budgetPerBdc.totalAmount,
-            regenGrants: harvestDistribution.bdcs.first.budgetPerBdc.regenGrants,
-            regenLoans: harvestDistribution.bdcs.first.budgetPerBdc.regenLoans,
-            openProposal: harvestDistribution.bdcs.first.budgetPerBdc.openProposal
+            ...firstBdc
           },
           {
             position: 'middle',
-            numBdc: harvestDistribution.bdcs.middle.numBdcs,
-            budget: harvestDistribution.bdcs.middle.budget,
-            totalAmount: harvestDistribution.bdcs.middle.budgetPerBdc.totalAmount,
-            regenGrants: harvestDistribution.bdcs.middle.budgetPerBdc.regenGrants,
-            regenLoans: harvestDistribution.bdcs.middle.budgetPerBdc.regenLoans,
-            openProposal: harvestDistribution.bdcs.middle.budgetPerBdc.openProposal
+            ...middleBdc
           },
           {
             position: 'last',
-            numBdc: harvestDistribution.bdcs.last.numBdcs,
-            budget: harvestDistribution.bdcs.last.budget,
-            totalAmount: harvestDistribution.bdcs.last.budgetPerBdc.totalAmount,
-            regenGrants: harvestDistribution.bdcs.last.budgetPerBdc.regenGrants,
-            regenLoans: harvestDistribution.bdcs.last.budgetPerBdc.regenLoans,
-            openProposal: harvestDistribution.bdcs.last.budgetPerBdc.openProposal
+            ...lastBdc
           }
         ]
       })
