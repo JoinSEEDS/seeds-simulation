@@ -81,7 +81,7 @@ export default {
     simulationStep (currentStep, prevStep) {
       console.log('The simulation step was changed', currentStep, prevStep)
       console.log('Before Cycle Tables', this.getSimulationState)
-      this.setCycleTables({ step: this.simulationStep - 1 })
+      this.setCycleTables({ step: this.simulationStep })
       console.log('After Cycle Tables', this.getSimulationState)
       if (this.simulationStep > prevStep) this.getDataChart({ tableId: this.tableSelected })
       console.log('Tables updated')
