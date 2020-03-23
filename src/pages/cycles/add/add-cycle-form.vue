@@ -19,7 +19,7 @@
                                     :rules="[rules.positiveInteger]"
                                     prefix="$"
                                 )
-                                p Hi {{ volumeGrowth }}
+                                //- p Hi {{ volumeGrowth }}
                                 percentage-input(
                                     v-model='volumeGrowth'
                                     :label="$t('forms.cycles.volumeGrowth')"
@@ -31,12 +31,22 @@
                                     :label="$t('forms.cycles.numPeopleAccounts')"
                                     :rules="[rules.positiveInteger]"
                                 )
+                                money-input(
+                                    v-model='gdpPerPerson'
+                                    :label="$t('forms.cycles.gdpPerPerson')"
+                                    :rules="[rules.positiveInteger]"
+                                )
                                 //- q-field(filled v-model='numPeopleAccounts' :label="$t('forms.cycles.numPeopleAccounts')")
                                 //-     template(v-slot:control='{ id, floatingLabel, value, emitValue }')
                                 //-         input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
                                 money-input(
                                     v-model='numOrganizationAccounts'
                                     :label="$t('forms.cycles.numOrganizationAccounts')"
+                                    :rules="[rules.positiveInteger]"
+                                )
+                                money-input(
+                                    v-model='gdpPerOrganisation'
+                                    :label="$t('forms.cycles.gdpPerOrganisation')"
                                     :rules="[rules.positiveInteger]"
                                 )
                                 //- q-field(filled v-model='numOrganizationAccounts' :label="$t('forms.cycles.numOrganizationAccounts')")
@@ -276,7 +286,7 @@
                   q-btn(round :disabled="simulationStep == 0 || simulationStep - 1 == 0" color="secondary" icon="skip_previous" @click="() => backCycle()")
             .column.justify-center
               .col-6
-                p {{simulationStep - 1}} / {{totalSimulationSteps - 1}}
+                p {{simulationStep}} / {{totalSimulationSteps}}
             .column.justify-center
               .col-2
                   q-btn(round color="secondary" icon="skip_next" @click="() => nextCycle()")
@@ -336,7 +346,9 @@ export default {
       interestFreeLoans: 0,
       // -END
       numPeopleAccounts: 0,
+      gdpPerPerson: 0,
       numOrganizationAccounts: 0,
+      gdpPerOrganisation: 0,
       numBdcs: 0,
       // - Variables
       hideFields: true
@@ -375,8 +387,8 @@ export default {
         circulatingSeeds: this.circulatingSeeds.value,
         volumeGrowth: this.volumeGrowth.value,
         // ==== new values ==== //
-        gdpPerPerson: 300,
-        gdpPerOrganisation: 25000,
+        gdpPerPerson: this.gdpPerPerson.value,
+        gdpPerOrganisation: this.gdpPerOrganisation.value,
         // changeRequiredToMeetDemand: 33339041.096,
         seedsDestroyed: this.seedsDestroyed.value,
         plantedSeeds: this.plantedSeeds.value,
@@ -410,7 +422,7 @@ export default {
       console.log('DoCycle Data:', simulationState)
       this.doCycle(
         {
-          simulationState, step: (this.simulationStep - 1)
+          simulationState, step: (this.simulationStep)
         })
     //   console.log('After next:', this.getSimulationState)
     },
@@ -444,7 +456,9 @@ export default {
       this.coreDevelopment = parseFloat(this.cycleDataForm.gdcPercentagesDistribution.coreDevelopment)
       this.interestFreeLoans = parseFloat(this.cycleDataForm.gdcPercentagesDistribution.interestFreeLoans)
       this.numPeopleAccounts = parseFloat(this.cycleDataForm.numPeopleAccounts).toFixed(2)
+      this.gdpPerPerson = parseFloat(this.cycleDataForm.gdpPerPerson).toFixed(2)
       this.numOrganizationAccounts = parseFloat(this.cycleDataForm.numOrganizationAccounts).toFixed(2)
+      this.gdpPerOrganisation = parseFloat(this.cycleDataForm.gdpPerOrganisation).toFixed(2)
       this.numBdcs = parseFloat(this.cycleDataForm.numBdcs).toFixed(2)
       //   console.log('After Sync Form:', this.getSimulationState)
     },

@@ -4,13 +4,16 @@ export default () => ({
     tableName: 'Seeds Grown'
   },
   peopleAccountsTable: {
-    tableName: 'Seeds Distributed for Individual Accounts'
+    tableName: 'Seeds Distributed for Individual Accounts',
+    expand: false
   },
   organizationAccountsTable: {
-    tableName: 'Seeds Distributed for Organization Accounts'
+    tableName: 'Seeds Distributed for Organization Accounts',
+    expand: false
   },
   bdcsTable: {
-    tableName: 'Seeds Distributed for BDCs'
+    tableName: 'Seeds Distributed for BDCs',
+    expanded: false
   },
   gdcTable: {
     tableName: 'Seeds for GDC'
@@ -93,7 +96,9 @@ export default () => ({
       interestFreeLoans: 0.2
     },
     numPeopleAccounts: 10000000,
+    gdpPerPerson: 300,
     numOrganizationAccounts: 100000,
+    gdpPerOrganisation: 25000,
     numBdcs: 100,
     changeRequiredToMeetDemand: 33339041.096,
     seedsRemoved3Cycles: 26681232.878,

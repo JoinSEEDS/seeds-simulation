@@ -289,6 +289,8 @@ export const setCycleTables = async function ({ dispatch, commit, state }, { ste
     step = state.simulationState.length - 1
   }
 
+  console.log('LOOK AT THAT (setCycleTables):', step)
+
   for (let i = 1; i <= 5; i++) {
     getDataTable({ dispatch, commit, state }, { tableId: i, step: step })
   }
@@ -300,20 +302,22 @@ export const doCycle = async function ({ dispatch, commit, state }, { simulation
   if (step === -1) {
     step = state.simulationState.length
   }
-  console.log('Inicio de DoCycle', state.simulationState)
-  console.log('Inicio de DoCycle my', simulationState)
+
   if (state.simulationState.length === 0) {
     let initState = initCycle(Object.assign({}, simulationState))
     let newState = doNextCycle(Object.assign({}, initState), true)
     commit('setDataSimulationState', { simulation: [initState, newState], step: step })
+    step = 1
     // console.log(JSON.stringify(state.simulationState[0]))
   } else {
     let newState = doNextCycle(Object.assign({}, simulationState), true)
     commit('setDataSimulationState', { simulation: [newState], step: step })
   }
 
-  setCycleTables({ dispatch, commit, state }, { step: step })
-  commit('setSimulationStep', state.simulationState.length)
+  console.log('LOOK AT THAT:', state.simulationState.length - 1)
+  setCycleTables({ dispatch, commit, state }, { step: state.simulationState.length - 1 })
+  commit('setSimulationStep', state.simulationState.length - 1)
+  // commit('setSimulationStep', state.simulationState.length - 1)
   // commit('setDataForm', simulationState)
 
   return true

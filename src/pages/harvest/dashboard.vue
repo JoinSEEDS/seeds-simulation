@@ -20,7 +20,7 @@
             :card-class="{'bg-grey-5': tableSelected == constant.SEEDS_IND_ACCNTS}"
             )
               template(v-slot:top)
-                custom-table-header(:titleTable="dataTableIND.tableName" :subtitleTable="dataTableIND.totalAmount")
+                custom-table-header(:titleTable="dataTableIND.tableName" :subtitleTable="dataTableIND.totalAmount" :tableId="constant.SEEDS_IND_ACCNTS")
         .col-md-6.col-sm-12(@click="selectTable(constant.SEEDS_ORG_ACCNTS)")
             q-table(
             :dense="$q.screen.lt.md"
@@ -30,7 +30,7 @@
             :card-class="{'bg-grey-5': tableSelected == constant.SEEDS_ORG_ACCNTS}"
             )
               template(v-slot:top)
-                custom-table-header(:titleTable="dataTableORG.tableName" :subtitleTable="dataTableORG.totalAmount")
+                custom-table-header(:titleTable="dataTableORG.tableName" :subtitleTable="dataTableORG.totalAmount" :tableId="constant.SEEDS_ORG_ACCNTS")
       .row.q-col-gutter-md
         .col-md-6.col-sm-12(@click="selectTable(constant.SEEDS_BDC)")
             q-table(
@@ -41,7 +41,7 @@
             :card-class="{'bg-grey-5': tableSelected == constant.SEEDS_BDC}"
             )
               template(v-slot:top)
-                custom-table-header(:titleTable="dataTableBDC.tableName" :subtitleTable="dataTableBDC.totalAmount")
+                custom-table-header(:titleTable="dataTableBDC.tableName" :subtitleTable="dataTableBDC.totalAmount" :tableId="constant.SEEDS_BDC")
         .col-md-6.col-sm-12(@click="selectTable(constant.SEEDS_GDC)")
             q-table(
             :class="{'height-table': getSimulationState.length != 0}"
@@ -120,6 +120,7 @@ export default {
   },
   data () {
     return {
+      tableGrownExpanded: false,
       tableSelected: undefined,
       constant: undefined,
       columnsTableGrown: [

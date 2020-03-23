@@ -4,13 +4,17 @@
         p.text-h6.text-center {{titleTable}}
     div.container-subtitle(v-if="subtitleTable")
         p.text-overline.text-center Total Amount: {{this.formatToMoney(subtitleTable)}}
+        q-toggle(
+          v-model="expandEntries"
+        )
+          p Show all entries
 </template>
 
 <script>
 export default {
   name: 'custom-table-header',
   model: {
-    prop: ['titleTable', 'subtitleTable']
+    prop: ['titleTable', 'subtitleTable', 'expandEntries']
   },
   props: {
     titleTable: {
@@ -18,11 +22,24 @@ export default {
     },
     subtitleTable: {
       default: undefined
+    },
+    tableId: {
+      default: undefined
+    }
+  },
+  data () {
+    return {
+      expandEntries: false
     }
   },
   mounted () {
     // console.log('Custom container', this.$refs.container.parentElement)
     this.$refs.container.parentElement.classList.remove('q-table__top')
+  },
+  watch: {
+    expandEntries () {
+      console.log('TABLE:', this.tableId, ' entries have changed')
+    }
   }
 }
 </script>

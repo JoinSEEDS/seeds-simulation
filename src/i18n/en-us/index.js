@@ -66,7 +66,9 @@ export default {
       interestFreeLoans: 'Interest Free Loans',
       // -END
       numPeopleAccounts: 'Number of People Accounts',
+      gdpPerPerson: 'GDP per Person',
       numOrganizationAccounts: 'Number of Organization Accounts',
+      gdpPerOrganisation: 'GDP per Organisation',
       numBdcs: 'Number of Bdcs',
       // Groups
       groupGDP: 'GDP',

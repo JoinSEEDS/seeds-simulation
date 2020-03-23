@@ -4,11 +4,17 @@ export const dataTableORG = ({ organizationAccountsTable }) => organizationAccou
 export const dataTableBDC = ({ bdcsTable }) => bdcsTable
 export const dataTableGDC = ({ gdcTable }) => gdcTable
 export const simulationStep = ({ simulationStep }) => simulationStep
-export const totalSimulationSteps = ({ simulationState }) => simulationState.length
+export const totalSimulationSteps = ({ simulationState }) => {
+  if (simulationState.length > 0) {
+    return simulationState.length - 1
+  } else {
+    return 0
+  }
+}
 export const dataChart = ({ dataChart }) => dataChart
 export const getSimulationState = ({ simulationState }) => simulationState
 export const cycleDataForm = ({ simulationStep, simulationState, stateForm }) => {
   if (simulationState.length > 0) {
-    return simulationState[simulationStep - 1]
+    return simulationState[simulationStep]
   } else return stateForm
 }
