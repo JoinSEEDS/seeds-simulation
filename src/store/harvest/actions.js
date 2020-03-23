@@ -2,46 +2,61 @@ import { HarvestConstants } from '~/const'
 import { doNextCycle, initCycle } from '~/services/harvest'
 
 export const getDataTable = async function ({ dispatch, commit, state }, { tableId, step = -1 }) {
+  const structureAll = ({ numberUsers, totalAmount, totalAmountPerUser }) => {
+    const rows = []
+    for (let i = 0; i < numberUsers.length; i++) {
+      rows.push({
+        position: i + 1,
+        numberUsers: numberUsers[i],
+        totalAmount: totalAmount[i],
+        totalAmountPerUser: totalAmountPerUser[i]
+      })
+    }
+    return rows
+  }
   // Do your magic
   // Filter by tableID
   if (step === -1) {
     step = state.simulationState.length - 1
   }
-
+  const stepState = state.simulationState[step]
+  const { harvestDistribution } = stepState
   switch (tableId) {
     case HarvestConstants.SEEDS_GROWN: // Replace by constant
       commit('setDataSeedsGrownTable', {
         tableName: 'Seeds Grown',
         rows: [
           {
-            seeds3cycles: state.simulationState[step].seedsGrownPerCycle * 3,
-            seedsPerCycle: state.simulationState[step].seedsGrownPerCycle,
-            seedsPerBlock: state.simulationState[step].seedsGrownPerCycle / (HarvestConstants.CYCLE * 172800)
+            seeds3cycles: stepState.seedsGrownPerCycle * 3,
+            seedsPerCycle: stepState.seedsGrownPerCycle,
+            seedsPerBlock: stepState.seedsGrownPerCycle / (HarvestConstants.CYCLE * 172800)
           }]
       })
       break
     case HarvestConstants.SEEDS_IND_ACCNTS:
+      const {
+        totalAmountForAccounts,
+        first,
+        middle,
+        last,
+        all
+      } = harvestDistribution.peopleAccounts
       commit('setDataPeopleAccountsTable', {
         tableName: 'Seeds Distributed for Individual Accounts',
-        totalAmount: state.simulationState[step].harvestDistribution.peopleAccounts.totalAmountForAccounts,
-        rows: [
+        totalAmount: totalAmountForAccounts,
+        all: structureAll(all),
+        sample3: [
           {
             position: 'first',
-            numberUsers: state.simulationState[step].harvestDistribution.peopleAccounts.first.numberUsers,
-            totalAmount: state.simulationState[step].harvestDistribution.peopleAccounts.first.totalAmount,
-            totalAmountPerUser: state.simulationState[step].harvestDistribution.peopleAccounts.first.totalAmountPerUser
+            ...first
           },
           {
             position: 'middle',
-            numberUsers: state.simulationState[step].harvestDistribution.peopleAccounts.middle.numberUsers,
-            totalAmount: state.simulationState[step].harvestDistribution.peopleAccounts.middle.totalAmount,
-            totalAmountPerUser: state.simulationState[step].harvestDistribution.peopleAccounts.middle.totalAmountPerUser
+            ...middle
           },
           {
             position: 'last',
-            numberUsers: state.simulationState[step].harvestDistribution.peopleAccounts.last.numberUsers,
-            totalAmount: state.simulationState[step].harvestDistribution.peopleAccounts.last.totalAmount,
-            totalAmountPerUser: state.simulationState[step].harvestDistribution.peopleAccounts.last.totalAmountPerUser
+            ...last
           }
         ]
       })
@@ -49,25 +64,25 @@ export const getDataTable = async function ({ dispatch, commit, state }, { table
     case HarvestConstants.SEEDS_ORG_ACCNTS:
       commit('setDataOrganizationsAccountsTable', {
         tableName: 'Seeds Distributed for Organization Accounts',
-        totalAmount: state.simulationState[step].harvestDistribution.organizationAccounts.totalAmountForOrganizations,
+        totalAmount: harvestDistribution.organizationAccounts.totalAmountForOrganizations,
         rows: [
           {
             position: 'first',
-            numberUsers: state.simulationState[step].harvestDistribution.organizationAccounts.first.numberUsers,
-            totalAmount: state.simulationState[step].harvestDistribution.organizationAccounts.first.totalAmount,
-            totalAmountPerOrganization: state.simulationState[step].harvestDistribution.organizationAccounts.first.totalAmountPerUser
+            numberUsers: harvestDistribution.organizationAccounts.first.numberUsers,
+            totalAmount: harvestDistribution.organizationAccounts.first.totalAmount,
+            totalAmountPerOrganization: harvestDistribution.organizationAccounts.first.totalAmountPerUser
           },
           {
             position: 'middle',
-            numberUsers: state.simulationState[step].harvestDistribution.organizationAccounts.middle.numberUsers,
-            totalAmount: state.simulationState[step].harvestDistribution.organizationAccounts.middle.totalAmount,
-            totalAmountPerOrganization: state.simulationState[step].harvestDistribution.organizationAccounts.middle.totalAmountPerUser
+            numberUsers: harvestDistribution.organizationAccounts.middle.numberUsers,
+            totalAmount: harvestDistribution.organizationAccounts.middle.totalAmount,
+            totalAmountPerOrganization: harvestDistribution.organizationAccounts.middle.totalAmountPerUser
           },
           {
             position: 'last',
-            numberUsers: state.simulationState[step].harvestDistribution.organizationAccounts.last.numberUsers,
-            totalAmount: state.simulationState[step].harvestDistribution.organizationAccounts.last.totalAmount,
-            totalAmountPerOrganization: state.simulationState[step].harvestDistribution.organizationAccounts.last.totalAmountPerUser
+            numberUsers: harvestDistribution.organizationAccounts.last.numberUsers,
+            totalAmount: harvestDistribution.organizationAccounts.last.totalAmount,
+            totalAmountPerOrganization: harvestDistribution.organizationAccounts.last.totalAmountPerUser
           }
         ]
       })
@@ -75,34 +90,34 @@ export const getDataTable = async function ({ dispatch, commit, state }, { table
     case HarvestConstants.SEEDS_BDC:
       commit('setDataBdcsTable', {
         tableName: 'Seeds Distributed for BDCs',
-        totalAmount: state.simulationState[step].harvestDistribution.bdcs.totalAmountForBdcs,
+        totalAmount: harvestDistribution.bdcs.totalAmountForBdcs,
         rows: [
           {
             position: 'first',
-            numBdc: state.simulationState[step].harvestDistribution.bdcs.first.numBdcs,
-            budget: state.simulationState[step].harvestDistribution.bdcs.first.budget,
-            totalAmount: state.simulationState[step].harvestDistribution.bdcs.first.budgetPerBdc.totalAmount,
-            regenGrants: state.simulationState[step].harvestDistribution.bdcs.first.budgetPerBdc.regenGrants,
-            regenLoans: state.simulationState[step].harvestDistribution.bdcs.first.budgetPerBdc.regenLoans,
-            openProposal: state.simulationState[step].harvestDistribution.bdcs.first.budgetPerBdc.openProposal
+            numBdc: harvestDistribution.bdcs.first.numBdcs,
+            budget: harvestDistribution.bdcs.first.budget,
+            totalAmount: harvestDistribution.bdcs.first.budgetPerBdc.totalAmount,
+            regenGrants: harvestDistribution.bdcs.first.budgetPerBdc.regenGrants,
+            regenLoans: harvestDistribution.bdcs.first.budgetPerBdc.regenLoans,
+            openProposal: harvestDistribution.bdcs.first.budgetPerBdc.openProposal
           },
           {
             position: 'middle',
-            numBdc: state.simulationState[step].harvestDistribution.bdcs.middle.numBdcs,
-            budget: state.simulationState[step].harvestDistribution.bdcs.middle.budget,
-            totalAmount: state.simulationState[step].harvestDistribution.bdcs.middle.budgetPerBdc.totalAmount,
-            regenGrants: state.simulationState[step].harvestDistribution.bdcs.middle.budgetPerBdc.regenGrants,
-            regenLoans: state.simulationState[step].harvestDistribution.bdcs.middle.budgetPerBdc.regenLoans,
-            openProposal: state.simulationState[step].harvestDistribution.bdcs.middle.budgetPerBdc.openProposal
+            numBdc: harvestDistribution.bdcs.middle.numBdcs,
+            budget: harvestDistribution.bdcs.middle.budget,
+            totalAmount: harvestDistribution.bdcs.middle.budgetPerBdc.totalAmount,
+            regenGrants: harvestDistribution.bdcs.middle.budgetPerBdc.regenGrants,
+            regenLoans: harvestDistribution.bdcs.middle.budgetPerBdc.regenLoans,
+            openProposal: harvestDistribution.bdcs.middle.budgetPerBdc.openProposal
           },
           {
             position: 'last',
-            numBdc: state.simulationState[step].harvestDistribution.bdcs.last.numBdcs,
-            budget: state.simulationState[step].harvestDistribution.bdcs.last.budget,
-            totalAmount: state.simulationState[step].harvestDistribution.bdcs.last.budgetPerBdc.totalAmount,
-            regenGrants: state.simulationState[step].harvestDistribution.bdcs.last.budgetPerBdc.regenGrants,
-            regenLoans: state.simulationState[step].harvestDistribution.bdcs.last.budgetPerBdc.regenLoans,
-            openProposal: state.simulationState[step].harvestDistribution.bdcs.last.budgetPerBdc.openProposal
+            numBdc: harvestDistribution.bdcs.last.numBdcs,
+            budget: harvestDistribution.bdcs.last.budget,
+            totalAmount: harvestDistribution.bdcs.last.budgetPerBdc.totalAmount,
+            regenGrants: harvestDistribution.bdcs.last.budgetPerBdc.regenGrants,
+            regenLoans: harvestDistribution.bdcs.last.budgetPerBdc.regenLoans,
+            openProposal: harvestDistribution.bdcs.last.budgetPerBdc.openProposal
           }
         ]
       })
@@ -112,11 +127,11 @@ export const getDataTable = async function ({ dispatch, commit, state }, { table
         tableName: 'Seeds for GDC',
         rows: [
           {
-            totalAmountForGdc: state.simulationState[step].harvestDistribution.gdcs.totalAmountForGdc,
-            networkMaintenance: state.simulationState[step].harvestDistribution.gdcs.networkMaintenance,
-            regenGrants: state.simulationState[step].harvestDistribution.gdcs.regenGrants,
-            coreDevelopment: state.simulationState[step].harvestDistribution.gdcs.coreDevelopment,
-            interestFreeLoans: state.simulationState[step].harvestDistribution.gdcs.interestFreeLoans
+            totalAmountForGdc: harvestDistribution.gdcs.totalAmountForGdc,
+            networkMaintenance: harvestDistribution.gdcs.networkMaintenance,
+            regenGrants: harvestDistribution.gdcs.regenGrants,
+            coreDevelopment: harvestDistribution.gdcs.coreDevelopment,
+            interestFreeLoans: harvestDistribution.gdcs.interestFreeLoans
           }]
       })
       break

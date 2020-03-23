@@ -14,13 +14,13 @@
         .col-md-6.col-sm-12(@click="selectTable(constant.SEEDS_IND_ACCNTS)")
             q-table(
             :dense="$q.screen.lt.md"
-            :data="dataTableIND.rows"
+            :data="getIndividualAccounts"
             :columns="columnsTableInd"
             row-key="name"
             :card-class="{'bg-grey-5': tableSelected == constant.SEEDS_IND_ACCNTS}"
             )
               template(v-slot:top)
-                custom-table-header(:titleTable="dataTableIND.tableName" :subtitleTable="dataTableIND.totalAmount" :tableId="constant.SEEDS_IND_ACCNTS")
+                custom-table-header(:titleTable="dataTableIND.tableName" :subtitleTable="dataTableIND.totalAmount" :tableId="constant.SEEDS_IND_ACCNTS" v-bind:showAll.sync="showAllIndividualAccounts")
         .col-md-6.col-sm-12(@click="selectTable(constant.SEEDS_ORG_ACCNTS)")
             q-table(
             :dense="$q.screen.lt.md"
@@ -99,7 +99,10 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('harvest', ['dataTableGROWN', 'dataTableIND', 'dataTableORG', 'dataTableBDC', 'dataTableGDC', 'simulationStep', 'totalSimulationSteps', 'dataChart', 'getSimulationState'])
+    ...mapGetters('harvest', ['dataTableGROWN', 'dataTableIND', 'dataTableORG', 'dataTableBDC', 'dataTableGDC', 'simulationStep', 'totalSimulationSteps', 'dataChart', 'getSimulationState']),
+    getIndividualAccounts () {
+      return this.showAllIndividualAccounts ? this.dataTableIND.all : this.dataTableIND.sample3
+    }
   },
   methods: {
     ...mapActions('harvest', ['getDataTable', 'getDataChart', 'doCycle', 'setCycleTables', 'getInitSimulationStep']),
@@ -120,6 +123,7 @@ export default {
   },
   data () {
     return {
+      showAllIndividualAccounts: false,
       tableGrownExpanded: false,
       tableSelected: undefined,
       constant: undefined,

@@ -5,7 +5,8 @@
     div.container-subtitle(v-if="subtitleTable")
         p.text-overline.text-center Total Amount: {{this.formatToMoney(subtitleTable)}}
         q-toggle(
-          v-model="expandEntries"
+          v-model="expandEntries",
+          @input="$emit('update:showAll', $event)"
         )
           p Show all entries
 </template>
@@ -35,11 +36,6 @@ export default {
   mounted () {
     // console.log('Custom container', this.$refs.container.parentElement)
     this.$refs.container.parentElement.classList.remove('q-table__top')
-  },
-  watch: {
-    expandEntries () {
-      console.log('TABLE:', this.tableId, ' entries have changed')
-    }
   }
 }
 </script>
