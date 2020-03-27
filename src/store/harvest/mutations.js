@@ -13,6 +13,9 @@ export const setDataBdcsTable = (state, data) => {
 export const setDataGdcTable = (state, data) => {
   state.gdcTable = data
 }
+export const setDataGeneralTable = (state, data) => {
+  state.generalStatsTable = data
+}
 export const setDataChart = (state, data) => {
   state.dataChart = data
 }

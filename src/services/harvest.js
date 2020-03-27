@@ -139,15 +139,24 @@ function distributeGdc (budget, percentages) {
 export const initCycle = function (state) {
   let newState = state
 
-  newState.circulatingSeeds = (newState.gdpPerPerson * newState.numPeopleAccounts) + (newState.gdpPerOrganisation * newState.numOrganizationAccounts)
-  newState.circulatingSeeds /= 365
-  newState.circulatingSeeds *= 29.5 * 3
+  newState.totalGDP = (newState.numPeopleAccounts * newState.gdpPerPerson) + (newState.numOrganizationAccounts * newState.gdpPerOrganisation)
 
   newState.changeRequiredToMeetDemand = 0
-  newState.seedsRemoved3Cycles = 0
+  newState.seedsRemovedDuringCycle = 0
 
-  newState.seedsIntroducedPrevious3Cycles = 0
+  newState.seedsIntroducedDuringCycle = 0
   newState.seedsGrownPerCycle = 0
+
+  newState.newContractsDuringCycle = 0
+
+  newState.totalOpenSeedsBankContracts = 0
+
+  newState.totals = {
+    circulatingSeeds: (newState.totalGDP * 29.5 * 3) / 365,
+    plantedSeeds: 0,
+    burnedSeeds: 0,
+    seeds: 0
+  }
 
   newState.harvestDistribution = {
     peopleAccounts: distributeAccounts(0, newState.numPeopleAccounts),
@@ -165,26 +174,86 @@ export const initCycle = function (state) {
 export const doNextCycle = function (state, update) {
   let newState = state
 
-  newState.changeRequiredToMeetDemand = newState.circulatingSeeds * newState.volumeGrowth
-  newState.seedsRemoved3Cycles = newState.seedsDestroyed +
-                    newState.plantedSeeds +
-                    newState.enterExchanges * newState.enterExchangesWeight +
-                    newState.enterSeedsBank
+  let newAccountsNum = newState.numPeopleAccounts * newState.peopleGrowth
 
-  newState.seedsIntroducedPrevious3Cycles = newState.unplantedSeeds +
-                          newState.exitExchanges * newState.exitExchangesWeight +
-                          newState.exitSeedsBank
+  newState.numPeopleAccounts += newAccountsNum
+  newState.numOrganizationAccounts += newState.numOrganizationAccounts * newState.organizationsGrowth
+  newState.numBdcs += newState.numBdcs * newState.bdcsGrowth
 
-  newState.seedsGrownPerCycle = newState.changeRequiredToMeetDemand +
-                    newState.seedsRemoved3Cycles -
-                    newState.seedsIntroducedPrevious3Cycles
+  let pastGDP = newState.totalGDP
 
-  newState.seedsGrownPerCycle /= 3
+  console.log('PAST GDP:', pastGDP)
 
-  if (update) {
-    newState.circulatingSeeds += newState.percentageOfHarvestAssignedCirculating * newState.seedsGrownPerCycle
+  newState.totalGDP = (newState.numPeopleAccounts * newState.gdpPerPerson) + (newState.numOrganizationAccounts * newState.gdpPerOrganisation)
+
+  newState.volumeGrowth = (newState.totalGDP - pastGDP) / pastGDP
+
+  // change required to meet demand
+  console.log('CIRCULATING SEEDS:', newState.totals.circulatingSeeds, 'VOLUME GROWTH:', newState.volumeGrowth)
+  newState.changeRequiredToMeetDemand = newState.totals.circulatingSeeds * newState.volumeGrowth
+
+  // planted seeds
+  console.log('Planted per user FIXED:', newState.seedsPlantedPerUserFixed, 'VARIABLE:', newState.seedsPlantedPerUserVariable, 'NEW ACCNTS:', newAccountsNum, 'NUM ACCNTS:', newState.numPeopleAccounts)
+  newState.plantedSeedsDuringCycle = (newState.seedsPlantedPerUserFixed * newAccountsNum) +
+                                     (newState.seedsPlantedPerUserVariable * newState.numPeopleAccounts) // new accounts are also planting this?
+
+  // burned amount
+  newState.burnedSeedsDuringCycle = newState.averageSeedsBurnedPerUser * newState.numPeopleAccounts
+
+  // bank contracts
+  newState.outstandingContracts += newState.newContractsDuringCycle
+
+  newState.newContractsDuringCycle = newState.contractsGrowth * newState.changeRequiredToMeetDemand
+
+  if (newState.newContractsDuringCycle < 0) {
+    newState.newContractsDuringCycle = 0
   }
 
+  console.log('OUTSTANDING CONTRACTS:', newState.outstandingContracts, 'CLOSED CONTRACTS:', newState.closedContractsPercentage)
+
+  newState.closedContractsDuringCycle = newState.outstandingContracts * newState.closedContractsPercentage // this variable should be in the burned seeds?
+
+  newState.totalOpenSeedsBankContracts += newState.newContractsDuringCycle - newState.closedContractsDuringCycle
+
+  // seeds removed
+  newState.seedsRemovedDuringCycle = newState.burnedSeedsDuringCycle +
+                                newState.plantedSeedsDuringCycle +
+                                newState.enterExchanges * newState.enterExchangesWeight +
+                                newState.enterSeedsBank
+                                // newState.closedContractsDuringCycle (should I add this variable here?)
+
+  // seeds introduced
+  newState.seedsIntroducedDuringCycle = newState.unplantedSeeds +
+                                newState.exitExchanges * newState.exitExchangesWeight +
+                                newState.exitSeedsBank
+                                // newState.newContractsDuringCycle (should I add this here?)
+
+  // harvest
+  newState.seedsGrownPerCycle = newState.changeRequiredToMeetDemand +
+                    newState.seedsRemovedDuringCycle -
+                    newState.seedsIntroducedDuringCycle +
+                    newState.newContractsDuringCycle - // is this correct?
+                    newState.closedContractsDuringCycle
+
+  // newState.seedsGrownPerCycle /= 3 // is this still correct?
+
+  let totalCirculatingSeeds = newState.totals.circulatingSeeds + newState.percentageOfHarvestAssignedCirculating * newState.seedsGrownPerCycle
+  let totalPlantedSeeds = newState.totals.plantedSeeds + newState.plantedSeedsDuringCycle
+  let totalBurnedSeeds = newState.totals.burnedSeeds + newState.burnedSeedsDuringCycle
+
+  let totalSeeds = newState.totals.seeds + newState.seedsIntroducedDuringCycle +
+                  newState.seedsRemovedDuringCycle + newState.seedsGrownPerCycle +
+                  newState.newContractsDuringCycle - newState.burnedSeedsDuringCycle
+
+  // totals
+  newState.totals = {
+    circulatingSeeds: totalCirculatingSeeds,
+    plantedSeeds: totalPlantedSeeds,
+    burnedSeeds: totalBurnedSeeds,
+    seeds: totalSeeds
+  }
+
+  // harvest distribution
   newState.harvestDistribution = {
     peopleAccounts: distributeAccounts(newState.seedsGrownPerCycle * newState.percentageDistributionOfNewHarvest.accounts, newState.numPeopleAccounts),
 

@@ -1,3 +1,4 @@
+export const dataTableGeneral = ({ generalStatsTable }) => generalStatsTable
 export const dataTableGROWN = ({ seedsGrownTable }) => seedsGrownTable
 export const dataTableIND = ({ peopleAccountsTable }) => peopleAccountsTable
 export const dataTableORG = ({ organizationAccountsTable }) => organizationAccountsTable

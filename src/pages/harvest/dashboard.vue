@@ -1,6 +1,15 @@
 <template lang="pug">
   q-scroll-area.scroll-container(ref="scrollArea")
     div.q-ma-sm.q-gutter-y-xl
+      .div(@click="selectTable(constant.SEEDS_GENERAL)")
+          q-table(
+          :data="dataTableGeneral.rows"
+          :columns="columnsTableGeneral"
+          row-key="name"
+          :card-class="{'bg-grey-5': tableSelected == constant.SEEDS_GENERAL}"
+          )
+            template(v-slot:top)
+              custom-table-header(:titleTable="dataTableGeneral.tableName")
       .div(@click="selectTable(constant.SEEDS_GROWN)")
           q-table(
           :data="dataTableGROWN.rows"
@@ -99,7 +108,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('harvest', ['dataTableGROWN', 'dataTableIND', 'dataTableORG', 'dataTableBDC', 'dataTableGDC', 'simulationStep', 'totalSimulationSteps', 'dataChart', 'getSimulationState']),
+    ...mapGetters('harvest', ['dataTableGeneral', 'dataTableGROWN', 'dataTableIND', 'dataTableORG', 'dataTableBDC', 'dataTableGDC', 'simulationStep', 'totalSimulationSteps', 'dataChart', 'getSimulationState']),
     getIndividualAccounts () {
       return this.showAllIndividualAccounts ? this.dataTableIND.all : this.dataTableIND.sample3
     },
@@ -135,6 +144,12 @@ export default {
       tableGrownExpanded: false,
       tableSelected: undefined,
       constant: undefined,
+      columnsTableGeneral: [
+        { name: 'totalSeeds', align: 'left', label: 'Total Seeds', field: 'totalSeeds', sortable: true, headerClasses: 'bg-primary text-white', format: val => this.formatToMoney(val) },
+        { name: 'totalCirculatingSeeds', align: 'center', label: 'Total Circulating Seeds', field: 'totalCirculatingSeeds', sortable: true, headerClasses: 'bg-primary text-white', format: val => this.formatToMoney(val) },
+        { name: 'totalSeedsPlanted', align: 'center', label: 'Total Seeds Planted', field: 'totalSeedsPlanted', sortable: true, headerClasses: 'bg-primary text-white', format: val => this.formatToMoney(val) },
+        { name: 'totalSeedsBurned', align: 'right', label: 'Total Seeds Burned', field: 'totalSeedsBurned', sortable: true, headerClasses: 'bg-primary text-white', format: val => this.formatToMoney(val) }
+      ],
       columnsTableGrown: [
         {
           name: 'seeds3cycles',

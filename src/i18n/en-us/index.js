@@ -31,7 +31,7 @@ export default {
       tokenDecimals: 'The decimals must be between 2 and 9'
     },
     cycles: {
-      circulatingSeeds: 'Circulating Seeds',
+      changeRequiredToMeetDemand: 'Change Required to Meet Demand',
       volumeGrowth: 'Volume Growth',
       // changeRequiredToMeetDemand: 33339041.096,
       seedsDestroyed: 'Seeds Destroyed',
@@ -66,12 +66,25 @@ export default {
       interestFreeLoans: 'Interest Free Loans',
       // -END
       numPeopleAccounts: 'Number of People Accounts',
+      peopleGrowth: 'People Growth',
       gdpPerPerson: 'GDP per Person',
+      seedsPlantedPerUserFixed: 'Seeds Planted Per User Fixed',
+      seedsPlantedPerUserVariable: 'Seeds Planted Per User Variable',
+      averageSeedsBurnedPerUser: 'Average Seeds Burned Per User',
       numOrganizationAccounts: 'Number of Organization Accounts',
-      gdpPerOrganisation: 'GDP per Organisation',
+      organizationsGrowth: 'Organizations Growth',
+      gdpPerOrganisation: 'GDP per Organization',
       numBdcs: 'Number of Bdcs',
+      bdcsGrowth: 'BDCs Growth',
+      // Interface Seeds Bank
+      outstandingContracts: 'Outstanding Contracts',
+      closedContracts: 'Closed Contracts',
+      closedContractsPercentage: 'Closed Contracts Percentage',
+      contracts: 'Contracts',
+      contractsGrowth: 'Contracts Growth',
       // Groups
       groupGDP: 'GDP',
+      groupSeedsBank: 'Seeds Bank',
       groupSeedsRemove: 'Seeds Remove',
       groupSeedsIntroduce: 'Seeds Introduce',
       groupHarvestDistribution: 'Harvest Distribution',

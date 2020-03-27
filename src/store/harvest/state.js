@@ -1,5 +1,8 @@
 export default () => ({
   simulationState: [],
+  generalStatsTable: {
+    tableName: 'General Information'
+  },
   seedsGrownTable: {
     tableName: 'Seeds Grown'
   },
@@ -64,7 +67,7 @@ export default () => ({
   simulationStep: 0,
   stateForm: {
     circulatingSeeds: 1341120159.8225,
-    volumeGrowth: 0.025,
+    volumeGrowth: 0,
     seedsDestroyed: 10000,
     plantedSeeds: 13335616.44,
     enterExchanges: 133356164.38,
@@ -96,14 +99,31 @@ export default () => ({
       interestFreeLoans: 0.2
     },
     numPeopleAccounts: 10000000,
+    peopleGrowth: 0.01,
     gdpPerPerson: 300,
     numOrganizationAccounts: 100000,
+    organizationsGrowth: 0.01,
     gdpPerOrganisation: 25000,
     numBdcs: 100,
     changeRequiredToMeetDemand: 33339041.096,
-    seedsRemoved3Cycles: 26681232.878,
-    seedsIntroducedPrevious3Cycles: 14669178.079,
+    seedsRemovedDuringCycle: 26681232.878,
+    seedsIntroducedDuringCycle: 14669178.079,
     seedsGrownPerCycle: 15117031.964999998,
+    newContractsDuringCycle: 0,
+    contractsGrowth: 0.4,
+    outstandingContracts: 10000,
+    closedContracts: 0,
+    closedContractsPercentage: 0.1,
+    totalGDP: 0,
+    seedsPlantedPerUserFixed: 50,
+    seedsPlantedPerUserVariable: 30,
+    averageSeedsBurnedPerUser: 10,
+    totals: {
+      circulatingSeeds: 0,
+      plantedSeeds: 0,
+      burnedSeeds: 0,
+      seeds: 0
+    },
     harvestDistribution: {
       peopleAccounts: {
         totalAmountForAccounts: 4535109.589499999,
