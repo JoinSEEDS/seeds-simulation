@@ -41,21 +41,6 @@
                                     :label="$t('forms.cycles.gdpPerPerson')"
                                     :rules="[rules.positiveInteger]"
                                 )
-                                money-input(
-                                    v-model='seedsPlantedPerUserFixed'
-                                    :label="$t('forms.cycles.seedsPlantedPerUserFixed')"
-                                    :rules="[rules.positiveInteger]"
-                                )
-                                money-input(
-                                    v-model='seedsPlantedPerUserVariable'
-                                    :label="$t('forms.cycles.seedsPlantedPerUserVariable')"
-                                    :rules="[rules.positiveInteger]"
-                                )
-                                money-input(
-                                    v-model='averageSeedsBurnedPerUser'
-                                    :label="$t('forms.cycles.averageSeedsBurnedPerUser')"
-                                    :rules="[rules.positiveInteger]"
-                                )
                                 //- q-field(filled v-model='numPeopleAccounts' :label="$t('forms.cycles.numPeopleAccounts')")
                                 //-     template(v-slot:control='{ id, floatingLabel, value, emitValue }')
                                 //-         input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
@@ -94,7 +79,7 @@
                         //- Seeds Bank
                         q-expansion-item(
                             group="formGroup"
-                            :label="$t('forms.cycles.groupSeedsBank')"
+                            :label="labelSeedsBank"
                             header-class="text-positive"
                         )
                           q-card
@@ -156,6 +141,21 @@
                                     :label="$t('forms.cycles.plantedSeeds')"
                                     :rules="[rules.positiveInteger]"
                                 )
+                                money-input(
+                                    v-model='seedsPlantedPerUserFixed'
+                                    :label="$t('forms.cycles.seedsPlantedPerUserFixed')"
+                                    :rules="[rules.positiveInteger]"
+                                )
+                                money-input(
+                                    v-model='seedsPlantedPerUserVariable'
+                                    :label="$t('forms.cycles.seedsPlantedPerUserVariable')"
+                                    :rules="[rules.positiveInteger]"
+                                )
+                                money-input(
+                                    v-model='averageSeedsBurnedPerUser'
+                                    :label="$t('forms.cycles.averageSeedsBurnedPerUser')"
+                                    :rules="[rules.positiveInteger]"
+                                )
                                 //- q-field(filled v-model='plantedSeeds' :label="$t('forms.cycles.plantedSeeds')")
                                 //-     template(v-slot:control='{ id, floatingLabel, value, emitValue }')
                                 //-         input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
@@ -190,6 +190,11 @@
                                 money-input(
                                     v-model='unplantedSeeds'
                                     :label="$t('forms.cycles.unplantedSeeds')"
+                                    :rules="[rules.positiveInteger]"
+                                )
+                                money-input(
+                                    v-model='unplantedSeedsPerUser'
+                                    :label="$t('forms.cycles.unplantedSeedsPerUser')"
                                     :rules="[rules.positiveInteger]"
                                 )
                                 //- q-field(filled v-model='unplantedSeeds' :label="$t('forms.cycles.unplantedSeeds')")
@@ -428,16 +433,20 @@ export default {
       seedsPlantedPerUserFixed: 0,
       seedsPlantedPerUserVariable: 0,
       averageSeedsBurnedPerUser: 0,
+      unplantedSeedsPerUser: 0,
       totals: undefined
     }
   },
   computed: {
     ...mapGetters('harvest', ['simulationStep', 'totalSimulationSteps', 'cycleDataForm', 'getSimulationState']),
     labelSeedsRemoves () {
-      return this.getSimulationState.length > 0 ? this.$t('forms.cycles.groupSeedsRemove') + ': ' + this.getSimulationState[this.simulationStep].seedsRemovedDuringCycle : this.$t('forms.cycles.groupSeedsRemove')
+      return this.getSimulationState.length > 0 ? this.$t('forms.cycles.groupSeedsRemove') + ': ' + this.getSimulationState[this.simulationStep].seedsRemovedDuringCycle.toFixed(2) : this.$t('forms.cycles.groupSeedsRemove')
     },
     labelSeedsIntroduce () {
-      return this.getSimulationState.length > 0 ? this.$t('forms.cycles.groupSeedsIntroduce') + ': ' + this.getSimulationState[this.simulationStep].seedsIntroducedDuringCycle : this.$t('forms.cycles.groupSeedsIntroduce')
+      return this.getSimulationState.length > 0 ? this.$t('forms.cycles.groupSeedsIntroduce') + ': ' + this.getSimulationState[this.simulationStep].seedsIntroducedDuringCycle.toFixed(2) : this.$t('forms.cycles.groupSeedsIntroduce')
+    },
+    labelSeedsBank () {
+      return this.getSimulationState.length > 0 ? this.$t('forms.cycles.groupSeedsBank') + ': ' + this.getSimulationState[this.simulationStep].bankContractsDuringCycle.toFixed(2) : this.$t('forms.cycles.groupSeedsBank')
     }
   },
   beforeMount () {
@@ -474,6 +483,7 @@ export default {
         enterExchangesWeight: this.enterExchangesWeight.value,
         enterSeedsBank: this.enterSeedsBank.value,
         // seedsRemoved3Cycles: 26681232.878,
+        unplantedSeedsPerUser: this.unplantedSeedsPerUser.value,
         unplantedSeeds: this.unplantedSeeds.value,
         exitExchanges: this.exitExchanges.value,
         exitExchangesWeight: this.exitExchangesWeight.value,
@@ -562,6 +572,8 @@ export default {
       this.averageSeedsBurnedPerUser = parseFloat(this.cycleDataForm.averageSeedsBurnedPerUser).toFixed(2)
       this.contractsGrowth = parseFloat(this.cycleDataForm.contractsGrowth).toFixed(2)
       this.totals = this.cycleDataForm.totals
+      this.unplantedSeedsPerUser = parseFloat(this.cycleDataForm.unplantedSeedsPerUser).toFixed(2)
+      this.bankSeedsPerCycle = parseFloat(this.cycleDataForm.bankSeedsPerCycle).toFixed(2)
       //   console.log('After Sync Form:', this.getSimulationState)
     },
     cleanFormat (value) {

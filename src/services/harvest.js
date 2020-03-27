@@ -153,9 +153,9 @@ export const initCycle = function (state) {
 
   newState.totals = {
     circulatingSeeds: (newState.totalGDP * 29.5 * 3) / 365,
-    plantedSeeds: 0,
+    plantedSeeds: (newState.seedsPlantedPerUserFixed + newState.seedsPlantedPerUserVariable) * newState.numPeopleAccounts,
     burnedSeeds: 0,
-    seeds: 0
+    seeds: (newState.totalGDP * 29.5 * 3) / 365
   }
 
   newState.harvestDistribution = {
@@ -182,23 +182,22 @@ export const doNextCycle = function (state, update) {
 
   let pastGDP = newState.totalGDP
 
-  console.log('PAST GDP:', pastGDP)
-
   newState.totalGDP = (newState.numPeopleAccounts * newState.gdpPerPerson) + (newState.numOrganizationAccounts * newState.gdpPerOrganisation)
 
   newState.volumeGrowth = (newState.totalGDP - pastGDP) / pastGDP
 
   // change required to meet demand
-  console.log('CIRCULATING SEEDS:', newState.totals.circulatingSeeds, 'VOLUME GROWTH:', newState.volumeGrowth)
   newState.changeRequiredToMeetDemand = newState.totals.circulatingSeeds * newState.volumeGrowth
 
   // planted seeds
-  console.log('Planted per user FIXED:', newState.seedsPlantedPerUserFixed, 'VARIABLE:', newState.seedsPlantedPerUserVariable, 'NEW ACCNTS:', newAccountsNum, 'NUM ACCNTS:', newState.numPeopleAccounts)
   newState.plantedSeedsDuringCycle = (newState.seedsPlantedPerUserFixed * newAccountsNum) +
                                      (newState.seedsPlantedPerUserVariable * newState.numPeopleAccounts) // new accounts are also planting this?
 
   // burned amount
   newState.burnedSeedsDuringCycle = newState.averageSeedsBurnedPerUser * newState.numPeopleAccounts
+
+  // unplanted seeds
+  newState.unplantedSeeds = newState.unplantedSeedsPerUser * newState.numPeopleAccounts
 
   // bank contracts
   newState.outstandingContracts += newState.newContractsDuringCycle
@@ -209,11 +208,11 @@ export const doNextCycle = function (state, update) {
     newState.newContractsDuringCycle = 0
   }
 
-  console.log('OUTSTANDING CONTRACTS:', newState.outstandingContracts, 'CLOSED CONTRACTS:', newState.closedContractsPercentage)
-
   newState.closedContractsDuringCycle = newState.outstandingContracts * newState.closedContractsPercentage // this variable should be in the burned seeds?
 
-  newState.totalOpenSeedsBankContracts += newState.newContractsDuringCycle - newState.closedContractsDuringCycle
+  newState.bankContractsDuringCycle = newState.newContractsDuringCycle - newState.closedContractsDuringCycle
+
+  newState.totalOpenSeedsBankContracts += newState.bankContractsDuringCycle
 
   // seeds removed
   newState.seedsRemovedDuringCycle = newState.burnedSeedsDuringCycle +
