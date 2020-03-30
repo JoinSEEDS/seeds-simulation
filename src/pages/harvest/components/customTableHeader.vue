@@ -2,13 +2,13 @@
   .full-width(ref="container")
     div.bg-secondary.text-white.header
         p.text-h6.text-center {{titleTable}}
-    div.container-subtitle(v-if="subtitleTable")
-        p.text-overline.text-center Total Amount: {{this.formatToMoney(subtitleTable)}}
-        q-toggle(
-          v-model="expandEntries",
-          @input="$emit('update:showAll', $event)"
-        )
-          p Show all entries
+    div.row.justify-between.items-center.container-subtitle.q-pl-md.q-pt-sm.q-pb-sm(v-if="subtitleTable")
+        p.text-center Total Amount: {{this.formatToMoney(subtitleTable)}}
+        p Show all entries
+            q-toggle(
+              v-model="expandEntries",
+              @input="$emit('update:showAll', $event)"
+            )
 </template>
 
 <script>

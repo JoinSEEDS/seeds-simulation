@@ -231,8 +231,6 @@ export const doNextCycle = function (state, update) {
   newState.unplantedSeeds = newState.unplantedSeedsPerUser * newState.numPeopleAccounts
 
   // bank contracts
-  newState.outstandingContracts += newState.newContractsDuringCycle
-
   newState.newContractsDuringCycle = newState.contractsGrowth * newState.changeRequiredToMeetDemand
 
   if (newState.newContractsDuringCycle < 0) {
@@ -243,7 +241,7 @@ export const doNextCycle = function (state, update) {
 
   newState.bankContractsDuringCycle = newState.newContractsDuringCycle - newState.closedContractsDuringCycle
 
-  newState.totalOpenSeedsBankContracts += newState.bankContractsDuringCycle
+  newState.outstandingContracts += newState.bankContractsDuringCycle
 
   // seeds removed
   newState.seedsRemovedDuringCycle = newState.burnedSeedsDuringCycle +
