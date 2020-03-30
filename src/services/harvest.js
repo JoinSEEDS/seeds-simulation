@@ -181,21 +181,30 @@ export const initCycle = function (state) {
 export const doNextCycle = function (state, update) {
   let newState = state
 
-  let newAccountsNum = newState.numPeopleAccounts * newState.peopleGrowth
+  let newAccountsNum = Math.floor(newState.numPeopleAccounts * newState.peopleGrowth)
 
   newState.numPeopleAccounts += newAccountsNum
   if (isNegative(newState.numPeopleAccounts)) {
-    return {}
+    return {
+      error: 'negative',
+      field: 'Number of People Accounts'
+    }
   }
 
-  newState.numOrganizationAccounts += newState.numOrganizationAccounts * newState.organizationsGrowth
+  newState.numOrganizationAccounts += Math.floor(newState.numOrganizationAccounts * newState.organizationsGrowth)
   if (isNegative(newState.numOrganizationAccounts)) {
-    return {}
+    return {
+      error: 'negative',
+      field: 'Number of Organization Accounts'
+    }
   }
 
-  newState.numBdcs += newState.numBdcs * newState.bdcsGrowth
+  newState.numBdcs += Math.floor(newState.numBdcs * newState.bdcsGrowth)
   if (isNegative(newState.numBdcs)) {
-    return {}
+    return {
+      error: 'negative',
+      field: 'Number of BDCs'
+    }
   }
 
   let pastGDP = newState.totalGDP
@@ -209,7 +218,11 @@ export const doNextCycle = function (state, update) {
 
   // planted seeds
   newState.plantedSeedsDuringCycle = (newState.seedsPlantedPerUserFixed * newAccountsNum) +
-                                     (newState.seedsPlantedPerUserVariable * newState.numPeopleAccounts) // new accounts are also planting this?
+                                     (newState.seedsPlantedPerUserVariable * newState.numPeopleAccounts)
+
+  if (newState.plantedSeedsDuringCycle < 0) {
+    newState.plantedSeedsDuringCycle = 0
+  }
 
   // burned amount
   newState.burnedSeedsDuringCycle = newState.averageSeedsBurnedPerUser * newState.numPeopleAccounts
@@ -231,9 +244,6 @@ export const doNextCycle = function (state, update) {
   newState.bankContractsDuringCycle = newState.newContractsDuringCycle - newState.closedContractsDuringCycle
 
   newState.totalOpenSeedsBankContracts += newState.bankContractsDuringCycle
-  if (isNegative(newState.totalOpenSeedsBankContracts)) {
-    return {}
-  }
 
   // seeds removed
   newState.seedsRemovedDuringCycle = newState.burnedSeedsDuringCycle +
@@ -259,7 +269,10 @@ export const doNextCycle = function (state, update) {
 
   let totalCirculatingSeeds = newState.totals.circulatingSeeds + newState.percentageOfHarvestAssignedCirculating * newState.seedsGrownPerCycle
   if (isNegative(totalCirculatingSeeds)) {
-    return {}
+    return {
+      error: 'negative',
+      field: 'Total Circulating Seeds'
+    }
   }
 
   let totalPlantedSeeds = newState.totals.plantedSeeds + newState.plantedSeedsDuringCycle

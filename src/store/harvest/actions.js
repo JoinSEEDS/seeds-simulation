@@ -366,11 +366,20 @@ export const doCycle = async function ({ dispatch, commit, state }, { simulation
   if (state.simulationState.length === 0) {
     let initState = initCycle(Object.assign({}, simulationState))
     let newState = doNextCycle(Object.assign({}, initState), true)
+    console.log(newState)
+    if (newState.error === 'negative') {
+      commit('general/setErrorMsg', 'The field ' + newState.field + ' became negative during cycle calculation.', { root: true })
+      return true
+    }
     commit('setDataSimulationState', { simulation: [initState, newState], step: step })
     step = 1
     // console.log(JSON.stringify(state.simulationState[0]))
   } else {
     let newState = doNextCycle(Object.assign({}, simulationState), true)
+    if (newState.error === 'negative') {
+      commit('general/setErrorMsg', 'The field ' + newState.field + ' became negative during cycle calculation.', { root: true })
+      return true
+    }
     commit('setDataSimulationState', { simulation: [newState], step: step })
   }
 

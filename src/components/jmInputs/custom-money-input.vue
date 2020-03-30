@@ -9,6 +9,7 @@
         :rules="rules"
         :readonly="readonly"
         :disable="disable"
+        :bg-color="bgColor"
         filled
     )
         template(v-slot:control='{ id, floatingLabel, value, emitValue }')
@@ -30,6 +31,7 @@ export default {
     label: { type: String },
     readonly: {},
     disable: {},
+    bgColor: {},
     rules: { type: Array }
   },
   data () {

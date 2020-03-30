@@ -35,7 +35,7 @@ export default {
       changeRequiredToMeetDemand: 'Change Required to Meet Demand',
       volumeGrowth: 'Volume Growth',
       // changeRequiredToMeetDemand: 33339041.096,
-      seedsDestroyed: 'Seeds Destroyed',
+      seedsDestroyed: 'Seeds Burned During Cycle',
       plantedSeeds: 'Planted Seeds During Cycle',
       enterExchanges: 'Enter Exchanges',
       enterExchangesWeight: 'Enter Exchanges Weight',
@@ -87,8 +87,8 @@ export default {
       // Groups
       groupGDP: 'GDP',
       groupSeedsBank: 'Seeds Bank',
-      groupSeedsRemove: 'Seeds Remove',
-      groupSeedsIntroduce: 'Seeds Introduce',
+      groupSeedsRemove: 'Seeds Removed During Cycle',
+      groupSeedsIntroduce: 'Seeds Introduced During Cycle',
       groupHarvestDistribution: 'Harvest Distribution',
       groupBDCDistribution: 'BDC Distribution',
       groupGDCDistribution: 'GDC Distribution'

@@ -16,19 +16,11 @@
                         )
                           q-card
                             q-card-section.q-gutter-y-sm
-                                money-input(
-                                    v-model='changeRequiredToMeetDemand'
-                                    :label="$t('forms.cycles.changeRequiredToMeetDemand')"
-                                    :rules="[rules.required]"
-                                    :readonly='true'
-                                    prefix="S"
-                                )
                                 //- p Hi {{ volumeGrowth }}
                                 percentage-input(
                                     v-model='volumeGrowth'
                                     :label="$t('forms.cycles.volumeGrowth')"
                                     :rules="[rules.required]"
-                                    prefix="S"
                                 )
                                 money-input(
                                     v-model='numPeopleAccounts'
@@ -53,11 +45,11 @@
                                     v-model='numOrganizationAccounts'
                                     :label="$t('forms.cycles.numOrganizationAccounts')"
                                     :rules="[rules.positiveInteger]"
-                                    prefix="S"
                                 )
                                 percentage-input(
                                     v-model='organizationsGrowth'
                                     :label="$t('forms.cycles.organizationsGrowth')"
+                                    :rules="[rules.required]"
                                 )
                                 money-input(
                                     v-model='gdpPerOrganisation'
@@ -71,13 +63,20 @@
                                 money-input(
                                     v-model='numBdcs'
                                     :label="$t('forms.cycles.numBdcs')"
-                                    :rules="[rules.positiveInteger]"
-                                    prefix="S"
+                                    :rules="[rules.required]"
                                 )
                                 percentage-input(
                                     v-model='bdcsGrowth'
                                     :label="$t('forms.cycles.bdcsGrowth')"
                                     :rules="[rules.required]"
+                                )
+                                money-input(
+                                    v-model='changeRequiredToMeetDemand'
+                                    :label="$t('forms.cycles.changeRequiredToMeetDemand')"
+                                    :rules="[rules.required]"
+                                    :readonly='true'
+                                    :bgColor="bgColor"
+                                    prefix="S"
                                 )
                                 //- q-field(filled v-model='numBdcs' :label="$t('forms.cycles.numBdcs')")
                                 //-     template(v-slot:control='{ id, floatingLabel, value, emitValue }')
@@ -91,20 +90,6 @@
                         )
                           q-card
                             q-card-section.q-gutter-y-sm
-                              money-input(
-                                    v-model='contracts'
-                                    :label="$t('forms.cycles.contracts')"
-                                    :readonly='true'
-                                    :rules="[rules.nonNegative]"
-                                    prefix="S"
-                                )
-                              money-input(
-                                    v-model='closedContracts'
-                                    :label="$t('forms.cycles.closedContracts')"
-                                    :readonly='true'
-                                    :rules="[rules.nonNegative]"
-                                    prefix="S"
-                                )
                               percentage-input(
                                     v-model='contractsGrowth'
                                     :label="$t('forms.cycles.contractsGrowth')"
@@ -134,6 +119,22 @@
                                     :label="$t('forms.cycles.closedContractsPercentage')"
                                     :rules="[rules.nonNegative]"
                                 )
+                              money-input(
+                                    v-model='contracts'
+                                    :label="$t('forms.cycles.contracts')"
+                                    :readonly='true'
+                                    :rules="[rules.nonNegative]"
+                                    :bgColor="bgColor"
+                                    prefix="S"
+                                )
+                              money-input(
+                                    v-model='closedContracts'
+                                    :label="$t('forms.cycles.closedContracts')"
+                                    :readonly='true'
+                                    :bgColor="bgColor"
+                                    :rules="[rules.nonNegative]"
+                                    prefix="S"
+                                )
                         q-separator
                         //- Seeds Remove
                         q-expansion-item(
@@ -143,23 +144,6 @@
                         )
                           q-card
                             q-card-section.q-gutter-y-sm
-                                money-input(
-                                    v-model='seedsDestroyed'
-                                    :label="$t('forms.cycles.seedsDestroyed')"
-                                    :readonly='true'
-                                    :rules="[rules.nonNegative]"
-                                    prefix="S"
-                                )
-                                //- q-field(filled v-model='seedsDestroyed' :label="$t('forms.cycles.seedsDestroyed')")
-                                //-     template(v-slot:control='{ id, floatingLabel, value, emitValue }')
-                                //-         input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
-                                money-input(
-                                    v-model='plantedSeeds'
-                                    :label="$t('forms.cycles.plantedSeeds')"
-                                    :readonly='true'
-                                    :rules="[rules.nonNegative]"
-                                    prefix="S"
-                                )
                                 money-input(
                                     v-model='seedsPlantedPerUserFixed'
                                     :label="$t('forms.cycles.seedsPlantedPerUserFixed')"
@@ -195,6 +179,25 @@
                                     :label="$t('forms.cycles.enterExchangesWeight')"
                                     :rules="[rules.nonNegative]"
                                 )
+                                money-input(
+                                    v-model='seedsDestroyed'
+                                    :label="$t('forms.cycles.seedsDestroyed')"
+                                    :readonly='true'
+                                    :bgColor="bgColor"
+                                    :rules="[rules.nonNegative]"
+                                    prefix="S"
+                                )
+                                //- q-field(filled v-model='seedsDestroyed' :label="$t('forms.cycles.seedsDestroyed')")
+                                //-     template(v-slot:control='{ id, floatingLabel, value, emitValue }')
+                                //-         input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
+                                money-input(
+                                    v-model='plantedSeeds'
+                                    :label="$t('forms.cycles.plantedSeeds')"
+                                    :readonly='true'
+                                    :bgColor="bgColor"
+                                    :rules="[rules.nonNegative]"
+                                    prefix="S"
+                                )
                                 //- q-field(filled v-model='enterExchangesWeight' :label="$t('forms.cycles.enterExchangesWeight')")
                                 //-     template(v-slot:control='{ id, floatingLabel, value, emitValue }')
                                 //-         input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
@@ -210,13 +213,6 @@
                         )
                           q-card
                             q-card-section.q-gutter-y-sm
-                                money-input(
-                                    v-model='unplantedSeeds'
-                                    :label="$t('forms.cycles.unplantedSeeds')"
-                                    :readonly='true'
-                                    :rules="[rules.nonNegative]"
-                                    prefix="S"
-                                )
                                 money-input(
                                     v-model='unplantedSeedsPerUser'
                                     :label="$t('forms.cycles.unplantedSeedsPerUser')"
@@ -246,6 +242,14 @@
                                 //- q-field(filled v-model='exitSeedsBank' :label="$t('forms.cycles.exitSeedsBank')")
                                 //-     template(v-slot:control='{ id, floatingLabel, value, emitValue }')
                                 //-         input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
+                                money-input(
+                                    v-model='unplantedSeeds'
+                                    :label="$t('forms.cycles.unplantedSeeds')"
+                                    :readonly='true'
+                                    :bgColor="bgColor"
+                                    :rules="[rules.nonNegative]"
+                                    prefix="S"
+                                )
                         q-separator
                         //- Harvest Distribution
                         q-expansion-item(
@@ -400,6 +404,7 @@ export default {
   mixins: [ validation ],
   data () {
     return {
+      bgColor: 'light-green-3',
       price: 0,
       moneyFormat: {
         decimal: '.',
@@ -592,7 +597,7 @@ export default {
       console.log('Before Sync Form: volumeGrowth ', this.cycleDataForm)
       this.changeRequiredToMeetDemand = parseFloat(this.cycleDataForm.changeRequiredToMeetDemand).toFixed(2)
       this.volumeGrowth = parseFloat(this.cycleDataForm.volumeGrowth)
-      this.seedsDestroyed = parseFloat(this.cycleDataForm.seedsBurnedDuringCycle).toFixed(2)
+      this.seedsDestroyed = parseFloat(this.cycleDataForm.burnedSeedsDuringCycle).toFixed(2)
       this.plantedSeeds = parseFloat(this.cycleDataForm.plantedSeedsDuringCycle).toFixed(2)
       this.enterExchanges = parseFloat(this.cycleDataForm.enterExchanges).toFixed(2)
       this.enterExchangesWeight = parseFloat(this.cycleDataForm.enterExchangesWeight)
@@ -682,6 +687,8 @@ export default {
 .scroll-container
     height: calc(100vh - 130px)
     max-width: 100%
+.bg-readonly
+    background: blue
 .c_input
     background-color: inherit
     flex: 1
