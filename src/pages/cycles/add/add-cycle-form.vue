@@ -521,8 +521,11 @@ export default {
       console.log('After back:', this.getSimulationState)
     },
     formError (ref) {
-      console.log('VALIDATION ERROR')
-      console.log(ref)
+      let parent = ref.$parent
+      while (parent && !parent.show) {
+        parent = parent.$parent
+      }
+      parent && parent.show()
     },
     nextCycle () {
       this.$refs.simulationForm.validate(true).then(success => {
