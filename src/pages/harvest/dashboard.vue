@@ -172,6 +172,7 @@ export default {
           label: 'Rank',
           align: 'left',
           field: 'position',
+          sortable: true,
           headerClasses: 'bg-primary text-white text-weight-bold',
           style: 'max-width: 100px'
         },
@@ -193,6 +194,7 @@ export default {
           label: 'Rank',
           align: 'left',
           field: 'position',
+          sortable: true,
           // format: val => `${val}`,
           headerClasses: 'bg-primary text-white',
           style: 'max-width: 100px'
@@ -208,6 +210,7 @@ export default {
           label: 'Rank',
           align: 'left',
           field: 'position',
+          sortable: true,
           // format: val => `${val}`,
           headerClasses: 'bg-primary text-white',
           style: 'max-width: 100px'

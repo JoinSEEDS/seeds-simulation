@@ -136,6 +136,13 @@ function distributeGdc (budget, percentages) {
   }
 }
 
+function isNegative (amount) {
+  if (amount < 0) {
+    return true
+  }
+  return false
+}
+
 export const initCycle = function (state) {
   let newState = state
 
@@ -177,8 +184,19 @@ export const doNextCycle = function (state, update) {
   let newAccountsNum = newState.numPeopleAccounts * newState.peopleGrowth
 
   newState.numPeopleAccounts += newAccountsNum
+  if (isNegative(newState.numPeopleAccounts)) {
+    return {}
+  }
+
   newState.numOrganizationAccounts += newState.numOrganizationAccounts * newState.organizationsGrowth
+  if (isNegative(newState.numOrganizationAccounts)) {
+    return {}
+  }
+
   newState.numBdcs += newState.numBdcs * newState.bdcsGrowth
+  if (isNegative(newState.numBdcs)) {
+    return {}
+  }
 
   let pastGDP = newState.totalGDP
 
@@ -213,6 +231,9 @@ export const doNextCycle = function (state, update) {
   newState.bankContractsDuringCycle = newState.newContractsDuringCycle - newState.closedContractsDuringCycle
 
   newState.totalOpenSeedsBankContracts += newState.bankContractsDuringCycle
+  if (isNegative(newState.totalOpenSeedsBankContracts)) {
+    return {}
+  }
 
   // seeds removed
   newState.seedsRemovedDuringCycle = newState.burnedSeedsDuringCycle +
@@ -237,6 +258,10 @@ export const doNextCycle = function (state, update) {
   // newState.seedsGrownPerCycle /= 3 // is this still correct?
 
   let totalCirculatingSeeds = newState.totals.circulatingSeeds + newState.percentageOfHarvestAssignedCirculating * newState.seedsGrownPerCycle
+  if (isNegative(totalCirculatingSeeds)) {
+    return {}
+  }
+
   let totalPlantedSeeds = newState.totals.plantedSeeds + newState.plantedSeedsDuringCycle
   let totalBurnedSeeds = newState.totals.burnedSeeds + newState.burnedSeedsDuringCycle
 

@@ -8,6 +8,7 @@
         :suffix="customSuffix"
         :rules="rules"
         :readonly="readonly"
+        :disable="disable"
         filled
     )
         template(v-slot:control='{ id, floatingLabel, value, emitValue }')
@@ -28,6 +29,7 @@ export default {
     suffix: { type: String },
     label: { type: String },
     readonly: {},
+    disable: {},
     rules: { type: Array }
   },
   data () {

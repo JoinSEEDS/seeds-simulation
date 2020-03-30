@@ -105,6 +105,7 @@ export default () => ({
     organizationsGrowth: 0.01,
     gdpPerOrganisation: 25000,
     numBdcs: 100,
+    bdcsGrowth: 0.01,
     changeRequiredToMeetDemand: 33339041.096,
     seedsRemovedDuringCycle: 26681232.878,
     seedsIntroducedDuringCycle: 14669178.079,
