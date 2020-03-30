@@ -10,7 +10,7 @@
                         //- GPD
                         q-expansion-item(
                             group="formGroup"
-                            :label="$t('forms.cycles.groupGDP')"
+                            :label="labelGDP"
                             default-opened
                             header-class="text-positive"
                         )
@@ -481,6 +481,9 @@ export default {
     },
     labelSeedsBank () {
       return this.getSimulationState.length > 0 ? this.$t('forms.cycles.groupSeedsBank') + ': ' + this.formatMoney(this.getSimulationState[this.simulationStep].bankContractsDuringCycle.toFixed(2)) : this.$t('forms.cycles.groupSeedsBank')
+    },
+    labelGDP () {
+      return this.getSimulationState.length > 0 ? this.$t('forms.cycles.groupGDP') + ': ' + this.formatMoney(this.getSimulationState[this.simulationStep].totalGDP.toFixed(2)) : this.$t('forms.cycles.groupGDP')
     }
   },
   beforeMount () {
