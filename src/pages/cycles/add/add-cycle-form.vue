@@ -17,11 +17,6 @@
                           q-card
                             q-card-section.q-gutter-y-sm
                                 //- p Hi {{ volumeGrowth }}
-                                percentage-input(
-                                    v-model='volumeGrowth'
-                                    :label="$t('forms.cycles.volumeGrowth')"
-                                    :rules="[rules.required]"
-                                )
                                 money-input(
                                     v-model='numPeopleAccounts'
                                     :label="$t('forms.cycles.numPeopleAccounts')"
@@ -63,7 +58,7 @@
                                 money-input(
                                     v-model='numBdcs'
                                     :label="$t('forms.cycles.numBdcs')"
-                                    :rules="[rules.required]"
+                                    :rules="[rules.nonNegative]"
                                 )
                                 percentage-input(
                                     v-model='bdcsGrowth'
@@ -77,6 +72,13 @@
                                     :readonly='true'
                                     :bgColor="bgColor"
                                     prefix="S"
+                                )
+                                percentage-input(
+                                    v-model='volumeGrowth'
+                                    :label="$t('forms.cycles.volumeGrowth')"
+                                    :readonly='true'
+                                    :bgColor="bgColor"
+                                    :rules="[rules.required]"
                                 )
                                 //- q-field(filled v-model='numBdcs' :label="$t('forms.cycles.numBdcs')")
                                 //-     template(v-slot:control='{ id, floatingLabel, value, emitValue }')
@@ -599,7 +601,7 @@ export default {
       //   console.log('Before Sync Form:', this.getSimulationState)
       console.log('Before Sync Form: volumeGrowth ', this.cycleDataForm)
       this.changeRequiredToMeetDemand = parseFloat(this.cycleDataForm.changeRequiredToMeetDemand).toFixed(2)
-      this.volumeGrowth = parseFloat(this.cycleDataForm.volumeGrowth)
+      this.volumeGrowth = parseFloat(this.cycleDataForm.volumeGrowth).toFixed(4)
       this.seedsDestroyed = parseFloat(this.cycleDataForm.burnedSeedsDuringCycle).toFixed(2)
       this.plantedSeeds = parseFloat(this.cycleDataForm.plantedSeedsDuringCycle).toFixed(2)
       this.enterExchanges = parseFloat(this.cycleDataForm.enterExchanges).toFixed(2)
@@ -625,13 +627,13 @@ export default {
       this.coreDevelopment = parseFloat(this.cycleDataForm.gdcPercentagesDistribution.coreDevelopment)
       this.interestFreeLoans = parseFloat(this.cycleDataForm.gdcPercentagesDistribution.interestFreeLoans)
       this.numPeopleAccounts = parseFloat(this.cycleDataForm.numPeopleAccounts).toFixed(2)
-      this.peopleGrowth = parseFloat(this.cycleDataForm.peopleGrowth).toFixed(2)
+      this.peopleGrowth = parseFloat(this.cycleDataForm.peopleGrowth).toFixed(4)
       this.gdpPerPerson = parseFloat(this.cycleDataForm.gdpPerPerson).toFixed(2)
       this.numOrganizationAccounts = parseFloat(this.cycleDataForm.numOrganizationAccounts).toFixed(2)
-      this.organizationsGrowth = parseFloat(this.cycleDataForm.organizationsGrowth).toFixed(2)
+      this.organizationsGrowth = parseFloat(this.cycleDataForm.organizationsGrowth).toFixed(4)
       this.gdpPerOrganisation = parseFloat(this.cycleDataForm.gdpPerOrganisation).toFixed(2)
       this.numBdcs = parseFloat(this.cycleDataForm.numBdcs).toFixed(2)
-      this.bdcsGrowth = parseFloat(this.cycleDataForm.bdcsGrowth).toFixed(2)
+      this.bdcsGrowth = parseFloat(this.cycleDataForm.bdcsGrowth).toFixed(4)
       this.contracts = parseFloat(this.cycleDataForm.newContractsDuringCycle).toFixed(2)
       this.outstandingContracts = parseFloat(this.cycleDataForm.outstandingContracts).toFixed(2)
       this.closedContracts = parseFloat(this.cycleDataForm.closedContractsDuringCycle).toFixed(2)
@@ -640,7 +642,7 @@ export default {
       this.seedsPlantedPerUserFixed = parseFloat(this.cycleDataForm.seedsPlantedPerUserFixed).toFixed(2)
       this.seedsPlantedPerUserVariable = parseFloat(this.cycleDataForm.seedsPlantedPerUserVariable).toFixed(2)
       this.averageSeedsBurnedPerUser = parseFloat(this.cycleDataForm.averageSeedsBurnedPerUser).toFixed(2)
-      this.contractsGrowth = parseFloat(this.cycleDataForm.contractsGrowth).toFixed(2)
+      this.contractsGrowth = parseFloat(this.cycleDataForm.contractsGrowth).toFixed(4)
       this.totals = this.cycleDataForm.totals
       this.unplantedSeedsPerUser = parseFloat(this.cycleDataForm.unplantedSeedsPerUser).toFixed(2)
       this.bankSeedsPerCycle = parseFloat(this.cycleDataForm.bankSeedsPerCycle).toFixed(2)

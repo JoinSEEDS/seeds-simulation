@@ -80,9 +80,9 @@ export default {
       bdcsGrowth: 'BDCs Growth',
       // Interface Seeds Bank
       outstandingContracts: 'Outstanding Contracts',
-      closedContracts: 'Closed Contracts',
+      closedContracts: 'Closed Contracts During Cycle',
       closedContractsPercentage: 'Closed Contracts Percentage',
-      contracts: 'Contracts',
+      contracts: 'New Contracts During Cycle',
       contractsGrowth: 'Contracts Growth',
       // Groups
       groupGDP: 'GDP',

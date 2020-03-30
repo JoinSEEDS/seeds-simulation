@@ -177,7 +177,7 @@ export const getDataChart = async function ({ dispatch, commit, state }, { table
   switch (tableId) {
     case HarvestConstants.SEEDS_GROWN:
       data = {
-        categories: Array.from(Array(state.simulationState.length - 1).keys()),
+        categories: Array.from({ length: state.simulationState.length - 1 }, (v, k) => k + 1),
         series: [
           {
             name: 'Seeds Grown 3 Cycles',
@@ -199,7 +199,7 @@ export const getDataChart = async function ({ dispatch, commit, state }, { table
       break
     case HarvestConstants.SEEDS_IND_ACCNTS:
       data = {
-        categories: Array.from(Array(state.simulationState.length - 1).keys()),
+        categories: Array.from({ length: state.simulationState.length - 1 }, (v, k) => k + 1),
         series: [
           {
             name: 'Total Amount For People',
@@ -226,7 +226,7 @@ export const getDataChart = async function ({ dispatch, commit, state }, { table
       break
     case HarvestConstants.SEEDS_ORG_ACCNTS:
       data = {
-        categories: Array.from(Array(state.simulationState.length - 1).keys()),
+        categories: Array.from({ length: state.simulationState.length - 1 }, (v, k) => k + 1),
         series: [
           {
             name: 'Total Amount For Organizations',
@@ -253,7 +253,7 @@ export const getDataChart = async function ({ dispatch, commit, state }, { table
       break
     case HarvestConstants.SEEDS_BDC:
       data = {
-        categories: Array.from(Array(state.simulationState.length - 1).keys()),
+        categories: Array.from({ length: state.simulationState.length - 1 }, (v, k) => k + 1),
         series: [
           {
             name: 'Total Amount For BDC',
@@ -280,7 +280,7 @@ export const getDataChart = async function ({ dispatch, commit, state }, { table
       break
     case HarvestConstants.SEEDS_GDC:
       data = {
-        categories: Array.from(Array(state.simulationState.length - 1).keys()),
+        categories: Array.from({ length: state.simulationState.length - 1 }, (v, k) => k + 1),
         series: [
           {
             name: 'Total Amount For GDC',
@@ -312,7 +312,7 @@ export const getDataChart = async function ({ dispatch, commit, state }, { table
       break
     case HarvestConstants.SEEDS_GENERAL:
       data = {
-        categories: Array.from(Array(state.simulationState.length - 1).keys()),
+        categories: Array.from({ length: state.simulationState.length - 1 }, (v, k) => k + 1),
         series: [
           {
             name: 'Total Seeds',

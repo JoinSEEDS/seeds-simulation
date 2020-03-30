@@ -8,6 +8,7 @@
         suffix="%"
         :rules="rules"
         :readonly="readonly"
+        :bg-color="bgColor"
         filled
     )
 </template>
@@ -20,7 +21,8 @@ export default {
     label: { type: String },
     scale: { type: String, default: '100' },
     readonly: {},
-    rules: { type: Array }
+    rules: { type: Array },
+    bgColor: {}
   },
   data () {
     return {
