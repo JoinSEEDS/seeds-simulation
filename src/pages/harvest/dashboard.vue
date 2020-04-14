@@ -167,7 +167,7 @@ export default {
       valueSelected: null,
       valueOption: 0,
       options: [
-        'first - middle - last', 'each 10 (11 samples)', 'each 20 (6 samples)'
+        'first - middle - last', 'every 10 (11 samples)', 'every 20 (6 samples)'
       ],
       showOptions: false,
       showAllIndividualAccounts: false,
