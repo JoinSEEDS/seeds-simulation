@@ -32,6 +32,7 @@ export default {
       nonNegative: 'The value can not be negative'
     },
     cycles: {
+      chartOptions: 'Number of samples',
       changeRequiredToMeetDemand: 'Change Required to Meet Demand',
       volumeGrowth: 'Volume Growth',
       // changeRequiredToMeetDemand: 33339041.096,

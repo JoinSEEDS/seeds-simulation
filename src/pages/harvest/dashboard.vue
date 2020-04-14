@@ -63,7 +63,13 @@
                   custom-table-header(:titleTable="dataTableGDC.tableName" :subtitleTable="dataTableGDC.totalAmount")
       //- div(v-if="dataChart")
       //- p Condition {{getSimulationState.length}}
-      custom-chart(
+      div.row.justify-start.q-pl-md
+        q-select.col-3(
+          v-model='valueSelected'
+          :options='options'
+          :label="$t('forms.cycles.chartOptions')"
+        )
+      custom-chart.q-mb-xl(
         :dataChart="dataChart",
         :chartName="dataChart.chartName",
         xAxisTitle="Cycles",
@@ -92,19 +98,31 @@ export default {
       console.log('Before Cycle Tables', this.getSimulationState)
       this.setCycleTables({ step: this.simulationStep })
       console.log('After Cycle Tables', this.getSimulationState)
-      if (this.simulationStep > prevStep) this.getDataChart({ tableId: this.tableSelected })
+      if (this.simulationStep > prevStep) this.getDataChart({ tableId: this.tableSelected, compare: this.valueOption })
       console.log('Tables updated')
       console.log('After Tables updated', this.getSimulationState)
     },
     totalSimulationSteps (newV, oldV) {
       if (this.totalSimulationSteps > 0 && oldV === 0) {
-        this.getDataChart({ tableId: this.tableSelected })
+        this.getDataChart({ tableId: this.tableSelected, compare: this.valueOption })
         console.log('After Updated simulation steps', this.getSimulationState)
         this.tableSelected = 1
       }
     },
     tableSelected () {
-      this.getDataChart({ tableId: this.tableSelected })
+      this.getDataChart({ tableId: this.tableSelected, compare: this.valueOption })
+    },
+    valueSelected () {
+      console.log('VALUE SELECTED:', this.valueSelected)
+      if (this.valueSelected === this.options[1]) {
+        this.valueOption = 1
+      } else if (this.valueSelected === this.options[2]) {
+        this.valueOption = 2
+      } else {
+        this.valueOption = 0
+      }
+
+      this.getDataChart({ tableId: this.tableSelected, compare: this.valueOption })
     }
   },
   computed: {
@@ -138,6 +156,11 @@ export default {
   },
   data () {
     return {
+      valueSelected: null,
+      valueOption: 0,
+      options: [
+        'first - middle - last', 'each 10 (11 samples)', 'each 20 (6 samples)'
+      ],
       showAllIndividualAccounts: false,
       showAllOrganizationAccounts: false,
       showAllBDCs: false,

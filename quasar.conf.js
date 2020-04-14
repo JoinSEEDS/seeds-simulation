@@ -81,6 +81,7 @@ module.exports = function (ctx) {
         'QItemSection',
         'QLayout',
         'QList',
+        'QMarkupTable',
         'QMenu',
         'QOptionGroup',
         'QPage',

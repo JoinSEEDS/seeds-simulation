@@ -165,13 +165,27 @@ export const getDataTable = async function ({ dispatch, commit, state }, { table
   return true
 }
 
-export const getDataChart = async function ({ dispatch, commit, state }, { tableId }) {
+export const getDataChart = async function ({ dispatch, commit, state }, { tableId, compare }) {
   console.log('getDataChart function')
   let data
 
-  if (state.simulationState.length === 0) {
-    // commit('setDataChart', { chartName: 'First Select a table' })
-    // commit('setDataChart', undefined)
+  let k = 0
+  let rank = 0
+  let increment = 0
+  switch (compare) {
+    case 1:
+      k = 9
+      increment = 10
+      break
+    case 2:
+      k = 19
+      increment = 20
+      break
+    default:
+      k = 49
+      increment = 50
+      rank = 'last'
+      break
   }
 
   switch (tableId) {
@@ -198,85 +212,163 @@ export const getDataChart = async function ({ dispatch, commit, state }, { table
       }
       break
     case HarvestConstants.SEEDS_IND_ACCNTS:
+      let series = [{
+        name: 'Total Amount Per Rank (' + rank + ')',
+        data: state.simulationState.slice(1).map(s => { return s.harvestDistribution.peopleAccounts.all.totalAmount[0] })
+      }]
+
+      for (k; k < 100; k += increment) {
+        if (typeof rank === 'string') {
+          if (rank === 49) {
+            rank = 'middle'
+          } else {
+            rank = 'first'
+          }
+        } else {
+          rank = k
+        }
+        series.push({
+          name: 'Total Amount Per Rank (' + rank + ')',
+          data: state.simulationState.slice(1).map(s => { return s.harvestDistribution.peopleAccounts.all.totalAmount[k] })
+        })
+      }
+
       data = {
         categories: Array.from({ length: state.simulationState.length - 1 }, (v, k) => k + 1),
-        series: [
-          {
-            name: 'Total Amount For People',
-            data: state.simulationState.slice(1).map(s => { return s.harvestDistribution.peopleAccounts.totalAmountForAccounts })
-          },
-          {
-            name: 'Total Amount Per Rank (first)',
-            data: state.simulationState.slice(1).map(s => { return s.harvestDistribution.peopleAccounts.first.totalAmount }),
-            visible: false
-          },
-          {
-            name: 'Total Amount Per Rank (middle)',
-            data: state.simulationState.slice(1).map(s => { return s.harvestDistribution.peopleAccounts.middle.totalAmount }),
-            visible: false
-          },
-          {
-            name: 'Total Amount Per Rank (last)',
-            data: state.simulationState.slice(1).map(s => { return s.harvestDistribution.peopleAccounts.last.totalAmount }),
-            visible: false
-          }
-        ],
+        series: series,
         chartName: 'Seeds Individual Accounts'
       }
+      // data = {
+      //   categories: Array.from({ length: state.simulationState.length - 1 }, (v, k) => k + 1),
+      //   series: [
+      //     {
+      //       name: 'Total Amount For People',
+      //       data: state.simulationState.slice(1).map(s => { return s.harvestDistribution.peopleAccounts.totalAmountForAccounts })
+      //     },
+      //     {
+      //       name: 'Total Amount Per Rank (first)',
+      //       data: state.simulationState.slice(1).map(s => { return s.harvestDistribution.peopleAccounts.first.totalAmount }),
+      //       visible: false
+      //     },
+      //     {
+      //       name: 'Total Amount Per Rank (middle)',
+      //       data: state.simulationState.slice(1).map(s => { return s.harvestDistribution.peopleAccounts.middle.totalAmount }),
+      //       visible: false
+      //     },
+      //     {
+      //       name: 'Total Amount Per Rank (last)',
+      //       data: state.simulationState.slice(1).map(s => { return s.harvestDistribution.peopleAccounts.last.totalAmount }),
+      //       visible: false
+      //     }
+      //   ],
+      //   chartName: 'Seeds Individual Accounts'
+      // }
       break
     case HarvestConstants.SEEDS_ORG_ACCNTS:
+      let seriesOrg = [{
+        name: 'Total Amount Per Rank (' + rank + ')',
+        data: state.simulationState.slice(1).map(s => { return s.harvestDistribution.organizationAccounts.allOrg.totalAmount[0] })
+      }]
+
+      for (k; k < 100; k += increment) {
+        if (typeof rank === 'string') {
+          if (rank === 49) {
+            rank = 'middle'
+          } else {
+            rank = 'first'
+          }
+        } else {
+          rank = k
+        }
+        seriesOrg.push({
+          name: 'Total Amount Per Rank (' + rank + ')',
+          data: state.simulationState.slice(1).map(s => { return s.harvestDistribution.organizationAccounts.allOrg.totalAmount[k] })
+        })
+      }
+
       data = {
         categories: Array.from({ length: state.simulationState.length - 1 }, (v, k) => k + 1),
-        series: [
-          {
-            name: 'Total Amount For Organizations',
-            data: state.simulationState.slice(1).map(s => { return s.harvestDistribution.organizationAccounts.totalAmountForOrganizations })
-          },
-          {
-            name: 'Total Amount per Rank (first)',
-            data: state.simulationState.slice(1).map(s => { return s.harvestDistribution.organizationAccounts.firstOrg.totalAmount }),
-            visible: false
-          },
-          {
-            name: 'Total Amount per Rank (middle)',
-            data: state.simulationState.slice(1).map(s => { return s.harvestDistribution.organizationAccounts.middleOrg.totalAmount }),
-            visible: false
-          },
-          {
-            name: 'Total Amount per Rank (last)',
-            data: state.simulationState.slice(1).map(s => { return s.harvestDistribution.organizationAccounts.lastOrg.totalAmount }),
-            visible: false
-          }
-        ],
+        series: seriesOrg,
         chartName: 'Seeds Organization Accounts'
       }
+      // data = {
+      //   categories: Array.from({ length: state.simulationState.length - 1 }, (v, k) => k + 1),
+      //   series: [
+      //     {
+      //       name: 'Total Amount For Organizations',
+      //       data: state.simulationState.slice(1).map(s => { return s.harvestDistribution.organizationAccounts.totalAmountForOrganizations })
+      //     },
+      //     {
+      //       name: 'Total Amount per Rank (first)',
+      //       data: state.simulationState.slice(1).map(s => { return s.harvestDistribution.organizationAccounts.firstOrg.totalAmount }),
+      //       visible: false
+      //     },
+      //     {
+      //       name: 'Total Amount per Rank (middle)',
+      //       data: state.simulationState.slice(1).map(s => { return s.harvestDistribution.organizationAccounts.middleOrg.totalAmount }),
+      //       visible: false
+      //     },
+      //     {
+      //       name: 'Total Amount per Rank (last)',
+      //       data: state.simulationState.slice(1).map(s => { return s.harvestDistribution.organizationAccounts.lastOrg.totalAmount }),
+      //       visible: false
+      //     }
+      //   ],
+      //   chartName: 'Seeds Organization Accounts'
+      // }
       break
     case HarvestConstants.SEEDS_BDC:
+      let seriesBdc = [{
+        name: 'Total Amount Per Rank (' + rank + ')',
+        data: state.simulationState.slice(1).map(s => { return s.harvestDistribution.bdcs.allBdc.budget[0] })
+      }]
+
+      for (k; k < 100; k += increment) {
+        if (typeof rank === 'string') {
+          if (rank === 49) {
+            rank = 'middle'
+          } else {
+            rank = 'first'
+          }
+        } else {
+          rank = k
+        }
+        seriesBdc.push({
+          name: 'Total Amount Per Rank (' + rank + ')',
+          data: state.simulationState.slice(1).map(s => { return s.harvestDistribution.bdcs.allBdc.budget[k] })
+        })
+      }
+
       data = {
         categories: Array.from({ length: state.simulationState.length - 1 }, (v, k) => k + 1),
-        series: [
-          {
-            name: 'Total Amount For BDC',
-            data: state.simulationState.slice(1).map(s => { return s.harvestDistribution.bdcs.totalAmountForBdcs })
-          },
-          {
-            name: 'Total Amount Per Rank (first)',
-            data: state.simulationState.slice(1).map(s => { return s.harvestDistribution.bdcs.firstBdc.budget }),
-            visible: false
-          },
-          {
-            name: 'Total Amount Per Rank (middle)',
-            data: state.simulationState.slice(1).map(s => { return s.harvestDistribution.bdcs.middleBdc.budget }),
-            visible: false
-          },
-          {
-            name: 'Total Amount Per Rank (last)',
-            data: state.simulationState.slice(1).map(s => { return s.harvestDistribution.bdcs.lastBdc.budget }),
-            visible: false
-          }
-        ],
-        chartName: 'Seeds BDCs'
+        series: seriesBdc,
+        chartName: 'Seeds BDCs Accounts'
       }
+      // data = {
+      //   categories: Array.from({ length: state.simulationState.length - 1 }, (v, k) => k + 1),
+      //   series: [
+      //     {
+      //       name: 'Total Amount For BDC',
+      //       data: state.simulationState.slice(1).map(s => { return s.harvestDistribution.bdcs.totalAmountForBdcs })
+      //     },
+      //     {
+      //       name: 'Total Amount Per Rank (first)',
+      //       data: state.simulationState.slice(1).map(s => { return s.harvestDistribution.bdcs.firstBdc.budget }),
+      //       visible: false
+      //     },
+      //     {
+      //       name: 'Total Amount Per Rank (middle)',
+      //       data: state.simulationState.slice(1).map(s => { return s.harvestDistribution.bdcs.middleBdc.budget }),
+      //       visible: false
+      //     },
+      //     {
+      //       name: 'Total Amount Per Rank (last)',
+      //       data: state.simulationState.slice(1).map(s => { return s.harvestDistribution.bdcs.lastBdc.budget }),
+      //       visible: false
+      //     }
+      //   ],
+      //   chartName: 'Seeds BDCs'
+      // }
       break
     case HarvestConstants.SEEDS_GDC:
       data = {
