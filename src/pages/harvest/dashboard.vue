@@ -43,7 +43,6 @@
       .row.q-col-gutter-md
         .col-md-6.col-sm-12(@click="selectTable(constant.SEEDS_BDC)")
             q-table(
-            :class="{'height-table': getSimulationState.length != 0}"
             :data="getBdcs"
             :columns="columnsTableBDC"
             row-key="name"
@@ -53,7 +52,6 @@
                 custom-table-header(:titleTable="dataTableBDC.tableName" :subtitleTable="dataTableBDC.totalAmount" :tableId="constant.SEEDS_BDC" v-bind:showAll.sync="showAllBDCs")
         .col-md-6.col-sm-12(@click="selectTable(constant.SEEDS_GDC)")
             q-table(
-            :class="{'height-table': getSimulationState.length != 0}"
             :data="dataTableGDC.rows"
             :columns="columnsTableGDC"
             row-key="name"
