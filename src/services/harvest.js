@@ -98,6 +98,7 @@ function distributeBdc (budget, numAccounts, percentages) {
     firstBdc: {
       numBdcs: accountsDistribution[99],
       budget: budgetDistribution[99],
+      budgetPerBdc: budgetDistribution[99] / accountsDistribution[99],
       regenGrants: percentages.regenGrants * budgetDistribution[99],
       regenLoans: percentages.regenLoans * budgetDistribution[99],
       openProposal: percentages.openProposal * budgetDistribution[99]
@@ -105,6 +106,7 @@ function distributeBdc (budget, numAccounts, percentages) {
     middleBdc: {
       numBdcs: accountsDistribution[49],
       budget: budgetDistribution[49],
+      budgetPerBdc: budgetDistribution[49] / accountsDistribution[49],
       regenGrants: percentages.regenGrants * budgetDistribution[49],
       regenLoans: percentages.regenLoans * budgetDistribution[49],
       openProposal: percentages.openProposal * budgetDistribution[49]
@@ -112,6 +114,7 @@ function distributeBdc (budget, numAccounts, percentages) {
     lastBdc: {
       numBdcs: accountsDistribution[0],
       budget: budgetDistribution[0],
+      budgetPerBdc: budgetDistribution[0] / accountsDistribution[0],
       regenGrants: percentages.regenGrants * budgetDistribution[0],
       regenLoans: percentages.regenLoans * budgetDistribution[0],
       openProposal: percentages.openProposal * budgetDistribution[0]
@@ -119,6 +122,7 @@ function distributeBdc (budget, numAccounts, percentages) {
     allBdc: {
       numBdcs: accountsDistribution,
       budget: budgetDistribution,
+      budgetPerBdc: budgetDistribution.map((d, index) => { return d / accountsDistribution[index] }),
       regenGrants: budgetDistribution.map(d => { return percentages.regenGrants * d }),
       regenLoans: budgetDistribution.map(d => { return percentages.regenLoans * d }),
       openProposal: budgetDistribution.map(d => { return percentages.openProposal * d })

@@ -15,13 +15,14 @@ export const getDataTable = async function ({ dispatch, commit, state }, { table
     return rows.reverse()
   }
 
-  const getBdcRows = ({ numBdcs, budget, regenGrants, regenLoans, openProposal }) => {
+  const getBdcRows = ({ numBdcs, budget, budgetPerBdc, regenGrants, regenLoans, openProposal }) => {
     const rows = []
     for (let i = 0; i < numBdcs.length; i++) {
       rows.push({
         position: i,
         numBdcs: numBdcs[i],
         budget: budget[i],
+        budgetPerBdc: budgetPerBdc[i],
         regenGrants: regenGrants[i],
         regenLoans: regenLoans[i],
         openProposal: openProposal[i]

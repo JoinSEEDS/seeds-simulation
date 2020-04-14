@@ -4,7 +4,7 @@
         p.text-h6.text-center {{titleTable}}
     div.row.justify-between.items-center.container-subtitle.q-pl-md.q-pt-sm.q-pb-sm(v-if="subtitleTable")
         p.text-center Total Amount: {{this.formatToMoney(subtitleTable)}}
-        p Show all entries
+        p Show all percentiles
             q-toggle(
               v-model="expandEntries",
               @input="$emit('update:showAll', $event)"

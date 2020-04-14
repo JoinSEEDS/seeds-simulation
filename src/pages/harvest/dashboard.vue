@@ -63,7 +63,9 @@
                   custom-table-header(:titleTable="dataTableGDC.tableName" :subtitleTable="dataTableGDC.totalAmount")
       //- div(v-if="dataChart")
       //- p Condition {{getSimulationState.length}}
-      div.row.justify-start.q-pl-md
+      div.row.justify-start.q-pl-md(
+        :class="{ 'hidden': !showOptions }"
+      )
         q-select.col-3(
           v-model='valueSelected'
           :options='options'
@@ -111,9 +113,15 @@ export default {
     },
     tableSelected () {
       this.getDataChart({ tableId: this.tableSelected, compare: this.valueOption })
+      if (this.tableSelected === this.constant.SEEDS_IND_ACCNTS ||
+          this.tableSelected === this.constant.SEEDS_ORG_ACCNTS ||
+          this.tableSelected === this.constant.SEEDS_BDC) {
+        this.showOptions = true
+      } else {
+        this.showOptions = false
+      }
     },
     valueSelected () {
-      console.log('VALUE SELECTED:', this.valueSelected)
       if (this.valueSelected === this.options[1]) {
         this.valueOption = 1
       } else if (this.valueSelected === this.options[2]) {
@@ -161,6 +169,7 @@ export default {
       options: [
         'first - middle - last', 'each 10 (11 samples)', 'each 20 (6 samples)'
       ],
+      showOptions: false,
       showAllIndividualAccounts: false,
       showAllOrganizationAccounts: false,
       showAllBDCs: false,
@@ -192,7 +201,7 @@ export default {
         {
           name: 'position',
           required: true,
-          label: 'Rank',
+          label: 'Percentile',
           align: 'left',
           field: 'position',
           sortable: true,
@@ -214,7 +223,7 @@ export default {
         {
           name: 'position',
           required: true,
-          label: 'Rank',
+          label: 'Percentile',
           align: 'left',
           field: 'position',
           sortable: true,
@@ -230,7 +239,7 @@ export default {
         {
           name: 'position',
           required: true,
-          label: 'Rank',
+          label: 'Percentile',
           align: 'left',
           field: 'position',
           sortable: true,
@@ -238,11 +247,12 @@ export default {
           headerClasses: 'bg-primary text-white',
           style: 'max-width: 100px'
         },
-        { name: 'numBdc', align: 'left', label: '# BDC', field: 'numBdcs', sortable: true, headerClasses: 'bg-primary text-white', format: val => this.formatToMoney(val) },
+        { name: 'numBdc', align: 'left', label: '# of BDC', field: 'numBdcs', sortable: true, headerClasses: 'bg-primary text-white', format: val => this.formatToMoney(val) },
         { name: 'openProposal', label: 'Open Proposal', field: 'openProposal', sortable: true, headerClasses: 'bg-primary text-white', format: val => this.formatToMoney(val) },
         { name: 'regenGrants', label: 'Regen Grants', field: 'regenGrants', sortable: true, headerClasses: 'bg-primary text-white', format: val => this.formatToMoney(val) },
         { name: 'regenLoans', label: 'Regen Loans', field: 'regenLoans', sortable: true, headerClasses: 'bg-primary text-white', format: val => this.formatToMoney(val) },
-        { name: 'totalAmount', label: 'Total Amount', field: 'budget', sortable: true, headerClasses: 'bg-primary text-white', format: val => this.formatToMoney(val) }
+        { name: 'totalAmount', label: 'Total Amount', field: 'budget', sortable: true, headerClasses: 'bg-primary text-white', format: val => this.formatToMoney(val) },
+        { name: 'totalAmountPerBdc', label: 'Total Amount per BDC', field: 'budgetPerBdc', sortable: true, headerClasses: 'bg-primary text-white', format: val => this.formatToMoney(val) }
       ],
       columnsTableGDC: [
         {
