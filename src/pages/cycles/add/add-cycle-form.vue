@@ -484,6 +484,30 @@ export default {
           this.$t('forms.cycles.volumeGrowth')
         ]
       },
+      SeedsBank_Options: {
+        optionSelected: undefined,
+        options: []
+      },
+      SeedsRemoves_Options: {
+        optionSelected: undefined,
+        options: []
+      },
+      SeedsIntroduce_Options: {
+        optionSelected: undefined,
+        options: []
+      },
+      HarvestDistribution_Options: {
+        optionSelected: undefined,
+        options: []
+      },
+      BDCDistribution_Options: {
+        optionSelected: undefined,
+        options: []
+      },
+      GDCDistribution_Options: {
+        optionSelected: undefined,
+        options: []
+      },
       fieldValue: undefined,
       optionField: undefined,
       optionsField: [
@@ -662,10 +686,36 @@ export default {
       console.log('After back:', this.getSimulationState)
     },
     formError (ref) {
-      console.log('Error Form', ref)
+      console.log('Error Form', ref.label)
       let parent = ref.$parent
       while (parent && !parent.show) {
         parent = parent.$parent
+      }
+      console.log('Expander found', parent)
+      switch (parent.label) {
+        case this.labelGDP:
+          this.GDP_Options.optionSelected = ref.label
+          break
+        case this.labelSeedsBank:
+          this.SeedsBank_Options.optionSelected = ref.label
+          break
+        case this.labelSeedsRemoves:
+          this.SeedsRemoves_Options.optionSelected = ref.label
+          break
+        case this.labelSeedsIntroduce:
+          this.SeedsIntroduce_Options.optionSelected = ref.label
+          break
+        case this.$t('forms.cycles.groupHarvestDistribution'):
+          this.HarvestDistribution_Options.optionSelected = ref.label
+          break
+        case this.$t('forms.cycles.groupBDCDistribution'):
+          this.BDCDistribution_Options.optionSelected = ref.label
+          break
+        case this.$t('forms.cycles.groupGDCDistribution'):
+          this.GDCDistribution_Options.optionSelected = ref.label
+          break
+        default:
+          break
       }
       parent && parent.show()
     },
