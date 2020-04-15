@@ -18,20 +18,20 @@
                             q-card-section.q-gutter-y-sm
                                 //- p Hi {{ volumeGrowth }}
                                 money-input(
-                                    v-model='numPeopleAccounts'
-                                    :label="$t('forms.cycles.numPeopleAccounts')"
-                                    :rules="[rules.positiveInteger]"
+                                  v-model='numPeopleAccounts'
+                                  :label="$t('forms.cycles.numPeopleAccounts')"
+                                  :rules="[rules.positiveInteger]"
                                 )
                                 percentage-input(
-                                    v-model='peopleGrowth'
-                                    :label="$t('forms.cycles.peopleGrowth')"
-                                    :rules="[rules.required]"
+                                  v-model='peopleGrowth'
+                                  :label="$t('forms.cycles.peopleGrowth')"
+                                  :rules="[rules.required]"
                                 )
                                 money-input(
-                                    v-model='gdpPerPerson'
-                                    :label="$t('forms.cycles.gdpPerPerson')"
-                                    :rules="[rules.nonNegative]"
-                                    prefix="S"
+                                  v-model='gdpPerPerson'
+                                  :label="$t('forms.cycles.gdpPerPerson')"
+                                  :rules="[rules.nonNegative]"
+                                  prefix="S"
                                 )
                                 //- q-field(filled v-model='numPeopleAccounts' :label="$t('forms.cycles.numPeopleAccounts')")
                                 //-     template(v-slot:control='{ id, floatingLabel, value, emitValue }')
@@ -368,6 +368,52 @@
                                 //-     template(v-slot:control='{ id, floatingLabel, value, emitValue }')
                                 //-         input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
                         q-separator
+                        //- Seeds Bank
+                        q-expansion-item(
+                            group="formGroup"
+                            label="Select a field"
+                            header-class="text-positive"
+                        )
+                          q-card
+                            q-card-section.q-gutter-y-sm
+                              q-select(
+                                filled
+                                label="Option Field"
+                                v-model="optionField"
+                                :options="optionsField"
+                              )
+                              percentage-input(
+                                v-if="fieldType === 'percentage'"
+                                v-model='fieldValue'
+                                :label="optionField"
+                                :rules="[rules.nonNegative]"
+                                prefix="S"
+                              )
+                              money-input(
+                                v-if="fieldType === 'money'"
+                                v-model='fieldValue'
+                                :label="optionField"
+                                :rules="[rules.nonNegative]"
+                                prefix="S"
+                              )
+                              p Field value: {{ fieldValue }}
+                              p this.peopleGrowth: {{ this.peopleGrowth }}
+                              //- money-input(
+                              //-       v-model='numPeopleAccounts'
+                              //-       :label="$t('forms.cycles.numPeopleAccounts')"
+                              //-       :rules="[rules.positiveInteger]"
+                              //-   )
+                              //-   percentage-input(
+                              //-       v-model='peopleGrowth'
+                              //-       :label="$t('forms.cycles.peopleGrowth')"
+                              //-       :rules="[rules.required]"
+                              //-   )
+                              //-   money-input(
+                              //-       v-model='gdpPerPerson'
+                              //-       :label="$t('forms.cycles.gdpPerPerson')"
+                              //-       :rules="[rules.nonNegative]"
+                              //-       prefix="S"
+                              //-   )
                     //- Hidden Fields
                     //- q-field(v-if="!hideFields" filled v-model='percentageOfHarvestAssignedCirculating' :label="$t('forms.cycles.percentageOfHarvestAssignedCirculating')")
                     //-     template(v-slot:control='{ id, floatingLabel, value, emitValue }')
@@ -406,6 +452,13 @@ export default {
   mixins: [ validation ],
   data () {
     return {
+      fieldValue: undefined,
+      optionField: undefined,
+      optionsField: [
+        this.$t('forms.cycles.numPeopleAccounts'),
+        this.$t('forms.cycles.peopleGrowth'),
+        this.$t('forms.cycles.gdpPerPerson')
+      ],
       bgColor: 'light-green-3',
       price: 0,
       moneyFormat: {
@@ -484,6 +537,18 @@ export default {
     },
     labelGDP () {
       return this.getSimulationState.length > 0 ? this.$t('forms.cycles.groupGDP') + ': ' + this.formatMoney(this.getSimulationState[this.simulationStep].totalGDP.toFixed(2)) : this.$t('forms.cycles.groupGDP')
+    },
+    fieldType () {
+      switch (this.optionField) {
+        case this.$t('forms.cycles.numPeopleAccounts'):
+          return 'money'
+        case this.$t('forms.cycles.peopleGrowth'):
+          return 'percentage'
+        case this.$t('forms.cycles.gdpPerPerson'):
+          return 'money'
+        default:
+          return 'none'
+      }
     }
   },
   beforeMount () {
@@ -493,6 +558,40 @@ export default {
     simulationStep (currentStep, prevStep) {
       console.log('Form data syncronized', prevStep)
       this.syncFormData()
+    },
+    // Set real value to temp value
+    optionField () {
+      let newValue
+      switch (this.optionField) {
+        case this.$t('forms.cycles.numPeopleAccounts'):
+          newValue = this.numPeopleAccounts
+          break
+        case this.$t('forms.cycles.peopleGrowth'):
+          newValue = this.peopleGrowth.value
+          break
+        case this.$t('forms.cycles.gdpPerPerson'):
+          newValue = this.gdpPerPerson
+          break
+        default:
+          newValue = undefined
+      }
+      this.fieldValue = newValue
+    },
+    // Set temp value to real value
+    fieldValue () {
+      switch (this.optionField) {
+        case this.$t('forms.cycles.numPeopleAccounts'):
+          this.numPeopleAccounts = this.fieldValue
+          break
+        case this.$t('forms.cycles.peopleGrowth'):
+          this.peopleGrowth = this.fieldValue
+          break
+        case this.$t('forms.cycles.gdpPerPerson'):
+          this.gdpPerPerson = this.fieldValue
+          break
+        default:
+          console.warn('Not case found on fieldValue watch')
+      }
     }
   },
   methods: {
