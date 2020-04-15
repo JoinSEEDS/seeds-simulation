@@ -17,7 +17,15 @@
                           q-card
                             q-card-section.q-gutter-y-sm
                                 //- p Hi {{ volumeGrowth }}
+                                q-select(
+                                  filled
+                                  v-model="GDP_Options.optionSelected"
+                                  :options="GDP_Options.options"
+                                  label="Field"
+                                  placeholder="Select an option"
+                                )
                                 money-input(
+                                  v-show="GDP_Options.optionSelected === $t('forms.cycles.numPeopleAccounts')"
                                   v-model='numPeopleAccounts'
                                   :label="$t('forms.cycles.numPeopleAccounts')"
                                   :rules="[rules.positiveInteger]"
@@ -25,11 +33,13 @@
                                 percentage-input(
                                   v-model='peopleGrowth'
                                   :label="$t('forms.cycles.peopleGrowth')"
+                                  v-show="GDP_Options.optionSelected === $t('forms.cycles.peopleGrowth')"
                                   :rules="[rules.required]"
                                 )
                                 money-input(
                                   v-model='gdpPerPerson'
                                   :label="$t('forms.cycles.gdpPerPerson')"
+                                  v-show="GDP_Options.optionSelected === $t('forms.cycles.gdpPerPerson')"
                                   :rules="[rules.nonNegative]"
                                   prefix="S"
                                 )
@@ -39,16 +49,19 @@
                                 money-input(
                                     v-model='numOrganizationAccounts'
                                     :label="$t('forms.cycles.numOrganizationAccounts')"
+                                    v-show="GDP_Options.optionSelected === $t('forms.cycles.numOrganizationAccounts')"
                                     :rules="[rules.positiveInteger]"
                                 )
                                 percentage-input(
                                     v-model='organizationsGrowth'
                                     :label="$t('forms.cycles.organizationsGrowth')"
+                                    v-show="GDP_Options.optionSelected === $t('forms.cycles.organizationsGrowth')"
                                     :rules="[rules.required]"
                                 )
                                 money-input(
                                     v-model='gdpPerOrganisation'
                                     :label="$t('forms.cycles.gdpPerOrganisation')"
+                                    v-show="GDP_Options.optionSelected === $t('forms.cycles.gdpPerOrganisation')"
                                     :rules="[rules.nonNegative]"
                                     prefix="S"
                                 )
@@ -58,16 +71,19 @@
                                 money-input(
                                     v-model='numBdcs'
                                     :label="$t('forms.cycles.numBdcs')"
+                                    v-show="GDP_Options.optionSelected === $t('forms.cycles.numBdcs')"
                                     :rules="[rules.nonNegative]"
                                 )
                                 percentage-input(
                                     v-model='bdcsGrowth'
                                     :label="$t('forms.cycles.bdcsGrowth')"
+                                    v-show="GDP_Options.optionSelected === $t('forms.cycles.bdcsGrowth')"
                                     :rules="[rules.required]"
                                 )
                                 money-input(
                                     v-model='changeRequiredToMeetDemand'
                                     :label="$t('forms.cycles.changeRequiredToMeetDemand')"
+                                    v-show="GDP_Options.optionSelected === $t('forms.cycles.changeRequiredToMeetDemand')"
                                     :rules="[rules.required]"
                                     :readonly='true'
                                     :bgColor="bgColor"
@@ -76,6 +92,7 @@
                                 percentage-input(
                                     v-model='volumeGrowth'
                                     :label="$t('forms.cycles.volumeGrowth')"
+                                    v-show="GDP_Options.optionSelected === $t('forms.cycles.volumeGrowth')"
                                     :readonly='true'
                                     :bgColor="bgColor"
                                     :rules="[rules.required]"
@@ -369,35 +386,35 @@
                                 //-         input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
                         q-separator
                         //- Seeds Bank
-                        q-expansion-item(
-                            group="formGroup"
-                            label="Select a field"
-                            header-class="text-positive"
-                        )
-                          q-card
-                            q-card-section.q-gutter-y-sm
-                              q-select(
-                                filled
-                                label="Option Field"
-                                v-model="optionField"
-                                :options="optionsField"
-                              )
-                              percentage-input(
-                                v-if="fieldType === 'percentage'"
-                                v-model='fieldValue'
-                                :label="optionField"
-                                :rules="[rules.nonNegative]"
-                                prefix="S"
-                              )
-                              money-input(
-                                v-if="fieldType === 'money'"
-                                v-model='fieldValue'
-                                :label="optionField"
-                                :rules="[rules.nonNegative]"
-                                prefix="S"
-                              )
-                              p Field value: {{ fieldValue }}
-                              p this.peopleGrowth: {{ this.peopleGrowth }}
+                        //- q-expansion-item(
+                        //-     group="formGroup"
+                        //-     label="Select a field"
+                        //-     header-class="text-positive"
+                        //- )
+                        //-   q-card
+                        //-     q-card-section.q-gutter-y-sm
+                        //-       q-select(
+                        //-         filled
+                        //-         label="Option Field"
+                        //-         v-model="optionField"
+                        //-         :options="optionsField"
+                        //-       )
+                        //-       percentage-input(
+                        //-         v-if="fieldType === 'percentage'"
+                        //-         v-model='fieldValue'
+                        //-         :label="optionField"
+                        //-         :rules="[rules.nonNegative]"
+                        //-         prefix="S"
+                        //-       )
+                        //-       money-input(
+                        //-         v-if="fieldType === 'money'"
+                        //-         v-model='fieldValue'
+                        //-         :label="optionField"
+                        //-         :rules="[rules.nonNegative]"
+                        //-         prefix="S"
+                        //-       )
+                        //-       p Field value: {{ fieldValue }}
+                        //-       p this.peopleGrowth: {{ this.peopleGrowth }}
                               //- money-input(
                               //-       v-model='numPeopleAccounts'
                               //-       :label="$t('forms.cycles.numPeopleAccounts')"
@@ -452,6 +469,21 @@ export default {
   mixins: [ validation ],
   data () {
     return {
+      GDP_Options: {
+        optionSelected: undefined,
+        options: [
+          this.$t('forms.cycles.numPeopleAccounts'),
+          this.$t('forms.cycles.peopleGrowth'),
+          this.$t('forms.cycles.gdpPerPerson'),
+          this.$t('forms.cycles.numOrganizationAccounts'),
+          this.$t('forms.cycles.organizationsGrowth'),
+          this.$t('forms.cycles.gdpPerOrganisation'),
+          this.$t('forms.cycles.numBdcs'),
+          this.$t('forms.cycles.bdcsGrowth'),
+          this.$t('forms.cycles.changeRequiredToMeetDemand'),
+          this.$t('forms.cycles.volumeGrowth')
+        ]
+      },
       fieldValue: undefined,
       optionField: undefined,
       optionsField: [
@@ -630,6 +662,7 @@ export default {
       console.log('After back:', this.getSimulationState)
     },
     formError (ref) {
+      console.log('Error Form', ref)
       let parent = ref.$parent
       while (parent && !parent.show) {
         parent = parent.$parent
