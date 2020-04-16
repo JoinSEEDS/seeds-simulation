@@ -83,7 +83,6 @@
                                 money-input(
                                     v-model='changeRequiredToMeetDemand'
                                     :label="$t('forms.cycles.changeRequiredToMeetDemand')"
-                                    v-show="GDP_Options.optionSelected === $t('forms.cycles.changeRequiredToMeetDemand')"
                                     :rules="[rules.required]"
                                     :readonly='true'
                                     :bgColor="bgColor"
@@ -92,7 +91,6 @@
                                 percentage-input(
                                     v-model='volumeGrowth'
                                     :label="$t('forms.cycles.volumeGrowth')"
-                                    v-show="GDP_Options.optionSelected === $t('forms.cycles.volumeGrowth')"
                                     :readonly='true'
                                     :bgColor="bgColor"
                                     :rules="[rules.required]"
@@ -479,9 +477,7 @@ export default {
           this.$t('forms.cycles.organizationsGrowth'),
           this.$t('forms.cycles.gdpPerOrganisation'),
           this.$t('forms.cycles.numBdcs'),
-          this.$t('forms.cycles.bdcsGrowth'),
-          this.$t('forms.cycles.changeRequiredToMeetDemand'),
-          this.$t('forms.cycles.volumeGrowth')
+          this.$t('forms.cycles.bdcsGrowth')
         ]
       },
       SeedsBank_Options: {
@@ -686,12 +682,12 @@ export default {
       console.log('After back:', this.getSimulationState)
     },
     formError (ref) {
-      console.log('Error Form', ref.label)
+      // console.log('Error Form', ref.label)
       let parent = ref.$parent
       while (parent && !parent.show) {
         parent = parent.$parent
       }
-      console.log('Expander found', parent)
+      // console.log('Expander found', parent)
       switch (parent.label) {
         case this.labelGDP:
           this.GDP_Options.optionSelected = ref.label
