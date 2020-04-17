@@ -17,85 +17,95 @@
                           q-card
                             q-card-section.q-gutter-y-sm
                                 //- p Hi {{ volumeGrowth }}
-                                q-select(
-                                  filled
-                                  v-model="GDP_Options.optionSelected"
-                                  :options="GDP_Options.options"
-                                  label="Field"
-                                  placeholder="Select an option"
+                                //- q-select(
+                                //-   filled
+                                //-   v-model="GDP_Options.optionSelected"
+                                //-   :options="GDP_Options.options"
+                                //-   label="Field"
+                                //-   placeholder="Select an option"
+                                //- )
+                                q-expansion-item(
+                                  group="groupGDP"
+                                  label="People growth %"
+                                  header-class="text-positive"
                                 )
-                                money-input(
-                                  v-show="GDP_Options.optionSelected === $t('forms.cycles.numPeopleAccounts')"
-                                  v-model='numPeopleAccounts'
-                                  :label="$t('forms.cycles.numPeopleAccounts')"
-                                  :rules="[rules.positiveInteger]"
+                                  div.q-px-sm.q-py-xs
+                                    percentage-input(
+                                      v-model='peopleGrowth'
+                                      :label="$t('forms.cycles.peopleGrowth')"
+                                      :rules="[rules.required]"
+                                    )
+                                    money-input(
+                                      v-model='numPeopleAccounts'
+                                      :label="$t('forms.cycles.numPeopleAccounts')"
+                                      :rules="[rules.positiveInteger]"
+                                    )
+                                    money-input(
+                                      v-model='gdpPerPerson'
+                                      :label="$t('forms.cycles.gdpPerPerson')"
+                                      :rules="[rules.nonNegative]"
+                                      prefix="S"
+                                    )
+                                q-expansion-item(
+                                  group="groupGDP"
+                                  label="Org growth % ^"
+                                  header-class="text-positive"
                                 )
-                                percentage-input(
-                                  v-model='peopleGrowth'
-                                  :label="$t('forms.cycles.peopleGrowth')"
-                                  v-show="GDP_Options.optionSelected === $t('forms.cycles.peopleGrowth')"
-                                  :rules="[rules.required]"
+                                  div.q-px-sm.q-py-xs
+                                    money-input(
+                                        v-model='numOrganizationAccounts'
+                                        :label="$t('forms.cycles.numOrganizationAccounts')"
+                                        :rules="[rules.positiveInteger]"
+                                    )
+                                    percentage-input(
+                                        v-model='organizationsGrowth'
+                                        :label="$t('forms.cycles.organizationsGrowth')"
+                                        :rules="[rules.required]"
+                                    )
+                                    money-input(
+                                        v-model='gdpPerOrganisation'
+                                        :label="$t('forms.cycles.gdpPerOrganisation')"
+                                        :rules="[rules.nonNegative]"
+                                        prefix="S"
+                                    )
+                                q-expansion-item(
+                                  group="groupGDP"
+                                  label="BDC Growth % ^"
+                                  header-class="text-positive"
                                 )
-                                money-input(
-                                  v-model='gdpPerPerson'
-                                  :label="$t('forms.cycles.gdpPerPerson')"
-                                  v-show="GDP_Options.optionSelected === $t('forms.cycles.gdpPerPerson')"
-                                  :rules="[rules.nonNegative]"
-                                  prefix="S"
+                                  div.q-px-sm.q-py-xs
+                                    percentage-input(
+                                      v-model='bdcsGrowth'
+                                      :label="$t('forms.cycles.bdcsGrowth')"
+                                      :rules="[rules.required]"
+                                    )
+                                    money-input(
+                                        v-model='numBdcs'
+                                        :label="$t('forms.cycles.numBdcs')"
+                                        :rules="[rules.nonNegative]"
+                                    )
+                                q-expansion-item(
+                                  group="groupGDP"
+                                  label="Change Required to meet demand ^"
+                                  header-class="text-positive"
                                 )
-                                //- q-field(filled v-model='numPeopleAccounts' :label="$t('forms.cycles.numPeopleAccounts')")
-                                //-     template(v-slot:control='{ id, floatingLabel, value, emitValue }')
-                                //-         input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
-                                money-input(
-                                    v-model='numOrganizationAccounts'
-                                    :label="$t('forms.cycles.numOrganizationAccounts')"
-                                    v-show="GDP_Options.optionSelected === $t('forms.cycles.numOrganizationAccounts')"
-                                    :rules="[rules.positiveInteger]"
-                                )
-                                percentage-input(
-                                    v-model='organizationsGrowth'
-                                    :label="$t('forms.cycles.organizationsGrowth')"
-                                    v-show="GDP_Options.optionSelected === $t('forms.cycles.organizationsGrowth')"
-                                    :rules="[rules.required]"
-                                )
-                                money-input(
-                                    v-model='gdpPerOrganisation'
-                                    :label="$t('forms.cycles.gdpPerOrganisation')"
-                                    v-show="GDP_Options.optionSelected === $t('forms.cycles.gdpPerOrganisation')"
-                                    :rules="[rules.nonNegative]"
-                                    prefix="S"
-                                )
+                                  div.q-px-sm.q-py-xs
+                                    money-input(
+                                        v-model='changeRequiredToMeetDemand'
+                                        :label="$t('forms.cycles.changeRequiredToMeetDemand')"
+                                        :rules="[rules.required]"
+                                        :readonly='true'
+                                        :bgColor="bgColor"
+                                        prefix="S"
+                                    )
+                                    percentage-input(
+                                        v-model='volumeGrowth'
+                                        :label="$t('forms.cycles.volumeGrowth')"
+                                        :readonly='true'
+                                        :bgColor="bgColor"
+                                        :rules="[rules.required]"
+                                    )
                                 //- q-field(filled v-model='numOrganizationAccounts' :label="$t('forms.cycles.numOrganizationAccounts')")
-                                //-     template(v-slot:control='{ id, floatingLabel, value, emitValue }')
-                                //-         input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
-                                money-input(
-                                    v-model='numBdcs'
-                                    :label="$t('forms.cycles.numBdcs')"
-                                    v-show="GDP_Options.optionSelected === $t('forms.cycles.numBdcs')"
-                                    :rules="[rules.nonNegative]"
-                                )
-                                percentage-input(
-                                    v-model='bdcsGrowth'
-                                    :label="$t('forms.cycles.bdcsGrowth')"
-                                    v-show="GDP_Options.optionSelected === $t('forms.cycles.bdcsGrowth')"
-                                    :rules="[rules.required]"
-                                )
-                                money-input(
-                                    v-model='changeRequiredToMeetDemand'
-                                    :label="$t('forms.cycles.changeRequiredToMeetDemand')"
-                                    :rules="[rules.required]"
-                                    :readonly='true'
-                                    :bgColor="bgColor"
-                                    prefix="S"
-                                )
-                                percentage-input(
-                                    v-model='volumeGrowth'
-                                    :label="$t('forms.cycles.volumeGrowth')"
-                                    :readonly='true'
-                                    :bgColor="bgColor"
-                                    :rules="[rules.required]"
-                                )
-                                //- q-field(filled v-model='numBdcs' :label="$t('forms.cycles.numBdcs')")
                                 //-     template(v-slot:control='{ id, floatingLabel, value, emitValue }')
                                 //-         input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
                         q-separator
@@ -107,51 +117,63 @@
                         )
                           q-card
                             q-card-section.q-gutter-y-sm
-                              percentage-input(
-                                    v-model='contractsGrowth'
-                                    :label="$t('forms.cycles.contractsGrowth')"
-                                    :rules="[rules.nonNegative]"
-                                    prefix="S"
-                                )
-                              money-input(
+                              q-expansion-item(
+                                  group="groupSeeds"
+                                  label="Bank"
+                                  header-class="text-positive"
+                              )
+                                div.q-px-sm.q-py-xs
+                                  money-input(
                                     v-model='enterSeedsBank'
                                     :label="$t('forms.cycles.enterSeedsBank')"
                                     :rules="[rules.nonNegative]"
                                     prefix="S"
-                                )
-                              money-input(
+                                  )
+                                  money-input(
                                     v-model='exitSeedsBank'
                                     :label="$t('forms.cycles.exitSeedsBank')"
                                     :rules="[rules.nonNegative]"
                                     prefix="S"
-                                )
-                              money-input(
-                                    v-model='outstandingContracts'
-                                    :label="$t('forms.cycles.outstandingContracts')"
+                                  )
+                              q-expansion-item(
+                                  group="groupSeeds"
+                                  label="Contracts"
+                                  header-class="text-positive"
+                              )
+                                div.q-px-sm.q-py-xs
+                                  percentage-input(
+                                    v-model='contractsGrowth'
+                                    :label="$t('forms.cycles.contractsGrowth')"
                                     :rules="[rules.nonNegative]"
                                     prefix="S"
-                                )
-                              percentage-input(
-                                    v-model='closedContractsPercentage'
-                                    :label="$t('forms.cycles.closedContractsPercentage')"
-                                    :rules="[rules.nonNegative]"
-                                )
-                              money-input(
-                                    v-model='contracts'
-                                    :label="$t('forms.cycles.contracts')"
-                                    :readonly='true'
-                                    :rules="[rules.nonNegative]"
-                                    :bgColor="bgColor"
-                                    prefix="S"
-                                )
-                              money-input(
-                                    v-model='closedContracts'
-                                    :label="$t('forms.cycles.closedContracts')"
-                                    :readonly='true'
-                                    :bgColor="bgColor"
-                                    :rules="[rules.nonNegative]"
-                                    prefix="S"
-                                )
+                                  )
+                                  money-input(
+                                      v-model='outstandingContracts'
+                                      :label="$t('forms.cycles.outstandingContracts')"
+                                      :rules="[rules.nonNegative]"
+                                      prefix="S"
+                                  )
+                                  percentage-input(
+                                      v-model='closedContractsPercentage'
+                                      :label="$t('forms.cycles.closedContractsPercentage')"
+                                      :rules="[rules.nonNegative]"
+                                  )
+                                  money-input(
+                                      v-model='contracts'
+                                      :label="$t('forms.cycles.contracts')"
+                                      :readonly='true'
+                                      :rules="[rules.nonNegative]"
+                                      :bgColor="bgColor"
+                                      prefix="S"
+                                  )
+                                  money-input(
+                                      v-model='closedContracts'
+                                      :label="$t('forms.cycles.closedContracts')"
+                                      :readonly='true'
+                                      :bgColor="bgColor"
+                                      :rules="[rules.nonNegative]"
+                                      prefix="S"
+                                  )
                         q-separator
                         //- Seeds Remove
                         q-expansion-item(
@@ -161,66 +183,69 @@
                         )
                           q-card
                             q-card-section.q-gutter-y-sm
-                                money-input(
-                                    v-model='seedsPlantedPerUserFixed'
-                                    :label="$t('forms.cycles.seedsPlantedPerUserFixed')"
-                                    :rules="[rules.nonNegative]"
-                                    prefix="S"
+                                q-expansion-item(
+                                    group="groupSeedsRemove"
+                                    label="Planted"
+                                    header-class="text-positive"
                                 )
-                                money-input(
-                                    v-model='seedsPlantedPerUserVariable'
-                                    :label="$t('forms.cycles.seedsPlantedPerUserVariable')"
-                                    :rules="[rules.nonNegative]"
-                                    prefix="S"
+                                  div.q-px-sm.q-py-xs
+                                    money-input(
+                                      v-model='seedsPlantedPerUserFixed'
+                                      :label="$t('forms.cycles.seedsPlantedPerUserFixed')"
+                                      :rules="[rules.nonNegative]"
+                                      prefix="S"
+                                    )
+                                    money-input(
+                                      v-model='seedsPlantedPerUserVariable'
+                                      :label="$t('forms.cycles.seedsPlantedPerUserVariable')"
+                                      :rules="[rules.nonNegative]"
+                                      prefix="S"
+                                    )
+                                    money-input(
+                                      v-model='plantedSeeds'
+                                      :label="$t('forms.cycles.plantedSeeds')"
+                                      :readonly='true'
+                                      :bgColor="bgColor"
+                                      :rules="[rules.nonNegative]"
+                                      prefix="S"
+                                    )
+                                q-expansion-item(
+                                    group="groupSeedsRemove"
+                                    label="Burned"
+                                    header-class="text-positive"
                                 )
-                                money-input(
-                                    v-model='averageSeedsBurnedPerUser'
-                                    :label="$t('forms.cycles.averageSeedsBurnedPerUser')"
-                                    :rules="[rules.nonNegative]"
-                                    prefix="S"
+                                  div.q-px-sm.q-py-xs
+                                    money-input(
+                                        v-model='averageSeedsBurnedPerUser'
+                                        :label="$t('forms.cycles.averageSeedsBurnedPerUser')"
+                                        :rules="[rules.nonNegative]"
+                                        prefix="S"
+                                    )
+                                    money-input(
+                                      v-model='seedsDestroyed'
+                                      :label="$t('forms.cycles.seedsDestroyed')"
+                                      :readonly='true'
+                                      :bgColor="bgColor"
+                                      :rules="[rules.nonNegative]"
+                                      prefix="S"
+                                    )
+                                q-expansion-item(
+                                    group="groupSeedsRemove"
+                                    label="Exchanges"
+                                    header-class="text-positive"
                                 )
-                                //- q-field(filled v-model='plantedSeeds' :label="$t('forms.cycles.plantedSeeds')")
-                                //-     template(v-slot:control='{ id, floatingLabel, value, emitValue }')
-                                //-         input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
-                                money-input(
-                                    v-model='enterExchanges'
-                                    :label="$t('forms.cycles.enterExchanges')"
-                                    :rules="[rules.nonNegative]"
-                                    prefix="S"
-                                )
-                                //- q-field(filled v-model='enterExchanges' :label="$t('forms.cycles.enterExchanges')")
-                                //-     template(v-slot:control='{ id, floatingLabel, value, emitValue }')
-                                //-         input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
-                                percentage-input(
-                                    v-model='enterExchangesWeight'
-                                    :label="$t('forms.cycles.enterExchangesWeight')"
-                                    :rules="[rules.nonNegative]"
-                                )
-                                money-input(
-                                    v-model='seedsDestroyed'
-                                    :label="$t('forms.cycles.seedsDestroyed')"
-                                    :readonly='true'
-                                    :bgColor="bgColor"
-                                    :rules="[rules.nonNegative]"
-                                    prefix="S"
-                                )
-                                //- q-field(filled v-model='seedsDestroyed' :label="$t('forms.cycles.seedsDestroyed')")
-                                //-     template(v-slot:control='{ id, floatingLabel, value, emitValue }')
-                                //-         input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
-                                money-input(
-                                    v-model='plantedSeeds'
-                                    :label="$t('forms.cycles.plantedSeeds')"
-                                    :readonly='true'
-                                    :bgColor="bgColor"
-                                    :rules="[rules.nonNegative]"
-                                    prefix="S"
-                                )
-                                //- q-field(filled v-model='enterExchangesWeight' :label="$t('forms.cycles.enterExchangesWeight')")
-                                //-     template(v-slot:control='{ id, floatingLabel, value, emitValue }')
-                                //-         input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
-                                //- q-field(filled v-model='enterSeedsBank' :label="$t('forms.cycles.enterSeedsBank')")
-                                //-     template(v-slot:control='{ id, floatingLabel, value, emitValue }')
-                                //-         input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
+                                  div.q-px-sm.q-py-xs
+                                    money-input(
+                                        v-model='enterExchanges'
+                                        :label="$t('forms.cycles.enterExchanges')"
+                                        :rules="[rules.nonNegative]"
+                                        prefix="S"
+                                    )
+                                    percentage-input(
+                                        v-model='enterExchangesWeight'
+                                        :label="$t('forms.cycles.enterExchangesWeight')"
+                                        :rules="[rules.nonNegative]"
+                                    )
                         q-separator
                         //- Seeds Introduce
                         q-expansion-item(
@@ -230,43 +255,43 @@
                         )
                           q-card
                             q-card-section.q-gutter-y-sm
-                                money-input(
-                                    v-model='unplantedSeedsPerUser'
-                                    :label="$t('forms.cycles.unplantedSeedsPerUser')"
-                                    :rules="[rules.nonNegative]"
-                                    prefix="S"
+                                q-expansion-item(
+                                    group="groupSeedsIntroduce"
+                                    label="Exchanges"
+                                    header-class="text-positive"
                                 )
-                                //- q-field(filled v-model='unplantedSeeds' :label="$t('forms.cycles.unplantedSeeds')")
-                                //-     template(v-slot:control='{ id, floatingLabel, value, emitValue }')
-                                //-         input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
-                                money-input(
-                                    v-model='exitExchanges'
-                                    :label="$t('forms.cycles.exitExchanges')"
-                                    :rules="[rules.nonNegative]"
-                                    prefix="S"
+                                  div.q-px-sm.q-py-xs
+                                    money-input(
+                                        v-model='exitExchanges'
+                                        :label="$t('forms.cycles.exitExchanges')"
+                                        :rules="[rules.nonNegative]"
+                                        prefix="S"
+                                    )
+                                    percentage-input(
+                                        v-model='exitExchangesWeight'
+                                        :label="$t('forms.cycles.exitExchangesWeight')"
+                                        :rules="[rules.nonNegative]"
+                                    )
+                                q-expansion-item(
+                                    group="groupSeedsIntroduce"
+                                    label="Unplanted"
+                                    header-class="text-positive"
                                 )
-                                //- q-field(filled v-model='exitExchanges' :label="$t('forms.cycles.exitExchanges')")
-                                //-     template(v-slot:control='{ id, floatingLabel, value, emitValue }')
-                                //-         input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
-                                percentage-input(
-                                    v-model='exitExchangesWeight'
-                                    :label="$t('forms.cycles.exitExchangesWeight')"
-                                    :rules="[rules.nonNegative]"
-                                )
-                                //- q-field(filled v-model='exitExchangesWeight' :label="$t('forms.cycles.exitExchangesWeight')")
-                                //-     template(v-slot:control='{ id, floatingLabel, value, emitValue }')
-                                //-         input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
-                                //- q-field(filled v-model='exitSeedsBank' :label="$t('forms.cycles.exitSeedsBank')")
-                                //-     template(v-slot:control='{ id, floatingLabel, value, emitValue }')
-                                //-         input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
-                                money-input(
-                                    v-model='unplantedSeeds'
-                                    :label="$t('forms.cycles.unplantedSeeds')"
-                                    :readonly='true'
-                                    :bgColor="bgColor"
-                                    :rules="[rules.nonNegative]"
-                                    prefix="S"
-                                )
+                                  div.q-px-sm.q-py-xs
+                                    money-input(
+                                        v-model='unplantedSeedsPerUser'
+                                        :label="$t('forms.cycles.unplantedSeedsPerUser')"
+                                        :rules="[rules.nonNegative]"
+                                        prefix="S"
+                                    )
+                                    money-input(
+                                        v-model='unplantedSeeds'
+                                        :label="$t('forms.cycles.unplantedSeeds')"
+                                        :readonly='true'
+                                        :bgColor="bgColor"
+                                        :rules="[rules.nonNegative]"
+                                        prefix="S"
+                                    )
                         q-separator
                         //- Harvest Distribution
                         q-expansion-item(

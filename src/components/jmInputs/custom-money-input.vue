@@ -41,7 +41,7 @@ export default {
       moneyFormat: {
         decimal: '.',
         thousands: ',',
-        precision: 2,
+        precision: 0,
         masked: true
       }
     }
