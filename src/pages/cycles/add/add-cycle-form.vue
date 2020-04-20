@@ -48,7 +48,7 @@
                                     )
                                 q-expansion-item(
                                   group="groupGDP"
-                                  label="Org growth % ^"
+                                  label="Org growth % "
                                   header-class="text-positive"
                                 )
                                   div.q-px-sm.q-py-xs
@@ -70,7 +70,7 @@
                                     )
                                 q-expansion-item(
                                   group="groupGDP"
-                                  label="BDC Growth % ^"
+                                  label="BDC Growth % "
                                   header-class="text-positive"
                                 )
                                   div.q-px-sm.q-py-xs
@@ -86,7 +86,7 @@
                                     )
                                 q-expansion-item(
                                   group="groupGDP"
-                                  label="Change Required to meet demand ^"
+                                  label="Change Required to meet demand "
                                   header-class="text-positive"
                                 )
                                   div.q-px-sm.q-py-xs
@@ -604,16 +604,16 @@ export default {
   computed: {
     ...mapGetters('harvest', ['simulationStep', 'totalSimulationSteps', 'cycleDataForm', 'getSimulationState']),
     labelSeedsRemoves () {
-      return this.getSimulationState.length > 0 ? this.$t('forms.cycles.groupSeedsRemove') + ': ' + this.formatMoney(this.getSimulationState[this.simulationStep].seedsRemovedDuringCycle.toFixed(2)) : this.$t('forms.cycles.groupSeedsRemove')
+      return this.getSimulationState.length > 0 ? this.$t('forms.cycles.groupSeedsRemove') + ': ' + this.formatToMoney(this.getSimulationState[this.simulationStep].seedsRemovedDuringCycle.toFixed(0)) : this.$t('forms.cycles.groupSeedsRemove')
     },
     labelSeedsIntroduce () {
-      return this.getSimulationState.length > 0 ? this.$t('forms.cycles.groupSeedsIntroduce') + ': ' + this.formatMoney(this.getSimulationState[this.simulationStep].seedsIntroducedDuringCycle.toFixed(2)) : this.$t('forms.cycles.groupSeedsIntroduce')
+      return this.getSimulationState.length > 0 ? this.$t('forms.cycles.groupSeedsIntroduce') + ': ' + this.formatToMoney(this.getSimulationState[this.simulationStep].seedsIntroducedDuringCycle.toFixed(0)) : this.$t('forms.cycles.groupSeedsIntroduce')
     },
     labelSeedsBank () {
-      return this.getSimulationState.length > 0 ? this.$t('forms.cycles.groupSeedsBank') + ': ' + this.formatMoney(this.getSimulationState[this.simulationStep].bankContractsDuringCycle.toFixed(2)) : this.$t('forms.cycles.groupSeedsBank')
+      return this.getSimulationState.length > 0 ? this.$t('forms.cycles.groupSeedsBank') + ': ' + this.formatToMoney(this.getSimulationState[this.simulationStep].bankContractsDuringCycle.toFixed(0)) : this.$t('forms.cycles.groupSeedsBank')
     },
     labelGDP () {
-      return this.getSimulationState.length > 0 ? this.$t('forms.cycles.groupGDP') + ': ' + this.formatMoney(this.getSimulationState[this.simulationStep].totalGDP.toFixed(2)) : this.$t('forms.cycles.groupGDP')
+      return this.getSimulationState.length > 0 ? this.$t('forms.cycles.groupGDP') + ': ' + this.formatToMoney(this.getSimulationState[this.simulationStep].totalGDP.toFixed(0)) : this.$t('forms.cycles.groupGDP')
     },
     fieldType () {
       switch (this.optionField) {
@@ -674,7 +674,8 @@ export default {
   methods: {
     ...mapActions('harvest', ['getInitSimulationStep', 'doCycle']),
     ...mapMutations('harvest', ['setSimulationStep']),
-    formatMoney (val) {
+    formatMoney (val1) {
+      let val = Math.round(val1)
       if (val !== undefined) {
         let sign = false
         if (val < 0) {

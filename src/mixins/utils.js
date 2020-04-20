@@ -45,7 +45,8 @@ export const utils = {
       this.setIsLoading(state)
     },
     formatToMoney (price) {
-      let format = new Intl.NumberFormat().format(price)
+      const priceRound = Math.round(price)
+      let format = new Intl.NumberFormat().format(priceRound)
       return format
     }
   }
