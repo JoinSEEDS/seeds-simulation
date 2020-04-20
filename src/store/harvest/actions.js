@@ -455,8 +455,9 @@ export const doCycle = async function ({ dispatch, commit, state }, { simulation
   if (step === -1) {
     step = state.simulationState.length
   }
-
+  console.log('DoCycle Action')
   if (state.simulationState.length === 0) {
+    console.log('DoCycle Action 1')
     let initState = initCycle(Object.assign({}, simulationState))
     let newState = doNextCycle(Object.assign({}, initState), true)
     console.log(newState)
@@ -468,6 +469,7 @@ export const doCycle = async function ({ dispatch, commit, state }, { simulation
     step = 1
     // console.log(JSON.stringify(state.simulationState[0]))
   } else {
+    console.log('DoCycle Action 2')
     let newState = doNextCycle(Object.assign({}, simulationState), true)
     if (newState.error === 'negative') {
       commit('general/setErrorMsg', 'The field ' + newState.field + ' became negative during cycle calculation.', { root: true })
@@ -475,7 +477,7 @@ export const doCycle = async function ({ dispatch, commit, state }, { simulation
     }
     commit('setDataSimulationState', { simulation: [newState], step: step })
   }
-
+  console.log('DoCycle Action 3')
   console.log('LOOK AT THAT:', state.simulationState.length - 1)
   setCycleTables({ dispatch, commit, state }, { step: state.simulationState.length - 1 })
   commit('setSimulationStep', state.simulationState.length - 1)
