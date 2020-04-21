@@ -455,7 +455,7 @@ export const doCycle = async function ({ dispatch, commit, state }, { simulation
   if (step === -1) {
     step = state.simulationState.length
   }
-  console.log('DoCycle Action', simulationState)
+  console.log('DoCycle Action')
   if (state.simulationState.length === 0) {
     console.log('DoCycle Action 1')
     let initState = initCycle(Object.assign({}, simulationState))

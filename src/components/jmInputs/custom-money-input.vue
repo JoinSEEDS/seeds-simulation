@@ -1,6 +1,6 @@
 <template lang="pug">
     q-field(
-        v-show="value && value.display != null"
+        v-if="value && value.display != null"
         v-bind:value="value.display"
         @input=" e => updateModel(e)"
         :label="label"
@@ -39,6 +39,7 @@ export default {
       string: '',
       last: '',
       moneyFormat: {
+        decimal: '.',
         thousands: ',',
         precision: 0,
         masked: true
@@ -50,10 +51,9 @@ export default {
       // if (this.last === this.value) return
       // this.last = this.value
       // console.log('CUSTOM MONET OPTION 5', this.value)
-      console.log('watch VALUE!! ' + this.label, this.value)
       if (!isNaN(parseFloat(this.value))) {
         // console.log('CUSTOM MONET OPTION 6')
-        this.$emit('input', { display: this.value, value: parseInt(this.value) })
+        this.$emit('input', { display: this.value, value: parseFloat(this.value) })
       } else if (!this.value || this.value.display == null) {
         this.$emit('input', { display: '0', value: 0 })
         console.log('CUSTOM MONET OPTION 7', this.value)
@@ -66,10 +66,9 @@ export default {
     //   value: this.value.display
     // }
     // this.$emit('input', model)
-    console.log('Before Mount!! ' + this.label, this.value)
-    if (!isNaN(parseFloat(this.value)) || !isNaN(parseInt(this.value))) {
+    if (!isNaN(parseFloat(this.value))) {
       // console.log('CUSTOM MONET OPTION 1')
-      this.$emit('input', { display: this.value, value: parseInt(this.value) })
+      this.$emit('input', { display: this.value, value: parseFloat(this.value) })
     } else if (!this.value || this.value.display == null) {
       this.$emit('input', { display: '0', value: 0 })
       // console.log('CUSTOM MONET OPTION 2')

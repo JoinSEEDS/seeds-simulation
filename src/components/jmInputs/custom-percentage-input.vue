@@ -46,7 +46,7 @@ export default {
   },
   watch: {
     value (newValue) {
-      // console.log('newValue percentage', newValue)
+      console.log('newValue percentage', newValue)
       if (!isNaN(parseFloat(this.value))) {
         const mDisplay = parseFloat(this.value) * parseFloat(this.scale)
         const mValue = parseFloat(this.value)
