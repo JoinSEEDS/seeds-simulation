@@ -628,13 +628,13 @@ export default {
       }
     }
   },
-  beforeMount () {
+  mounted () {
     this.syncFormData()
   },
   watch: {
     simulationStep (currentStep, prevStep) {
       console.log('Form data syncronized', prevStep)
-      this.syncFormData()
+      // this.syncFormData()
     },
     // Set real value to temp value
     optionField () {
@@ -807,7 +807,7 @@ export default {
     syncFormData () {
       //   console.log('Before Sync Form:', this.getSimulationState)
       console.log('Before Sync Form: volumeGrowth ', this.cycleDataForm)
-      this.changeRequiredToMeetDemand = parseFloat(this.cycleDataForm.changeRequiredToMeetDemand).toFixed(2)
+      this.changeRequiredToMeetDemand = parseInt(this.cycleDataForm.changeRequiredToMeetDemand)
       this.volumeGrowth = parseFloat(this.cycleDataForm.volumeGrowth).toFixed(4)
       this.seedsDestroyed = parseFloat(this.cycleDataForm.burnedSeedsDuringCycle).toFixed(2)
       this.plantedSeeds = parseFloat(this.cycleDataForm.plantedSeedsDuringCycle).toFixed(2)
@@ -833,13 +833,13 @@ export default {
       this.regenGrantsGDC = parseFloat(this.cycleDataForm.gdcPercentagesDistribution.regenGrants)
       this.coreDevelopment = parseFloat(this.cycleDataForm.gdcPercentagesDistribution.coreDevelopment)
       this.interestFreeLoans = parseFloat(this.cycleDataForm.gdcPercentagesDistribution.interestFreeLoans)
-      this.numPeopleAccounts = parseFloat(this.cycleDataForm.numPeopleAccounts).toFixed(2)
+      this.numPeopleAccounts = parseFloat(this.cycleDataForm.numPeopleAccounts)
       this.peopleGrowth = parseFloat(this.cycleDataForm.peopleGrowth).toFixed(4)
-      this.gdpPerPerson = parseFloat(this.cycleDataForm.gdpPerPerson).toFixed(2)
-      this.numOrganizationAccounts = parseFloat(this.cycleDataForm.numOrganizationAccounts).toFixed(2)
+      this.gdpPerPerson = parseInt(this.cycleDataForm.gdpPerPerson)
+      this.numOrganizationAccounts = parseInt(this.cycleDataForm.numOrganizationAccounts)
       this.organizationsGrowth = parseFloat(this.cycleDataForm.organizationsGrowth).toFixed(4)
-      this.gdpPerOrganisation = parseFloat(this.cycleDataForm.gdpPerOrganisation).toFixed(2)
-      this.numBdcs = parseFloat(this.cycleDataForm.numBdcs).toFixed(2)
+      this.gdpPerOrganisation = parseInt(this.cycleDataForm.gdpPerOrganisation)
+      this.numBdcs = parseInt(this.cycleDataForm.numBdcs)
       this.bdcsGrowth = parseFloat(this.cycleDataForm.bdcsGrowth).toFixed(4)
       this.contracts = parseFloat(this.cycleDataForm.newContractsDuringCycle).toFixed(2)
       this.outstandingContracts = parseFloat(this.cycleDataForm.outstandingContracts).toFixed(2)
