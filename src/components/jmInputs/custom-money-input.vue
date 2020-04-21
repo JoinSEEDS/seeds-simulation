@@ -77,7 +77,7 @@ export default {
     // console.log('CUSTOM MONET OPTION 3')
     if (this.asset && this.asset.precision) {
       // console.log('CUSTOM MONET OPTION 4')
-      this.moneyFormat.precision = this.asset.precision
+      // this.moneyFormat.precision = this.asset.precision
     }
   },
   updated () {
