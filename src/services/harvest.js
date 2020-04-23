@@ -213,7 +213,11 @@ export const doNextCycle = function (state, update) {
 
   let pastGDP = newState.totalGDP
 
-  newState.totalGDP = (newState.numPeopleAccounts * newState.gdpPerPerson) + (newState.numOrganizationAccounts * newState.gdpPerOrganisation)
+  newState.peopleGrowthLabel = newState.numPeopleAccounts * newState.gdpPerPerson
+
+  newState.organizationsGrowthLabel = newState.numOrganizationAccounts * newState.gdpPerOrganisation
+
+  newState.totalGDP = newState.peopleGrowthLabel + newState.organizationsGrowthLabel
 
   newState.volumeGrowth = (newState.totalGDP - pastGDP) / pastGDP
 
@@ -247,18 +251,22 @@ export const doNextCycle = function (state, update) {
 
   newState.outstandingContracts += newState.bankContractsDuringCycle
 
+  // enter exchanges
+  newState.enterExchangesLabel = newState.enterExchanges * newState.enterExchangesWeight
+
+  // exit exchanges
+  newState.exitExchangesLabel = newState.exitExchanges * newState.exitExchangesWeight
+
   // seeds removed
   newState.seedsRemovedDuringCycle = newState.burnedSeedsDuringCycle +
                                 newState.plantedSeedsDuringCycle +
-                                newState.enterExchanges * newState.enterExchangesWeight +
-                                newState.enterSeedsBank
-                                // newState.closedContractsDuringCycle (should I add this variable here?)
+                                newState.enterExchangesLabel +
+                                newState.closedContractsDuringCycle
 
   // seeds introduced
   newState.seedsIntroducedDuringCycle = newState.unplantedSeeds +
-                                newState.exitExchanges * newState.exitExchangesWeight +
-                                newState.exitSeedsBank
-                                // newState.newContractsDuringCycle (should I add this here?)
+                                newState.exitExchangesLabel +
+                                newState.newContractsDuringCycle
 
   // harvest
   newState.seedsGrownPerCycle = newState.changeRequiredToMeetDemand +
