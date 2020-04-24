@@ -76,6 +76,8 @@ export default {
       averageSeedsBurnedPerUser: 'Average Seeds Burned Per User',
       numOrganizationAccounts: 'Number of Organization Accounts',
       organizationsGrowth: 'Organizations Growth',
+      orgGrowth: 'Org Growth',
+      bdcGrowth: 'BDC Growth',
       gdpPerOrganisation: 'GDP per Organization',
       numBdcs: 'Number of Bdcs',
       bdcsGrowth: 'BDCs Growth',

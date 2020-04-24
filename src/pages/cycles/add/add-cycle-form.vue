@@ -26,7 +26,7 @@
                                 //- )
                                 q-expansion-item(
                                   group="groupGDP"
-                                  label="People growth %"
+                                  :label="labelPeopleGrowth"
                                   header-class="text-positive"
                                 )
                                   div.q-px-sm.q-py-xs
@@ -48,7 +48,7 @@
                                     )
                                 q-expansion-item(
                                   group="groupGDP"
-                                  label="Org growth % "
+                                  :label="labelOrganizationsGrowth"
                                   header-class="text-positive"
                                 )
                                   div.q-px-sm.q-py-xs
@@ -70,7 +70,7 @@
                                     )
                                 q-expansion-item(
                                   group="groupGDP"
-                                  label="BDC Growth % "
+                                  :label="$t('forms.cycles.bdcGrowth')"
                                   header-class="text-positive"
                                 )
                                   div.q-px-sm.q-py-xs
@@ -118,9 +118,10 @@
                           q-card
                             q-card-section.q-gutter-y-sm
                               q-expansion-item(
-                                  group="groupSeeds"
-                                  label="Bank"
-                                  header-class="text-positive"
+                                v-show="false"
+                                group="groupSeeds"
+                                label="Bank"
+                                header-class="text-positive"
                               )
                                 div.q-px-sm.q-py-xs
                                   money-input(
@@ -135,45 +136,45 @@
                                     :rules="[rules.nonNegative]"
                                     prefix="S"
                                   )
-                              q-expansion-item(
-                                  group="groupSeeds"
-                                  label="Contracts"
-                                  header-class="text-positive"
+                              //- q-expansion-item(
+                              //-     group="groupSeeds"
+                              //-     label="Contracts"
+                              //-     header-class="text-positive"
+                              //- )
+                              //-   div.q-px-sm.q-py-xs
+                              percentage-input(
+                                v-model='contractsGrowth'
+                                :label="$t('forms.cycles.contractsGrowth')"
+                                :rules="[rules.nonNegative]"
+                                prefix="S"
                               )
-                                div.q-px-sm.q-py-xs
-                                  percentage-input(
-                                    v-model='contractsGrowth'
-                                    :label="$t('forms.cycles.contractsGrowth')"
-                                    :rules="[rules.nonNegative]"
-                                    prefix="S"
-                                  )
-                                  money-input(
-                                      v-model='outstandingContracts'
-                                      :label="$t('forms.cycles.outstandingContracts')"
-                                      :rules="[rules.nonNegative]"
-                                      prefix="S"
-                                  )
-                                  percentage-input(
-                                      v-model='closedContractsPercentage'
-                                      :label="$t('forms.cycles.closedContractsPercentage')"
-                                      :rules="[rules.nonNegative]"
-                                  )
-                                  money-input(
-                                      v-model='contracts'
-                                      :label="$t('forms.cycles.contracts')"
-                                      :readonly='true'
-                                      :rules="[rules.nonNegative]"
-                                      :bgColor="bgColor"
-                                      prefix="S"
-                                  )
-                                  money-input(
-                                      v-model='closedContracts'
-                                      :label="$t('forms.cycles.closedContracts')"
-                                      :readonly='true'
-                                      :bgColor="bgColor"
-                                      :rules="[rules.nonNegative]"
-                                      prefix="S"
-                                  )
+                              money-input(
+                                  v-model='outstandingContracts'
+                                  :label="$t('forms.cycles.outstandingContracts')"
+                                  :rules="[rules.nonNegative]"
+                                  prefix="S"
+                              )
+                              percentage-input(
+                                  v-model='closedContractsPercentage'
+                                  :label="$t('forms.cycles.closedContractsPercentage')"
+                                  :rules="[rules.nonNegative]"
+                              )
+                              money-input(
+                                  v-model='contracts'
+                                  :label="$t('forms.cycles.contracts')"
+                                  :readonly='true'
+                                  :rules="[rules.nonNegative]"
+                                  :bgColor="bgColor"
+                                  prefix="S"
+                              )
+                              money-input(
+                                  v-model='closedContracts'
+                                  :label="$t('forms.cycles.closedContracts')"
+                                  :readonly='true'
+                                  :bgColor="bgColor"
+                                  :rules="[rules.nonNegative]"
+                                  prefix="S"
+                              )
                         q-separator
                         //- Seeds Remove
                         q-expansion-item(
@@ -231,7 +232,7 @@
                                     )
                                 q-expansion-item(
                                     group="groupSeedsRemove"
-                                    label="Exchanges"
+                                    :label="labelExitExchanges"
                                     header-class="text-positive"
                                 )
                                   div.q-px-sm.q-py-xs
@@ -257,7 +258,7 @@
                             q-card-section.q-gutter-y-sm
                                 q-expansion-item(
                                     group="groupSeedsIntroduce"
-                                    label="Exchanges"
+                                    :label="labelEnterExchanges"
                                     header-class="text-positive"
                                 )
                                   div.q-px-sm.q-py-xs
@@ -492,50 +493,6 @@ export default {
   mixins: [ validation ],
   data () {
     return {
-      GDP_Options: {
-        optionSelected: undefined,
-        options: [
-          this.$t('forms.cycles.numPeopleAccounts'),
-          this.$t('forms.cycles.peopleGrowth'),
-          this.$t('forms.cycles.gdpPerPerson'),
-          this.$t('forms.cycles.numOrganizationAccounts'),
-          this.$t('forms.cycles.organizationsGrowth'),
-          this.$t('forms.cycles.gdpPerOrganisation'),
-          this.$t('forms.cycles.numBdcs'),
-          this.$t('forms.cycles.bdcsGrowth')
-        ]
-      },
-      SeedsBank_Options: {
-        optionSelected: undefined,
-        options: []
-      },
-      SeedsRemoves_Options: {
-        optionSelected: undefined,
-        options: []
-      },
-      SeedsIntroduce_Options: {
-        optionSelected: undefined,
-        options: []
-      },
-      HarvestDistribution_Options: {
-        optionSelected: undefined,
-        options: []
-      },
-      BDCDistribution_Options: {
-        optionSelected: undefined,
-        options: []
-      },
-      GDCDistribution_Options: {
-        optionSelected: undefined,
-        options: []
-      },
-      fieldValue: undefined,
-      optionField: undefined,
-      optionsField: [
-        this.$t('forms.cycles.numPeopleAccounts'),
-        this.$t('forms.cycles.peopleGrowth'),
-        this.$t('forms.cycles.gdpPerPerson')
-      ],
       bgColor: 'light-green-3',
       price: 0,
       moneyFormat: {
@@ -615,17 +572,17 @@ export default {
     labelGDP () {
       return this.getSimulationState.length > 0 ? this.$t('forms.cycles.groupGDP') + ': ' + this.formatToMoney(this.getSimulationState[this.simulationStep].totalGDP.toFixed(0)) : this.$t('forms.cycles.groupGDP')
     },
-    fieldType () {
-      switch (this.optionField) {
-        case this.$t('forms.cycles.numPeopleAccounts'):
-          return 'money'
-        case this.$t('forms.cycles.peopleGrowth'):
-          return 'percentage'
-        case this.$t('forms.cycles.gdpPerPerson'):
-          return 'money'
-        default:
-          return 'none'
-      }
+    labelPeopleGrowth () {
+      return this.getSimulationState.length > 0 ? this.$t('forms.cycles.peopleGrowth') + ': ' + this.formatToMoney(this.getSimulationState[this.simulationStep].peopleGrowthLabel.toFixed(0)) : this.$t('forms.cycles.peopleGrowth')
+    },
+    labelOrganizationsGrowth () {
+      return this.getSimulationState.length > 0 ? this.$t('forms.cycles.orgGrowth') + ': ' + this.formatToMoney(this.getSimulationState[this.simulationStep].organizationsGrowthLabel.toFixed(0)) : this.$t('forms.cycles.orgGrowth')
+    },
+    labelEnterExchanges () {
+      return this.getSimulationState.length > 0 ? this.$t('forms.cycles.enterExchanges') + ': ' + this.formatToMoney(this.getSimulationState[this.simulationStep].enterExchangesLabel.toFixed(0)) : this.$t('forms.cycles.enterExchanges')
+    },
+    labelExitExchanges () {
+      return this.getSimulationState.length > 0 ? this.$t('forms.cycles.exitExchanges') + ': ' + this.formatToMoney(this.getSimulationState[this.simulationStep].exitExchangesLabel.toFixed(0)) : this.$t('forms.cycles.exitExchanges')
     }
   },
   beforeMount () {
