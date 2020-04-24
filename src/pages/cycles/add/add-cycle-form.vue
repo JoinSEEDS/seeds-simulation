@@ -70,7 +70,7 @@
                                     )
                                 q-expansion-item(
                                   group="groupGDP"
-                                  :label="$t('forms.cycles.bdcGrowth')"
+                                  :label="labelBDCGrowth"
                                   header-class="text-positive"
                                 )
                                   div.q-px-sm.q-py-xs
@@ -86,7 +86,7 @@
                                     )
                                 q-expansion-item(
                                   group="groupGDP"
-                                  label="Change Required to meet demand "
+                                  :label="labelChangeRequiredToMeetDemand"
                                   header-class="text-positive"
                                 )
                                   div.q-px-sm.q-py-xs
@@ -186,7 +186,7 @@
                             q-card-section.q-gutter-y-sm
                                 q-expansion-item(
                                     group="groupSeedsRemove"
-                                    label="Planted"
+                                    :label="labelSeedsRemovesPlanted"
                                     header-class="text-positive"
                                 )
                                   div.q-px-sm.q-py-xs
@@ -203,6 +203,7 @@
                                       prefix="S"
                                     )
                                     money-input(
+                                      v-show="true"
                                       v-model='plantedSeeds'
                                       :label="$t('forms.cycles.plantedSeeds')"
                                       :readonly='true'
@@ -212,7 +213,7 @@
                                     )
                                 q-expansion-item(
                                     group="groupSeedsRemove"
-                                    label="Burned"
+                                    :label="labelSeedsRemovesBurned"
                                     header-class="text-positive"
                                 )
                                   div.q-px-sm.q-py-xs
@@ -223,6 +224,7 @@
                                         prefix="S"
                                     )
                                     money-input(
+                                      v-show="true"
                                       v-model='seedsDestroyed'
                                       :label="$t('forms.cycles.seedsDestroyed')"
                                       :readonly='true'
@@ -275,7 +277,7 @@
                                     )
                                 q-expansion-item(
                                     group="groupSeedsIntroduce"
-                                    label="Unplanted"
+                                    :label="labelSeedsIntroduceUnplanted"
                                     header-class="text-positive"
                                 )
                                   div.q-px-sm.q-py-xs
@@ -286,6 +288,7 @@
                                         prefix="S"
                                     )
                                     money-input(
+                                        v-show="true"
                                         v-model='unplantedSeeds'
                                         :label="$t('forms.cycles.unplantedSeeds')"
                                         :readonly='true'
@@ -583,6 +586,21 @@ export default {
     },
     labelExitExchanges () {
       return this.getSimulationState.length > 0 ? this.$t('forms.cycles.exitExchanges') + ': ' + this.formatToMoney(this.getSimulationState[this.simulationStep].exitExchangesLabel.toFixed(0)) : this.$t('forms.cycles.exitExchanges')
+    },
+    labelBDCGrowth () {
+      return this.getSimulationState.length > 0 ? this.$t('forms.cycles.bdcGrowth') + ': ' + this.formatToMoney(this.getSimulationState[this.simulationStep].numBdcs.toFixed(0)) : this.$t('forms.cycles.bdcGrowth')
+    },
+    labelChangeRequiredToMeetDemand () {
+      return this.getSimulationState.length > 0 ? this.$t('forms.cycles.changeRequiredToMeetDemand') + ': ' + this.formatToMoney(this.getSimulationState[this.simulationStep].changeRequiredToMeetDemand.toFixed(0)) : this.$t('forms.cycles.changeRequiredToMeetDemand')
+    },
+    labelSeedsRemovesPlanted () {
+      return this.getSimulationState.length > 0 ? this.$t('forms.cycles.planted') + ': ' + this.formatToMoney(this.getSimulationState[this.simulationStep].plantedSeedsDuringCycle.toFixed(0)) : this.$t('forms.cycles.planted')
+    },
+    labelSeedsIntroduceUnplanted () {
+      return this.getSimulationState.length > 0 ? this.$t('forms.cycles.unplanted') + ': ' + this.formatToMoney(this.getSimulationState[this.simulationStep].unplantedSeeds.toFixed(0)) : this.$t('forms.cycles.unplanted')
+    },
+    labelSeedsRemovesBurned () {
+      return this.getSimulationState.length > 0 ? this.$t('forms.cycles.burned') + ': ' + this.formatToMoney(this.getSimulationState[this.simulationStep].burnedSeedsDuringCycle) : this.$t('forms.cycles.planted')
     }
   },
   beforeMount () {
