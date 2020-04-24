@@ -4,11 +4,21 @@
         p.text-h6.text-center {{titleTable}}
     div.row.justify-between.items-center.container-subtitle.q-pl-md.q-pt-sm.q-pb-sm(v-if="subtitleTable")
         p.text-center Total Amount: {{this.formatToMoney(subtitleTable)}}
-        p Show all percentiles
-            q-toggle(
-              v-model="expandEntries",
-              @input="$emit('update:showAll', $event)"
-            )
+        div.select
+          q-select(
+            dense
+            v-model="optionSelected"
+            :options="options"
+            label="Show"
+            emit-value
+            map-options
+            @input="$emit('update:showAll', $event)"
+          )
+        //- p Show all percentiles
+        //-     q-toggle(
+        //-       v-model="expandEntries",
+        //-       @input="$emit('update:showAll', $event)"
+        //-     )
 </template>
 
 <script>
@@ -30,7 +40,22 @@ export default {
   },
   data () {
     return {
-      expandEntries: false
+      expandEntries: false,
+      optionSelected: 1,
+      options: [
+        {
+          value: 1,
+          label: 'First - Fiddle - Last'
+        },
+        {
+          value: 2,
+          label: 'Every 10'
+        },
+        {
+          value: 3,
+          label: 'All'
+        }
+      ]
     }
   },
   mounted () {
@@ -51,4 +76,6 @@ export default {
     margin: 0px
   .header
     border-radius: 5px 5px 0px 0px
+  .select
+    min-width: 200px
 </style>

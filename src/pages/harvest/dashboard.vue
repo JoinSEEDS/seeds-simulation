@@ -26,6 +26,8 @@
             :data="getIndividualAccounts"
             :columns="columnsTableInd"
             row-key="name"
+            virtual-scroll
+            style="height: 400px"
             :card-class="{'bg-grey-5': tableSelected == constant.SEEDS_IND_ACCNTS}"
             )
               template(v-slot:top)
@@ -134,13 +136,40 @@ export default {
   computed: {
     ...mapGetters('harvest', ['dataTableGeneral', 'dataTableGROWN', 'dataTableIND', 'dataTableORG', 'dataTableBDC', 'dataTableGDC', 'simulationStep', 'totalSimulationSteps', 'dataChart', 'getSimulationState']),
     getIndividualAccounts () {
-      return this.showAllIndividualAccounts ? this.dataTableIND.all : this.dataTableIND.sample3
+      switch (this.showAllIndividualAccounts) {
+        case 1:
+          return this.dataTableIND.sample3
+        case 2:
+          return this.dataTableIND.all
+        case 3:
+          return this.dataTableIND.all
+        default:
+          return []
+      }
     },
     getOrganizationAccounts () {
-      return this.showAllOrganizationAccounts ? this.dataTableORG.all : this.dataTableORG.sample3
+      switch (this.showAllOrganizationAccounts) {
+        case 1:
+          return this.dataTableORG.sample3
+        case 2:
+          return this.dataTableORG.all
+        case 3:
+          return this.dataTableORG.all
+        default:
+          return []
+      }
     },
     getBdcs () {
-      return this.showAllBDCs ? this.dataTableBDC.all : this.dataTableBDC.sample3
+      switch (this.showAllBDCs) {
+        case 1:
+          return this.dataTableBDC.sample3
+        case 2:
+          return this.dataTableBDC.all
+        case 3:
+          return this.dataTableBDC.all
+        default:
+          return []
+      }
     }
   },
   methods: {
@@ -168,9 +197,9 @@ export default {
         'first - middle - last', 'every 10 (11 samples)', 'every 20 (6 samples)'
       ],
       showOptions: false,
-      showAllIndividualAccounts: false,
-      showAllOrganizationAccounts: false,
-      showAllBDCs: false,
+      showAllIndividualAccounts: 1,
+      showAllOrganizationAccounts: 1,
+      showAllBDCs: 1,
       tableGrownExpanded: false,
       tableSelected: undefined,
       constant: undefined,
