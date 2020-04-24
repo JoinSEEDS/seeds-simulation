@@ -2,9 +2,9 @@ import { HarvestConstants } from '~/const'
 import { doNextCycle, initCycle } from '~/services/harvest'
 
 export const getDataTable = async function ({ dispatch, commit, state }, { tableId, step = -1 }) {
-  const structureAll = ({ numberUsers, totalAmount, totalAmountPerUser }) => {
+  const structureAll = ({ numberUsers, totalAmount, totalAmountPerUser, k }) => {
     const rows = []
-    for (let i = 0; i < numberUsers.length; i++) {
+    for (let i = k; i < numberUsers.length; i += (1 + k)) {
       rows.push({
         position: i,
         numberUsers: numberUsers[i],
@@ -15,9 +15,9 @@ export const getDataTable = async function ({ dispatch, commit, state }, { table
     return rows.reverse()
   }
 
-  const getBdcRows = ({ numBdcs, budget, budgetPerBdc, regenGrants, regenLoans, openProposal }) => {
+  const getBdcRows = ({ numBdcs, budget, budgetPerBdc, regenGrants, regenLoans, openProposal, k }) => {
     const rows = []
-    for (let i = 0; i < numBdcs.length; i++) {
+    for (let i = k; i < numBdcs.length; i += (1 + k)) {
       rows.push({
         position: i,
         numBdcs: numBdcs[i],
@@ -30,6 +30,7 @@ export const getDataTable = async function ({ dispatch, commit, state }, { table
     }
     return rows.reverse()
   }
+
   // Do your magic
   // Filter by tableID
   if (step === -1) {
@@ -61,7 +62,8 @@ export const getDataTable = async function ({ dispatch, commit, state }, { table
       commit('setDataPeopleAccountsTable', {
         tableName: 'Seeds Distributed for Individual Accounts',
         totalAmount: totalAmountForAccounts,
-        all: structureAll(all),
+        all: structureAll({ ...all, k: 0 }),
+        sample10: structureAll({ ...all, k: 9 }),
         sample3: [
           {
             position: 'first',
@@ -89,7 +91,8 @@ export const getDataTable = async function ({ dispatch, commit, state }, { table
       commit('setDataOrganizationsAccountsTable', {
         tableName: 'Seeds Distributed for Organization Accounts',
         totalAmount: totalAmountForOrganizations,
-        all: structureAll(allOrg),
+        all: structureAll({ ...allOrg, k: 0 }),
+        sample10: structureAll({ ...allOrg, k: 9 }),
         sample3: [
           {
             position: 'first',
@@ -117,7 +120,8 @@ export const getDataTable = async function ({ dispatch, commit, state }, { table
       commit('setDataBdcsTable', {
         tableName: 'Seeds Distributed for BDCs',
         totalAmount: totalAmountForBdcs,
-        all: getBdcRows(allBdc),
+        all: getBdcRows({ ...allBdc, k: 0 }),
+        sample10: getBdcRows({ ...allBdc, k: 9 }),
         sample3: [
           {
             position: 'first',
