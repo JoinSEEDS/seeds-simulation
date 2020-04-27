@@ -202,7 +202,7 @@ export default {
         'first - middle - last', 'every 10 (11 samples)', 'every 20 (6 samples)'
       ],
       showOptions: false,
-      showAllIndividualAccounts: 3,
+      showAllIndividualAccounts: 1,
       showAllOrganizationAccounts: 1,
       showAllBDCs: 1,
       tableGrownExpanded: false,
