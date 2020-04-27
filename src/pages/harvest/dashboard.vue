@@ -36,21 +36,30 @@
                 custom-table-header(:titleTable="dataTableIND.tableName" :subtitleTable="dataTableIND.totalAmount" :tableId="constant.SEEDS_IND_ACCNTS" v-bind:showAll.sync="showAllIndividualAccounts")
         .col-md-6.col-sm-12(@click="selectTable(constant.SEEDS_ORG_ACCNTS)")
             q-table(
-            :dense="$q.screen.lt.md"
-            :data="getOrganizationAccounts"
-            :columns="columnsTableOrg"
-            row-key="name"
-            :card-class="{'bg-grey-5': tableSelected == constant.SEEDS_ORG_ACCNTS}"
+              class="my-sticky-virtscroll-table"
+              :pagination.sync="pagination"
+              virtual-scroll
+              :rows-per-page-options="[0]"
+              :virtual-scroll-sticky-size-start="100"
+              :data="getOrganizationAccounts"
+              :columns="columnsTableOrg"
+              row-key="name"
+              :card-class="{'bg-grey-5': tableSelected == constant.SEEDS_ORG_ACCNTS}"
             )
               template(v-slot:top)
                 custom-table-header(:titleTable="dataTableORG.tableName" :subtitleTable="dataTableORG.totalAmount" :tableId="constant.SEEDS_ORG_ACCNTS" v-bind:showAll.sync="showAllOrganizationAccounts")
       .row.q-col-gutter-md
         .col-md-6.col-sm-12(@click="selectTable(constant.SEEDS_BDC)")
             q-table(
-            :data="getBdcs"
-            :columns="columnsTableBDC"
-            row-key="name"
-            :card-class="{'bg-grey-5': tableSelected == constant.SEEDS_BDC}"
+              class="my-sticky-virtscroll-table"
+              :pagination.sync="pagination"
+              virtual-scroll
+              :rows-per-page-options="[0]"
+              :virtual-scroll-sticky-size-start="100"
+              :data="getBdcs"
+              :columns="columnsTableBDC"
+              row-key="name"
+              :card-class="{'bg-grey-5': tableSelected == constant.SEEDS_BDC}"
             )
               template(v-slot:top)
                 custom-table-header(:titleTable="dataTableBDC.tableName" :subtitleTable="dataTableBDC.totalAmount" :tableId="constant.SEEDS_BDC" v-bind:showAll.sync="showAllBDCs")
@@ -260,12 +269,12 @@ export default {
           field: 'position',
           sortable: true,
           // format: val => `${val}`,
-          headerClasses: 'bg-primary text-white',
+          headerClasses: 'sticky bg-primary text-white',
           style: 'max-width: 100px'
         },
-        { name: 'numberUsers', align: 'center', label: '# Org. Accounts', field: 'numberUsers', sortable: true, headerClasses: 'bg-primary text-white', format: val => this.formatToMoney(val) },
-        { name: 'totalAmount', label: 'Total Amount', field: 'totalAmount', sortable: true, headerClasses: 'bg-primary text-white', format: val => this.formatToMoney(val) },
-        { name: 'totalAmountPerOrganization', label: 'Total Amount per Org.', field: 'totalAmountPerUser', sortable: true, headerClasses: 'bg-primary text-white', format: val => this.formatToMoney(val) }
+        { name: 'numberUsers', align: 'center', label: '# Org. Accounts', field: 'numberUsers', sortable: true, headerClasses: 'sticky bg-primary text-white', format: val => this.formatToMoney(val) },
+        { name: 'totalAmount', label: 'Total Amount', field: 'totalAmount', sortable: true, headerClasses: 'sticky bg-primary text-white', format: val => this.formatToMoney(val) },
+        { name: 'totalAmountPerOrganization', label: 'Total Amount per Org.', field: 'totalAmountPerUser', sortable: true, headerClasses: 'sticky bg-primary text-white', format: val => this.formatToMoney(val) }
       ],
       columnsTableBDC: [
         {
@@ -276,15 +285,15 @@ export default {
           field: 'position',
           sortable: true,
           // format: val => `${val}`,
-          headerClasses: 'bg-primary text-white',
+          headerClasses: 'sticky bg-primary text-white',
           style: 'max-width: 100px'
         },
-        { name: 'numBdc', align: 'left', label: '# of BDC', field: 'numBdcs', sortable: true, headerClasses: 'bg-primary text-white', format: val => this.formatToMoney(val) },
-        { name: 'openProposal', label: 'Open Proposal', field: 'openProposal', sortable: true, headerClasses: 'bg-primary text-white', format: val => this.formatToMoney(val) },
-        { name: 'regenGrants', label: 'Regen Grants', field: 'regenGrants', sortable: true, headerClasses: 'bg-primary text-white', format: val => this.formatToMoney(val) },
-        { name: 'regenLoans', label: 'Regen Loans', field: 'regenLoans', sortable: true, headerClasses: 'bg-primary text-white', format: val => this.formatToMoney(val) },
-        { name: 'totalAmount', label: 'Total Amount', field: 'budget', sortable: true, headerClasses: 'bg-primary text-white', format: val => this.formatToMoney(val) },
-        { name: 'totalAmountPerBdc', label: 'Total Amount per BDC', field: 'budgetPerBdc', sortable: true, headerClasses: 'bg-primary text-white', format: val => this.formatToMoney(val) }
+        { name: 'numBdc', align: 'left', label: '# of BDC', field: 'numBdcs', sortable: true, headerClasses: 'sticky bg-primary text-white', format: val => this.formatToMoney(val) },
+        { name: 'openProposal', label: 'Open Proposal', field: 'openProposal', sortable: true, headerClasses: 'sticky bg-primary text-white', format: val => this.formatToMoney(val) },
+        { name: 'regenGrants', label: 'Regen Grants', field: 'regenGrants', sortable: true, headerClasses: 'sticky bg-primary text-white', format: val => this.formatToMoney(val) },
+        { name: 'regenLoans', label: 'Regen Loans', field: 'regenLoans', sortable: true, headerClasses: 'sticky bg-primary text-white', format: val => this.formatToMoney(val) },
+        { name: 'totalAmount', label: 'Total Amount', field: 'budget', sortable: true, headerClasses: 'sticky bg-primary text-white', format: val => this.formatToMoney(val) },
+        { name: 'totalAmountPerBdc', label: 'Total Amount per BDC', field: 'budgetPerBdc', sortable: true, headerClasses: 'sticky bg-primary text-white', format: val => this.formatToMoney(val) }
       ],
       columnsTableGDC: [
         {
@@ -319,7 +328,7 @@ export default {
   //   .height-table
   //     height: 400px
   .my-sticky-virtscroll-table
-    height: 410px
+    height: 350px
 
     .q-table__top,
     .q-table__bottom,
