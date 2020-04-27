@@ -48,8 +48,8 @@ export default {
     value (newValue) {
       console.log('newValue percentage', newValue)
       if (!isNaN(parseFloat(this.value))) {
-        const mDisplay = parseFloat(this.value) * parseFloat(this.scale)
-        const mValue = parseFloat(this.value)
+        const mDisplay = (parseFloat(this.value) * parseFloat(this.scale)).toFixed(2)
+        const mValue = parseFloat(this.value).toFixed(2)
         this.$emit('input', { display: mDisplay, value: mValue })
       }
       // if (!isNaN(parseFloat(this.value))) {

@@ -809,13 +809,13 @@ export default {
       this.coreDevelopment = parseFloat(this.cycleDataForm.gdcPercentagesDistribution.coreDevelopment)
       this.interestFreeLoans = parseFloat(this.cycleDataForm.gdcPercentagesDistribution.interestFreeLoans)
       this.numPeopleAccounts = parseFloat(this.cycleDataForm.numPeopleAccounts)
-      this.peopleGrowth = parseFloat(this.cycleDataForm.peopleGrowth).toFixed(4)
+      this.peopleGrowth = parseFloat(this.cycleDataForm.peopleGrowth).toFixed(4) // 4
       this.gdpPerPerson = parseFloat(this.cycleDataForm.gdpPerPerson)
       this.numOrganizationAccounts = parseFloat(this.cycleDataForm.numOrganizationAccounts)
-      this.organizationsGrowth = parseFloat(this.cycleDataForm.organizationsGrowth).toFixed(4)
+      this.organizationsGrowth = parseFloat(this.cycleDataForm.organizationsGrowth).toFixed(4) // 4
       this.gdpPerOrganisation = parseFloat(this.cycleDataForm.gdpPerOrganisation)
       this.numBdcs = parseFloat(this.cycleDataForm.numBdcs)
-      this.bdcsGrowth = parseFloat(this.cycleDataForm.bdcsGrowth).toFixed(4)
+      this.bdcsGrowth = parseFloat(this.cycleDataForm.bdcsGrowth).toFixed(4) // 4
       this.contracts = parseFloat(this.cycleDataForm.newContractsDuringCycle)
       this.outstandingContracts = parseFloat(this.cycleDataForm.outstandingContracts)
       this.closedContracts = parseFloat(this.cycleDataForm.closedContractsDuringCycle)
@@ -824,7 +824,7 @@ export default {
       this.seedsPlantedPerUserFixed = parseFloat(this.cycleDataForm.seedsPlantedPerUserFixed)
       this.seedsPlantedPerUserVariable = parseFloat(this.cycleDataForm.seedsPlantedPerUserVariable)
       this.averageSeedsBurnedPerUser = parseFloat(this.cycleDataForm.averageSeedsBurnedPerUser)
-      this.contractsGrowth = parseFloat(this.cycleDataForm.contractsGrowth).toFixed(4)
+      this.contractsGrowth = parseFloat(this.cycleDataForm.contractsGrowth).toFixed(4) // 4
       this.totals = this.cycleDataForm.totals
       this.unplantedSeedsPerUser = parseFloat(this.cycleDataForm.unplantedSeedsPerUser)
       this.bankSeedsPerCycle = parseFloat(this.cycleDataForm.bankSeedsPerCycle).toFixed(2)
