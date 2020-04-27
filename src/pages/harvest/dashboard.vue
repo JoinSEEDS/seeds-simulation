@@ -22,13 +22,15 @@
       .row.q-col-gutter-md
         .col-md-6.col-sm-12(@click="selectTable(constant.SEEDS_IND_ACCNTS)")
             q-table(
-            :dense="$q.screen.lt.md"
-            :data="getIndividualAccounts"
-            :columns="columnsTableInd"
-            row-key="name"
-            virtual-scroll
-            style="height: 400px"
-            :card-class="{'bg-grey-5': tableSelected == constant.SEEDS_IND_ACCNTS}"
+              class="my-sticky-virtscroll-table"
+              :pagination.sync="pagination"
+              virtual-scroll
+              :rows-per-page-options="[0]"
+              :virtual-scroll-sticky-size-start="100"
+              :data="getIndividualAccounts"
+              :columns="columnsTableInd"
+              row-key="name"
+              :card-class="{'bg-grey-5': tableSelected == constant.SEEDS_IND_ACCNTS}"
             )
               template(v-slot:top)
                 custom-table-header(:titleTable="dataTableIND.tableName" :subtitleTable="dataTableIND.totalAmount" :tableId="constant.SEEDS_IND_ACCNTS" v-bind:showAll.sync="showAllIndividualAccounts")
@@ -191,13 +193,16 @@ export default {
   },
   data () {
     return {
+      pagination: {
+        rowsPerPage: 0
+      },
       valueSelected: null,
       valueOption: 0,
       options: [
         'first - middle - last', 'every 10 (11 samples)', 'every 20 (6 samples)'
       ],
       showOptions: false,
-      showAllIndividualAccounts: 1,
+      showAllIndividualAccounts: 3,
       showAllOrganizationAccounts: 1,
       showAllBDCs: 1,
       tableGrownExpanded: false,
@@ -232,19 +237,19 @@ export default {
           align: 'left',
           field: 'position',
           sortable: true,
-          headerClasses: 'bg-primary text-white text-weight-bold',
+          headerClasses: 'bg-primary text-white text-weight-bold sticky',
           style: 'max-width: 100px'
         },
-        { name: 'numberUsers', align: 'center', label: '# People Accounts', field: 'numberUsers', sortable: true, headerClasses: 'bg-primary text-white', format: val => this.formatToMoney(val) },
+        { name: 'numberUsers', align: 'center', label: '# People Accounts', field: 'numberUsers', sortable: true, headerClasses: 'bg-primary text-white sticky', format: val => this.formatToMoney(val) },
         {
           name: 'totalAmount',
           label: 'Total Amount',
           field: 'totalAmount',
           sortable: true,
-          headerClasses: 'bg-primary text-white text-weight-bold',
+          headerClasses: 'bg-primary text-white text-weight-bold sticky',
           format: val => this.formatToMoney(val)
         },
-        { name: 'totalAmountPerUser', label: 'Total Amount per Account', field: 'totalAmountPerUser', sortable: true, headerClasses: 'bg-primary text-white', format: val => this.formatToMoney(val) }
+        { name: 'totalAmountPerUser', label: 'Total Amount per Account', field: 'totalAmountPerUser', sortable: true, headerClasses: 'bg-primary text-white sticky', format: val => this.formatToMoney(val) }
       ],
       columnsTableOrg: [
         {
@@ -313,4 +318,19 @@ export default {
   // @media (min-width: 768px)
   //   .height-table
   //     height: 400px
+  .my-sticky-virtscroll-table
+    height: 410px
+
+    .q-table__top,
+    .q-table__bottom,
+    thead tr:first-child th
+      background-color: #fff
+
+    thead tr th
+      position: sticky
+      z-index: 1
+    thead tr:last-child th
+      top: 48px
+    thead tr:first-child th
+      top: 0
 </style>
