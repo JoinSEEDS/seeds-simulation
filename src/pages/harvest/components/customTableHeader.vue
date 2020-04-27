@@ -4,7 +4,7 @@
         p.text-h6.text-center {{titleTable}}
     div.row.justify-between.items-center.container-subtitle.q-pl-md.q-pt-sm.q-pb-sm(v-if="subtitleTable")
         p.text-center Total Amount: {{this.formatToMoney(subtitleTable)}}
-        div.select
+        div.select(@click.stop="prevent")
           q-select(
             dense
             v-model="optionSelected"
@@ -58,9 +58,20 @@ export default {
       ]
     }
   },
+  watch: {
+    optionSelected () {
+      this.$refs.container.click()
+    }
+  },
   mounted () {
     // console.log('Custom container', this.$refs.container.parentElement)
     this.$refs.container.parentElement.classList.remove('q-table__top')
+  },
+  methods: {
+    prevent (event) {
+      // console.log('Try prevent', event)
+      event.preventDefault()
+    }
   }
 }
 </script>

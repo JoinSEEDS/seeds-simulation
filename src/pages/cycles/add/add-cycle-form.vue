@@ -234,7 +234,7 @@
                                     )
                                 q-expansion-item(
                                     group="groupSeedsRemove"
-                                    :label="labelExitExchanges"
+                                    :label="labelEnterExchanges"
                                     header-class="text-positive"
                                 )
                                   div.q-px-sm.q-py-xs
@@ -260,7 +260,7 @@
                             q-card-section.q-gutter-y-sm
                                 q-expansion-item(
                                     group="groupSeedsIntroduce"
-                                    :label="labelEnterExchanges"
+                                    :label="labelExitExchanges"
                                     header-class="text-positive"
                                 )
                                   div.q-px-sm.q-py-xs

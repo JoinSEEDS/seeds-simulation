@@ -118,7 +118,11 @@ async function start () {
 
     
 
-    new Vue(app)
+    
+      new Vue(app)
+    
+
+    
 
     
 
