@@ -14,6 +14,16 @@ class SimulationRepositoryApi {
     })
   }
 
+  /**
+   * Save or update simulation
+   * @param {string} [id] is optional, if set then the simulation is updated
+   * @param {string} account creator account
+   * @param {string} name name of the simulation
+   * @param {string} description
+   * @param {object} data simulation data
+   * @returns {object} the saved simulation
+   * @throws {error} incase of error
+   */
   async save ({
     id,
     account,
