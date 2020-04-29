@@ -499,8 +499,12 @@
                   q-btn(round color="secondary" icon="skip_next" @click="() => nextCycle()")
         //- Modals
         q-dialog(v-model="showSaveCycle" persistent)
-          q-card
-            save-simulation-form(@cancel="showSaveCycle = false")
+          q-card(style="min-width: 40vw")
+            q-card-section
+              p.text-h6.q-ma-none {{$t('pages.saveSimulation.saveSimulation')}}
+            q-separator
+            q-card-section
+              save-simulation-form(@cancel="showSaveCycle = false")
         q-dialog(v-model="showLoadCycle")
           q-card
             load-simulation(@cancel="showSaveCycle = false")

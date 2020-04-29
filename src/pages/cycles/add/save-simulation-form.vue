@@ -1,6 +1,6 @@
 <template lang="pug">
   #Container.q-pa-md
-    .text-h4 {{$t('pages.saveSimulation.saveSimulation')}}
+    //- .text-h4 {{$t('pages.saveSimulation.saveSimulation')}}
     q-form.q-gutter-sm.q-pa-md(
       ref='saveCycleForm'
       @submit="onSave"
@@ -18,7 +18,7 @@
             type="textarea"
             :rules="[rules.required]"
         )
-        #buttons.q-gutter-sm.q-pb-md
+        #buttons.q-gutter-sm.q-pb-lg
             q-btn.float-right(
                 :label="$t('common.buttons.save')"
                 color="primary"
@@ -58,5 +58,5 @@ export default {
 
 <style lang="sass" scoped>
     #Container
-        min-width: 40vw
+        // min-width: 40vw
 </style>
