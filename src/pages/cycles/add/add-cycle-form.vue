@@ -1,5 +1,20 @@
 <template lang="pug">
     #container.q-gutter-y-sm
+        //- Top Buttons
+        //- div.q-ma-none
+        q-btn.full-width.q-mt-md(
+          color="primary"
+          icon="cloud_download"
+          :label="$t('pages.saveSimulation.loadSimulation')"
+          @click="showLoadCycle = true"
+        )
+        q-btn.full-width(
+          color="primary"
+          icon="save"
+          :label="$t('pages.saveSimulation.saveSimulation')"
+          @click="showSaveCycle = true"
+        )
+        //- Form
         q-scroll-area.scroll-container
             .template-form
                 q-form.q-gutter-y-sm(
@@ -471,6 +486,7 @@
                     //- q-field(v-if="!hideFields" filled v-model='maxPercentageBdc' :label="$t('forms.cycles.maxPercentageBdc')")
                         template(v-slot:control='{ id, floatingLabel, value, emitValue }')
                             input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
+        //- Bottom Buttons
         .row.justify-around.items-center
             .column.justify-center
               .col-2
@@ -481,6 +497,18 @@
             .column.justify-center
               .col-2
                   q-btn(round color="secondary" icon="skip_next" @click="() => nextCycle()")
+        //- Modals
+        q-dialog(v-model="showSaveCycle" persistent)
+          q-card(style="min-width: 40vw")
+            q-card-section
+              p.text-h6.q-ma-none {{$t('pages.saveSimulation.saveSimulation')}}
+            q-separator
+            q-card-section
+              save-simulation-form(@cancel="showSaveCycle = false")
+        q-dialog(v-model="showLoadCycle")
+          q-card
+            load-simulation(@cancel="showSaveCycle = false")
+
 </template>
 
 <script>
@@ -488,14 +516,18 @@ import { mapActions, mapGetters, mapMutations } from 'vuex'
 // import Vue from 'vue'
 import { VMoney } from 'v-money'
 import { MoneyInput, PercentageInput } from '~/components/jmInputs'
+import SaveSimulationForm from '~/pages/cycles/add/save-simulation-form'
+import LoadSimulation from '~/pages/cycles/list/load-simulation'
 import { validation } from '~/mixins/validation'
 export default {
   name: 'add-cycle-form',
   directives: { money: VMoney },
-  components: { MoneyInput, PercentageInput },
+  components: { MoneyInput, PercentageInput, SaveSimulationForm, LoadSimulation },
   mixins: [ validation ],
   data () {
     return {
+      showSaveCycle: false,
+      showLoadCycle: false,
       bgColor: 'light-green-3',
       price: 0,
       moneyFormat: {
@@ -872,7 +904,7 @@ export default {
     border-color: gray
     padding: 5px
 .scroll-container
-    height: calc(100vh - 130px)
+    height: calc(100vh - 100px)
     max-width: 100%
 .bg-readonly
     background: blue
@@ -886,4 +918,8 @@ export default {
     border: none !important
 input:focus, textarea:focus, select:focus
     outline: none
+@media(min-width: 920px)
+  .scroll-container
+    height: calc(100vh - 220px)
+    max-width: 100%
 </style>

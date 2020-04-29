@@ -1,9 +1,15 @@
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import appIcons from '~/utils/app-icons'
 
 export default {
   name: 'App',
+  mounted () {
+    this.initWakeDb()
+  },
+  methods: {
+    ...mapActions('simulations', ['initWakeDb'])
+  },
   computed: {
     ...mapGetters('accounts', ['isAutoLoading']),
     ...mapGetters('general', ['isLoading', 'errorMsg', 'successMsg']),

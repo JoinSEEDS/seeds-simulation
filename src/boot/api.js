@@ -1,4 +1,5 @@
 import { Api, JsonRpc } from 'eosjs'
+import SimulationRepositoryApi from '~/services/SimulationRepositoryApi'
 
 const signTransaction = async function (actions) {
   actions.forEach(action => {
@@ -49,4 +50,6 @@ export default ({ store }) => {
     signTransaction: signTransaction.bind(store),
     getTableRows: getTableRows.bind(store)
   }
+
+  store['$simulationRepositoryApi'] = new SimulationRepositoryApi()
 }
