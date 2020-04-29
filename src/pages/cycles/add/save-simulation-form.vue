@@ -57,6 +57,5 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-    #Container
-        // min-width: 40vw
+  #Container
 </style>

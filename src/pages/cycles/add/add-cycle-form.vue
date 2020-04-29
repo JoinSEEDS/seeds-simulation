@@ -920,6 +920,6 @@ input:focus, textarea:focus, select:focus
     outline: none
 @media(min-width: 920px)
   .scroll-container
-    height: calc(100vh - 200px)
+    height: calc(100vh - 220px)
     max-width: 100%
 </style>

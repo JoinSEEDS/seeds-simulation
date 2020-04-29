@@ -5,6 +5,7 @@ import accounts from './accounts'
 import transfers from './transfers'
 import general from './general'
 import harvest from './harvest'
+import simulations from './simulations'
 
 Vue.use(Vuex)
 
@@ -19,7 +20,8 @@ export default function (/* { ssrContext } */) {
       accounts,
       transfers,
       general,
-      harvest
+      harvest,
+      simulations
     },
 
     // enable strict mode (adds overhead!)
