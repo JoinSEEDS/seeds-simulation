@@ -16,6 +16,10 @@ build_dev:
     NETWORK_HOST: '"testnet.eos.miami"'
     NETWORK_PORT: '443'
     NETWORK_PROTOCOL: '"https"'
+    WEBSERVICES_URL: '"https://fqbkgjgig0.execute-api.eu-west-1.amazonaws.com/dev"'
+    WEBSERVICES_API_KEY: '"Zo3L4h85H4TxltCRRrJR70SIfVSWQJW15MbwsTzg"'
+    BASE_REPOSITORY_URL: https://seeds-simulations-dev.s3-eu-west-1.amazonaws.com
+    RETRY_DELAY: '5000'
   cache:
     paths:
       - node_modules/
@@ -48,6 +52,10 @@ build_prod:
     NETWORK_HOST: '"telos.caleos.io"'
     NETWORK_PORT: '443'
     NETWORK_PROTOCOL: '"https"'
+    WEBSERVICES_URL: '"https://fqbkgjgig0.execute-api.eu-west-1.amazonaws.com/dev"'
+    WEBSERVICES_API_KEY: '"Zo3L4h85H4TxltCRRrJR70SIfVSWQJW15MbwsTzg"'
+    BASE_REPOSITORY_URL: https://seeds-simulations-dev.s3-eu-west-1.amazonaws.com
+    RETRY_DELAY: '5000'
   cache:
     paths:
       - node_modules/

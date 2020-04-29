@@ -1,4 +1,5 @@
 import axios from 'axios'
+import sleep from 'sleep-promise'
 
 class SimulationRepositoryApi {
   constructor () {
@@ -51,7 +52,7 @@ class SimulationRepositoryApi {
     account
   }) {
     console.log('Deleting simulation...')
-    return this.axios.post('/delete-simulation', {
+    return this._post('/delete-simulation', {
       id,
       account
     })
@@ -59,7 +60,7 @@ class SimulationRepositoryApi {
 
   async wakeDb () {
     console.log('Waking Db Up...')
-    const { data } = await this.axios.get('/wake-db')
+    const { data } = await this._get('/wake-db', null, false)
     return data
   }
 
@@ -70,7 +71,7 @@ class SimulationRepositoryApi {
    * @param {string} [term] to search for in name and description
    * @param {string} [orderBy] name of column to order by
    * @param {boolean} [desc] whether it should be ordered in descending order
-   * @param {int} offset 2 decimals
+   * @param {int} offset
    * @param {int} limit
    * @returns {object} with following structure {more: true, rows: []}
    * @throws {error} incase of error
@@ -83,7 +84,7 @@ class SimulationRepositoryApi {
     offset,
     limit
   }) {
-    const { data } = await this.axios.post('/search-simulation', {
+    const { data } = await this._post('/search-simulation', {
       creatorAccount: account,
       term,
       orderBy,
@@ -101,7 +102,7 @@ class SimulationRepositoryApi {
     description,
     s3Key
   }) {
-    const { data } = await this.axios.post('/save-simulation', {
+    const { data } = await this._post('/save-simulation', {
       id,
       account,
       name,
@@ -118,6 +119,55 @@ class SimulationRepositoryApi {
 
   async _storeSimulationData (uploadUrl, simulation) {
     return axios.put(uploadUrl, simulation)
+  }
+
+  async _get (url, params, retry = true) {
+    return this._request(
+      {
+        method: 'get',
+        url,
+        params
+      },
+      retry
+    )
+  }
+
+  async _post (url, data, retry = true) {
+    return this._request(
+      {
+        method: 'post',
+        url,
+        data
+      },
+      retry
+    )
+  }
+
+  /**
+   *
+   * @param {string} [method] default get
+   * @param {string} url
+   * @param {object} data
+   */
+  async _request (params, retry = true) {
+    try {
+      const response = await this.axios(params)
+      return response
+    } catch (error) {
+      console.log('Error making request: ', error)
+      if (retry) {
+        if (error.response) {
+          const {
+            data
+          } = error.response
+          if (data.retryable) {
+            await sleep(process.env.RETRY_DELAY)
+            return this._request(params, retry)
+          }
+        }
+      }
+      throw error
+    }
   }
 }
 
