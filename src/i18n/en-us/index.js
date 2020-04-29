@@ -114,7 +114,9 @@ export default {
     general: {
       search: 'Search',
       confirmActions: 'Do you want confirm this action?',
-      noAccountsFound: 'No accounts found'
+      noAccountsFound: 'No accounts found',
+      name: 'Name',
+      description: 'Description'
     },
     login: {
       getApp: 'Download the app',
@@ -127,6 +129,9 @@ export default {
         perCycle: 'Seeds Grown Per Cycle',
         perBlock: 'Seeds Grown Per Block'
       }
+    },
+    saveSimulation: {
+      saveSimulation: 'Save Simulation'
     }
   }
 }
