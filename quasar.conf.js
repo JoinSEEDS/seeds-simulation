@@ -134,6 +134,7 @@ module.exports = function (ctx) {
         NETWORK_CHAIN_ID: process.env.NETWORK_CHAIN_ID,
         WEBSERVICES_URL: process.env.WEBSERVICES_URL,
         WEBSERVICES_API_KEY: process.env.WEBSERVICES_API_KEY,
+        BASE_SIMULTAIONS_REPOSITORY_URL: process.env.BASE_SIMULTAIONS_REPOSITORY_URL,
         BLOCKCHAIN_EXPLORER: process.env.BLOCKCHAIN_EXPLORER,
         GOOGLE_ANALYTICS: process.env.GOOGLE_ANALYTICS
       },
