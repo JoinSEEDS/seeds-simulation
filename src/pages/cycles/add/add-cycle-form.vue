@@ -1,13 +1,19 @@
 <template lang="pug">
     #container.q-gutter-y-sm
         //- Top Buttons
-        .row.justify-around.items-center
-            .column.justify-center
-              .col-2
-                  q-btn.q-mt-sm(color="primary" icon="cloud_download" @click="showLoadCycle = true")
-            .column.justify-center
-              .col-2
-                  q-btn.q-mt-sm(color="primary" icon="save" @click="showSaveCycle = true")
+        //- div.q-ma-none
+        q-btn.full-width.q-mt-md(
+          color="primary"
+          icon="cloud_download"
+          :label="$t('pages.saveSimulation.loadSimulation')"
+          @click="showLoadCycle = true"
+        )
+        q-btn.full-width(
+          color="primary"
+          icon="save"
+          :label="$t('pages.saveSimulation.saveSimulation')"
+          @click="showSaveCycle = true"
+        )
         //- Form
         q-scroll-area.scroll-container
             .template-form
@@ -894,7 +900,7 @@ export default {
     border-color: gray
     padding: 5px
 .scroll-container
-    height: calc(100vh - 160px)
+    height: calc(100vh - 100px)
     max-width: 100%
 .bg-readonly
     background: blue
@@ -908,4 +914,8 @@ export default {
     border: none !important
 input:focus, textarea:focus, select:focus
     outline: none
+@media(min-width: 920px)
+  .scroll-container
+    height: calc(100vh - 200px)
+    max-width: 100%
 </style>

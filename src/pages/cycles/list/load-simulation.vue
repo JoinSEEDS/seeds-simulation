@@ -1,43 +1,42 @@
 <template lang="pug">
 #Container
-    q-tabs(
+  q-tabs(
+    v-model="tab"
+    active-color="white"
+    active-bg-color="primary"
+    class="text-primary shadow-2"
+    indicator-color="secondary"
+    :breakpoint="0"
+    align="justify"
+  )
+    q-tab(name="mySimulations", :label="$t('pages.saveSimulation.mySimulations')")
+    q-tab(name="allSimulations", :label="$t('pages.saveSimulation.allSimulations')")
+  q-separator
+  q-tab-panels(
       v-model="tab"
-      shrink
-      stretch
-      active-color="white"
-      active-bg-color="primary"
-      class="text-primary shadow-2"
-      indicator-color="secondary"
-    )
-      q-tab(name="mySimulations", :label="$t('pages.saveSimulation.mySimulations')")
-      q-tab(name="allSimulations", :label="$t('pages.saveSimulation.allSimulations')")
-    q-separator
-    q-tab-panels(
-        v-model="tab"
-        animated
-        swipeable
-        vertical
-        transition-prev="jump-up"
-        transition-next="jump-up"
-    )
-        q-tab-panel(name="mySimulations")
-          div.containerScroll(ref="scrollContainerMySimulation")
-            q-infinite-scroll(scroll-target="$refs.scrollContainerMySimulation" @load="loadMoreMySimulations" :offset="250" ref="mySimulationScroll")
-              template(v-slot:loading)
-                div(class="row justify-center q-my-md")
-                  q-spinner-dots(color="primary" size="40px")
+      animated
+      swipeable
+      transition-prev="jump-up"
+      transition-next="jump-up"
+  )
+      q-tab-panel(name="mySimulations")
+        div.containerScroll(ref="scrollContainerMySimulation")
+          q-infinite-scroll(scroll-target="$refs.scrollContainerMySimulation" @load="loadMoreMySimulations" :offset="250" ref="mySimulationScroll")
+            template(v-slot:loading)
+              div(class="row justify-center q-my-md")
+                q-spinner-dots(color="primary" size="40px")
 
-              div.q-gutter-y-md
-                simulation-item(v-for="(simulation, index) in mySimulations" :key="index" :simulation="simulation")
-        q-tab-panel(name="allSimulations")
-          div.containerScroll(ref="scrollContainerAllSimulation")
-            q-infinite-scroll(scroll-target="$refs.scrollContainerAllSimulation" @load="loadMoreAllSimulations" :offset="250" ref="allSimulationScroll")
-              template(v-slot:loading)
-                div(class="row justify-center q-my-md")
-                  q-spinner-dots(color="primary" size="40px")
+            div.q-gutter-y-md
+              simulation-item(v-for="(simulation, index) in mySimulations" :key="index" :simulation="simulation")
+      q-tab-panel(name="allSimulations")
+        div.containerScroll(ref="scrollContainerAllSimulation")
+          q-infinite-scroll(scroll-target="$refs.scrollContainerAllSimulation" @load="loadMoreAllSimulations" :offset="250" ref="allSimulationScroll")
+            template(v-slot:loading)
+              div(class="row justify-center q-my-md")
+                q-spinner-dots(color="primary" size="40px")
 
-              div.q-gutter-y-md
-                simulation-item(v-for="(simulation, index) in allSimulations" :key="index" :simulation="simulation")
+            div.q-gutter-y-md
+              simulation-item(v-for="(simulation, index) in allSimulations" :key="index" :simulation="simulation")
 </template>
 
 <script>
@@ -120,11 +119,14 @@ export default {
 
 <style lang="sass" scoped>
 #Container
-  width: 50vw
+  min-width: 35vw
+  width: 30vw
+  max-width: 700px
   overflow: 'hidden'
 .containerScroll
   height: 74vh
-@media (max-width: 500px)
+@media (max-width: 700px)
  #Container
-  width: 95vw
+  width: 100%
+  min-width: 70vw
 </style>
