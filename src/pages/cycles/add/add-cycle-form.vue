@@ -904,7 +904,7 @@ export default {
     border-color: gray
     padding: 5px
 .scroll-container
-    height: calc(100vh - 100px)
+    height: calc(100vh - 210px)
     max-width: 100%
 .bg-readonly
     background: blue
@@ -918,8 +918,8 @@ export default {
     border: none !important
 input:focus, textarea:focus, select:focus
     outline: none
-@media(min-width: 920px)
+@media(min-width: 0px) and (max-width: 1025px)
   .scroll-container
-    height: calc(100vh - 220px)
+    height: calc(100vh - 160px)
     max-width: 100%
 </style>
