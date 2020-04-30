@@ -22,11 +22,13 @@ export const saveSimulation = async function ({ state }, payload) {
   // commit('setSimulationStep', state.simulationState.length)
 }
 
-export const searchMySimulations = async function ({ dispatch, commit }, payload) {
+export const searchMySimulations = async function ({ commit }, payload) {
   try {
+    // payload['account'] = this.state.accounts.account
+    payload['account'] = 'sebastianmb2'
     const simulations = await this.$simulationRepositoryApi.search(payload)
     commit('addToMySimulations', simulations)
-    return true
+    return simulations
   } catch (error) {
     console.error(error)
     throw new Error(error)

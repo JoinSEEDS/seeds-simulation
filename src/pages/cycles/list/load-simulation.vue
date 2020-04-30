@@ -27,7 +27,7 @@
                 q-spinner-dots(color="primary" size="40px")
 
             div.q-gutter-y-md
-              simulation-item(v-for="(simulation, index) in mySimulations" :key="index" :simulation="simulation")
+              simulation-item(v-for="(simulation, index) in mySimulations.rows" :key="index" :simulation="simulation")
       q-tab-panel(name="allSimulations")
         div.containerScroll(ref="scrollContainerAllSimulation")
           q-infinite-scroll(scroll-target="$refs.scrollContainerAllSimulation" @load="loadMoreAllSimulations" :offset="250" ref="allSimulationScroll")
@@ -36,91 +36,57 @@
                 q-spinner-dots(color="primary" size="40px")
 
             div.q-gutter-y-md
-              simulation-item(v-for="(simulation, index) in allSimulations" :key="index" :simulation="simulation")
+              simulation-item(v-for="(simulation, index) in allSimulations.rows" :key="index" :simulation="simulation")
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapMutations, mapState } from 'vuex'
 import SimulationItem from '~/pages/cycles/list/components/simulation-item'
 export default {
   name: 'load-simulation',
   components: { SimulationItem },
-  async mounted () {
-    this.$refs.mySimulationScroll.trigger()
-    const simulations = await this.searchAllSimulations({
-      account: undefined,
-      term: '',
-      offset: 0,
-      limit: 100
-    })
-    console.log('load-simulation', simulations)
+  mounted () {
+    this.$refs.allSimulationScroll.trigger()
+  },
+  beforeDestroy () {
+    this.cleanAllSimulations()
+    this.cleanMySimulations()
   },
   data () {
     return {
-      tab: 'mySimulations',
-      mySimulations: [],
-      allSimulations: []
+      tab: 'allSimulations',
+      offsetMySimulations: 0,
+      offsetAllSimulations: 0,
+      limit: 10
     }
   },
+  computed: {
+    ...mapState('simulations', ['mySimulations', 'allSimulations'])
+  },
   methods: {
-    ...mapActions('simulations', ['searchAllSimulations']),
-    loadMoreMySimulations (index, done) {
-      setTimeout(() => {
-        this.mySimulations.push(
-          {
-            name: 'Simulation of Test',
-            description:
-              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-          },
-          {
-            name: 'Simulation of Test',
-            description:
-              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-          },
-          {
-            name: 'Simulation of Test',
-            description:
-              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-          },
-          {
-            name: 'Simulation of Test',
-            description:
-              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-          }
-        )
-        done()
-      }, 2000)
+    ...mapActions('simulations', ['searchAllSimulations', 'searchMySimulations']),
+    ...mapMutations('simulations', ['cleanMySimulations', 'cleanAllSimulations']),
+    async loadMoreMySimulations (index, done) {
+      if (this.mySimulations.more) {
+        await this.searchMySimulations({
+          term: '',
+          offset: this.offsetMySimulations,
+          limit: this.limit
+        })
+        this.offsetMySimulations += this.limit
+      }
+      done()
     },
-    loadMoreAllSimulations (index, done) {
-      setTimeout(() => {
-        this.allSimulations.push(
-          {
-            name: 'Simulation of Test',
-            user: 'jmgayosso',
-            description:
-              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-          },
-          {
-            name: 'Simulation of Test',
-            user: 'xhema',
-            description:
-              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-          },
-          {
-            name: 'Simulation of Test',
-            user: 'jmgayosso',
-            description:
-              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-          },
-          {
-            name: 'Simulation of Test',
-            user: 'jmgayosso',
-            description:
-              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-          }
-        )
-        done()
-      }, 2000)
+    async loadMoreAllSimulations (index, done) {
+      if (this.allSimulations.more) {
+        await this.searchAllSimulations({
+          term: '',
+          offset: this.offsetAllSimulations,
+          limit: this.limit
+        })
+        this.offsetAllSimulations += this.limit
+      }
+      done()
     }
   }
 }
