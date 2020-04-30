@@ -40,12 +40,20 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import SimulationItem from '~/pages/cycles/list/components/simulation-item'
 export default {
   name: 'load-simulation',
   components: { SimulationItem },
-  mounted () {
+  async mounted () {
     this.$refs.mySimulationScroll.trigger()
+    const simulations = await this.searchSimulations({
+      account: undefined,
+      term: '',
+      offset: 0,
+      limit: 100
+    })
+    console.log('load-simulation', simulations)
   },
   data () {
     return {
@@ -55,6 +63,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions('simulations', ['searchSimulations']),
     loadMoreMySimulations (index, done) {
       setTimeout(() => {
         this.mySimulations.push(

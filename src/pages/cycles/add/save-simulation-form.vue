@@ -33,6 +33,7 @@
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex'
 import { validation } from '~/mixins/validation'
 export default {
   name: 'save-simulation-form',
@@ -41,16 +42,33 @@ export default {
     return {
       form: {
         name: '',
-        description: ''
-      },
-      data: {}
+        description: '',
+        id: undefined
+      }
     }
   },
+  computed: {
+    ...mapState('accounts', ['account']),
+    ...mapState('harvest', ['simulationState'])
+  },
   methods: {
+    ...mapActions('simulations', ['saveSimulation']),
     onCancel () {
       this.$emit('cancel')
     },
-    onSave () {
+    async onSave () {
+      try {
+        const response = await this.saveSimulation({
+          id: this.form.id,
+          account: this.account,
+          name: this.form.name,
+          description: this.form.description,
+          data: this.simulationState
+        })
+        console.log('onSave', response)
+      } catch (error) {
+        console.error('onSaveSimulation')
+      }
     }
   }
 }
