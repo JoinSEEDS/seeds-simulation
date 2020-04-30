@@ -44,6 +44,8 @@ import qboot_Bootual from 'boot/ual'
 
 import qboot_Bootapi from 'boot/api'
 
+import qboot_Booteventbus from 'boot/event-bus'
+
 import qboot_Bootmixins from 'boot/mixins'
 
 import qboot_Bootga from 'boot/ga'
@@ -78,7 +80,7 @@ async function start () {
   }
 
   const urlPath = window.location.href.replace(window.location.origin, '')
-  const bootFiles = [qboot_Bootlayouts,qboot_Bootaxios,qboot_Booti18n,qboot_Bootual,qboot_Bootapi,qboot_Bootmixins,qboot_Bootga]
+  const bootFiles = [qboot_Bootlayouts,qboot_Bootaxios,qboot_Booti18n,qboot_Bootual,qboot_Bootapi,qboot_Booteventbus,qboot_Bootmixins,qboot_Bootga]
 
   for (let i = 0; routeUnchanged === true && i < bootFiles.length; i++) {
     if (typeof bootFiles[i] !== 'function') {

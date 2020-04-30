@@ -35,8 +35,8 @@ export default {
   methods: {
     ...mapActions('simulations', ['getSimulationData']),
     async applySimulation () {
-      const json = await this.getSimulationData(this.simulation.s3Key)
-      console.log('ApplySimulation', json)
+      await this.getSimulationData(this.simulation.s3Key)
+      // this.$emit('simulationApplied', this.simulation.id)
     }
   }
 }

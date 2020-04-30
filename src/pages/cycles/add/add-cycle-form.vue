@@ -641,6 +641,15 @@ export default {
   beforeMount () {
     this.syncFormData()
   },
+  mounted () {
+    this.$store.$EventBus.$on('simulation-applied', () => {
+      console.log('Event bus listened')
+      this.showLoadCycle = false
+    })
+  },
+  beforeDestroy () {
+    this.$store.$EventBus.$off('simulation-applied')
+  },
   watch: {
     simulationStep (currentStep, prevStep) {
       console.log('Form data syncronized', prevStep)
@@ -716,10 +725,13 @@ export default {
       }
       return ''
     },
-    backCycle () {
-      console.log('Before back:', this.getSimulationState)
+    async backCycle () {
+      // console.log('Before back:', this.getSimulationState)
+      this.showIsLoading(true)
+      await this.sleep(100)
       this.setSimulationStep((this.simulationStep - 1))
-      console.log('After back:', this.getSimulationState)
+      this.showIsLoading(false)
+      // console.log('After back:', this.getSimulationState)
     },
     formError (ref) {
       // console.log('Error Form', ref.label)

@@ -15,6 +15,7 @@ module.exports = function (ctx) {
       'i18n',
       { path: 'ual', server: false },
       { path: 'api', server: false },
+      { path: 'event-bus', server: false },
       'mixins',
       'ga'
     ],

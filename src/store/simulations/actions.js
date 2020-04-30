@@ -52,7 +52,9 @@ export const getSimulationData = async function ({ dispatch, commit }, s3key) {
   try {
     commit('general/setIsLoading', true, { root: true })
     const simulations = await this.$simulationRepositoryApi.fetchData(s3key)
-    // commit('addToAllSimulations', simulations)
+    commit('harvest/overwriteSimulationState', simulations, { root: true })
+    commit('harvest/setSimulationStep', simulations.length - 1, { root: true })
+    this.$EventBus.$emit('simulation-applied')
     return simulations
   } catch (error) {
     console.error(error)
