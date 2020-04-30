@@ -135,7 +135,8 @@ export default {
       mySimulations: 'My Simulations',
       allSimulations: 'All Simulations',
       loadSimulation: 'Load simulation',
-      saveSimulations: 'Save Simulation'
+      saveSimulations: 'Save Simulation',
+      simulationSaved: 'Simulation Saved'
     }
   }
 }

@@ -66,6 +66,7 @@ export default {
           data: this.simulationState
         })
         console.log('onSave', response)
+        this.$emit('success')
       } catch (error) {
         console.error('onSaveSimulation')
       }

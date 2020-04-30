@@ -46,7 +46,7 @@ export default {
   name: 'load-simulation',
   components: { SimulationItem },
   mounted () {
-    this.$refs.allSimulationScroll.trigger()
+    this.$refs.mySimulationScroll.trigger()
   },
   beforeDestroy () {
     this.cleanAllSimulations()
@@ -54,7 +54,7 @@ export default {
   },
   data () {
     return {
-      tab: 'allSimulations',
+      tab: 'mySimulations',
       offsetMySimulations: 0,
       offsetAllSimulations: 0,
       limit: 10

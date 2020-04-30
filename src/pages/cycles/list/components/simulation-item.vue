@@ -29,7 +29,6 @@ export default {
   computed: {
     ...mapState('accounts', ['account']),
     owner () {
-      // console.log(`account ${this.account} vs creator ${this.simulation.creatorAccount}`)
       return this.simulation.creatorAccount === this.account
     }
   }

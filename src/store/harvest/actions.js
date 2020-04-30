@@ -456,6 +456,7 @@ export const setCycleTables = async function ({ dispatch, commit, state }, { ste
 }
 
 export const doCycle = async function ({ dispatch, commit, state }, { simulationState, step = -1 }) {
+  commit('general/setIsLoading', true, { root: true })
   if (step === -1) {
     step = state.simulationState.length
   }
@@ -485,6 +486,7 @@ export const doCycle = async function ({ dispatch, commit, state }, { simulation
   console.log('LOOK AT THAT:', state.simulationState.length - 1)
   setCycleTables({ dispatch, commit, state }, { step: state.simulationState.length - 1 })
   commit('setSimulationStep', state.simulationState.length - 1)
+  commit('general/setIsLoading', false, { root: true })
   // commit('setSimulationStep', state.simulationState.length - 1)
   // commit('setDataForm', simulationState)
 

@@ -9,14 +9,17 @@ export const initWakeDb = async function () {
   // return true
 }
 
-export const saveSimulation = async function ({ state }, payload) {
+export const saveSimulation = async function ({ state, dispatch, commit }, payload) {
   try {
     console.log('saveSimulation', payload)
+    commit('general/setIsLoading', true, { root: true })
     const response = await this.$simulationRepositoryApi.save(payload)
     return response
   } catch (error) {
     console.error(error)
     throw new Error(error)
+  } finally {
+    commit('general/setIsLoading', false, { root: true })
   }
 
   // commit('setSimulationStep', state.simulationState.length)
@@ -24,8 +27,8 @@ export const saveSimulation = async function ({ state }, payload) {
 
 export const searchMySimulations = async function ({ commit }, payload) {
   try {
-    // payload['account'] = this.state.accounts.account
-    payload['account'] = 'sebastianmb2'
+    payload['account'] = this.state.accounts.account
+    // payload['account'] = 'sebastianmb2'
     const simulations = await this.$simulationRepositoryApi.search(payload)
     commit('addToMySimulations', simulations)
     return simulations

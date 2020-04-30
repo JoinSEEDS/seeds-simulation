@@ -504,7 +504,10 @@
               p.text-h6.q-ma-none {{$t('pages.saveSimulation.saveSimulation')}}
             q-separator
             q-card-section
-              save-simulation-form(@cancel="showSaveCycle = false")
+              save-simulation-form(
+                @success="onSimulationSaved"
+                @cancel="showSaveCycle = false"
+              )
         q-dialog(v-model="showLoadCycle")
           q-card
             load-simulation(@cancel="showSaveCycle = false")
@@ -681,6 +684,10 @@ export default {
   methods: {
     ...mapActions('harvest', ['getInitSimulationStep', 'doCycle']),
     ...mapMutations('harvest', ['setSimulationStep']),
+    onSimulationSaved () {
+      this.showSaveCycle = false
+      this.showNotification(this.$t('pages.saveSimulation.simulationSaved'))
+    },
     formatMoney (val1) {
       let val = Math.round(val1)
       if (val !== undefined) {
