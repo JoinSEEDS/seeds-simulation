@@ -1,10 +1,10 @@
 export default () => ({
   mySimulations: {
-    isMore: true,
+    more: true,
     rows: []
   },
   allSimulations: {
-    isMore: true,
+    more: true,
     rows: []
   }
 })

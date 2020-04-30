@@ -22,14 +22,24 @@ export const saveSimulation = async function ({ state }, payload) {
   // commit('setSimulationStep', state.simulationState.length)
 }
 
-export const searchSimulations = async function ({ dispatch, commit }, payload) {
+export const searchMySimulations = async function ({ dispatch, commit }, payload) {
   try {
-    const response = await this.$simulationRepositoryApi.search(payload)
-    return response
+    const simulations = await this.$simulationRepositoryApi.search(payload)
+    commit('addToMySimulations', simulations)
+    return true
   } catch (error) {
     console.error(error)
     throw new Error(error)
   }
+}
 
-  // commit('setSimulationStep', state.simulationState.length)
+export const searchAllSimulations = async function ({ dispatch, commit }, payload) {
+  try {
+    const simulations = await this.$simulationRepositoryApi.search(payload)
+    commit('addToAllSimulations', simulations)
+    return simulations
+  } catch (error) {
+    console.error(error)
+    throw new Error(error)
+  }
 }

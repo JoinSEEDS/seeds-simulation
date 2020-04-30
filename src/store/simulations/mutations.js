@@ -1,5 +1,6 @@
-export const setDataSeedsGrownTable = (state, data) => {
-  state.seedsGrownTable = data
+export const addToAllSimulations = (state, simulations) => {
+  state.allSimulations.rows = state.allSimulations.rows.concat(simulations.rows)
+  state.allSimulations.more = simulations.more
 }
 
 export const setSimulationStep = (state, step) => {

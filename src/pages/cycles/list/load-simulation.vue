@@ -47,7 +47,7 @@ export default {
   components: { SimulationItem },
   async mounted () {
     this.$refs.mySimulationScroll.trigger()
-    const simulations = await this.searchSimulations({
+    const simulations = await this.searchAllSimulations({
       account: undefined,
       term: '',
       offset: 0,
@@ -63,7 +63,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('simulations', ['searchSimulations']),
+    ...mapActions('simulations', ['searchAllSimulations']),
     loadMoreMySimulations (index, done) {
       setTimeout(() => {
         this.mySimulations.push(
