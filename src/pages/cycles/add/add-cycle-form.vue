@@ -643,7 +643,7 @@ export default {
   },
   mounted () {
     this.$store.$EventBus.$on('simulation-applied', () => {
-      console.log('Event bus listened')
+      console.log('Event bus listened, loadSimulation closed')
       this.showLoadCycle = false
     })
   },

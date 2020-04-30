@@ -104,6 +104,17 @@ export default {
   mounted () {
     this.getInitSimulationStep()
     this.tableSelected = 0
+    this.$store.$EventBus.$on('simulation-applied', () => {
+      this.tableSelected = 6
+      // this.$nextTick()
+      this.getDataChart({ tableId: this.tableSelected, compare: this.valueOption })
+      this.$nextTick()
+      this.showOptions = false
+      console.log('Event bus listened on Dashboard, Chart and tables updated')
+    })
+  },
+  beforeDestroy () {
+    this.$store.$EventBus.$off('simulation-applied')
   },
   watch: {
     simulationStep (currentStep, prevStep) {
