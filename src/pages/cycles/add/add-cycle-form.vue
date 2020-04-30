@@ -756,8 +756,11 @@ export default {
       parent && parent.show()
     },
     nextCycle () {
-      this.$refs.simulationForm.validate(true).then(success => {
+      this.$refs.simulationForm.validate(true).then(async success => {
         if (success) {
+          this.showIsLoading(true)
+          this.$nextTick()
+          await this.sleep(100)
           // console.log('Before next:', JSON.stringify(this.getSimulationState, null, 4))
           console.log('DoCycle Init:', this)
           const simulationState = {
@@ -810,13 +813,17 @@ export default {
             // harvestDistribution: {}
           }
           console.log('DoCycle Data:', simulationState)
-          this.doCycle(
+          await this.doCycle(
             {
               simulationState, step: (this.simulationStep)
             })
+          this.showIsLoading(false)
         }
       })
     //   console.log('After next:', this.getSimulationState)
+    },
+    sleep (ms) {
+      return new Promise(resolve => setTimeout(resolve, ms))
     },
     syncFormData () {
       //   console.log('Before Sync Form:', this.getSimulationState)
