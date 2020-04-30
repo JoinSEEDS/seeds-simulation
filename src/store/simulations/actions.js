@@ -1,12 +1,13 @@
 export const initWakeDb = async function () {
   try {
     await this.$simulationRepositoryApi.wakeDb()
+    setTimeout(async () => {
+      await this.$simulationRepositoryApi.wakeDb()
+    }, (process.env.WAKE_DB_TIME * 60))
   } catch (error) {
     console.error(error)
     throw new Error(error)
   }
-  // commit('setSimulationStep', state.simulationState.length)
-  // return true
 }
 
 export const saveSimulation = async function ({ state, dispatch, commit }, payload) {
