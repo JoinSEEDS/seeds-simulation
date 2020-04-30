@@ -118,7 +118,13 @@ class SimulationRepositoryApi {
   }
 
   async _storeSimulationData (uploadUrl, simulation) {
-    return axios.put(uploadUrl, simulation)
+    return axios.put(uploadUrl, simulation,
+      {
+        headers: {
+          'content-type': 'application/json;charset=UTF-8'
+        }
+      }
+    )
   }
 
   async _get (url, params, retry = true) {
