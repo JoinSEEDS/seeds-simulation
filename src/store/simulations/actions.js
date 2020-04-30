@@ -21,8 +21,6 @@ export const saveSimulation = async function ({ state, dispatch, commit }, paylo
   } finally {
     commit('general/setIsLoading', false, { root: true })
   }
-
-  // commit('setSimulationStep', state.simulationState.length)
 }
 
 export const searchMySimulations = async function ({ commit }, payload) {
@@ -46,5 +44,19 @@ export const searchAllSimulations = async function ({ dispatch, commit }, payloa
   } catch (error) {
     console.error(error)
     throw new Error(error)
+  }
+}
+
+export const getSimulationData = async function ({ dispatch, commit }, s3key) {
+  try {
+    commit('general/setIsLoading', true, { root: true })
+    const simulations = await this.$simulationRepositoryApi.fetchData(s3key)
+    // commit('addToAllSimulations', simulations)
+    return simulations
+  } catch (error) {
+    console.error(error)
+    throw new Error(error)
+  } finally {
+    commit('general/setIsLoading', false, { root: true })
   }
 }

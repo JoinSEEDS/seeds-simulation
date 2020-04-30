@@ -137,7 +137,8 @@ module.exports = function (ctx) {
         BASE_SIMULTAIONS_REPOSITORY_URL: process.env.BASE_SIMULTAIONS_REPOSITORY_URL,
         BLOCKCHAIN_EXPLORER: process.env.BLOCKCHAIN_EXPLORER,
         GOOGLE_ANALYTICS: process.env.GOOGLE_ANALYTICS,
-        RETRY_DELAY: process.env.RETRY_DELAY
+        RETRY_DELAY: process.env.RETRY_DELAY,
+        BASE_REPOSITORY_URL: process.env.BASE_REPOSITORY_URL
       },
       scopeHoisting: true,
       vueRouterMode: 'history',

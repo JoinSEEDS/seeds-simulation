@@ -7,7 +7,7 @@
         q-item-section(side v-if="owner")
             q-icon.cursor-pointer(color="negative" name="delete")
         q-item-section(side)
-            q-icon.cursor-pointer(color="primary" name="cloud_download")
+            q-icon.cursor-pointer(color="primary" name="cloud_download" @click="applySimulation")
             //- q-icon(color="primary" name="cloud_download")
     q-expansion-item(
       icon="description"
@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 export default {
   name: 'simulation-item',
   props: {
@@ -30,6 +30,13 @@ export default {
     ...mapState('accounts', ['account']),
     owner () {
       return this.simulation.creatorAccount === this.account
+    }
+  },
+  methods: {
+    ...mapActions('simulations', ['getSimulationData']),
+    async applySimulation () {
+      const json = await this.getSimulationData(this.simulation.s3Key)
+      console.log('ApplySimulation', json)
     }
   }
 }

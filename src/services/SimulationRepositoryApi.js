@@ -64,6 +64,14 @@ class SimulationRepositoryApi {
     return data
   }
 
+  async fetchData (s3Key) {
+    const baseRepository = process.env.BASE_REPOSITORY_URL
+    // console.log('FetchData', baseRepository + '/' + s3Key)
+    const { data } = await this._get(baseRepository + '/' + s3Key)
+    // const { data } = await this.axios.get(baseRepository + '/' + s3Key)
+    return data
+  }
+
   /**
    * Search simulations
    *
