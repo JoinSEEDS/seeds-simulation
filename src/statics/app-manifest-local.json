@@ -1,0 +1,19 @@
+{
+    "account": "sebastianmb2",
+    "domain": "http://localhost:8080",
+    "appmeta": "http://localhost:8080/app-metadata.json#445d3b59f3ef7644d6a619f82f60a222126370e8036ea6f7154c535636b01031",
+    "whitelist": [
+        {
+            "contract": "eosio.token",
+            "action": ""
+        },
+        {
+            "contract": "logintester1",
+            "action": ""
+        },
+        {
+            "contract": "eosio.login",
+            "action": ""
+        }
+    ]
+}

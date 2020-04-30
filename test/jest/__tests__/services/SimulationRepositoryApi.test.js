@@ -14,7 +14,7 @@ process.env = {
 
 let repositoryApi = new SimulationRepositoryApi()
 
-/* describe('Test save', () => {
+describe('Test save', () => {
   test('save', async () => {
     try {
       let simulation = await repositoryApi.save({
@@ -57,7 +57,7 @@ describe('Test delete', () => {
     }
   })
 })
- */
+
 describe('Test search', () => {
   test('search', async () => {
     try {
@@ -71,7 +71,7 @@ describe('Test search', () => {
       throw error
     }
   })
-  /* test('search none', async () => {
+  test('search none', async () => {
     try {
       let response = await repositoryApi.search({
         account: 'testaccount',
@@ -86,10 +86,10 @@ describe('Test search', () => {
       console.log(error)
       throw error
     }
-  }) */
+  })
 })
 
-/* describe('Test wake db', () => {
+describe('Test wake db', () => {
   test('wakedb', async () => {
     try {
       let response = await repositoryApi.wakeDb()
@@ -100,4 +100,4 @@ describe('Test search', () => {
       throw error
     }
   })
-}) */
+})
