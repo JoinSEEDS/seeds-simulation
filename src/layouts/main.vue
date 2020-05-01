@@ -1,5 +1,5 @@
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapState } from 'vuex'
 import LeftMenu from '~/components/layout/left-menu'
 import RightMenuAuthenticated from '~/components/layout/right-menu-authenticated'
 import RightMenuGuest from '~/components/layout/right-menu-guest'
@@ -21,7 +21,11 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('accounts', ['isAuthenticated'])
+    ...mapGetters('accounts', ['isAuthenticated']),
+    ...mapState('simulations', ['editingMySimulation']),
+    titleBar () {
+      return this.editingMySimulation.status ? `${this.$t('pages.saveSimulation.simulation')}: ${this.editingMySimulation.simulation.name}` : ''
+    }
   },
   methods: {
     ...mapActions('accounts', ['autoLogin'])
@@ -41,8 +45,14 @@ export default {
         //-   icon="fas fa-bars"
         //-   aria-label="Menu"
         //- )
-        q-toolbar-title.flex.items-center
-          img.logo(src="statics/seeds-logo-with-text.png")
+        img.logo(src="statics/seeds-logo-with-text.png")
+        q-toolbar-title
+          .row.items-center(v-if="editingMySimulation.status")
+            //- p.q-ma-none {{titleBar}}
+            p.q-ma-none {{$t('pages.saveSimulation.simulation')}}:
+              strong  {{editingMySimulation.simulation.name}}
+            q-icon.cursor-pointer.iconClose(name="cancel")
+              q-tooltip {{$t('pages.saveSimulation.cleanSimulation')}}
         right-menu-authenticated(v-if="isAuthenticated")
         right-menu-guest(v-if="!isAuthenticated")
         q-btn(
@@ -85,4 +95,11 @@ export default {
 .accent
   color: 'red'
   background-color: 'red'
+.iconClose
+  transition: all 0.3s
+  margin-left: 10px
+  color: black
+.iconClose:hover
+  transform: scale(1.5)
+  color: $negative
 </style>

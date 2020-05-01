@@ -146,7 +146,9 @@ export default {
       searchAccount: 'Search by Account',
       deleteSimulationMessage: 'will be deleted.',
       loadSimulationMessage: 'will be loaded.',
-      simulationDeleted: 'Simulation deleted.'
+      simulationDeleted: 'Simulation deleted.',
+      simulation: 'Simulation',
+      cleanSimulation: 'Clean simulation loaded'
     }
   }
 }
