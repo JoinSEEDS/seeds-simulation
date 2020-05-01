@@ -112,9 +112,18 @@ export default {
       this.showOptions = false
       console.log('Event bus listened on Dashboard, Chart and tables updated')
     })
+    this.$store.$EventBus.$on('simulation-cleaned', () => {
+      // this.tableSelected = undefined
+      // this.$nextTick()
+      // this.getDataChart({ tableId: this.tableSelected, compare: this.valueOption })
+      this.$nextTick()
+      this.showOptions = false
+      console.log('Event bus listened on Dashboard, simulation updated')
+    })
   },
   beforeDestroy () {
     this.$store.$EventBus.$off('simulation-applied')
+    this.$store.$EventBus.$off('simulation-cleaned')
   },
   watch: {
     simulationStep (currentStep, prevStep) {

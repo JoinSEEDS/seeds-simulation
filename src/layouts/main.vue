@@ -29,7 +29,17 @@ export default {
     }
   },
   methods: {
-    ...mapActions('accounts', ['autoLogin'])
+    ...mapActions('accounts', ['autoLogin']),
+    ...mapActions('simulations', ['cleanSimulationData']),
+    onCleanSimulationData () {
+      try {
+        this.showConfirmCleanSimulation = true
+        this.cleanSimulationData()
+        this.showNotification('Simulation restored')
+      } catch (error) {
+        this.showNotification(error, 'error')
+      }
+    }
   }
 }
 </script>
@@ -89,7 +99,7 @@ export default {
 
         q-card-actions.float-right
           q-btn(flat :label="$t('common.buttons.cancel')" color="negative" v-close-popup)
-          q-btn(flat :label="$t('common.buttons.confirm')" color="primary")
+          q-btn(flat :label="$t('common.buttons.confirm')" color="primary" @click="onCleanSimulationData")
 </template>
 
 <style lang="sass" scoped>
