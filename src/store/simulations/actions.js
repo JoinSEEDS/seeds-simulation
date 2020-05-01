@@ -63,3 +63,16 @@ export const getSimulationData = async function ({ dispatch, commit }, s3key) {
     commit('general/setIsLoading', false, { root: true })
   }
 }
+
+export const deleteSimulation = async function ({ dispatch, commit }, payload) {
+  try {
+    commit('general/setIsLoading', true, { root: true })
+    const response = await this.$simulationRepositoryApi.delete(payload)
+    return response
+  } catch (error) {
+    console.error(error)
+    throw new Error(error)
+  } finally {
+    commit('general/setIsLoading', false, { root: true })
+  }
+}

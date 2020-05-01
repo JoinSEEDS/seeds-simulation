@@ -9,7 +9,8 @@ export default {
       mint: 'Mint',
       register: 'Register',
       save: 'Save',
-      confirm: 'Confirm'
+      confirm: 'Confirm',
+      delete: 'Delete'
     },
     defaultTitle: 'Title'
   },
@@ -138,7 +139,9 @@ export default {
       saveSimulations: 'Save Simulation',
       simulationSaved: 'Simulation Saved',
       searchDesc: 'Search by Description',
-      searchAccount: 'Search by Account'
+      searchAccount: 'Search by Account',
+      deleteSimulationMessage: 'will be deleted.',
+      simulationDeleted: 'Simulation deleted.'
     }
   }
 }
