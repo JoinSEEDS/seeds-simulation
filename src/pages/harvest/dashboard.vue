@@ -83,6 +83,7 @@
           :label="$t('forms.cycles.chartOptions')"
         )
       custom-chart.q-mb-xl(
+        v-show="tableSelected"
         :dataChart="dataChart",
         :chartName="dataChart.chartName",
         xAxisTitle="Cycles",
@@ -113,7 +114,7 @@ export default {
       console.log('Event bus listened on Dashboard, Chart and tables updated')
     })
     this.$store.$EventBus.$on('simulation-cleaned', () => {
-      // this.tableSelected = undefined
+      this.tableSelected = undefined
       // this.$nextTick()
       // this.getDataChart({ tableId: this.tableSelected, compare: this.valueOption })
       this.$nextTick()

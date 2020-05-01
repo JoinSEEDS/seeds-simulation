@@ -34,9 +34,10 @@ export default {
     async onCleanSimulationData () {
       try {
         this.showConfirmCleanSimulation = false
+        this.showIsLoading(true)
         await this.cleanSimulationData()
+        await this.sleep(400)
         this.showNotification('Simulation restored')
-        await this.sleep(200)
         this.showIsLoading(false)
       } catch (error) {
         this.showNotification(error, 'error')

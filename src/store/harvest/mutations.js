@@ -32,6 +32,33 @@ export const setDataSimulationState = (state, data) => {
 export const overwriteSimulationState = (state, newState) => {
   state.simulationState = newState
 }
+export const restartSimulation = (state, newState) => {
+  state.generalStatsTable = {
+    tableName: 'General Information'
+  }
+  state.seedsGrownTable = {
+    tableName: 'Seeds Grown'
+  }
+  state.peopleAccountsTable = {
+    tableName: 'Seeds Distributed for Individual Accounts',
+    expand: false
+  }
+  state.organizationAccountsTable = {
+    tableName: 'Seeds Distributed for Organization Accounts',
+    expand: false
+  }
+  state.bdcsTable = {
+    tableName: 'Seeds Distributed for BDCs',
+    expanded: false
+  }
+  state.gdcTable = {
+    tableName: 'Seeds for GDC'
+  }
+  state.dataChart = {
+    chartName: 'undefined'
+  }
+}
+
 export const setSimulationStep = (state, step) => {
   state.simulationStep = step
 }

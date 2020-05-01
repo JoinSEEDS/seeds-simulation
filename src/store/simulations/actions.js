@@ -75,6 +75,7 @@ export const cleanSimulationData = async function ({ dispatch, commit }) {
     // commit('general/setIsLoading', true, { root: true })
     commit('harvest/overwriteSimulationState', [], { root: true })
     commit('harvest/setSimulationStep', 0, { root: true })
+    commit('harvest/restartSimulation', null, { root: true })
     commit('restartEditingMySimulation')
     this.$EventBus.$emit('simulation-cleaned')
     commit('general/setIsLoading', false, { root: true })
