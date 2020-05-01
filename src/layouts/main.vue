@@ -17,7 +17,8 @@ export default {
     return {
       menu: false,
       right: false,
-      miniState: true
+      miniState: true,
+      showConfirmCleanSimulation: false
     }
   },
   computed: {
@@ -43,7 +44,7 @@ export default {
             //- p.q-ma-none {{titleBar}}
             p.q-ma-none {{$t('pages.saveSimulation.simulation')}}:
               strong  {{editingMySimulation.simulation.name}}
-            q-icon.cursor-pointer.iconClose(name="cancel")
+            q-icon.cursor-pointer.iconClose(name="cancel" @click="showConfirmCleanSimulation = true")
               q-tooltip {{$t('pages.saveSimulation.cleanSimulation')}}
         right-menu-authenticated(v-if="isAuthenticated")
         right-menu-guest(v-if="!isAuthenticated")
@@ -75,6 +76,20 @@ export default {
       right-menu-form-cycles
     q-page-container
       router-view
+    //- Confirm modal to load simulation
+    q-dialog(v-model="showConfirmCleanSimulation" persistent)
+      q-card(v-if="editingMySimulation.status")
+        q-card-section
+          .row.justify-center
+            .col-auto
+              q-avatar.text-center(icon="restore_from_trash" color="primary" text-color="white")
+            .col
+              p.text-weight-bold.q-ml-sm.text-center '{{editingMySimulation.simulation.name}}' {{$t('pages.saveSimulation.cleanSimulationMessage')}}
+          p.q-ml-sm.text-center {{$t('pages.general.confirmActions')}}
+
+        q-card-actions.float-right
+          q-btn(flat :label="$t('common.buttons.cancel')" color="negative" v-close-popup)
+          q-btn(flat :label="$t('common.buttons.confirm')" color="primary")
 </template>
 
 <style lang="sass" scoped>

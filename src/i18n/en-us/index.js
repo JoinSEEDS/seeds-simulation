@@ -146,6 +146,7 @@ export default {
       searchAccount: 'Search by Account',
       deleteSimulationMessage: 'will be deleted.',
       loadSimulationMessage: 'will be loaded.',
+      cleanSimulationMessage: 'will be unloaded, unsaved changes will be lost.',
       simulationDeleted: 'Simulation deleted.',
       simulation: 'Simulation',
       cleanSimulation: 'Clean simulation loaded'

@@ -4,8 +4,8 @@
   q-card.container.q-pa-sm
     q-item
         q-item-section
-          .row.justify-between
-            q-item-label(v-if="!owner" caption) {{simulation.creatorAccount}}
+          .row.justify-between.q-mt-none
+            q-item-label.q-mt-none(v-if="!owner" caption) {{simulation.creatorAccount}}
             q-item-label.q-mt-none(caption) {{simulation.updatedAt | formatDate}}
           q-item-label {{simulation.name}}
         q-item-section(side v-if="owner")
