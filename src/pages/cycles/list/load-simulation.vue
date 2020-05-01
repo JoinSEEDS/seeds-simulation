@@ -12,7 +12,7 @@
     q-tab(name="mySimulations", :label="$t('pages.saveSimulation.mySimulations')")
     q-tab(name="allSimulations", :label="$t('pages.saveSimulation.allSimulations')")
   q-separator
-  q-tab-panels(
+  q-tab-panels.q-pt-none(
       v-model="tab"
       animated
       swipeable
@@ -20,31 +20,39 @@
       transition-next="jump-up"
   )
       q-tab-panel(name="mySimulations")
-        div.containerScroll(ref="scrollContainerMySimulation")
-          q-infinite-scroll(scroll-target="$refs.scrollContainerMySimulation" @load="loadMoreMySimulations" :offset="250" ref="mySimulationScroll")
-            template(v-slot:loading)
-              div(class="row justify-center q-my-md")
-                q-spinner-dots(color="primary" size="40px")
+        .searchContainer
+          search-bar.search(label="Search by Desc", v-model="searchDesc" filled)
+        .scroll
+          div.containerScroll(ref="scrollContainerMySimulation")
+            q-infinite-scroll.infinite(scroll-target="$refs.scrollContainerMySimulation" @load="loadMoreMySimulations" :offset="250" ref="mySimulationScroll")
+              template(v-slot:loading)
+                div(class="row justify-center q-my-md")
+                  q-spinner-dots(color="primary" size="40px")
 
-            div.q-gutter-y-md
-              simulation-item(v-for="(simulation, index) in mySimulations.rows" :key="index" :simulation="simulation")
+              div.q-gutter-y-md
+                simulation-item(v-for="(simulation, index) in mySimulations.rows" :key="index" :simulation="simulation")
       q-tab-panel(name="allSimulations")
-        div.containerScroll(ref="scrollContainerAllSimulation")
-          q-infinite-scroll(scroll-target="$refs.scrollContainerAllSimulation" @load="loadMoreAllSimulations" :offset="250" ref="allSimulationScroll")
-            template(v-slot:loading)
-              div(class="row justify-center q-my-md")
-                q-spinner-dots(color="primary" size="40px")
+        .searchContainer.q-gutter-y-sm
+            search-bar.search(label="Search by Description", v-model="searchDesc" filled)
+            search-bar.search(label="Search by Account", v-model="searchAccount" filled)
+        .scroll
+          div.containerScrollAll(ref="scrollContainerAllSimulation")
+            q-infinite-scroll.infinite(scroll-target="$refs.scrollContainerAllSimulation" @load="loadMoreAllSimulations" :offset="250" ref="allSimulationScroll")
+              template(v-slot:loading)
+                div(class="row justify-center q-my-md")
+                  q-spinner-dots(color="primary" size="40px")
 
-            div.q-gutter-y-md
-              simulation-item(v-for="(simulation, index) in allSimulations.rows" :key="index" :simulation="simulation")
+              div.q-gutter-y-md
+                simulation-item(v-for="(simulation, index) in allSimulations.rows" :key="index" :simulation="simulation")
 </template>
 
 <script>
 import { mapActions, mapMutations, mapState } from 'vuex'
 import SimulationItem from '~/pages/cycles/list/components/simulation-item'
+import SearchBar from '~/components/search-bar'
 export default {
   name: 'load-simulation',
-  components: { SimulationItem },
+  components: { SimulationItem, SearchBar },
   mounted () {
     this.$refs.mySimulationScroll.trigger()
   },
@@ -57,11 +65,38 @@ export default {
       tab: 'mySimulations',
       offsetMySimulations: 0,
       offsetAllSimulations: 0,
-      limit: 10
+      limit: 10,
+      searchDesc: undefined,
+      searchAccount: undefined
     }
   },
   computed: {
     ...mapState('simulations', ['mySimulations', 'allSimulations'])
+  },
+  watch: {
+    searchDesc () {
+      if (this.tab === 'mySimulations') {
+        this.$refs.mySimulationScroll.reset()
+        this.cleanMySimulations()
+        this.offsetMySimulations = 0
+        this.$refs.mySimulationScroll.trigger()
+      } else if (this.tab === 'allSimulations') {
+        this.$refs.allSimulationScroll.reset()
+        this.cleanAllSimulations()
+        this.offsetAllSimulations = 0
+        this.$refs.allSimulationScroll.trigger()
+      }
+    },
+    searchAccount () {
+      this.$refs.allSimulationScroll.reset()
+      this.cleanAllSimulations()
+      this.offsetAllSimulations = 0
+      this.$refs.allSimulationScroll.trigger()
+    },
+    tab () {
+      // this.searchDesc = ''
+      // this.searchAccount = ''
+    }
   },
   methods: {
     ...mapActions('simulations', ['searchAllSimulations', 'searchMySimulations']),
@@ -69,7 +104,7 @@ export default {
     async loadMoreMySimulations (index, done) {
       if (this.mySimulations.more) {
         await this.searchMySimulations({
-          term: '',
+          term: this.searchDesc,
           offset: this.offsetMySimulations,
           limit: this.limit
         })
@@ -80,7 +115,8 @@ export default {
     async loadMoreAllSimulations (index, done) {
       if (this.allSimulations.more) {
         await this.searchAllSimulations({
-          term: '',
+          account: this.searchAccount,
+          term: this.searchDesc,
           offset: this.offsetAllSimulations,
           limit: this.limit
         })
@@ -93,15 +129,24 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-#Container
-  min-width: 35vw
-  width: 30vw
-  max-width: 700px
-  overflow: 'hidden'
-.containerScroll
-  height: 74vh
-@media (max-width: 700px)
- #Container
-  width: 100%
-  min-width: 70vw
+  #Container
+    min-width: 35vw
+    width: 30vw
+    max-width: 700px
+    overflow: 'hidden'
+  .containerScroll
+    height: 70vh
+    overflow: 'hidden' !important
+  .containerScrollAll
+    height: 65vh
+    overflow: 'hidden' !important
+  .searchContainer
+    overflow: 'hidden' !important
+  .infinite
+    overflow: 'hidden' !important
+
+  @media (max-width: 700px)
+   #Container
+    width: 100%
+    min-width: 70vw
 </style>

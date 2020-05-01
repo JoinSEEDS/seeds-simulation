@@ -44,4 +44,5 @@ export default {
 
 <style lang="sass" scoped>
 .container
+  z-index: 0
 </style>

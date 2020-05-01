@@ -1,6 +1,12 @@
 <template lang="pug">
     q-input(
-
+      :value="value"
+      :label="label"
+      :rules="rules"
+      :filled="filled"
+      :outline="outline"
+      @input="v => $emit('input', v)"
+      debounce="600"
     )
 </template>
 

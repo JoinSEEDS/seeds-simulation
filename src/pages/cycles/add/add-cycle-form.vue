@@ -509,7 +509,7 @@
                 @cancel="showSaveCycle = false"
               )
         q-dialog(v-model="showLoadCycle")
-          q-card
+          q-card.modal-load-simulation
             load-simulation(@cancel="showSaveCycle = false")
 
 </template>
@@ -944,6 +944,8 @@ export default {
     border: none !important
 input:focus, textarea:focus, select:focus
     outline: none
+.modal-load-simulation
+  height: 90vh
 @media(min-width: 0px) and (max-width: 1025px)
   .scroll-container
     height: calc(100vh - 160px)
