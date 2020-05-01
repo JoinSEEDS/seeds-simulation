@@ -136,7 +136,9 @@ export default {
       allSimulations: 'All Simulations',
       loadSimulation: 'Load simulation',
       saveSimulations: 'Save Simulation',
-      simulationSaved: 'Simulation Saved'
+      simulationSaved: 'Simulation Saved',
+      searchDesc: 'Search by Description',
+      searchAccount: 'Search by Account'
     }
   }
 }

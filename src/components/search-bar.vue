@@ -7,7 +7,11 @@
       :outline="outline"
       @input="v => $emit('input', v)"
       debounce="600"
+      :color="bgColor"
+      :icon="icon"
     )
+        template(v-slot:prepend)
+          q-icon(:name="icon")
 </template>
 
 <script>
@@ -18,6 +22,7 @@ export default {
     label: { type: String },
     rules: { type: Array },
     bgColor: {},
+    icon: { type: String },
     filled: { type: Boolean },
     outline: { type: Boolean }
   }
