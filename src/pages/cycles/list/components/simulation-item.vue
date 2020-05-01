@@ -65,7 +65,7 @@ export default {
   methods: {
     ...mapActions('simulations', ['getSimulationData', 'deleteSimulation']),
     async applySimulation () {
-      this.loadConfirmDelete = false
+      this.showConfirmLoad = false
       await this.getSimulationData(this.simulation.s3Key)
       // this.$emit('simulationApplied', this.simulation.id)
     },

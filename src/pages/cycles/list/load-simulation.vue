@@ -152,6 +152,8 @@ export default {
   .containerScrollAll
     height: 65vh
     overflow: 'hidden' !important
+    // ::-webkit-scrollbar-thumb
+    //   background-color: green !important
   .searchContainer
     overflow: 'hidden' !important
   .infinite
