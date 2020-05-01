@@ -31,11 +31,13 @@ export default {
   methods: {
     ...mapActions('accounts', ['autoLogin']),
     ...mapActions('simulations', ['cleanSimulationData']),
-    onCleanSimulationData () {
+    async onCleanSimulationData () {
       try {
-        this.showConfirmCleanSimulation = true
-        this.cleanSimulationData()
+        this.showConfirmCleanSimulation = false
+        await this.cleanSimulationData()
         this.showNotification('Simulation restored')
+        await this.sleep(200)
+        this.showIsLoading(false)
       } catch (error) {
         this.showNotification(error, 'error')
       }
@@ -87,8 +89,8 @@ export default {
     q-page-container
       router-view
     //- Confirm modal to load simulation
-    q-dialog(v-model="showConfirmCleanSimulation" persistent)
-      q-card(v-if="editingMySimulation.status")
+    q-dialog(v-model="showConfirmCleanSimulation" persistent v-if="editingMySimulation.status")
+      q-card
         q-card-section
           .row.justify-center
             .col-auto

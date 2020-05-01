@@ -2,6 +2,7 @@ import { HarvestConstants } from '~/const'
 import { doNextCycle, initCycle } from '~/services/harvest'
 
 export const getDataTable = async function ({ dispatch, commit, state }, { tableId, step = -1 }) {
+  if (state.simulationState.length === 0) return
   const structureAll = ({ numberUsers, totalAmount, totalAmountPerUser, k }) => {
     const rows = []
     for (let i = k; i < numberUsers.length; i += (1 + k)) {

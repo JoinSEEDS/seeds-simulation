@@ -50,6 +50,9 @@ export const utils = {
       const priceRound = Math.round(price)
       let format = new Intl.NumberFormat().format(priceRound)
       return format
+    },
+    sleep (ms) {
+      return new Promise(resolve => setTimeout(resolve, ms))
     }
   },
   filters: {
