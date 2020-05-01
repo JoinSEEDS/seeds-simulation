@@ -134,6 +134,13 @@ class TimeUtil {
     return `${date.getDate()}-${date.getMonth()}-${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
   }
 
+  static getFormatDate (date) {
+    const year = date.getFullYear()
+    const month = date.getMonth() + 1 >= 10 ? date.getMonth() + 1 : `0${date.getMonth() + 1}`
+    const day = date.getDate() >= 10 ? date.getDate() : `0${date.getDate()}`
+    return `${month}/${day}/${year}`
+  }
+
   static formDateToChat (date) {
     const diff = new DateDiff(new Date(), date)
     let hours, minutes, seconds

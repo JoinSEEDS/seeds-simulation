@@ -11,6 +11,7 @@
       :icon="icon"
       clearable
       clear-icon="close"
+      dense
     )
         template(v-slot:prepend)
           q-icon(:name="icon")

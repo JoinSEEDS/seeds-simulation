@@ -9,6 +9,7 @@
           @click="showLoadCycle = true"
         )
         q-btn.full-width(
+          v-show="showSaveSimulation"
           color="primary"
           icon="save"
           :label="$t('pages.saveSimulation.saveSimulation')"
@@ -636,6 +637,9 @@ export default {
     },
     labelSeedsRemovesBurned () {
       return this.getSimulationState.length > 0 ? this.$t('forms.cycles.burned') + ': ' + this.formatToMoney(this.getSimulationState[this.simulationStep].burnedSeedsDuringCycle) : this.$t('forms.cycles.planted')
+    },
+    showSaveSimulation () {
+      return this.getSimulationState.length > 0
     }
   },
   beforeMount () {

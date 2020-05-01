@@ -1,5 +1,7 @@
 import { mapMutations } from 'vuex'
 import Vue from 'vue'
+import TimeUtil from '~/utils/TimeUtil'
+
 export const EventBus = new Vue()
 export const utils = {
   methods: {
@@ -48,6 +50,11 @@ export const utils = {
       const priceRound = Math.round(price)
       let format = new Intl.NumberFormat().format(priceRound)
       return format
+    }
+  },
+  filters: {
+    formatDate (date) {
+      return TimeUtil.getFormatDate(new Date(date))
     }
   }
 }

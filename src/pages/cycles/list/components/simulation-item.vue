@@ -4,8 +4,10 @@
   q-card.container.q-pa-sm
     q-item
         q-item-section
+          .row.justify-between
             q-item-label(v-if="!owner" caption) {{simulation.creatorAccount}}
-            q-item-label {{simulation.name}}
+            q-item-label.q-mt-none(caption) {{simulation.updatedAt | formatDate}}
+          q-item-label {{simulation.name}}
         q-item-section(side v-if="owner")
             q-icon.cursor-pointer(color="negative" name="delete" @click="showConfirmDelete = true")
         q-item-section(side)
@@ -65,8 +67,14 @@ export default {
   methods: {
     ...mapActions('simulations', ['getSimulationData', 'deleteSimulation']),
     async applySimulation () {
-      this.showConfirmLoad = false
-      await this.getSimulationData(this.simulation.s3Key)
+      try {
+        this.showConfirmLoad = false
+        await this.getSimulationData(this.simulation.s3Key)
+        this.showNotification('Simulation loaded')
+      } catch (error) {
+        console.log('error', error)
+        this.showNotification(error, 'error')
+      }
       // this.$emit('simulationApplied', this.simulation.id)
     },
     async onDeleteSimulation () {
