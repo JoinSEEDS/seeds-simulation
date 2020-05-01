@@ -10,7 +10,8 @@ export default {
       register: 'Register',
       save: 'Save',
       confirm: 'Confirm',
-      delete: 'Delete'
+      delete: 'Delete',
+      load: 'Load'
     },
     defaultTitle: 'Title'
   },
@@ -141,6 +142,7 @@ export default {
       searchDesc: 'Search by Description',
       searchAccount: 'Search by Account',
       deleteSimulationMessage: 'will be deleted.',
+      loadSimulationMessage: 'will be loaded.',
       simulationDeleted: 'Simulation deleted.'
     }
   }

@@ -9,7 +9,7 @@
         q-item-section(side v-if="owner")
             q-icon.cursor-pointer(color="negative" name="delete" @click="showConfirmDelete = true")
         q-item-section(side)
-            q-icon.cursor-pointer(color="primary" name="cloud_download" @click="applySimulation")
+            q-icon.cursor-pointer(color="primary" name="cloud_download" @click="showConfirmLoad = true")
             //- q-icon(color="primary" name="cloud_download")
     q-expansion-item(
       icon="description"
@@ -17,7 +17,7 @@
       group="description"
     )
       p.q-pa-md {{simulation.description}}
-  //- Confirm modal delete
+  //- Confirm modal to delete simulation
   q-dialog(v-model="showConfirmDelete" persistent)
     q-card
       q-card-section.vertical-middle
@@ -26,8 +26,19 @@
         p.q-ml-sm.text-center {{$t('pages.general.confirmActions')}}
 
       q-card-actions.float-right
-        q-btn(flat label="Cancel" color="secondary" v-close-popup)
+        q-btn(flat :label="$t('common.buttons.cancel')" color="secondary" v-close-popup)
         q-btn(flat :label="$t('common.buttons.delete')" color="negative" @click="onDeleteSimulation")
+  //- Confirm modal to load simulation
+  q-dialog(v-model="showConfirmLoad" persistent)
+    q-card
+      q-card-section.vertical-middle
+        q-avatar(icon="cloud_download" color="primary" text-color="white")
+        span.text-weight-bold.q-ml-sm '{{this.simulation.name}}' {{$t('pages.saveSimulation.loadSimulationMessage')}}
+        p.q-ml-sm.text-center {{$t('pages.general.confirmActions')}}
+
+      q-card-actions.float-right
+        q-btn(flat :label="$t('common.buttons.cancel')" color="negative" v-close-popup)
+        q-btn(flat :label="$t('common.buttons.confirm')" color="primary" @click="applySimulation")
 </template>
 
 <script>
@@ -41,7 +52,8 @@ export default {
   },
   data () {
     return {
-      showConfirmDelete: false
+      showConfirmDelete: false,
+      showConfirmLoad: false
     }
   },
   computed: {
@@ -53,6 +65,7 @@ export default {
   methods: {
     ...mapActions('simulations', ['getSimulationData', 'deleteSimulation']),
     async applySimulation () {
+      this.loadConfirmDelete = false
       await this.getSimulationData(this.simulation.s3Key)
       // this.$emit('simulationApplied', this.simulation.id)
     },
