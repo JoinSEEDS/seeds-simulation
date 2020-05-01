@@ -6,12 +6,16 @@
       :filled="filled"
       :outline="outline"
       @input="v => $emit('input', v)"
-      debounce="600"
+      debounce="800"
       :color="bgColor"
       :icon="icon"
+      clearable
+      clear-icon="close"
     )
         template(v-slot:prepend)
           q-icon(:name="icon")
+        //- template(v-slot:append)
+        //-   q-icon(:name="icon")
 </template>
 
 <script>

@@ -30,7 +30,7 @@
                   q-spinner-dots(color="primary" size="40px")
 
               div.q-gutter-y-md
-                simulation-item(v-for="(simulation, index) in mySimulations.rows" :key="index" :simulation="simulation" @deleteSimulation="resetMySimulationScroll")
+                simulation-item(v-for="(simulation, index) in mySimulations.rows" :key="index" :simulation="simulation" @deleteSimulation="onSimulationDeleted")
       q-tab-panel(name="allSimulations")
         .searchContainer.q-gutter-y-sm
             search-bar.search(:label="$t('pages.saveSimulation.searchAccount')", v-model="searchAccount" filled icon="search")
@@ -43,7 +43,7 @@
                   q-spinner-dots(color="primary" size="40px")
 
               div.q-gutter-y-md
-                simulation-item(v-for="(simulation, index) in allSimulations.rows" :key="index" :simulation="simulation")
+                simulation-item(v-for="(simulation, index) in allSimulations.rows" :key="index" :simulation="simulation" @deleteSimulation="onSimulationDeleted")
 </template>
 
 <script>
@@ -92,6 +92,15 @@ export default {
   methods: {
     ...mapActions('simulations', ['searchAllSimulations', 'searchMySimulations']),
     ...mapMutations('simulations', ['cleanMySimulations', 'cleanAllSimulations']),
+    onSimulationDeleted () {
+      this.cleanMySimulations()
+      this.cleanAllSimulations()
+      if (this.tab === 'mySimulations') {
+        this.resetMySimulationScroll()
+      } else if (this.tab === 'allSimulations') {
+        this.resetAllSimulationScroll()
+      }
+    },
     resetMySimulationScroll () {
       this.$refs.mySimulationScroll.reset()
       this.cleanMySimulations()
