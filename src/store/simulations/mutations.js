@@ -8,12 +8,22 @@ export const addToMySimulations = (state, simulations) => {
   state.mySimulations.more = simulations.more
 }
 
-export const cleanMySimulations = (state, simulations) => {
+export const cleanMySimulations = (state) => {
   state.mySimulations.rows = []
   state.mySimulations.more = true
 }
 
-export const cleanAllSimulations = (state, simulations) => {
+export const cleanAllSimulations = (state) => {
   state.allSimulations.rows = []
   state.allSimulations.more = true
+}
+
+export const setEditingMySimulation = (state, simulationId) => {
+  state.editingMySimulation.status = true
+  state.editingMySimulation.simulation = simulationId
+}
+
+export const restartEditingMySimulation = (state) => {
+  state.editingMySimulation.status = false
+  state.editingMySimulation.simulation = undefined
 }

@@ -47,25 +47,36 @@ export default {
       }
     }
   },
+  mounted () {
+    this.syncForm()
+  },
   computed: {
     ...mapState('accounts', ['account']),
-    ...mapState('harvest', ['simulationState'])
+    ...mapState('harvest', ['simulationState']),
+    ...mapState('simulations', ['editingMySimulation'])
   },
   methods: {
     ...mapActions('simulations', ['saveSimulation']),
+    syncForm () {
+      if (this.editingMySimulation.status) {
+        this.form.name = this.editingMySimulation.simulation.name
+        this.form.description = this.editingMySimulation.simulation.description
+        this.form.id = this.editingMySimulation.simulation.id
+      }
+    },
     onCancel () {
       this.$emit('cancel')
     },
     async onSave () {
       try {
-        const response = await this.saveSimulation({
+        await this.saveSimulation({
           id: this.form.id,
           account: this.account,
           name: this.form.name,
           description: this.form.description,
           data: this.simulationState
         })
-        console.log('onSave', response)
+        // console.log('onSave', response)
         this.$emit('success')
       } catch (error) {
         console.error('onSaveSimulation')

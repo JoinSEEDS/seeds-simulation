@@ -48,12 +48,18 @@ export const searchAllSimulations = async function ({ dispatch, commit }, payloa
   }
 }
 
-export const getSimulationData = async function ({ dispatch, commit }, s3key) {
+export const getSimulationData = async function ({ dispatch, commit }, simulationToLoad) {
   try {
     commit('general/setIsLoading', true, { root: true })
-    const simulations = await this.$simulationRepositoryApi.fetchData(s3key)
+    console.log(simulationToLoad)
+    const simulations = await this.$simulationRepositoryApi.fetchData(simulationToLoad.s3Key)
     commit('harvest/overwriteSimulationState', simulations, { root: true })
     commit('harvest/setSimulationStep', simulations.length - 1, { root: true })
+    if (this.state.accounts.account === simulationToLoad.creatorAccount) {
+      commit('setEditingMySimulation', simulationToLoad)
+    } else {
+      commit('restartEditingMySimulation', simulationToLoad)
+    }
     this.$EventBus.$emit('simulation-applied')
     return simulations
   } catch (error) {

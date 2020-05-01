@@ -69,7 +69,7 @@ export default {
     async applySimulation () {
       try {
         this.showConfirmLoad = false
-        await this.getSimulationData(this.simulation.s3Key)
+        await this.getSimulationData(this.simulation)
         this.showNotification('Simulation loaded')
       } catch (error) {
         console.log('error', error)

@@ -138,6 +138,8 @@ export default {
       allSimulations: 'All Simulations',
       loadSimulation: 'Load simulation',
       saveSimulations: 'Save Simulation',
+      updateSimulations: 'Update Simulation',
+      savChanges: 'Save Changes',
       simulationSaved: 'Simulation Saved',
       simulationLoaded: 'Simulation Loaded',
       searchDesc: 'Search',

@@ -12,7 +12,7 @@
           v-show="showSaveSimulation"
           color="primary"
           icon="save"
-          :label="$t('pages.saveSimulation.saveSimulation')"
+          :label="editingMySimulation.status ? $t('pages.saveSimulation.savChanges') : $t('pages.saveSimulation.saveSimulation')"
           @click="showSaveCycle = true"
         )
         //- Form
@@ -502,7 +502,7 @@
         q-dialog(v-model="showSaveCycle" persistent)
           q-card(style="min-width: 40vw")
             q-card-section
-              p.text-h6.q-ma-none {{$t('pages.saveSimulation.saveSimulation')}}
+              p.text-h6.q-ma-none {{titleSaveSimulation}}
             q-separator
             q-card-section
               save-simulation-form(
@@ -516,7 +516,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters, mapMutations } from 'vuex'
+import { mapActions, mapGetters, mapMutations, mapState } from 'vuex'
 // import Vue from 'vue'
 import { VMoney } from 'v-money'
 import { MoneyInput, PercentageInput } from '~/components/jmInputs'
@@ -599,6 +599,10 @@ export default {
   },
   computed: {
     ...mapGetters('harvest', ['simulationStep', 'totalSimulationSteps', 'cycleDataForm', 'getSimulationState']),
+    ...mapState('simulations', ['editingMySimulation']),
+    titleSaveSimulation () {
+      return this.editingMySimulation.status ? this.$t('pages.saveSimulation.updateSimulations') : this.$t('pages.saveSimulation.saveSimulation')
+    },
     labelSeedsRemoves () {
       return this.getSimulationState.length > 0 ? this.$t('forms.cycles.groupSeedsRemove') + ': ' + this.formatToMoney(this.getSimulationState[this.simulationStep].seedsRemovedDuringCycle.toFixed(0)) : this.$t('forms.cycles.groupSeedsRemove')
     },

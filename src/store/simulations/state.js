@@ -6,5 +6,9 @@ export default () => ({
   allSimulations: {
     more: true,
     rows: []
+  },
+  editingMySimulation: {
+    status: false,
+    simulation: undefined
   }
 })
