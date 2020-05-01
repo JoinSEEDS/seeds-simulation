@@ -30,7 +30,7 @@
                   q-spinner-dots(color="primary" size="40px")
 
               div.q-gutter-y-md
-                simulation-item(v-for="(simulation, index) in mySimulations.rows" :key="index" :simulation="simulation")
+                simulation-item(v-for="(simulation, index) in mySimulations.rows" :key="index" :simulation="simulation" @deleteSimulation="resetMySimulationScroll")
       q-tab-panel(name="allSimulations")
         .searchContainer.q-gutter-y-sm
             search-bar.search(:label="$t('pages.saveSimulation.searchAccount')", v-model="searchAccount" filled icon="search")
@@ -76,22 +76,13 @@ export default {
   watch: {
     searchDesc () {
       if (this.tab === 'mySimulations') {
-        this.$refs.mySimulationScroll.reset()
-        this.cleanMySimulations()
-        this.offsetMySimulations = 0
-        this.$refs.mySimulationScroll.trigger()
+        this.resetMySimulationScroll()
       } else if (this.tab === 'allSimulations') {
-        this.$refs.allSimulationScroll.reset()
-        this.cleanAllSimulations()
-        this.offsetAllSimulations = 0
-        this.$refs.allSimulationScroll.trigger()
+        this.resetAllSimulationScroll()
       }
     },
     searchAccount () {
-      this.$refs.allSimulationScroll.reset()
-      this.cleanAllSimulations()
-      this.offsetAllSimulations = 0
-      this.$refs.allSimulationScroll.trigger()
+      this.resetAllSimulationScroll()
     },
     tab () {
       // this.searchDesc = ''
@@ -101,6 +92,18 @@ export default {
   methods: {
     ...mapActions('simulations', ['searchAllSimulations', 'searchMySimulations']),
     ...mapMutations('simulations', ['cleanMySimulations', 'cleanAllSimulations']),
+    resetMySimulationScroll () {
+      this.$refs.mySimulationScroll.reset()
+      this.cleanMySimulations()
+      this.offsetMySimulations = 0
+      this.$refs.mySimulationScroll.trigger()
+    },
+    resetAllSimulationScroll () {
+      this.$refs.allSimulationScroll.reset()
+      this.cleanAllSimulations()
+      this.offsetAllSimulations = 0
+      this.$refs.allSimulationScroll.trigger()
+    },
     async loadMoreMySimulations (index, done) {
       if (this.mySimulations.more) {
         await this.searchMySimulations({
