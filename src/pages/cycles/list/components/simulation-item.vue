@@ -98,4 +98,7 @@ export default {
 <style lang="sass" scoped>
 .container
   z-index: 0
+  transition: all 0.3s
+.container:hover
+  transform: scale(1.02)
 </style>

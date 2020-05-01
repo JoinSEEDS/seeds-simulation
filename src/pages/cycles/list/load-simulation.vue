@@ -20,9 +20,9 @@
       transition-next="jump-up"
   )
       q-tab-panel(name="mySimulations")
-        .searchContainer
+        .searchContainer.q-pa-md
           search-bar.search(:label="$t('pages.saveSimulation.searchDesc')", v-model="searchDesc" filled icon="search")
-        .scroll
+        .scroll.q-px-md
           div.containerScroll(ref="scrollContainerMySimulation")
             q-infinite-scroll.infinite(scroll-target="$refs.scrollContainerMySimulation" @load="loadMoreMySimulations" :offset="250" ref="mySimulationScroll")
               template(v-slot:loading)
@@ -32,10 +32,10 @@
               div.q-gutter-y-md
                 simulation-item(v-for="(simulation, index) in mySimulations.rows" :key="index" :simulation="simulation" @deleteSimulation="onSimulationDeleted")
       q-tab-panel(name="allSimulations")
-        .searchContainer.q-gutter-y-sm
+        .searchContainer.q-gutter-y-sm.q-pa-md
             search-bar.search(:label="$t('pages.saveSimulation.searchAccount')", v-model="searchAccount" filled icon="person")
             search-bar.search(:label="$t('pages.saveSimulation.searchDesc')", v-model="searchDesc" filled icon="search")
-        .scroll
+        .scroll.q-px-md
           div.containerScrollAll(ref="scrollContainerAllSimulation")
             q-infinite-scroll.infinite(scroll-target="$refs.scrollContainerAllSimulation" @load="loadMoreAllSimulations" :offset="250" ref="allSimulationScroll")
               template(v-slot:loading)

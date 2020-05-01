@@ -37,14 +37,6 @@ export default {
   q-layout(view="hHh lpr lff")
     q-header(elevated)
       q-toolbar.bg-accent
-        //- q-btn(
-        //-   flat
-        //-   dense
-        //-   round
-        //-   @click="menu = !menu"
-        //-   icon="fas fa-bars"
-        //-   aria-label="Menu"
-        //- )
         img.logo(src="statics/seeds-logo-with-text.png")
         q-toolbar-title
           .row.items-center(v-if="editingMySimulation.status")
