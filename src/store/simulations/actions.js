@@ -1,9 +1,10 @@
 export const initWakeDb = async function () {
   try {
     await this.$simulationRepositoryApi.wakeDb()
-    setTimeout(async () => {
+    setInterval(async () => {
+      console.log('Wake up db periodic call')
       await this.$simulationRepositoryApi.wakeDb()
-    }, (process.env.WAKE_DB_TIME * 60))
+    }, (process.env.WAKE_DB_TIME * 60000))
   } catch (error) {
     console.error(error)
     throw new Error(error)

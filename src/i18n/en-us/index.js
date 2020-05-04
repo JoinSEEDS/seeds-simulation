@@ -115,7 +115,7 @@ export default {
     },
     general: {
       search: 'Search',
-      confirmActions: 'Do you want confirm this action?',
+      confirmActions: 'Perform this action?',
       noAccountsFound: 'No accounts found',
       name: 'Name',
       description: 'Description'

@@ -20,6 +20,7 @@ build_dev:
     WEBSERVICES_API_KEY: '"Zo3L4h85H4TxltCRRrJR70SIfVSWQJW15MbwsTzg"'
     BASE_REPOSITORY_URL: https://seeds-simulations-dev.s3-eu-west-1.amazonaws.com
     RETRY_DELAY: '5000'
+    WAKE_DB_TIME: '15'
   cache:
     paths:
       - node_modules/
@@ -56,6 +57,7 @@ build_prod:
     WEBSERVICES_API_KEY: '"Zo3L4h85H4TxltCRRrJR70SIfVSWQJW15MbwsTzg"'
     BASE_REPOSITORY_URL: https://seeds-simulations-dev.s3-eu-west-1.amazonaws.com
     RETRY_DELAY: '5000'
+    WAKE_DB_TIME: '15'
   cache:
     paths:
       - node_modules/
