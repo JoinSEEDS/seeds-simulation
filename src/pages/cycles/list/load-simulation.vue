@@ -147,10 +147,10 @@ export default {
     max-width: 700px
     overflow: 'hidden'
   .containerScroll
-    height: 70vh
+    height: 65vh
     overflow: 'hidden' !important
   .containerScrollAll
-    height: 65vh
+    height: 60vh
     overflow: 'hidden' !important
     // ::-webkit-scrollbar-thumb
     //   background-color: green !important

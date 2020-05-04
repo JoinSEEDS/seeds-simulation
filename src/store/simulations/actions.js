@@ -16,6 +16,9 @@ export const saveSimulation = async function ({ state, dispatch, commit }, paylo
     console.log('saveSimulation', payload)
     commit('general/setIsLoading', true, { root: true })
     const response = await this.$simulationRepositoryApi.save(payload)
+    if (payload.id) {
+      commit('updateEditingMySimulation', payload.name)
+    }
     return response
   } catch (error) {
     console.error(error)

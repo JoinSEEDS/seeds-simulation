@@ -18,9 +18,14 @@ export const cleanAllSimulations = (state) => {
   state.allSimulations.more = true
 }
 
-export const setEditingMySimulation = (state, simulationId) => {
+export const setEditingMySimulation = (state, simulation) => {
   state.editingMySimulation.status = true
-  state.editingMySimulation.simulation = simulationId
+  state.editingMySimulation.simulation = simulation
+}
+
+export const updateEditingMySimulation = (state, simulationName) => {
+  // state.editingMySimulation.status = true
+  state.editingMySimulation.simulation.name = simulationName
 }
 
 export const restartEditingMySimulation = (state) => {
