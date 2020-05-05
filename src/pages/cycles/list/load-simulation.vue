@@ -142,10 +142,10 @@ export default {
 
 <style lang="sass" scoped>
   #Container
-    min-width: 35vw
-    width: 30vw
-    max-width: 700px
-    overflow: 'hidden'
+    // min-width: 35vw
+    // width: 30vw
+    // max-width: 700px
+    // overflow: 'hidden'
   .containerScroll
     height: 65vh
     overflow: 'hidden' !important
@@ -159,8 +159,8 @@ export default {
   .infinite
     overflow: 'hidden' !important
 
-  @media (max-width: 700px)
-   #Container
-    width: 100%
-    min-width: 70vw
+  // @media (max-width: 700px)
+  //  #Container
+  //   width: 100%
+  //   min-width: 70vw
 </style>

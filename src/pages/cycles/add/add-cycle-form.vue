@@ -509,9 +509,10 @@
                 @success="onSimulationSaved"
                 @cancel="showSaveCycle = false"
               )
+        //- Load simulations
         q-dialog(v-model="showLoadCycle")
           q-card.modal-load-simulation
-            load-simulation(@cancel="showSaveCycle = false")
+            load-simulation.modalLoadSimulation(@cancel="showSaveCycle = false")
 
 </template>
 
@@ -932,6 +933,9 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+.modalLoadSimulation
+  min-width: 35vw
+  max-width: 50vw
 .cycle-form
 .form-group
     border: 1px solid
