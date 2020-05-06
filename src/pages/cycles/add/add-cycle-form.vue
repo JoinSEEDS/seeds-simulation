@@ -934,8 +934,9 @@ export default {
 
 <style lang="sass" scoped>
 .modalLoadSimulation
-  min-width: 35vw
-  max-width: 50vw
+  min-width: 30vw
+  width: 40vw
+  max-width: 60vw
 .cycle-form
 .form-group
     border: 1px solid
@@ -958,6 +959,7 @@ input:focus, textarea:focus, select:focus
     outline: none
 .modal-load-simulation
   height: 90vh
+  width: 40vw
 @media(min-width: 0px) and (max-width: 1025px)
   .scroll-container
     height: calc(100vh - 160px)
