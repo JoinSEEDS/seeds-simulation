@@ -1,5 +1,5 @@
 <template lang="pug">
-  .full-width(ref="container")
+  #container.full-width(ref="container")
     div.bg-secondary.text-white.header
         p.text-h6.text-center {{titleTable}}
     div.row.justify-between.items-center.container-subtitle.q-pl-md.q-pt-sm.q-pb-sm(v-if="subtitleTable")

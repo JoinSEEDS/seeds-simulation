@@ -21,8 +21,8 @@
               custom-table-header(:titleTable="dataTableGROWN.tableName")
       .row.q-col-gutter-md
         .col-md-6.col-sm-12
-          custom-table-header(:titleTable="dataTableIND.tableName" :subtitleTable="dataTableIND.totalAmount" :tableId="constant.SEEDS_IND_ACCNTS" v-bind:showAll.sync="showAllIndividualAccounts")
-          div(@click="selectTable(constant.SEEDS_IND_ACCNTS)")
+          custom-table-header.header(:titleTable="dataTableIND.tableName" :subtitleTable="dataTableIND.totalAmount" :tableId="constant.SEEDS_IND_ACCNTS" v-bind:showAll.sync="showAllIndividualAccounts")
+          div.contentTable.cursor-pointer(@click="selectTable(constant.SEEDS_IND_ACCNTS)")
             q-table(
               class="my-sticky-virtscroll-table"
               :pagination.sync="pagination"
@@ -38,7 +38,7 @@
               //-   custom-table-header(:titleTable="dataTableIND.tableName" :subtitleTable="dataTableIND.totalAmount" :tableId="constant.SEEDS_IND_ACCNTS" v-bind:showAll.sync="showAllIndividualAccounts")
         .col-md-6.col-sm-12
           custom-table-header(:titleTable="dataTableORG.tableName" :subtitleTable="dataTableORG.totalAmount" :tableId="constant.SEEDS_ORG_ACCNTS" v-bind:showAll.sync="showAllOrganizationAccounts")
-          div(@click="selectTable(constant.SEEDS_ORG_ACCNTS)")
+          div.contentTable.cursor-pointer(@click="selectTable(constant.SEEDS_ORG_ACCNTS)")
             q-table(
               class="my-sticky-virtscroll-table"
               :pagination.sync="pagination"
@@ -55,7 +55,7 @@
       .row.q-col-gutter-md
         .col-md-6.col-sm-12
           custom-table-header(:titleTable="dataTableBDC.tableName" :subtitleTable="dataTableBDC.totalAmount" :tableId="constant.SEEDS_BDC" v-bind:showAll.sync="showAllBDCs")
-          div(@click="selectTable(constant.SEEDS_BDC)")
+          div.contentTable.cursor-pointer(@click="selectTable(constant.SEEDS_BDC)")
             q-table(
               class="my-sticky-virtscroll-table"
               :pagination.sync="pagination"
@@ -346,6 +346,8 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+  .contentTable
+    margin-top: -2px
   .scroll-container
     height: calc(100vh - 50px)
     max-width: 100%
