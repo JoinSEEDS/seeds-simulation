@@ -2,7 +2,7 @@
   #containerHeader.full-width(ref="container")
     div.bg-secondary.text-white.header
         p.text-h6.text-center {{titleTable}}
-    div.row.justify-between.items-center.container-subtitle.q-pl-md.q-pt-sm.q-pb-sm(v-if="subtitleTable")
+    div.row.justify-between.items-center.container-subtitle.q-px-md.q-pt-sm.q-pb-sm(v-if="subtitleTable")
         p.text-center Total Amount: {{this.formatToMoney(subtitleTable)}}
         #contSelect.select(@click.stop="prevent")
           q-select.selectC(
@@ -78,7 +78,7 @@ export default {
 </script>
 
 <style lang="sass">
-  #contSelect .q-field__native
+  #contSelect .q-field__native, .q-field__prefix, .q-field__suffix, .q-field__input, .q-field__append
     color: #ffffff !important
   #containerHeader .selectClass span
     color: #ffffff
