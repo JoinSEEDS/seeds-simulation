@@ -512,7 +512,7 @@
         //- Load simulations
         q-dialog(v-model="showLoadCycle")
           q-card.modal-load-simulation
-            load-simulation.modalLoadSimulation(@cancel="showSaveCycle = false")
+            load-simulation(@cancel="showSaveCycle = false")
 
 </template>
 

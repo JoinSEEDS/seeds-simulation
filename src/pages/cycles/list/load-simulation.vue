@@ -159,8 +159,4 @@ export default {
   .infinite
     overflow: 'hidden' !important
 
-  // @media (max-width: 700px)
-  //  #Container
-  //   width: 100%
-  //   min-width: 70vw
 </style>
