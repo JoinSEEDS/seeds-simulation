@@ -20,7 +20,9 @@
             template(v-slot:top)
               custom-table-header(:titleTable="dataTableGROWN.tableName")
       .row.q-col-gutter-md
-        .col-md-6.col-sm-12(@click="selectTable(constant.SEEDS_IND_ACCNTS)")
+        .col-md-6.col-sm-12
+          custom-table-header(:titleTable="dataTableIND.tableName" :subtitleTable="dataTableIND.totalAmount" :tableId="constant.SEEDS_IND_ACCNTS" v-bind:showAll.sync="showAllIndividualAccounts")
+          div(@click="selectTable(constant.SEEDS_IND_ACCNTS)")
             q-table(
               class="my-sticky-virtscroll-table"
               :pagination.sync="pagination"
@@ -32,9 +34,11 @@
               row-key="name"
               :card-class="{'bg-grey-5': tableSelected == constant.SEEDS_IND_ACCNTS}"
             )
-              template(v-slot:top)
-                custom-table-header(:titleTable="dataTableIND.tableName" :subtitleTable="dataTableIND.totalAmount" :tableId="constant.SEEDS_IND_ACCNTS" v-bind:showAll.sync="showAllIndividualAccounts")
-        .col-md-6.col-sm-12(@click="selectTable(constant.SEEDS_ORG_ACCNTS)")
+              //- template(v-slot:top)
+              //-   custom-table-header(:titleTable="dataTableIND.tableName" :subtitleTable="dataTableIND.totalAmount" :tableId="constant.SEEDS_IND_ACCNTS" v-bind:showAll.sync="showAllIndividualAccounts")
+        .col-md-6.col-sm-12
+          custom-table-header(:titleTable="dataTableORG.tableName" :subtitleTable="dataTableORG.totalAmount" :tableId="constant.SEEDS_ORG_ACCNTS" v-bind:showAll.sync="showAllOrganizationAccounts")
+          div(@click="selectTable(constant.SEEDS_ORG_ACCNTS)")
             q-table(
               class="my-sticky-virtscroll-table"
               :pagination.sync="pagination"
@@ -46,10 +50,12 @@
               row-key="name"
               :card-class="{'bg-grey-5': tableSelected == constant.SEEDS_ORG_ACCNTS}"
             )
-              template(v-slot:top)
-                custom-table-header(:titleTable="dataTableORG.tableName" :subtitleTable="dataTableORG.totalAmount" :tableId="constant.SEEDS_ORG_ACCNTS" v-bind:showAll.sync="showAllOrganizationAccounts")
+              //- template(v-slot:top)
+              //-   custom-table-header(:titleTable="dataTableORG.tableName" :subtitleTable="dataTableORG.totalAmount" :tableId="constant.SEEDS_ORG_ACCNTS" v-bind:showAll.sync="showAllOrganizationAccounts")
       .row.q-col-gutter-md
-        .col-md-6.col-sm-12(@click="selectTable(constant.SEEDS_BDC)")
+        .col-md-6.col-sm-12
+          custom-table-header(:titleTable="dataTableBDC.tableName" :subtitleTable="dataTableBDC.totalAmount" :tableId="constant.SEEDS_BDC" v-bind:showAll.sync="showAllBDCs")
+          div(@click="selectTable(constant.SEEDS_BDC)")
             q-table(
               class="my-sticky-virtscroll-table"
               :pagination.sync="pagination"
@@ -61,8 +67,8 @@
               row-key="name"
               :card-class="{'bg-grey-5': tableSelected == constant.SEEDS_BDC}"
             )
-              template(v-slot:top)
-                custom-table-header(:titleTable="dataTableBDC.tableName" :subtitleTable="dataTableBDC.totalAmount" :tableId="constant.SEEDS_BDC" v-bind:showAll.sync="showAllBDCs")
+              //- template(v-slot:top)
+              //-   custom-table-header(:titleTable="dataTableBDC.tableName" :subtitleTable="dataTableBDC.totalAmount" :tableId="constant.SEEDS_BDC" v-bind:showAll.sync="showAllBDCs")
         .col-md-6.col-sm-12(@click="selectTable(constant.SEEDS_GDC)")
             q-table(
             :data="dataTableGDC.rows"
