@@ -1,11 +1,12 @@
 <template lang="pug">
-  #container.full-width(ref="container")
+  #containerHeader.full-width(ref="container")
     div.bg-secondary.text-white.header
         p.text-h6.text-center {{titleTable}}
     div.row.justify-between.items-center.container-subtitle.q-pl-md.q-pt-sm.q-pb-sm(v-if="subtitleTable")
         p.text-center Total Amount: {{this.formatToMoney(subtitleTable)}}
-        div.select(@click.stop="prevent")
-          q-select(
+        #contSelect.select(@click.stop="prevent")
+          q-select.selectC(
+            label-color="white"
             dense
             v-model="optionSelected"
             :options="options"
@@ -76,17 +77,21 @@ export default {
 }
 </script>
 
-<style lang="sass" scoped>
-  .container-title
+<style lang="sass">
+  #contSelect .q-field__native
+    color: #ffffff !important
+  #containerHeader .selectClass span
+    color: #ffffff
+  #containerHeader .container-title
     color: #ffffff
     background-color: #1a237e
-  .container-subtitle
+  #containerHeader .container-subtitle
     color: #ffffff
     background-color: #514aac
-  p
+  #containerHeader p
     margin: 0px
-  .header
+  #containerHeader .header
     border-radius: 5px 5px 0px 0px
-  .select
+  #containerHeader .select
     min-width: 200px
 </style>
