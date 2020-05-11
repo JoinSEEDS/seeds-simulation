@@ -188,6 +188,7 @@
                                   :readonly='true'
                                   :rules="[rules.nonNegative]"
                                   :bgColor="bgColor"
+                                  prefix="S"
                               )
                               money-input(
                                   v-model='contracts'

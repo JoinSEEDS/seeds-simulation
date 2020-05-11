@@ -95,7 +95,7 @@ export default {
       contracts: 'New Contracts During Cycle',
       contractsSeeds: 'Value of New Contracts During Cycle',
       contractsGrowth: 'Contracts Growth',
-      seedsPerContract: 'Average Seeds per Contract',
+      seedsPerContract: 'Average Contract Value',
       // Groups
       groupGDP: 'GDP',
       groupSeedsBank: 'Seeds Bank',
