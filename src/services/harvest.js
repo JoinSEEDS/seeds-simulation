@@ -162,11 +162,15 @@ export const initCycle = function (state) {
 
   newState.totalOpenSeedsBankContracts = 0
 
+  let circulatingSeeds = (newState.totalGDP * 29.5) / 365
+  let plantedSeeds = (newState.seedsPlantedPerUserFixed + newState.seedsPlantedPerUserVariable) * newState.numPeopleAccounts
+  let burnedSeeds = newState.averageSeedsBurnedPerUser * newState.numPeopleAccounts
+
   newState.totals = {
-    circulatingSeeds: (newState.totalGDP * 29.5 * 3) / 365,
-    plantedSeeds: (newState.seedsPlantedPerUserFixed + newState.seedsPlantedPerUserVariable) * newState.numPeopleAccounts,
-    burnedSeeds: 0,
-    seeds: (newState.totalGDP * 29.5 * 3) / 365
+    circulatingSeeds: circulatingSeeds - plantedSeeds,
+    plantedSeeds: plantedSeeds,
+    burnedSeeds: burnedSeeds,
+    seeds: circulatingSeeds
   }
 
   newState.harvestDistribution = {
@@ -239,17 +243,21 @@ export const doNextCycle = function (state, update) {
   newState.unplantedSeeds = newState.unplantedSeedsPerUser * newState.numPeopleAccounts
 
   // bank contracts
-  newState.newContractsDuringCycle = newState.contractsGrowth * newState.changeRequiredToMeetDemand
+  newState.newContractsDuringCycleSeeds = newState.contractsGrowth * newState.changeRequiredToMeetDemand
+  newState.newContractsDuringCycle = Math.floor(newState.newContractsDuringCycleSeeds / newState.seedsPerContract)
 
   if (newState.newContractsDuringCycle < 0) {
     newState.newContractsDuringCycle = 0
   }
 
-  newState.closedContractsDuringCycle = newState.outstandingContracts * newState.closedContractsPercentage // this variable should be in the burned seeds?
+  newState.closedContractsDuringCycleSeeds = newState.outstandingContracts * newState.closedContractsPercentage
+  newState.closedContractsDuringCycle = Math.floor(newState.closedContractsDuringCycleSeeds / newState.seedsPerContract)
 
   newState.bankContractsDuringCycle = newState.newContractsDuringCycle - newState.closedContractsDuringCycle
+  newState.bankContractsDuringCycleSeeds = newState.newContractsDuringCycleSeeds - newState.closedContractsDuringCycleSeeds
 
   newState.outstandingContracts += newState.bankContractsDuringCycle
+  newState.outstandingContractsSeeds += newState.bankContractsDuringCycleSeeds
 
   // enter exchanges
   newState.enterExchangesLabel = newState.enterExchanges * newState.enterExchangesWeight
@@ -261,18 +269,18 @@ export const doNextCycle = function (state, update) {
   newState.seedsRemovedDuringCycle = newState.burnedSeedsDuringCycle +
                                 newState.plantedSeedsDuringCycle +
                                 newState.enterExchangesLabel +
-                                newState.closedContractsDuringCycle
+                                newState.closedContractsDuringCycleSeeds
 
   // seeds introduced
   newState.seedsIntroducedDuringCycle = newState.unplantedSeeds +
                                 newState.exitExchangesLabel +
-                                newState.newContractsDuringCycle
+                                newState.newContractsDuringCycleSeeds
 
   // harvest
   newState.seedsGrownPerCycle = newState.changeRequiredToMeetDemand +
                     newState.seedsRemovedDuringCycle -
                     newState.seedsIntroducedDuringCycle +
-                    newState.newContractsDuringCycle - // is this correct?
+                    newState.newContractsDuringCycle -
                     newState.closedContractsDuringCycle
 
   // newState.seedsGrownPerCycle /= 3 // is this still correct?
@@ -289,8 +297,7 @@ export const doNextCycle = function (state, update) {
   let totalBurnedSeeds = newState.totals.burnedSeeds + newState.burnedSeedsDuringCycle
 
   let totalSeeds = newState.totals.seeds + newState.seedsIntroducedDuringCycle +
-                  newState.seedsRemovedDuringCycle + newState.seedsGrownPerCycle +
-                  newState.newContractsDuringCycle - newState.burnedSeedsDuringCycle
+                  newState.seedsRemovedDuringCycle + newState.seedsGrownPerCycle - newState.burnedSeedsDuringCycle
 
   // totals
   newState.totals = {
