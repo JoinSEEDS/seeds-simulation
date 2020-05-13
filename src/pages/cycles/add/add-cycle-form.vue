@@ -1,5 +1,5 @@
 <template lang="pug">
-    #container.q-gutter-y-sm
+    #container-add-cycle.q-gutter-y-sm
         //- Top Buttons
         //- div.q-ma-none
         q-btn.full-width.q-mt-md(
@@ -32,7 +32,7 @@
                             dense-toggle
                         )
                           q-card
-                            q-card-section.q-gutter-y-sm
+                            q-card-section.q-gutter-y-sm.q-pr-none
                                 //- p Hi {{ volumeGrowth }}
                                 //- q-select(
                                 //-   filled
@@ -47,7 +47,7 @@
                                   :label="labelPeopleGrowth"
                                   header-class="text-positive"
                                 )
-                                  div.q-px-sm.q-py-xs
+                                  div.q-pr-sm.q-py-xs
                                     percentage-input(
                                       v-model='peopleGrowth'
                                       :label="$t('forms.cycles.peopleGrowth')"
@@ -70,7 +70,7 @@
                                   :label="labelOrganizationsGrowth"
                                   header-class="text-positive"
                                 )
-                                  div.q-px-sm.q-py-xs
+                                  div.q-pr-sm.q-py-xs
                                     money-input(
                                         v-model='numOrganizationAccounts'
                                         :label="$t('forms.cycles.numOrganizationAccounts')"
@@ -93,7 +93,7 @@
                                   :label="labelBDCGrowth"
                                   header-class="text-positive"
                                 )
-                                  div.q-px-sm.q-py-xs
+                                  div.q-pr-sm.q-py-xs
                                     percentage-input(
                                       v-model='bdcsGrowth'
                                       :label="$t('forms.cycles.bdcsGrowth')"
@@ -110,7 +110,7 @@
                                   :label="labelChangeRequiredToMeetDemand"
                                   header-class="text-positive"
                                 )
-                                  div.q-px-sm.q-py-xs
+                                  div.q-pr-sm.q-py-xs
                                     money-input(
                                         v-model='changeRequiredToMeetDemand'
                                         :label="$t('forms.cycles.changeRequiredToMeetDemand')"
@@ -146,7 +146,7 @@
                                 label="Bank"
                                 header-class="text-positive"
                               )
-                                div.q-px-sm.q-py-xs
+                                div.q-pr-sm.q-py-xs
                                   money-input(
                                     v-model='enterSeedsBank'
                                     :label="$t('forms.cycles.enterSeedsBank')"
@@ -164,7 +164,7 @@
                               //-     label="Contracts"
                               //-     header-class="text-positive"
                               //- )
-                              //-   div.q-px-sm.q-py-xs
+                              //-   div.q-pr-sm.q-py-xs
                               percentage-input(
                                 v-model='contractsGrowth'
                                 :label="$t('forms.cycles.contractsGrowth')"
@@ -243,7 +243,7 @@
                                   :label="labelSeedsRemovesPlanted"
                                   header-class="text-positive"
                                 )
-                                  div.q-px-sm.q-py-xs
+                                  div.q-pr-sm.q-py-xs
                                     money-input(
                                       v-model='seedsPlantedPerUserFixed'
                                       :label="$t('forms.cycles.seedsPlantedPerUserFixed')"
@@ -271,7 +271,7 @@
                                   :label="labelSeedsRemovesBurned"
                                   header-class="text-positive"
                                 )
-                                  div.q-px-sm.q-py-xs
+                                  div.q-pr-sm.q-py-xs
                                     money-input(
                                         v-model='averageSeedsBurnedPerUser'
                                         :label="$t('forms.cycles.averageSeedsBurnedPerUser')"
@@ -293,7 +293,7 @@
                                   :label="labelEnterExchanges"
                                   header-class="text-positive"
                                 )
-                                  div.q-px-sm.q-py-xs
+                                  div.q-pr-sm.q-py-xs
                                     money-input(
                                         v-model='enterExchanges'
                                         :label="$t('forms.cycles.enterExchanges')"
@@ -321,7 +321,7 @@
                                   :label="labelExitExchanges"
                                   header-class="text-positive"
                                 )
-                                  div.q-px-sm.q-py-xs
+                                  div.q-pr-sm.q-py-xs
                                     money-input(
                                         v-model='exitExchanges'
                                         :label="$t('forms.cycles.exitExchanges')"
@@ -339,7 +339,7 @@
                                   :label="labelSeedsIntroduceUnplanted"
                                   header-class="text-positive"
                                 )
-                                  div.q-px-sm.q-py-xs
+                                  div.q-pr-sm.q-py-xs
                                     money-input(
                                         v-model='unplantedSeedsPerUser'
                                         :label="$t('forms.cycles.unplantedSeedsPerUser')"
@@ -992,36 +992,39 @@ export default {
 // })
 </script>
 
-<style lang="sass" scoped>
-.modalLoadSimulation
+<style lang="sass">
+#container-add-cycle .q-item
+  min-height: 55px;
+  border-radius: 3px 3px 0px 0px;
+#container-add-cycle .modalLoadSimulation
   min-width: 30vw
   width: 40vw
   max-width: 60vw
-.cycle-form
-.form-group
+#container-add-cycle .cycle-form
+#container-add-cycle .form-group
     border: 1px solid
     border-color: gray
     padding: 5px
-.scroll-container
+#container-add-cycle .scroll-container
     height: calc(100vh - 210px)
     max-width: 100%
-.bg-readonly
+#container-add-cycle .bg-readonly
     background: blue
-.c_input
+#container-add-cycle .c_input
     background-color: inherit
     flex: 1
     border: none
-.c_input:focus
+#container-add-cycle .c_input:focus
     background-color: inherit
     flex: 1
     border: none !important
-input:focus, textarea:focus, select:focus
+#container-add-cycle input:focus, textarea:focus, select:focus
     outline: none
-.modal-load-simulation
+#container-add-cycle .modal-load-simulation
   height: 90vh
   width: 40vw
 @media(min-width: 0px) and (max-width: 1025px)
-  .scroll-container
+  #container-add-cycle .scroll-container
     height: calc(100vh - 160px)
     max-width: 100%
 </style>
