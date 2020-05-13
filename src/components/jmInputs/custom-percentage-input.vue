@@ -3,7 +3,7 @@
         v-if="value && value.display != null"
         v-bind:value="value.display"
         @input=" e => updateModel(e)"
-        :label="label"
+        :label="labelComputed"
         type="number"
         suffix="%"
         :rules="rules"
@@ -27,6 +27,11 @@ export default {
   data () {
     return {
       last: ''
+    }
+  },
+  computed: {
+    labelComputed () {
+      return this.label + ' (%)'
     }
   },
   mounted () {

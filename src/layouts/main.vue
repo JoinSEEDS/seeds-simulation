@@ -69,17 +69,17 @@ export default {
           icon="fas fa-bars"
           aria-label="Menu"
         )
-    q-drawer(
-      show-if-above
-      v-model="menu"
-      side="left"
-      bordered
-      mini-to-overlay
-      :mini="miniState"
-      @mouseover="miniState = false"
-      @mouseout="miniState = true"
-    )
-      left-menu
+    //- q-drawer(
+    //-   show-if-above
+    //-   v-model="menu"
+    //-   side="left"
+    //-   bordered
+    //-   mini-to-overlay
+    //-   :mini="miniState"
+    //-   @mouseover="miniState = false"
+    //-   @mouseout="miniState = true"
+    //- )
+    //-   left-menu
     q-drawer(
       show-if-above
       v-model="right"

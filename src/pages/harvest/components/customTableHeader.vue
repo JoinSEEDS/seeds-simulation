@@ -46,7 +46,7 @@ export default {
       options: [
         {
           value: 1,
-          label: 'First - Fiddle - Last'
+          label: 'First - Middle - Last'
         },
         {
           value: 2,
