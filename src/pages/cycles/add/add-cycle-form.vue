@@ -164,20 +164,42 @@
                                 :rules="[rules.nonNegative]"
                                 prefix="S"
                               )
-                              money-input(
-                                  v-model='outstandingContracts'
-                                  :label="$t('forms.cycles.outstandingContracts')"
-                                  :rules="[rules.nonNegative]"
-                                  prefix="S"
-                              )
                               percentage-input(
                                   v-model='closedContractsPercentage'
                                   :label="$t('forms.cycles.closedContractsPercentage')"
                                   :rules="[rules.nonNegative]"
                               )
                               money-input(
+                                  v-model='seedsPerContract'
+                                  :label="$t('forms.cycles.seedsPerContract')"
+                                  :rules="[rules.positiveInteger]"
+                                  prefix="S"
+                              )
+                              money-input(
+                                  v-model='outstandingContracts'
+                                  :label="$t('forms.cycles.outstandingContracts')"
+                                  :readonly='true'
+                                  :rules="[rules.nonNegative]"
+                                  :bgColor="bgColor"
+                              )
+                              money-input(
+                                  v-model='outstandingContractsSeeds'
+                                  :label="$t('forms.cycles.outstandingContractsSeeds')"
+                                  :readonly='true'
+                                  :rules="[rules.nonNegative]"
+                                  :bgColor="bgColor"
+                                  prefix="S"
+                              )
+                              money-input(
                                   v-model='contracts'
                                   :label="$t('forms.cycles.contracts')"
+                                  :readonly='true'
+                                  :rules="[rules.nonNegative]"
+                                  :bgColor="bgColor"
+                              )
+                              money-input(
+                                  v-model='contractsSeeds'
+                                  :label="$t('forms.cycles.contractsSeeds')"
                                   :readonly='true'
                                   :rules="[rules.nonNegative]"
                                   :bgColor="bgColor"
@@ -186,6 +208,13 @@
                               money-input(
                                   v-model='closedContracts'
                                   :label="$t('forms.cycles.closedContracts')"
+                                  :readonly='true'
+                                  :bgColor="bgColor"
+                                  :rules="[rules.nonNegative]"
+                              )
+                              money-input(
+                                  v-model='closedContractsSeeds'
+                                  :label="$t('forms.cycles.closedContractsSeeds')"
                                   :readonly='true'
                                   :bgColor="bgColor"
                                   :rules="[rules.nonNegative]"
@@ -587,9 +616,13 @@ export default {
       hideFields: true,
       // - Seeds Bank
       contracts: 0,
+      contractsSeeds: 0,
       contractsGrowth: 0,
       outstandingContracts: 0,
+      outstandingContractsSeeds: 0,
+      seedsPerContract: 0,
       closedContracts: 0,
+      closedContractsSeeds: 0,
       closedContractsPercentage: 0,
       seedsPlantedPerUserFixed: 0,
       seedsPlantedPerUserVariable: 0,
@@ -611,7 +644,7 @@ export default {
       return this.getSimulationState.length > 0 ? this.$t('forms.cycles.groupSeedsIntroduce') + ': ' + this.formatToMoney(this.getSimulationState[this.simulationStep].seedsIntroducedDuringCycle.toFixed(0)) : this.$t('forms.cycles.groupSeedsIntroduce')
     },
     labelSeedsBank () {
-      return this.getSimulationState.length > 0 ? this.$t('forms.cycles.groupSeedsBank') + ': ' + this.formatToMoney(this.getSimulationState[this.simulationStep].bankContractsDuringCycle.toFixed(0)) : this.$t('forms.cycles.groupSeedsBank')
+      return this.getSimulationState.length > 0 ? this.$t('forms.cycles.groupSeedsBank') + ': ' + this.formatToMoney(this.getSimulationState[this.simulationStep].bankContractsDuringCycleSeeds.toFixed(0)) : this.$t('forms.cycles.groupSeedsBank')
     },
     labelGDP () {
       return this.getSimulationState.length > 0 ? this.$t('forms.cycles.groupGDP') + ': ' + this.formatToMoney(this.getSimulationState[this.simulationStep].totalGDP.toFixed(0)) : this.$t('forms.cycles.groupGDP')
@@ -641,7 +674,7 @@ export default {
       return this.getSimulationState.length > 0 ? this.$t('forms.cycles.unplanted') + ': ' + this.formatToMoney(this.getSimulationState[this.simulationStep].unplantedSeeds.toFixed(0)) : this.$t('forms.cycles.unplanted')
     },
     labelSeedsRemovesBurned () {
-      return this.getSimulationState.length > 0 ? this.$t('forms.cycles.burned') + ': ' + this.formatToMoney(this.getSimulationState[this.simulationStep].burnedSeedsDuringCycle) : this.$t('forms.cycles.planted')
+      return this.getSimulationState.length > 0 ? this.$t('forms.cycles.burned') + ': ' + this.formatToMoney(this.getSimulationState[this.simulationStep].burnedSeedsDuringCycle) : this.$t('forms.cycles.burned')
     },
     showSaveSimulation () {
       return this.getSimulationState.length > 0
@@ -829,8 +862,10 @@ export default {
             bdcsGrowth: this.bdcsGrowth.value,
             contractsGrowth: this.contractsGrowth.value,
             newContractsDuringCycle: this.contracts.value,
+            outstandingContractsSeeds: this.outstandingContractsSeeds.value,
             outstandingContracts: this.outstandingContracts.value,
-            closedContractsPercentage: this.closedContractsPercentage.value
+            closedContractsPercentage: this.closedContractsPercentage.value,
+            seedsPerContract: this.seedsPerContract.value
             // harvestDistribution: {}
           }
           console.log('DoCycle Data:', simulationState)
@@ -895,6 +930,14 @@ export default {
       this.totals = this.cycleDataForm.totals
       this.unplantedSeedsPerUser = parseFloat(this.cycleDataForm.unplantedSeedsPerUser)
       this.bankSeedsPerCycle = parseFloat(this.cycleDataForm.bankSeedsPerCycle).toFixed(2)
+      this.seedsPerContract = parseFloat(this.cycleDataForm.seedsPerContract)
+      this.outstandingContractsSeeds = parseFloat(this.cycleDataForm.outstandingContractsSeeds)
+      this.contractsSeeds = parseFloat(this.cycleDataForm.newContractsDuringCycleSeeds).toFixed(2)
+      this.closedContractsSeeds = parseFloat(this.cycleDataForm.closedContractsDuringCycleSeeds).toFixed(2)
+
+      console.log('....................................................')
+      console.log('MIRA EN CYCLES: seeds per contract:', parseFloat(this.cycleDataForm.seedsPerContract).toFixed(2))
+      console.log('....................................................')
       //   console.log('After Sync Form:', this.getSimulationState)
     },
     cleanFormat (value) {
