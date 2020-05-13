@@ -78,7 +78,7 @@ export default {
 </script>
 
 <style lang="sass">
-  #contSelect .q-field__native, .q-field__prefix, .q-field__suffix, .q-field__input, .q-field__append
+  #contSelect .q-field__native, #contSelect .q-field__prefix,#contSelect .q-field__suffix,#contSelect .q-field__input,#contSelect .q-field__append
     color: #ffffff !important
   #containerHeader .selectClass span
     color: #ffffff
