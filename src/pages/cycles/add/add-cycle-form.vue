@@ -29,6 +29,7 @@
                             :label="labelGDP"
                             default-opened
                             header-class="text-positive"
+                            dense-toggle
                         )
                           q-card
                             q-card-section.q-gutter-y-sm
@@ -41,6 +42,7 @@
                                 //-   placeholder="Select an option"
                                 //- )
                                 q-expansion-item(
+                                  dense-toggle
                                   group="groupGDP"
                                   :label="labelPeopleGrowth"
                                   header-class="text-positive"
@@ -63,6 +65,7 @@
                                       prefix="S"
                                     )
                                 q-expansion-item(
+                                  dense-toggle
                                   group="groupGDP"
                                   :label="labelOrganizationsGrowth"
                                   header-class="text-positive"
@@ -85,6 +88,7 @@
                                         prefix="S"
                                     )
                                 q-expansion-item(
+                                  dense-toggle
                                   group="groupGDP"
                                   :label="labelBDCGrowth"
                                   header-class="text-positive"
@@ -101,6 +105,7 @@
                                         :rules="[rules.nonNegative]"
                                     )
                                 q-expansion-item(
+                                  dense-toggle
                                   group="groupGDP"
                                   :label="labelChangeRequiredToMeetDemand"
                                   header-class="text-positive"
@@ -127,13 +132,15 @@
                         q-separator
                         //- Seeds Bank
                         q-expansion-item(
-                            group="formGroup"
-                            :label="labelSeedsBank"
-                            header-class="text-positive"
+                          dense-toggle
+                          group="formGroup"
+                          :label="labelSeedsBank"
+                          header-class="text-positive"
                         )
                           q-card
                             q-card-section.q-gutter-y-sm
                               q-expansion-item(
+                                dense-toggle
                                 v-show="false"
                                 group="groupSeeds"
                                 label="Bank"
@@ -223,16 +230,18 @@
                         q-separator
                         //- Seeds Remove
                         q-expansion-item(
-                            group="formGroup"
-                            :label="labelSeedsRemoves"
-                            header-class="text-positive"
+                          dense-toggle
+                          group="formGroup"
+                          :label="labelSeedsRemoves"
+                          header-class="text-positive"
                         )
                           q-card
                             q-card-section.q-gutter-y-sm
                                 q-expansion-item(
-                                    group="groupSeedsRemove"
-                                    :label="labelSeedsRemovesPlanted"
-                                    header-class="text-positive"
+                                  dense-toggle
+                                  group="groupSeedsRemove"
+                                  :label="labelSeedsRemovesPlanted"
+                                  header-class="text-positive"
                                 )
                                   div.q-px-sm.q-py-xs
                                     money-input(
@@ -257,9 +266,10 @@
                                       prefix="S"
                                     )
                                 q-expansion-item(
-                                    group="groupSeedsRemove"
-                                    :label="labelSeedsRemovesBurned"
-                                    header-class="text-positive"
+                                  dense-toggle
+                                  group="groupSeedsRemove"
+                                  :label="labelSeedsRemovesBurned"
+                                  header-class="text-positive"
                                 )
                                   div.q-px-sm.q-py-xs
                                     money-input(
@@ -278,9 +288,10 @@
                                       prefix="S"
                                     )
                                 q-expansion-item(
-                                    group="groupSeedsRemove"
-                                    :label="labelEnterExchanges"
-                                    header-class="text-positive"
+                                  dense-toggle
+                                  group="groupSeedsRemove"
+                                  :label="labelEnterExchanges"
+                                  header-class="text-positive"
                                 )
                                   div.q-px-sm.q-py-xs
                                     money-input(
@@ -297,16 +308,18 @@
                         q-separator
                         //- Seeds Introduce
                         q-expansion-item(
-                            group="formGroup"
-                            :label="labelSeedsIntroduce"
-                            header-class="text-positive"
+                          dense-toggle
+                          group="formGroup"
+                          :label="labelSeedsIntroduce"
+                          header-class="text-positive"
                         )
                           q-card
                             q-card-section.q-gutter-y-sm
                                 q-expansion-item(
-                                    group="groupSeedsIntroduce"
-                                    :label="labelExitExchanges"
-                                    header-class="text-positive"
+                                  dense-toggle
+                                  group="groupSeedsIntroduce"
+                                  :label="labelExitExchanges"
+                                  header-class="text-positive"
                                 )
                                   div.q-px-sm.q-py-xs
                                     money-input(
@@ -321,9 +334,10 @@
                                         :rules="[rules.nonNegative]"
                                     )
                                 q-expansion-item(
-                                    group="groupSeedsIntroduce"
-                                    :label="labelSeedsIntroduceUnplanted"
-                                    header-class="text-positive"
+                                  dense-toggle
+                                  group="groupSeedsIntroduce"
+                                  :label="labelSeedsIntroduceUnplanted"
+                                  header-class="text-positive"
                                 )
                                   div.q-px-sm.q-py-xs
                                     money-input(
@@ -344,9 +358,10 @@
                         q-separator
                         //- Harvest Distribution
                         q-expansion-item(
-                            group="formGroup"
-                            :label="$t('forms.cycles.groupHarvestDistribution')"
-                            header-class="text-positive"
+                          dense-toggle
+                          group="formGroup"
+                          :label="$t('forms.cycles.groupHarvestDistribution')"
+                          header-class="text-positive"
                         )
                           q-card
                             q-card-section.q-gutter-y-sm
@@ -385,9 +400,10 @@
                         q-separator
                         //- BDC Distribution
                         q-expansion-item(
-                            group="formGroup"
-                            :label="$t('forms.cycles.groupBDCDistribution')"
-                            header-class="text-positive"
+                          dense-toggle
+                          group="formGroup"
+                          :label="$t('forms.cycles.groupBDCDistribution')"
+                          header-class="text-positive"
                         )
                           q-card
                             q-card-section.q-gutter-y-sm
@@ -418,9 +434,10 @@
                         q-separator
                         //- GDC Distribution
                         q-expansion-item(
-                            group="formGroup"
-                            :label="$t('forms.cycles.groupGDCDistribution')"
-                            header-class="text-positive"
+                          dense-toggle
+                          group="formGroup"
+                          :label="$t('forms.cycles.groupGDCDistribution')"
+                          header-class="text-positive"
                         )
                           q-card
                             q-card-section.q-gutter-y-sm
