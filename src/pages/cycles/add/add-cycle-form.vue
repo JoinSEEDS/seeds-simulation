@@ -62,7 +62,7 @@
                                       v-model='gdpPerPerson'
                                       :label="$t('forms.cycles.gdpPerPerson')"
                                       :rules="[rules.nonNegative]"
-                                      prefix="S"
+                                      seedsIcon
                                     )
                                 q-expansion-item(
                                   dense-toggle
@@ -85,7 +85,7 @@
                                         v-model='gdpPerOrganisation'
                                         :label="$t('forms.cycles.gdpPerOrganisation')"
                                         :rules="[rules.nonNegative]"
-                                        prefix="S"
+                                        seedsIcon
                                     )
                                 q-expansion-item(
                                   dense-toggle
@@ -117,7 +117,7 @@
                                         :rules="[rules.required]"
                                         :readonly='true'
                                         :bgColor="bgColor"
-                                        prefix="S"
+                                        seedsIcon
                                     )
                                     percentage-input(
                                         v-model='volumeGrowth'
@@ -151,13 +151,13 @@
                                     v-model='enterSeedsBank'
                                     :label="$t('forms.cycles.enterSeedsBank')"
                                     :rules="[rules.nonNegative]"
-                                    prefix="S"
+                                    seedsIcon
                                   )
                                   money-input(
                                     v-model='exitSeedsBank'
                                     :label="$t('forms.cycles.exitSeedsBank')"
                                     :rules="[rules.nonNegative]"
-                                    prefix="S"
+                                    seedsIcon
                                   )
                               //- q-expansion-item(
                               //-     group="groupSeeds"
@@ -169,7 +169,7 @@
                                 v-model='contractsGrowth'
                                 :label="$t('forms.cycles.contractsGrowth')"
                                 :rules="[rules.nonNegative]"
-                                prefix="S"
+                                seedsIcon
                               )
                               percentage-input(
                                   v-model='closedContractsPercentage'
@@ -180,7 +180,7 @@
                                   v-model='seedsPerContract'
                                   :label="$t('forms.cycles.seedsPerContract')"
                                   :rules="[rules.positiveInteger]"
-                                  prefix="S"
+                                  seedsIcon
                               )
                               money-input(
                                   v-model='outstandingContracts'
@@ -195,7 +195,7 @@
                                   :readonly='true'
                                   :rules="[rules.nonNegative]"
                                   :bgColor="bgColor"
-                                  prefix="S"
+                                  seedsIcon
                               )
                               money-input(
                                   v-model='contracts'
@@ -210,7 +210,7 @@
                                   :readonly='true'
                                   :rules="[rules.nonNegative]"
                                   :bgColor="bgColor"
-                                  prefix="S"
+                                  seedsIcon
                               )
                               money-input(
                                   v-model='closedContracts'
@@ -225,7 +225,7 @@
                                   :readonly='true'
                                   :bgColor="bgColor"
                                   :rules="[rules.nonNegative]"
-                                  prefix="S"
+                                  seedsIcon
                               )
                         q-separator
                         //- Seeds Remove
@@ -248,13 +248,13 @@
                                       v-model='seedsPlantedPerUserFixed'
                                       :label="$t('forms.cycles.seedsPlantedPerUserFixed')"
                                       :rules="[rules.nonNegative]"
-                                      prefix="S"
+                                      seedsIcon
                                     )
                                     money-input(
                                       v-model='seedsPlantedPerUserVariable'
                                       :label="$t('forms.cycles.seedsPlantedPerUserVariable')"
                                       :rules="[rules.nonNegative]"
-                                      prefix="S"
+                                      seedsIcon
                                     )
                                     money-input(
                                       v-show="true"
@@ -263,7 +263,7 @@
                                       :readonly='true'
                                       :bgColor="bgColor"
                                       :rules="[rules.nonNegative]"
-                                      prefix="S"
+                                      seedsIcon
                                     )
                                 q-expansion-item(
                                   dense-toggle
@@ -276,7 +276,7 @@
                                         v-model='averageSeedsBurnedPerUser'
                                         :label="$t('forms.cycles.averageSeedsBurnedPerUser')"
                                         :rules="[rules.nonNegative]"
-                                        prefix="S"
+                                        seedsIcon
                                     )
                                     money-input(
                                       v-show="true"
@@ -285,7 +285,7 @@
                                       :readonly='true'
                                       :bgColor="bgColor"
                                       :rules="[rules.nonNegative]"
-                                      prefix="S"
+                                      seedsIcon
                                     )
                                 q-expansion-item(
                                   dense-toggle
@@ -298,7 +298,7 @@
                                         v-model='enterExchanges'
                                         :label="$t('forms.cycles.enterExchanges')"
                                         :rules="[rules.nonNegative]"
-                                        prefix="S"
+                                        seedsIcon
                                     )
                                     percentage-input(
                                         v-model='enterExchangesWeight'
@@ -326,7 +326,7 @@
                                         v-model='exitExchanges'
                                         :label="$t('forms.cycles.exitExchanges')"
                                         :rules="[rules.nonNegative]"
-                                        prefix="S"
+                                        seedsIcon
                                     )
                                     percentage-input(
                                         v-model='exitExchangesWeight'
@@ -344,7 +344,7 @@
                                         v-model='unplantedSeedsPerUser'
                                         :label="$t('forms.cycles.unplantedSeedsPerUser')"
                                         :rules="[rules.nonNegative]"
-                                        prefix="S"
+                                        seedsIcon
                                     )
                                     money-input(
                                         v-show="true"
@@ -353,7 +353,7 @@
                                         :readonly='true'
                                         :bgColor="bgColor"
                                         :rules="[rules.nonNegative]"
-                                        prefix="S"
+                                        seedsIcon
                                     )
                         q-separator
                         //- Harvest Distribution
@@ -493,14 +493,14 @@
                         //-         v-model='fieldValue'
                         //-         :label="optionField"
                         //-         :rules="[rules.nonNegative]"
-                        //-         prefix="S"
+                        //-         seedsIcon
                         //-       )
                         //-       money-input(
                         //-         v-if="fieldType === 'money'"
                         //-         v-model='fieldValue'
                         //-         :label="optionField"
                         //-         :rules="[rules.nonNegative]"
-                        //-         prefix="S"
+                        //-         seedsIcon
                         //-       )
                         //-       p Field value: {{ fieldValue }}
                         //-       p this.peopleGrowth: {{ this.peopleGrowth }}
@@ -518,7 +518,7 @@
                               //-       v-model='gdpPerPerson'
                               //-       :label="$t('forms.cycles.gdpPerPerson')"
                               //-       :rules="[rules.nonNegative]"
-                              //-       prefix="S"
+                              //-       seedsIcon
                               //-   )
                     //- Hidden Fields
                     //- q-field(v-if="!hideFields" filled v-model='percentageOfHarvestAssignedCirculating' :label="$t('forms.cycles.percentageOfHarvestAssignedCirculating')")

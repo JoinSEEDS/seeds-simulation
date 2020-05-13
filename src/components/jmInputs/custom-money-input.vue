@@ -14,6 +14,8 @@
     )
         template(v-slot:control='{ id, floatingLabel, value, emitValue }')
             money.q-field__input.c_input(:id="id" class="q-field__input left" :value="value" :readonly="readonly" @input="emitValue" v-bind="moneyFormat" v-show="floatingLabel")
+        template(v-slot:prepend v-if="seedsIcon")
+          img.seeds-icon(src="~/assets/seeds-green-small.png")
 </template>
 
 <script>
@@ -32,7 +34,8 @@ export default {
     readonly: {},
     disable: {},
     bgColor: {},
-    rules: { type: Array }
+    rules: { type: Array },
+    seedsIcon: { type: Boolean }
   },
   data () {
     return {
@@ -117,9 +120,12 @@ export default {
 
 <style lang="sass" scoped>
 input:focus, textarea:focus, select:focus
-    outline: none
+  outline: none
 .c_input
-    background-color: inherit
-    flex: 1
-    border: none
+  background-color: inherit
+  flex: 1
+  border: none
+.seeds-icon
+  // width: 8px
+  height: 25px
 </style>
