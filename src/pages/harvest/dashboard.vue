@@ -75,9 +75,9 @@
             )
               //- template(v-slot:top)
               //-   custom-table-header(:titleTable="dataTableBDC.tableName" :subtitleTable="dataTableBDC.totalAmount" :tableId="constant.SEEDS_BDC" v-bind:showAll.sync="showAllBDCs")
-        .col-md-4.col-sm-12(@click="selectTable(constant.SEEDS_GDC)")
+        .col-md-4.col-sm-12(@click="selectTable(constant.SEEDS_GDC)" v-if="dataTableGDC.rows")
             custom-table-header.headerGDC(iconSrc="gdcTableIcon" :titleTable="dataTableGDC.tableName" :subtitleTable="dataTableGDC.totalAmount")
-            card-table-gdc(v-if="dataTableGDC.rows" :data="dataTableGDC.rows[0]" :selected="tableSelected === constant.SEEDS_GDC")
+            card-table-gdc(:data="dataTableGDC.rows[0]" :selected="tableSelected === constant.SEEDS_GDC")
             //- q-table(
             //- :data="dataTableGDC.rows"
             //- :columns="columnsTableGDC"
