@@ -154,6 +154,15 @@ export default {
       simulationDeleted: 'Simulation deleted.',
       simulation: 'Simulation',
       cleanSimulation: 'Clean simulation loaded'
+    },
+    tableCard: {
+      supply: 'Supply',
+      circulating: 'Circulating',
+      planted: 'Planted',
+      burned: 'Burned',
+      per3Cycles: 'Per 3 Cycles',
+      perBlock: 'Per Block',
+      perCycle: 'Per Cycle'
     }
   }
 }

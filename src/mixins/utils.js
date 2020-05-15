@@ -58,6 +58,12 @@ export const utils = {
   filters: {
     formatDate (date) {
       return TimeUtil.getFormatDate(new Date(date))
+    },
+    formatToMoney (amount) {
+      // const amount = absolute ? Math.abs(this.amount) : this.amount
+      const priceRound = Math.round(amount)
+      let format = new Intl.NumberFormat().format(priceRound)
+      return `${format}`
     }
   }
 }

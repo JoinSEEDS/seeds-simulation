@@ -118,20 +118,17 @@ export default {
 
 <style lang="sass">
 #chartL .myTooltipContainer
-    backgroundColor: rgb(149, 149, 149)
+    background-color: rgb(149, 149, 149)
     padding: 10px
     width: auto
     border-radius: 3px
     min-width: 150px
     text-align: center
-    color: 'red'
 #chartL .myTooltipText
-  color: 'red'
-  backgroundColor: 'green'
+  background-color: rgb(149, 149, 149)
 #chartL .tui-chart-tooltip
-  backgroundColor: 'green' !important
-  color: 'red' !important
+  background-color: rgb(149, 149, 149) !important
 #chartL .tui-chart, #chartL .tui-chart-tooltip-area, #chartL .tui-chart-tooltip
-  color: 'gray' !important
+  background-color: rgb(149, 149, 149)
 
 </style>

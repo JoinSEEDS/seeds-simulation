@@ -1,24 +1,29 @@
 <template lang="pug">
   q-scroll-area.scroll-container(ref="scrollArea")
     div.q-ma-sm.q-gutter-y-xl
-      .div(@click="selectTable(constant.SEEDS_GENERAL)")
-          q-table(
-          :data="dataTableGeneral.rows"
-          :columns="columnsTableGeneral"
-          row-key="name"
-          :card-class="{'bg-grey-5': tableSelected == constant.SEEDS_GENERAL}"
-          )
-            template(v-slot:top)
-              custom-table-header(:titleTable="dataTableGeneral.tableName")
-      .div(@click="selectTable(constant.SEEDS_GROWN)")
-          q-table(
-          :data="dataTableGROWN.rows"
-          :columns="columnsTableGrown"
-          row-key="name"
-          :card-class="{'bg-grey-5': tableSelected == constant.SEEDS_GROWN}"
-          )
-            template(v-slot:top)
-              custom-table-header(:titleTable="dataTableGROWN.tableName")
+      .row.q-col-gutter-sm
+        .col(@click="selectTable(constant.SEEDS_GENERAL)" )
+          card-table-totals(v-if="dataTableGeneral.rows" :data="dataTableGeneral.rows[0]" :selected="tableSelected === constant.SEEDS_GENERAL")
+        .col(@click="selectTable(constant.SEEDS_GROWN)")
+          card-table-growth(v-if="dataTableGROWN.rows" :data="dataTableGROWN.rows[0]" :selected="tableSelected === constant.SEEDS_GROWN")
+      //- .div(@click="selectTable(constant.SEEDS_GENERAL)")
+      //-     q-table(
+      //-     :data="dataTableGeneral.rows"
+      //-     :columns="columnsTableGeneral"
+      //-     row-key="name"
+      //-     :card-class="{'bg-grey-5': tableSelected == constant.SEEDS_GENERAL}"
+      //-     )
+      //-       template(v-slot:top)
+      //-         custom-table-header(:titleTable="dataTableGeneral.tableName")
+      //- .div(@click="selectTable(constant.SEEDS_GROWN)")
+      //-     q-table(
+      //-     :data="dataTableGROWN.rows"
+      //-     :columns="columnsTableGrown"
+      //-     row-key="name"
+      //-     :card-class="{'bg-grey-5': tableSelected == constant.SEEDS_GROWN}"
+      //-     )
+      //-       template(v-slot:top)
+      //-         custom-table-header(:titleTable="dataTableGROWN.tableName")
       .row.q-col-gutter-md
         .col-md-6.col-sm-12
           custom-table-header.header(:titleTable="dataTableIND.tableName" :subtitleTable="dataTableIND.totalAmount" :tableId="constant.SEEDS_IND_ACCNTS" v-bind:showAll.sync="showAllIndividualAccounts")
@@ -100,11 +105,13 @@
 <script>
 import CustomChart from '~/pages/harvest/chart'
 import CustomTableHeader from '~/pages/harvest/components/customTableHeader'
+import CardTableTotals from '~/pages/harvest/components/card-table-totals'
+import CardTableGrowth from '~/pages/harvest/components/card-table-growth'
 import harvestConstant from '~/const/harvestConstants'
 import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'harvest-dashboard',
-  components: { CustomChart, CustomTableHeader },
+  components: { CustomChart, CustomTableHeader, CardTableTotals, CardTableGrowth },
   beforeMount () {
     this.constant = harvestConstant
   },
