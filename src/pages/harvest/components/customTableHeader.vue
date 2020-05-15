@@ -1,7 +1,9 @@
 <template lang="pug">
   #containerHeader.full-width(ref="container")
     div.container-title.text-white.header
-        p.text-h6.text-center {{titleTable}}
+      .row.justify-center
+        img.icon(:src="require(`assets/${iconSrc}.png`)" v-if="iconSrc")
+        p.text-h6.titleTable {{titleTable}}
     div.row.justify-between.items-center.container-subtitle.q-px-md.q-pt-sm.q-pb-sm(v-if="subtitleTable")
         p.text-center Total Amount: {{this.formatToMoney(subtitleTable)}}
         #contSelect.select(@click.stop="prevent")
@@ -37,6 +39,9 @@ export default {
     },
     tableId: {
       default: undefined
+    },
+    iconSrc: {
+      type: String
     }
   },
   data () {
@@ -95,5 +100,12 @@ export default {
   #containerHeader .header
     border-radius: 5px 5px 0px 0px
   #containerHeader .select
-    min-width: 200px
+    min-width: 160px
+  #containerHeader .icon
+    width: 25px
+    height: 25px
+    padding: 2px
+    margin-top: 2px
+  #containerHeader .titleTable
+    margin: 0px 5px 0px 5px
 </style>

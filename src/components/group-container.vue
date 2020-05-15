@@ -1,6 +1,6 @@
 <template lang="pug">
 #main.q-my-md
-  #container-group.q-pa-sm
+  #container-group
     #name-group
       .title-group
         img.seeds-icon(src="~/assets/seeds-green-small.png")
@@ -28,7 +28,8 @@ export default {
   border-radius: 5px
 #name-group
   position: relative
-  margin-top: -35px
+  margin-top: -28px
+  margin-left: 8px
   padding: none
   margin-bottom: 0px
   background-color: 'red'

@@ -27,7 +27,7 @@
     group-container.q-pa-md(title="eeds Distribution")
       .row.q-col-gutter-md
         .col-md-6.col-sm-12
-          custom-table-header.header(:titleTable="dataTableIND.tableName" :subtitleTable="dataTableIND.totalAmount" :tableId="constant.SEEDS_IND_ACCNTS" v-bind:showAll.sync="showAllIndividualAccounts")
+          custom-table-header.header(:titleTable="dataTableIND.tableName" :subtitleTable="dataTableIND.totalAmount" :tableId="constant.SEEDS_IND_ACCNTS" v-bind:showAll.sync="showAllIndividualAccounts" iconSrc="peopleTableIcon")
           div.contentTable.cursor-pointer(@click="selectTable(constant.SEEDS_IND_ACCNTS)")
             q-table(
               class="my-sticky-virtscroll-table"
@@ -43,7 +43,7 @@
               //- template(v-slot:top)
               //-   custom-table-header(:titleTable="dataTableIND.tableName" :subtitleTable="dataTableIND.totalAmount" :tableId="constant.SEEDS_IND_ACCNTS" v-bind:showAll.sync="showAllIndividualAccounts")
         .col-md-6.col-sm-12
-          custom-table-header(:titleTable="dataTableORG.tableName" :subtitleTable="dataTableORG.totalAmount" :tableId="constant.SEEDS_ORG_ACCNTS" v-bind:showAll.sync="showAllOrganizationAccounts")
+          custom-table-header(iconSrc="organizationTableIcon" :titleTable="dataTableORG.tableName" :subtitleTable="dataTableORG.totalAmount" :tableId="constant.SEEDS_ORG_ACCNTS" v-bind:showAll.sync="showAllOrganizationAccounts")
           div.contentTable.cursor-pointer(@click="selectTable(constant.SEEDS_ORG_ACCNTS)")
             q-table(
               class="my-sticky-virtscroll-table"
@@ -58,9 +58,9 @@
             )
               //- template(v-slot:top)
               //-   custom-table-header(:titleTable="dataTableORG.tableName" :subtitleTable="dataTableORG.totalAmount" :tableId="constant.SEEDS_ORG_ACCNTS" v-bind:showAll.sync="showAllOrganizationAccounts")
-      .row.q-col-gutter-md
+      .row.q-col-gutter-md.q-mt-sm
         .col-md-6.col-sm-12
-          custom-table-header(:titleTable="dataTableBDC.tableName" :subtitleTable="dataTableBDC.totalAmount" :tableId="constant.SEEDS_BDC" v-bind:showAll.sync="showAllBDCs")
+          custom-table-header(iconSrc="bdcTableIcon" :titleTable="dataTableBDC.tableName" :subtitleTable="dataTableBDC.totalAmount" :tableId="constant.SEEDS_BDC" v-bind:showAll.sync="showAllBDCs")
           div.contentTable.cursor-pointer(@click="selectTable(constant.SEEDS_BDC)")
             q-table(
               class="my-sticky-virtscroll-table"
@@ -83,24 +83,24 @@
             :card-class="{'bg-grey-5': tableSelected == constant.SEEDS_GDC}"
             )
               template(v-slot:top)
-                  custom-table-header(:titleTable="dataTableGDC.tableName" :subtitleTable="dataTableGDC.totalAmount")
+                  custom-table-header(iconSrc="gdcTableIcon" :titleTable="dataTableGDC.tableName" :subtitleTable="dataTableGDC.totalAmount")
       //- div(v-if="dataChart")
       //- p Condition {{getSimulationState.length}}
-      div.row.justify-start.q-pl-md(
-        :class="{ 'hidden': !showOptions }"
+    div.row.justify-start.q-pl-md(
+      :class="{ 'hidden': !showOptions }"
+    )
+      q-select.col-3(
+        v-model='valueSelected'
+        :options='options'
+        :label="$t('forms.cycles.chartOptions')"
       )
-        q-select.col-3(
-          v-model='valueSelected'
-          :options='options'
-          :label="$t('forms.cycles.chartOptions')"
-        )
-      custom-chart.q-mb-xl(
-        v-show="tableSelected"
-        :dataChart="dataChart",
-        :chartName="dataChart.chartName",
-        xAxisTitle="Cycles",
-        yAxisTitle="Seeds"
-      )
+    custom-chart.q-mb-xl(
+      v-show="tableSelected"
+      :dataChart="dataChart",
+      :chartName="dataChart.chartName",
+      xAxisTitle="Cycles",
+      yAxisTitle="Seeds"
+    )
 </template>
 
 <script>
