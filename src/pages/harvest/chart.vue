@@ -1,11 +1,12 @@
 <template lang="pug">
-    div.column(ref='container' v-if="dataChart")
+    #chartL.column(ref='container' v-if="dataChart")
       //- slot(name='container')
       #chart-area
 </template>
 
 <script>
 // https://github.com/nhn/tui.chart/blob/master/docs/wiki/README.md
+// https://nhn.github.io/tui.chart/latest/tui.chart
 import chart from 'tui-chart'
 import { dom } from 'quasar'
 const { width } = dom
@@ -41,6 +42,20 @@ export default {
   mounted () {
     window.addEventListener('resize', () => { this.resizeChart() })
     console.log('Container ref', this.$refs)
+    // $('#table-filters>ul>li.active').removeClass('tui-chart-tooltip')
+    // this.$refs.container.children[0].removeClass('tui-chart-tooltip')
+    // this.$refs.container.children[0].children[0].children[0].children[0].classList.remove('tui-chart-tooltip')
+    // this.$refs.container.children[0].children[0].children[0].children[0].children[0].classList.remove('tui-chart-tooltip')
+  },
+  updated () {
+    const b = this.$refs.container.children[0].children[0].children[2].childNodes
+    // this.$refs.container.children[0].children[0].children[2].style.backgroundColor = 'gray'
+    // b[0].style.backgroundColor = 'gray'
+    // const a = this.$refs.container.children[0].children[0].children[2]
+    console.log('ID', b)
+    b.forEach(element => {
+      console.log('CHILDREN', element)
+    })
   },
   beforeDestroy () {
     document.removeEventListener('resize', () => { this.resizeChart() })
@@ -83,28 +98,40 @@ export default {
           }
         },
         tooltip: {
-          suffix: this.yAxisTitle
+          template: (category, item, categoryTimestamp) => {
+            const head = `<div style=backgroundColor: 'red'>
+              <div>${`${item.legend} ${item.value} TRADA`}</div>
+              </div>`
+            return head
+          }
         },
         legend: {
           align: 'top'
         }
       }
-      //   var theme = {
-      //     series: {
-      //       colors: [
-      //         '#83b14e', '#458a3f', '#295ba0', '#2a4175', '#289399',
-      //         '#289399', '#617178', '#8a9a9a', '#516f7d', '#dddddd'
-      //       ]
-      //     }
-      //   }
-
-      // For apply theme
-
-      // tui.chart.registerTheme('myTheme', theme);
-      // options.theme = 'myTheme';
 
       chart.lineChart(container, data, options)
     }
   }
 }
 </script>
+
+<style lang="sass">
+#chartL .myTooltipContainer
+    backgroundColor: rgb(149, 149, 149)
+    padding: 10px
+    width: auto
+    border-radius: 3px
+    min-width: 150px
+    text-align: center
+    color: 'red'
+#chartL .myTooltipText
+  color: 'red'
+  backgroundColor: 'green'
+#chartL .tui-chart-tooltip
+  backgroundColor: 'green' !important
+  color: 'red' !important
+#chartL .tui-chart, #chartL .tui-chart-tooltip-area, #chartL .tui-chart-tooltip
+  color: 'gray' !important
+
+</style>
