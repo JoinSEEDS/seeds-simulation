@@ -17,6 +17,7 @@
             map-options
             @input="$emit('update:showAll', $event)"
           )
+    .div-else.row.container-subtitle.q-px-md.q-pt-sm.q-pb-sm(v-else)
         //- p Show all percentiles
         //-     q-toggle(
         //-       v-model="expandEntries",
@@ -108,4 +109,6 @@ export default {
     margin-top: 2px
   #containerHeader .titleTable
     margin: 0px 5px 0px 5px
+  #containerHeader .div-else
+    height: 55px
 </style>

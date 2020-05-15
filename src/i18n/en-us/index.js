@@ -161,8 +161,13 @@ export default {
       planted: 'Planted',
       burned: 'Burned',
       per3Cycles: 'Per 3 Cycles',
+      perCycle: 'Per Cycle',
       perBlock: 'Per Block',
-      perCycle: 'Per Cycle'
+      networkMtn: 'Network Mtn.',
+      regenGrants: 'Regen Grants',
+      coreDevelopment: 'Core Development',
+      interestFreeLoans: 'Interest Free Loans',
+      totalAmount: 'Total Amount'
     }
   }
 }

@@ -59,7 +59,7 @@
               //- template(v-slot:top)
               //-   custom-table-header(:titleTable="dataTableORG.tableName" :subtitleTable="dataTableORG.totalAmount" :tableId="constant.SEEDS_ORG_ACCNTS" v-bind:showAll.sync="showAllOrganizationAccounts")
       .row.q-col-gutter-md.q-mt-sm
-        .col-md-6.col-sm-12
+        .col-md-8.col-sm-12
           custom-table-header(iconSrc="bdcTableIcon" :titleTable="dataTableBDC.tableName" :subtitleTable="dataTableBDC.totalAmount" :tableId="constant.SEEDS_BDC" v-bind:showAll.sync="showAllBDCs")
           div.contentTable.cursor-pointer(@click="selectTable(constant.SEEDS_BDC)")
             q-table(
@@ -75,17 +75,17 @@
             )
               //- template(v-slot:top)
               //-   custom-table-header(:titleTable="dataTableBDC.tableName" :subtitleTable="dataTableBDC.totalAmount" :tableId="constant.SEEDS_BDC" v-bind:showAll.sync="showAllBDCs")
-        .col-md-6.col-sm-12(@click="selectTable(constant.SEEDS_GDC)")
-            q-table(
-            :data="dataTableGDC.rows"
-            :columns="columnsTableGDC"
-            row-key="name"
-            :card-class="{'bg-grey-5': tableSelected == constant.SEEDS_GDC}"
-            )
-              template(v-slot:top)
-                  custom-table-header(iconSrc="gdcTableIcon" :titleTable="dataTableGDC.tableName" :subtitleTable="dataTableGDC.totalAmount")
-      //- div(v-if="dataChart")
-      //- p Condition {{getSimulationState.length}}
+        .col-md-4.col-sm-12(@click="selectTable(constant.SEEDS_GDC)")
+            custom-table-header.headerGDC(iconSrc="gdcTableIcon" :titleTable="dataTableGDC.tableName" :subtitleTable="dataTableGDC.totalAmount")
+            card-table-gdc(v-if="dataTableGDC.rows" :data="dataTableGDC.rows[0]" :selected="tableSelected === constant.SEEDS_GDC")
+            //- q-table(
+            //- :data="dataTableGDC.rows"
+            //- :columns="columnsTableGDC"
+            //- row-key="name"
+            //- :card-class="{'bg-grey-5': tableSelected == constant.SEEDS_GDC}"
+            //- )
+            //-   template(v-slot:top)
+            //-       custom-table-header(iconSrc="gdcTableIcon" :titleTable="dataTableGDC.tableName" :subtitleTable="dataTableGDC.totalAmount")
     div.row.justify-start.q-pl-md(
       :class="{ 'hidden': !showOptions }"
     )
@@ -108,12 +108,13 @@ import CustomChart from '~/pages/harvest/chart'
 import CustomTableHeader from '~/pages/harvest/components/customTableHeader'
 import CardTableTotals from '~/pages/harvest/components/card-table-totals'
 import CardTableGrowth from '~/pages/harvest/components/card-table-growth'
+import CardTableGdc from '~/pages/harvest/components/card-table-gdc'
 import harvestConstant from '~/const/harvestConstants'
 import GroupContainer from '~/components/group-container'
 import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'harvest-dashboard',
-  components: { CustomChart, CustomTableHeader, CardTableTotals, CardTableGrowth, GroupContainer },
+  components: { CustomChart, CustomTableHeader, CardTableTotals, CardTableGrowth, CardTableGdc, GroupContainer },
   beforeMount () {
     this.constant = harvestConstant
   },
