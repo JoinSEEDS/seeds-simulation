@@ -4,7 +4,7 @@
     #name-group
       .title-group
         img.seeds-icon(src="~/assets/seeds-green-small.png")
-        span.p {{title}}
+        span.p.text-title {{title}}
     .q-pa-md
         slot
          p Here put your component
@@ -39,10 +39,17 @@ export default {
   padding: 5px 5px 2px 5px
   font-size: 15px
   margin-bottom: px
-  font-family: Roboto, -apple-system, Helvetica Neue, Helvetica, Arial, sans-serif !important;
   border-radius: 5px
 .seeds-icon
   height: 30px
   margin-bottom: -7px
   margin-right: 3px
+.text-title
+  height: 24.4px
+  width: 126.7px
+  color: #091935
+  font-family: "Helvetica Neue"
+  font-size: 18px
+  letter-spacing: 0.75px
+  line-height: 21px
 </style>

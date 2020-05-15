@@ -6,26 +6,26 @@
           q-card.cardItem.q-pa-lg
             .row.justify-center
               img.icon(src="~/assets/functionIcon.png")
-              span.text-h6.text-white.text-center.q-mx-sm {{$t('pages.tableCard.supply')}}
-            .text-h6.text-white.text-center {{data.totalSeeds | formatToMoney}}
+              span.text-white.text-center.q-mx-sm.text-title {{$t('pages.tableCard.supply')}}
+            .text-white.text-center.text-value {{data.totalSeeds | formatToMoney}}
         .col-6
           q-card.cardItem.q-pa-lg
             .row.justify-center
               img.icon(src="~/assets/circulatingIcon.png")
-              .text-h6.text-white.text-center.q-mx-sm {{$t('pages.tableCard.circulating')}}
-            .text-h6.text-white.text-center {{data.totalCirculatingSeeds | formatToMoney}}
+              .text-white.text-center.q-mx-sm.text-title {{$t('pages.tableCard.circulating')}}
+            .text-white.text-center.text-value {{data.totalCirculatingSeeds | formatToMoney}}
         .col-6
           q-card.cardItem.q-pa-lg
             .row.justify-center
               img.icon(src="~/assets/plantedIcon.png")
-              .text-h6.text-white.text-center.q-mx-sm {{$t('pages.tableCard.planted')}}
-            .text-h6.text-white.text-center {{data.totalSeedsPlanted | formatToMoney}}
+              .text-white.text-center.q-mx-sm.text-title {{$t('pages.tableCard.planted')}}
+            .text-white.text-center.text-value {{data.totalSeedsPlanted | formatToMoney}}
         .col-6
           q-card.cardItem.q-pa-lg
             .row.justify-center
               img.icon(src="~/assets/burnedIcon.png")
-              .text-h6.text-white.text-center.q-mx-sm {{$t('pages.tableCard.burned')}}
-            .text-h6.text-white.text-center {{data.totalSeedsBurned | formatToMoney}}
+              .text-white.text-center.q-mx-sm.text-title {{$t('pages.tableCard.burned')}}
+            .text-white.text-center.text-value {{data.totalSeedsBurned | formatToMoney}}
 </template>
 
 <script>
@@ -54,4 +54,18 @@ export default {
     width: 25px
   .tableSelected
     border-radius: 5px
+  .text-title
+    height: 22.65px
+    color: #FFF
+    font-family: "Helvetica Neue"
+    font-size: 14px
+    font-weight: 700
+    line-height: 17px
+  .text-value
+    height: 33.11px
+    color: #FFF
+    font-family: "Helvetica Neue"
+    font-size: 18px
+    line-height: 21px
+    margin-top: 10px
 </style>
