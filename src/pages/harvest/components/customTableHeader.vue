@@ -1,6 +1,6 @@
 <template lang="pug">
   #containerHeader.full-width(ref="container")
-    div.bg-secondary.text-white.header
+    div.container-title.text-white.header
         p.text-h6.text-center {{titleTable}}
     div.row.justify-between.items-center.container-subtitle.q-px-md.q-pt-sm.q-pb-sm(v-if="subtitleTable")
         p.text-center Total Amount: {{this.formatToMoney(subtitleTable)}}
@@ -10,7 +10,7 @@
             dense
             v-model="optionSelected"
             :options="options"
-            label="Show"
+            label="Granularity"
             emit-value
             map-options
             @input="$emit('update:showAll', $event)"
@@ -84,10 +84,12 @@ export default {
     color: #ffffff
   #containerHeader .container-title
     color: #ffffff
-    background-color: #1a237e
+    background-color: #242626
   #containerHeader .container-subtitle
     color: #ffffff
-    background-color: #514aac
+    background-color: #242626
+  .containerTitle
+    background-color: #242626
   #containerHeader p
     margin: 0px
   #containerHeader .header

@@ -1,7 +1,7 @@
 <template lang="pug">
   q-scroll-area.scroll-container(ref="scrollArea")
-    div.q-ma-sm.q-gutter-y-xl
-      .row.q-col-gutter-sm
+    div.q-ma-md.q-gutter-y-xl
+      .row.q-col-gutter-sm.card-tables-container
         .col(@click="selectTable(constant.SEEDS_GENERAL)" )
           card-table-totals(v-if="dataTableGeneral.rows" :data="dataTableGeneral.rows[0]" :selected="tableSelected === constant.SEEDS_GENERAL")
         .col(@click="selectTable(constant.SEEDS_GROWN)")
@@ -24,6 +24,7 @@
       //-     )
       //-       template(v-slot:top)
       //-         custom-table-header(:titleTable="dataTableGROWN.tableName")
+    group-container.q-pa-md(title="eeds Distribution")
       .row.q-col-gutter-md
         .col-md-6.col-sm-12
           custom-table-header.header(:titleTable="dataTableIND.tableName" :subtitleTable="dataTableIND.totalAmount" :tableId="constant.SEEDS_IND_ACCNTS" v-bind:showAll.sync="showAllIndividualAccounts")
@@ -108,10 +109,11 @@ import CustomTableHeader from '~/pages/harvest/components/customTableHeader'
 import CardTableTotals from '~/pages/harvest/components/card-table-totals'
 import CardTableGrowth from '~/pages/harvest/components/card-table-growth'
 import harvestConstant from '~/const/harvestConstants'
+import GroupContainer from '~/components/group-container'
 import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'harvest-dashboard',
-  components: { CustomChart, CustomTableHeader, CardTableTotals, CardTableGrowth },
+  components: { CustomChart, CustomTableHeader, CardTableTotals, CardTableGrowth, GroupContainer },
   beforeMount () {
     this.constant = harvestConstant
   },
@@ -353,6 +355,8 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+  .card-tables-container
+    // max-height: 300px
   .contentTable
     margin-top: -2px
   .scroll-container

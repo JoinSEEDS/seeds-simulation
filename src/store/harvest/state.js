@@ -7,19 +7,21 @@ export default () => ({
     tableName: 'Seeds Grown'
   },
   peopleAccountsTable: {
-    tableName: 'Seeds Distributed for Individual Accounts',
+    tableName: 'People Accounts',
     expand: false
   },
   organizationAccountsTable: {
-    tableName: 'Seeds Distributed for Organization Accounts',
+    tableName: 'Organizations Accounts',
     expand: false
   },
   bdcsTable: {
-    tableName: 'Seeds Distributed for BDCs',
+    tableName: 'BDC',
+    // tableName: 'Seeds Distributed for BDCs',
     expanded: false
   },
   gdcTable: {
-    tableName: 'Seeds for GDC'
+    // tableName: 'Seeds for GDC'
+    tableName: 'GDC'
   },
   dataChart: {
     chartName: 'undefined'

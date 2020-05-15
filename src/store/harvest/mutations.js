@@ -40,19 +40,20 @@ export const restartSimulation = (state, newState) => {
     tableName: 'Seeds Grown'
   }
   state.peopleAccountsTable = {
-    tableName: 'Seeds Distributed for Individual Accounts',
+    tableName: 'People Accounts',
     expand: false
   }
   state.organizationAccountsTable = {
-    tableName: 'Seeds Distributed for Organization Accounts',
+    tableName: 'Organizations Accounts',
     expand: false
   }
   state.bdcsTable = {
-    tableName: 'Seeds Distributed for BDCs',
+    tableName: 'BDC',
     expanded: false
   }
   state.gdcTable = {
-    tableName: 'Seeds for GDC'
+    // tableName: 'Seeds for GDC'
+    tableName: 'GDC'
   }
   state.dataChart = {
     chartName: 'undefined'

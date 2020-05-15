@@ -61,7 +61,7 @@ export const getDataTable = async function ({ dispatch, commit, state }, { table
         all
       } = harvestDistribution.peopleAccounts
       commit('setDataPeopleAccountsTable', {
-        tableName: 'Seeds Distributed for Individual Accounts',
+        tableName: 'People Accounts',
         totalAmount: totalAmountForAccounts,
         all: structureAll({ ...all, k: 0 }),
         sample10: structureAll({ ...all, k: 9 }),
@@ -90,7 +90,7 @@ export const getDataTable = async function ({ dispatch, commit, state }, { table
         allOrg
       } = harvestDistribution.organizationAccounts
       commit('setDataOrganizationsAccountsTable', {
-        tableName: 'Seeds Distributed for Organization Accounts',
+        tableName: 'Organizations Accounts',
         totalAmount: totalAmountForOrganizations,
         all: structureAll({ ...allOrg, k: 0 }),
         sample10: structureAll({ ...allOrg, k: 9 }),
@@ -119,7 +119,7 @@ export const getDataTable = async function ({ dispatch, commit, state }, { table
         allBdc
       } = harvestDistribution.bdcs
       commit('setDataBdcsTable', {
-        tableName: 'Seeds Distributed for BDCs',
+        tableName: 'BDC',
         totalAmount: totalAmountForBdcs,
         all: getBdcRows({ ...allBdc, k: 0 }),
         sample10: getBdcRows({ ...allBdc, k: 9 }),
@@ -141,7 +141,8 @@ export const getDataTable = async function ({ dispatch, commit, state }, { table
       break
     case HarvestConstants.SEEDS_GDC:
       commit('setDataGdcTable', {
-        tableName: 'Seeds for GDC',
+        // tableName: 'Seeds for GDC',
+        tableName: 'GDC',
         rows: [
           {
             totalAmountForGdc: harvestDistribution.gdcs.totalAmountForGdc,

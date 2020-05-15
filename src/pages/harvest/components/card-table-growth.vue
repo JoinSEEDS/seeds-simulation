@@ -48,4 +48,6 @@ export default {
     width: 25px
   .tableSelected
     border-radius: 5px
+  #Container
+    max-height: 300px
 </style>
