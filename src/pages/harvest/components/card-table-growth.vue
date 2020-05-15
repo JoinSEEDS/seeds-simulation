@@ -48,13 +48,6 @@ export default {
     width: 25px
   .tableSelected
     border-radius: 5px
-    .text-title
-    height: 22.65px
-    color: #FFF
-    font-family: "Helvetica Neue"
-    font-size: 14px
-    font-weight: 700
-    line-height: 17px
   .text-title
     height: 22.65px
     color: #FFF
