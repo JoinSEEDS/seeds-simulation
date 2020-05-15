@@ -3,7 +3,7 @@
     div.container-title.text-white.header
       .row.justify-center
         img.icon(:src="require(`assets/${iconSrc}.png`)" v-if="iconSrc")
-        p.text-h6.titleTable {{titleTable}}
+        p.titleTable {{titleTable}}
     div.row.justify-between.items-center.container-subtitle.q-px-md.q-pt-sm.q-pb-sm(v-if="subtitleTable")
         p.text-center Total Amount: {{this.formatToMoney(subtitleTable)}}
         #contSelect.select(@click.stop="prevent")
@@ -108,7 +108,13 @@ export default {
     padding: 2px
     margin-top: 2px
   #containerHeader .titleTable
-    margin: 0px 5px 0px 5px
+    margin: 5px 5px 0px 5px
+    height: 42px
+    color: #FFF
+    font-family: "Helvetica Neue"
+    font-size: 18px
+    letter-spacing: 0.75px
+    line-height: 21px
   #containerHeader .div-else
     height: 55px
 </style>
