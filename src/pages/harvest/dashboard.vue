@@ -2,7 +2,9 @@
 #Container
   group-container.relative-position.q-pa-md.full-width(title="eeds" v-if="totalSimulationSteps === 0")
     .no-data-view
-      .text-no-data.text-weight-thin.absolute-center {{$t('common.notData')}}
+      #labels.absolute-center
+        .text-no-data.text-weight-thin.text-center {{$t('common.notData')}}
+        .text-no-data.text-weight-thin.text-center {{$t('common.notDataIndication')}}
   q-scroll-area.scroll-container(ref="scrollArea" v-else)
     div.q-ma-md.q-gutter-y-xl
       .row.q-col-gutter-sm.card-tables-container
