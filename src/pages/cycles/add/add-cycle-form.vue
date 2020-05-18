@@ -537,13 +537,13 @@
         .row.justify-around.items-center
             .column.justify-center
               .col-2
-                  q-btn(round :disabled="simulationStep == 0 || simulationStep - 1 == 0" color="secondary" icon="skip_previous" @click="() => backCycle()")
+                  q-btn(round :disabled="simulationStep == 0 || simulationStep - 1 == 0" color="secondary" icon="keyboard_arrow_left" @click="() => backCycle()")
             .column.justify-center
               .col-6
                 p {{simulationStep}} / {{totalSimulationSteps}}
             .column.justify-center
               .col-2
-                  q-btn(round color="secondary" icon="skip_next" @click="() => nextCycle()")
+                  q-btn(round color="secondary" icon="keyboard_arrow_right" @click="() => nextCycle()")
         //- Modals
         q-dialog(v-model="showSaveCycle" persistent)
           q-card(style="min-width: 40vw")
