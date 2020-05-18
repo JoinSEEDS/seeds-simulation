@@ -81,7 +81,8 @@ export default {
       var options = {
         chart: {
           title: this.chartName,
-          width: this.chartWidth
+          width: this.chartWidth,
+          format: (value) => this.formatToMoney(value)
         },
         yAxis: {
           title: this.yAxisTitle,
@@ -101,7 +102,7 @@ export default {
           template: (category, item, categoryTimestamp) => {
             const head = `<div class="tooltip-container">
               <div class="text-tooltip-title">${`${item.legend}:`}</div>
-              <div class="text-tooltip-value">${`${this.formatToMoney(item.value)} Seeds`}</div>
+              <div class="text-tooltip-value">${`${item.value} Seeds`}</div>
               </div>`
             return head
           }
