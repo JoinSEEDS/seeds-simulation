@@ -13,7 +13,8 @@ export default {
       delete: 'Delete',
       load: 'Load'
     },
-    defaultTitle: 'Title'
+    defaultTitle: 'Title',
+    notData: 'Not data yet'
   },
   forms: {
     errors: {

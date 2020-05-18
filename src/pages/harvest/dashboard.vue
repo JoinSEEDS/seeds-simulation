@@ -1,5 +1,9 @@
 <template lang="pug">
-  q-scroll-area.scroll-container(ref="scrollArea")
+#Container
+  group-container.relative-position.q-pa-md.full-width(title="eeds" v-if="totalSimulationSteps === 0")
+    .no-data-view
+      .text-no-data.text-weight-thin.absolute-center {{$t('common.notData')}}
+  q-scroll-area.scroll-container(ref="scrollArea" v-else)
     div.q-ma-md.q-gutter-y-xl
       .row.q-col-gutter-sm.card-tables-container
         .col(@click="selectTable(constant.SEEDS_GENERAL)" )
@@ -31,7 +35,8 @@
           div.contentTable.cursor-pointer(@click="selectTable(constant.SEEDS_IND_ACCNTS)")
             q-table(
               class="my-sticky-virtscroll-table"
-              :pagination.sync="pagination"
+              :pagination.sync="pagination1"
+              binary-state-sort
               virtual-scroll
               :rows-per-page-options="[0]"
               :virtual-scroll-sticky-size-start="100"
@@ -47,7 +52,7 @@
           div.contentTable.cursor-pointer(@click="selectTable(constant.SEEDS_ORG_ACCNTS)")
             q-table(
               class="my-sticky-virtscroll-table"
-              :pagination.sync="pagination"
+              :pagination.sync="pagination2"
               virtual-scroll
               :rows-per-page-options="[0]"
               :virtual-scroll-sticky-size-start="100"
@@ -64,7 +69,7 @@
           div.contentTable.cursor-pointer(@click="selectTable(constant.SEEDS_BDC)")
             q-table(
               class="my-sticky-virtscroll-table"
-              :pagination.sync="pagination"
+              :pagination.sync="pagination3"
               virtual-scroll
               :rows-per-page-options="[0]"
               :virtual-scroll-sticky-size-start="100"
@@ -188,7 +193,7 @@ export default {
         case 1:
           return this.dataTableIND.sample3
         case 2:
-          return this.dataTableIND.all
+          return this.dataTableIND.sample10
         case 3:
           return this.dataTableIND.all
         default:
@@ -200,7 +205,7 @@ export default {
         case 1:
           return this.dataTableORG.sample3
         case 2:
-          return this.dataTableORG.all
+          return this.dataTableORG.sample10
         case 3:
           return this.dataTableORG.all
         default:
@@ -212,7 +217,7 @@ export default {
         case 1:
           return this.dataTableBDC.sample3
         case 2:
-          return this.dataTableBDC.all
+          return this.dataTableBDC.sample10
         case 3:
           return this.dataTableBDC.all
         default:
@@ -239,8 +244,18 @@ export default {
   },
   data () {
     return {
-      pagination: {
-        rowsPerPage: 0
+      pagination1: {
+        rowsPerPage: 0,
+        // ascending: true,
+        sortBy: 'asc'
+      },
+      pagination2: {
+        rowsPerPage: 0,
+        descendig: true
+      },
+      pagination3: {
+        rowsPerPage: 0,
+        ascending: true
       },
       valueSelected: null,
       valueOption: 0,
@@ -356,6 +371,10 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+  .text-no-data
+    font-size: 20px
+  .no-data-view
+    height: 78vh
   .card-tables-container
     // max-height: 300px
   .contentTable
