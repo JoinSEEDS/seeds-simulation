@@ -99,8 +99,9 @@ export default {
         },
         tooltip: {
           template: (category, item, categoryTimestamp) => {
-            const head = `<div style=backgroundColor: 'red'>
-              <div>${`${item.legend} ${item.value} TRADA`}</div>
+            const head = `<div class="tooltip-container">
+              <div class="text-tooltip-title">${`${item.legend}:`}</div>
+              <div class="text-tooltip-value">${`${this.formatToMoney(item.value)} Seeds`}</div>
               </div>`
             return head
           }
@@ -117,6 +118,9 @@ export default {
 </script>
 
 <style lang="sass">
+.tooltip-container
+  padding: 10px
+  min-width: 150px
 #chartL .myTooltipContainer
     background-color: rgb(149, 149, 149)
     padding: 10px
@@ -124,11 +128,9 @@ export default {
     border-radius: 3px
     min-width: 150px
     text-align: center
-#chartL .myTooltipText
-  background-color: rgb(149, 149, 149)
 #chartL .tui-chart-tooltip
-  background-color: rgb(149, 149, 149) !important
+  background-color: gray !important
 #chartL .tui-chart, #chartL .tui-chart-tooltip-area, #chartL .tui-chart-tooltip
-  background-color: rgb(149, 149, 149)
+  // background-color: rgb(149, 149, 149)
 
 </style>
