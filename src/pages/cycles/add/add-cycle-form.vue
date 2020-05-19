@@ -543,7 +543,7 @@
                 p {{simulationStep}} / {{totalSimulationSteps}}
             .column.justify-center
               .col-2
-                  q-btn(round color="secondary" icon="keyboard_arrow_right" @click="() => nextCycle()")
+                  q-btn(round color="secondary" icon="keyboard_arrow_rig" @click="() => nextCycle()")
         //- Modals
         q-dialog(v-model="showSaveCycle" persistent)
           q-card(style="min-width: 40vw")
@@ -1020,7 +1020,7 @@ export default {
     border: none !important
 #container-add-cycle input:focus, textarea:focus, select:focus
     outline: none
-#container-add-cycle .modal-load-simulation
+.modal-load-simulation
   height: 90vh
   width: 40vw
 @media(min-width: 0px) and (max-width: 1025px)

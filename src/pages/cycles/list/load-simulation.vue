@@ -142,18 +142,12 @@ export default {
 
 <style lang="sass" scoped>
   #Container
-    // min-width: 35vw
-    // width: 30vw
-    // max-width: 700px
-    // overflow: 'hidden'
   .containerScroll
     height: 65vh
     overflow: 'hidden' !important
   .containerScrollAll
     height: 60vh
     overflow: 'hidden' !important
-    // ::-webkit-scrollbar-thumb
-    //   background-color: green !important
   .searchContainer
     overflow: 'hidden' !important
   .infinite

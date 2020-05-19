@@ -51,7 +51,7 @@ export default {
   q-layout(view="hHh lpr lff")
     q-header(elevated)
       q-toolbar.bg-accent
-        img.logo(src="statics/seeds-logo-with-text.png")
+        img.logo(src="statics/SeedsWhite.png")
         q-toolbar-title
           .row.items-center(v-if="editingMySimulation.status")
             //- p.q-ma-none {{titleBar}}
