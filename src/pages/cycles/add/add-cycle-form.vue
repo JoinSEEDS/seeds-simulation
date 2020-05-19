@@ -543,7 +543,7 @@
                 p {{simulationStep}} / {{totalSimulationSteps}}
             .column.justify-center
               .col-2
-                  q-btn(round color="secondary" icon="keyboard_arrow_rig" @click="() => nextCycle()")
+                  q-btn(round color="secondary" icon="keyboard_arrow_right" @click="() => nextCycle()")
         //- Modals
         q-dialog(v-model="showSaveCycle" persistent)
           q-card(style="min-width: 40vw")
