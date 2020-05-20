@@ -226,7 +226,8 @@ export const getDataChart = async function ({ dispatch, commit, state }, { table
 
       for (k; k < 100; k += increment) {
         if (typeof rank === 'string') {
-          if (rank === 49) {
+          console.log('HAHSSFHSDJFHKSDFS', rank)
+          if (k === 49) {
             rank = 'middle'
           } else {
             rank = 'first'
@@ -279,7 +280,7 @@ export const getDataChart = async function ({ dispatch, commit, state }, { table
 
       for (k; k < 100; k += increment) {
         if (typeof rank === 'string') {
-          if (rank === 49) {
+          if (k === 49) {
             rank = 'middle'
           } else {
             rank = 'first'
@@ -332,7 +333,7 @@ export const getDataChart = async function ({ dispatch, commit, state }, { table
 
       for (k; k < 100; k += increment) {
         if (typeof rank === 'string') {
-          if (rank === 49) {
+          if (k === 49) {
             rank = 'middle'
           } else {
             rank = 'first'
