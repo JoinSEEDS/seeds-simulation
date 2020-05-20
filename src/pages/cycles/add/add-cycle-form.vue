@@ -3,14 +3,14 @@
         //- Top Buttons
         //- div.q-ma-none
         q-btn.full-width.q-mt-md(
-          color="primary"
+          color="positive"
           icon="cloud_download"
           :label="$t('pages.saveSimulation.loadSimulation')"
           @click="showLoadCycle = true"
         )
         q-btn.full-width(
           v-show="showSaveSimulation"
-          color="primary"
+          color="positive"
           icon="save"
           :label="editingMySimulation.status ? $t('pages.saveSimulation.savChanges') : $t('pages.saveSimulation.saveSimulation')"
           @click="showSaveCycle = true"
@@ -537,13 +537,13 @@
         .row.justify-around.items-center
             .column.justify-center
               .col-2
-                  q-btn(round :disabled="simulationStep == 0 || simulationStep - 1 == 0" color="secondary" icon="keyboard_arrow_left" @click="() => backCycle()")
+                  q-btn(round :disabled="simulationStep == 0 || simulationStep - 1 == 0" color="positive" icon="keyboard_arrow_left" @click="() => backCycle()")
             .column.justify-center
               .col-6
                 p {{simulationStep}} / {{totalSimulationSteps}}
             .column.justify-center
               .col-2
-                  q-btn(round color="secondary" icon="keyboard_arrow_right" @click="() => nextCycle()")
+                  q-btn(round color="positive" icon="keyboard_arrow_right" @click="() => nextCycle()")
         //- Modals
         q-dialog(v-model="showSaveCycle" persistent)
           q-card(style="min-width: 40vw")

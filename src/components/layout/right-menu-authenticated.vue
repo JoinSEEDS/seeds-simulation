@@ -23,6 +23,6 @@ div
   q-btn(
     :label="$t('common.buttons.logout')"
     @click="logout"
-    color="secondary"
+    color="positive"
   )
 </template>

@@ -9,9 +9,9 @@
     div.q-ma-md.q-gutter-y-xl
       .row.q-col-gutter-sm.card-tables-container
         .col(@click="selectTable(constant.SEEDS_GENERAL)" )
-          card-table-totals(v-if="dataTableGeneral.rows" :data="dataTableGeneral.rows[0]" :selected="tableSelected === constant.SEEDS_GENERAL")
+          card-table-totals.cursor-pointer(v-if="dataTableGeneral.rows" :data="dataTableGeneral.rows[0]" :selected="tableSelected === constant.SEEDS_GENERAL")
         .col(@click="selectTable(constant.SEEDS_GROWN)")
-          card-table-growth(v-if="dataTableGROWN.rows" :data="dataTableGROWN.rows[0]" :selected="tableSelected === constant.SEEDS_GROWN")
+          card-table-growth.cursor-pointer(v-if="dataTableGROWN.rows" :data="dataTableGROWN.rows[0]" :selected="tableSelected === constant.SEEDS_GROWN")
       //- .div(@click="selectTable(constant.SEEDS_GENERAL)")
       //-     q-table(
       //-     :data="dataTableGeneral.rows"
@@ -347,7 +347,7 @@ export default {
         { name: 'regenGrants', label: 'Regen Grants', field: 'regenGrants', sortable: true, headerClasses: 'sticky bg-primary text-white', format: val => this.formatToMoney(val) },
         { name: 'regenLoans', label: 'Regen Loans', field: 'regenLoans', sortable: true, headerClasses: 'sticky bg-primary text-white', format: val => this.formatToMoney(val) },
         { name: 'totalAmount', label: 'Total Amount', field: 'budget', sortable: true, headerClasses: 'sticky bg-primary text-white', format: val => this.formatToMoney(val) },
-        { name: 'totalAmountPerBdc', label: 'Total Amount per BDC', field: 'budgetPerBdc', sortable: true, headerClasses: 'sticky bg-primary text-white', format: val => this.formatToMoney(val) }
+        { name: 'totalAmountPerBdc', label: 'BDC Total Amount', field: 'budgetPerBdc', sortable: true, headerClasses: 'sticky bg-primary text-white', format: val => this.formatToMoney(val) }
       ],
       columnsTableGDC: [
         {
