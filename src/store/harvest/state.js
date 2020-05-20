@@ -113,7 +113,7 @@ export default () => ({
     seedsIntroducedDuringCycle: 0,
     seedsGrownPerCycle: 0,
     newContractsDuringCycle: 0,
-    outstandingContractsSeeds: 0,
+    outstandingContractsSeeds: 628318530,
     contractsGrowth: 0.4,
     outstandingContracts: 0,
     closedContracts: 0,

@@ -160,17 +160,14 @@ export const initCycle = function (state) {
 
   newState.newContractsDuringCycle = 0
 
-  newState.totalOpenSeedsBankContracts = 0
-
-  let circulatingSeeds = (newState.totalGDP * 29.5) / 365
-  let plantedSeeds = (newState.seedsPlantedPerUserFixed + newState.seedsPlantedPerUserVariable) * newState.numPeopleAccounts
-  let burnedSeeds = newState.averageSeedsBurnedPerUser * newState.numPeopleAccounts
+  newState.outstandingContractsSeeds = 628318530
+  newState.outstandingContracts = Math.floor(newState.outstandingContractsSeeds / newState.seedsPerContract)
 
   newState.totals = {
-    circulatingSeeds: circulatingSeeds - plantedSeeds,
-    plantedSeeds: plantedSeeds,
-    burnedSeeds: burnedSeeds,
-    seeds: circulatingSeeds
+    circulatingSeeds: 1256637061,
+    plantedSeeds: 1256637061,
+    burnedSeeds: 0,
+    seeds: 3141592653
   }
 
   newState.harvestDistribution = {
