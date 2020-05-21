@@ -14,7 +14,7 @@ export default {
       load: 'Load'
     },
     defaultTitle: 'Title',
-    notData: 'Not data yet',
+    notData: 'This is the initial state.',
     notDataIndication: 'You can create your own simulation or load a saved one.'
   },
   forms: {

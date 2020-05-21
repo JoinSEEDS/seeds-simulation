@@ -1,7 +1,15 @@
 export default () => ({
   simulationState: [],
   generalStatsTable: {
-    tableName: 'General Information'
+    tableName: 'General Information',
+    rows: [
+      {
+        totalCirculatingSeeds: 1256637061,
+        totalSeedsPlanted: 1256637061,
+        totalSeedsBurned: 0,
+        totalSeeds: 3141592653
+      }
+    ]
   },
   seedsGrownTable: {
     tableName: 'Seeds Grown'
@@ -115,7 +123,7 @@ export default () => ({
     newContractsDuringCycle: 0,
     outstandingContractsSeeds: 628318530,
     contractsGrowth: 0.4,
-    outstandingContracts: 0,
+    outstandingContracts: (628318530 / 200),
     closedContracts: 0,
     closedContractsPercentage: 0.1,
     seedsPerContract: 200,

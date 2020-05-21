@@ -3,6 +3,7 @@
   group-container.relative-position.q-pa-md.full-width(title="eeds" v-if="totalSimulationSteps === 0")
     .no-data-view
       #labels.absolute-center
+        card-table-totals.cursor-pointer(v-if="dataTableGeneral.rows" :data="dataTableGeneral.rows[0]" :selected="tableSelected === constant.SEEDS_GENERAL")
         .text-no-data.text-weight-thin.text-center {{$t('common.notData')}}
         .text-no-data.text-weight-thin.text-center {{$t('common.notDataIndication')}}
   q-scroll-area.scroll-container(ref="scrollArea" v-else)
