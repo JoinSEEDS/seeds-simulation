@@ -20,6 +20,7 @@
           color="positive"
           icon="restore"
           :label="$t('pages.saveSimulation.resetSimulation')"
+          @click="showConfirmCleanSimulation = true"
         )
         //- Form
         q-scroll-area.scroll-container
@@ -566,6 +567,22 @@
           q-card.modal-load-simulation
             load-simulation(@cancel="showSaveCycle = false")
 
+        //- Reset Simulation
+        //- Confirm modal to load simulation
+        q-dialog(v-model="showConfirmCleanSimulation" persistent)
+          q-card
+            q-card-section
+              .row.justify-center
+                .col-auto
+                  q-avatar.text-center(icon="restore_from_trash" color="primary" text-color="white")
+                .col
+                  p.text-weight-bold.q-ml-sm.text-center The current simulation {{$t('pages.saveSimulation.cleanSimulationMessage')}}
+              p.q-ml-sm.text-center {{$t('pages.general.confirmActions')}}
+
+            q-card-actions.float-right
+              q-btn(flat :label="$t('common.buttons.cancel')" color="negative" v-close-popup)
+              q-btn(flat :label="$t('common.buttons.confirm')" color="primary" @click="onCleanSimulationData")
+
 </template>
 
 <script>
@@ -585,6 +602,7 @@ export default {
     return {
       showSaveCycle: false,
       showLoadCycle: false,
+      showConfirmCleanSimulation: false,
       bgColor: 'light-green-3',
       price: 0,
       moneyFormat: {
@@ -757,7 +775,20 @@ export default {
   },
   methods: {
     ...mapActions('harvest', ['getInitSimulationStep', 'doCycle']),
+    ...mapActions('simulations', ['cleanSimulationData']),
     ...mapMutations('harvest', ['setSimulationStep']),
+    async onCleanSimulationData () {
+      try {
+        this.showConfirmCleanSimulation = false
+        this.showIsLoading(true)
+        await this.cleanSimulationData()
+        await this.sleep(400)
+        this.showNotification('Simulation restored')
+        this.showIsLoading(false)
+      } catch (error) {
+        this.showNotification(error, 'error')
+      }
+    },
     onSimulationSaved () {
       this.showSaveCycle = false
       this.showNotification(this.$t('pages.saveSimulation.simulationSaved'))

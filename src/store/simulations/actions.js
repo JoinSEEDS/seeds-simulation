@@ -76,7 +76,7 @@ export const getSimulationData = async function ({ dispatch, commit }, simulatio
 
 export const cleanSimulationData = async function ({ dispatch, commit }) {
   try {
-    // commit('general/setIsLoading', true, { root: true })
+    commit('general/setIsLoading', true, { root: true })
     commit('harvest/overwriteSimulationState', [], { root: true })
     commit('harvest/setSimulationStep', 0, { root: true })
     commit('harvest/restartSimulation', null, { root: true })
@@ -87,6 +87,7 @@ export const cleanSimulationData = async function ({ dispatch, commit }) {
     console.error(error)
     throw new Error(error)
   } finally {
+    commit('general/setIsLoading', false, { root: true })
   }
 }
 
