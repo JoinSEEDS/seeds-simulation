@@ -34,7 +34,15 @@ export const overwriteSimulationState = (state, newState) => {
 }
 export const restartSimulation = (state, newState) => {
   state.generalStatsTable = {
-    tableName: 'General Information'
+    tableName: 'General Information',
+    rows: [
+      {
+        totalCirculatingSeeds: 1256637061,
+        totalSeedsPlanted: 1256637061,
+        totalSeedsBurned: 0,
+        totalSeeds: 3141592653
+      }
+    ]
   }
   state.seedsGrownTable = {
     tableName: 'Seeds Grown'
