@@ -155,7 +155,8 @@ export default {
       cleanSimulationMessage: 'will be unloaded, unsaved changes will be lost.',
       simulationDeleted: 'Simulation deleted.',
       simulation: 'Simulation',
-      cleanSimulation: 'Clean simulation loaded'
+      cleanSimulation: 'Clean simulation loaded',
+      resetSimulation: 'Reset simulation'
     },
     tableCard: {
       supply: 'Supply',

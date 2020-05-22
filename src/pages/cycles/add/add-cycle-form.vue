@@ -15,6 +15,12 @@
           :label="editingMySimulation.status ? $t('pages.saveSimulation.savChanges') : $t('pages.saveSimulation.saveSimulation')"
           @click="showSaveCycle = true"
         )
+        q-btn.full-width(
+          v-show="showSaveSimulation"
+          color="positive"
+          icon="restore"
+          :label="$t('pages.saveSimulation.resetSimulation')"
+        )
         //- Form
         q-scroll-area.scroll-container
             .template-form
@@ -1006,7 +1012,7 @@ export default {
     border-color: gray
     padding: 5px
 #container-add-cycle .scroll-container
-    height: calc(100vh - 210px)
+    height: calc(100vh - 245px)
     max-width: 100%
 #container-add-cycle .bg-readonly
     background: blue
@@ -1025,6 +1031,6 @@ export default {
   width: 40vw
 @media(min-width: 0px) and (max-width: 1025px)
   #container-add-cycle .scroll-container
-    height: calc(100vh - 160px)
+    height: calc(100vh - 190px)
     max-width: 100%
 </style>
