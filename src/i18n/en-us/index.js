@@ -170,7 +170,9 @@ export default {
       regenGrants: 'Regen Grants',
       coreDevelopment: 'Core Development',
       interestFreeLoans: 'Interest Free Loans',
-      totalAmount: 'Total Amount'
+      totalAmount: 'Total Amount',
+      totalGEV: 'Total GEV',
+      volumeGrowth: 'Volume Growth'
     }
   }
 }

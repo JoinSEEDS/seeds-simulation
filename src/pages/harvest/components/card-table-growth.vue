@@ -12,14 +12,20 @@
           q-card.cardItem.q-pa-lg
             .row.justify-center
               img.icon(src="~/assets/perBlockIcon.png")
-              .text-title.text-white.text-center.q-mx-sm {{$t('pages.tableCard.perBlock')}}
-            .text-value.text-white.text-center {{data.seedsPerBlock | formatToMoney}}
+              .text-title.text-white.text-center.q-mx-sm {{$t('pages.tableCard.totalGEV')}}
+            .text-value.text-white.text-center {{data.totalGev | formatToMoney}}
         .col-6
           q-card.cardItem.q-pa-lg
             .row.justify-center
               img.icon(src="~/assets/perCycleIcon.png")
               .text-title.text-white.text-center.q-mx-sm {{$t('pages.tableCard.perCycle')}}
             .text-value.text-white.text-center {{data.seedsPerCycle | formatToMoney}}
+        .col-6
+          q-card.cardItem.q-pa-lg
+            .row.justify-center
+              img.icon(src="~/assets/perBlockIcon.png")
+              .text-title.text-white.text-center.q-mx-sm {{$t('pages.tableCard.volumeGrowth')}}
+            .text-value.text-white.text-center {{data.volumeGrowth | formatToMoney}}
 </template>
 
 <script>
