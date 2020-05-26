@@ -458,6 +458,15 @@ export const setCycleTables = async function ({ dispatch, commit, state }, { ste
   return true
 }
 
+export const initState = async function ({ dispatch, commit, state }, { simulationState }) {
+  let newState = initCycle(Object.assign({}, simulationState))
+
+  commit('setDataSimulationState', { simulation: [newState], step: 0 })
+  commit('setSimulationStep', state.simulationState.length - 1)
+
+  return true
+}
+
 export const doCycle = async function ({ dispatch, commit, state }, { simulationState, step = -1 }) {
   // commit('general/setIsLoading', true, { root: true })
   if (step === -1) {

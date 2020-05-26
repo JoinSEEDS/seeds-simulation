@@ -243,7 +243,8 @@ export const doNextCycle = function (state, update) {
   newState.newContractsDuringCycleSeeds = newState.contractsGrowth * newState.changeRequiredToMeetDemand
   newState.newContractsDuringCycle = Math.floor(newState.newContractsDuringCycleSeeds / newState.seedsPerContract)
 
-  if (newState.newContractsDuringCycle < 0) {
+  if (newState.newContractsDuringCycleSeeds < 0) {
+    newState.newContractsDuringCycleSeeds = 0
     newState.newContractsDuringCycle = 0
   }
 
