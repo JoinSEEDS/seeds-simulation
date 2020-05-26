@@ -278,10 +278,12 @@ export const doNextCycle = function (state, update) {
   newState.seedsGrownPerCycle = newState.changeRequiredToMeetDemand +
                     newState.seedsRemovedDuringCycle -
                     newState.seedsIntroducedDuringCycle +
-                    newState.newContractsDuringCycle -
-                    newState.closedContractsDuringCycle
+                    newState.newContractsDuringCycleSeeds -
+                    newState.closedContractsDuringCycleSeeds
 
   // newState.seedsGrownPerCycle /= 3 // is this still correct?
+
+  let pastCirculatingSeeds = newState.totals.circulatingSeeds
 
   let totalCirculatingSeeds = newState.totals.circulatingSeeds + newState.percentageOfHarvestAssignedCirculating * newState.seedsGrownPerCycle
   if (isNegative(totalCirculatingSeeds)) {
@@ -291,11 +293,14 @@ export const doNextCycle = function (state, update) {
     }
   }
 
+  let pastPlantedSeeds = newState.totals.plantedSeeds
+  let pastBurnedSeeds = newState.totals.burnedSeeds
+  let pastTotalSeeds = newState.totals.seeds
+
   let totalPlantedSeeds = newState.totals.plantedSeeds + newState.plantedSeedsDuringCycle
   let totalBurnedSeeds = newState.totals.burnedSeeds + newState.burnedSeedsDuringCycle
 
-  let totalSeeds = newState.totals.seeds + newState.seedsIntroducedDuringCycle +
-                  newState.seedsRemovedDuringCycle + newState.seedsGrownPerCycle - newState.burnedSeedsDuringCycle
+  let totalSeeds = newState.totals.seeds + 2 * newState.seedsIntroducedDuringCycle + newState.seedsGrownPerCycle - newState.burnedSeedsDuringCycle
 
   // totals
   newState.totals = {
@@ -304,6 +309,84 @@ export const doNextCycle = function (state, update) {
     burnedSeeds: totalBurnedSeeds,
     seeds: totalSeeds
   }
+
+  console.info('---------------------------------------------------------------------------')
+  console.info('-------------------            FORMULAS USED            -------------------')
+  console.info('---------------------------------------------------------------------------')
+  console.info('')
+  console.info('VOLUME GROWTH:')
+  console.info('Volume Growth = ( (Current Total GDP) - (Past Total GDP) ) / (Past Total GDP)')
+  console.info('\tVolume Growth =', newState.volumeGrowth)
+  console.info('\tCurrent Total GDP =', newState.totalGDP)
+  console.info('\tPast Total GDP =', pastGDP)
+  console.info('')
+  console.info('')
+  console.info('CHANGE REQUIRED TO MEET DEMAND:')
+  console.info('Change Required to Meet Demand = (Circulating Seeds) * (Volume Growth)')
+  console.info('\tChange Required to Meet Demand =', newState.changeRequiredToMeetDemand)
+  console.info('\tCirculating Seeds =', newState.totals.circulatingSeeds)
+  console.info('\tVolume Growth =', newState.volumeGrowth)
+  console.info('')
+  console.info('')
+  console.info('SEEDS REMOVED DURING CYCLE:')
+  console.info('Seeds Removed During Cycle = (Burned Seeds During Cycle) + (Planted Seeds During Cycle) + (Enter Exchanges * Weight) + (Closed Contracts During Cycle (in Seeds))')
+  console.info('\tSeeds Removed During Cycle =', newState.seedsRemovedDuringCycle)
+  console.info('\tBurned Seeds During Cycle =', newState.burnedSeedsDuringCycle)
+  console.info('\tPlanted Seeds During Cycle =', newState.plantedSeedsDuringCycle)
+  console.info('\tEnter Exchanges (times weight) =', newState.enterExchangesLabel)
+  console.info('\tClosed Contracts During Cycles (in seeds) =', newState.closedContractsDuringCycleSeeds)
+  console.info('')
+  console.info('')
+  console.info('SEEDS INTRODUCED DURING CYCLE:')
+  console.info('Seeds Introduced During Cycle = (Unplanted Seeds) + (Exit Exchanges * Weight) + (New Contracts During Cycle (in Seeds))')
+  console.info('\tSeeds Introduced During Cycle =', newState.seedsIntroducedDuringCycle)
+  console.info('\tUnplanted Seeds =', newState.unplantedSeeds)
+  console.info('\tExit Exchanges (times weight) =', newState.exitExchangesLabel)
+  console.info('\tNew Contracts During Cycle (in Seeds) =', newState.newContractsDuringCycleSeeds)
+  console.info('')
+  console.info('')
+  console.info('SEEDS GROWN PER CYCLE (aka HARVEST):')
+  console.info('Seeds Grown per Cycle (aka Harvest) = (Change Required to Meet Demand) + (Seeds Removed During Cycle) - (Seeds Introduced During Cycle) + (New Contracts During Cycle) - (Closed Contracts During Cycle)')
+  console.info('\tSeeds Grown per Cycle =', newState.seedsGrownPerCycle)
+  console.info('\tChange Required to Meet Demand =', newState.changeRequiredToMeetDemand)
+  console.info('\tSeeds Removed During Cycle =', newState.seedsRemovedDuringCycle)
+  console.info('\tSeeds Introduced During Cycle =', newState.seedsIntroducedDuringCycle)
+  console.info('\tNew Contracts During Cycle (in Seeds) =', newState.newContractsDuringCycleSeeds)
+  console.info('\tClosed Contracts During Cycle (in Seeds) =', newState.closedContractsDuringCycleSeeds)
+  console.info('')
+  console.info('')
+  console.info('CIRCULATING SEEDS:')
+  console.info('Circulating Seeds = (Past Circulating Seeds) + (Seeds Grown Per Cycle)')
+  console.info('\tCirculating Seeds =', totalCirculatingSeeds)
+  console.info('\tPast Circulating Seeds =', pastCirculatingSeeds)
+  console.info('\tSeeds Grown Per Cycle =', newState.seedsGrownPerCycle)
+  console.info('')
+  console.info('')
+  console.info('PLANTED SEEDS:')
+  console.info('Planted Seeds = (Past Planted Seeds) + (Planted Seeds During Cycle)')
+  console.info('\tPlanted Seeds =', totalPlantedSeeds)
+  console.info('\tPast Planted Seeds =', pastPlantedSeeds)
+  console.info('\tPlanted Seeds During Cycle =', newState.plantedSeedsDuringCycle)
+  console.info('')
+  console.info('')
+  console.info('BURNED SEEDS:')
+  console.info('Burned Seeds = (Past Burned Seeds) + (Burned Seeds During Cycle)')
+  console.info('\tBurned Seeds =', totalBurnedSeeds)
+  console.info('\tPast Burned Seeds =', pastBurnedSeeds)
+  console.info('\tBurned Seeds During Cycle =', newState.burnedSeedsDuringCycle)
+  console.info('')
+  console.info('')
+  console.info('TOTAL SEEDS SUPPLY:')
+  console.info('Total Supply = (Past Total Supply) + (2 * Seeds Introduced During Cycle) + (Seeds Grown Per Cycle) - (Burned Seeds During Cycle)')
+  console.info('\tTotal Supply =', totalSeeds)
+  console.info('\tPast Total Supply =', pastTotalSeeds)
+  console.info('\t2 * Seeds Introduced During Cycle =', 2 * newState.seedsIntroducedDuringCycle)
+  console.info('\tSeeds Grown Per Cycle =', newState.seedsGrownPerCycle)
+  console.info('\tBurned Seeds During Cycle =', newState.burnedSeedsDuringCycle)
+  console.info('\t')
+  console.info('')
+  console.info('---------------------------------------------------------------------------')
+  console.info('---------------------------------------------------------------------------')
 
   // harvest distribution
   newState.harvestDistribution = {
