@@ -679,49 +679,50 @@ export default {
       return this.editingMySimulation.status ? this.$t('pages.saveSimulation.updateSimulations') : this.$t('pages.saveSimulation.saveSimulation')
     },
     labelSeedsRemoves () {
-      return this.getSimulationState.length > 0 ? this.$t('forms.cycles.groupSeedsRemove') + ': ' + this.formatToMoney(this.getSimulationState[this.simulationStep].seedsRemovedDuringCycle.toFixed(0)) : this.$t('forms.cycles.groupSeedsRemove')
+      return this.getSimulationState.length > 1 ? this.$t('forms.cycles.groupSeedsRemove') + ': ' + this.formatToMoney(this.getSimulationState[this.simulationStep].seedsRemovedDuringCycle.toFixed(0)) : this.$t('forms.cycles.groupSeedsRemove')
     },
     labelSeedsIntroduce () {
-      return this.getSimulationState.length > 0 ? this.$t('forms.cycles.groupSeedsIntroduce') + ': ' + this.formatToMoney(this.getSimulationState[this.simulationStep].seedsIntroducedDuringCycle.toFixed(0)) : this.$t('forms.cycles.groupSeedsIntroduce')
+      return this.getSimulationState.length > 1 ? this.$t('forms.cycles.groupSeedsIntroduce') + ': ' + this.formatToMoney(this.getSimulationState[this.simulationStep].seedsIntroducedDuringCycle.toFixed(0)) : this.$t('forms.cycles.groupSeedsIntroduce')
     },
     labelSeedsBank () {
-      return this.getSimulationState.length > 0 ? this.$t('forms.cycles.groupSeedsBank') + ': ' + this.formatToMoney(this.getSimulationState[this.simulationStep].bankContractsDuringCycleSeeds.toFixed(0)) : this.$t('forms.cycles.groupSeedsBank')
+      return this.getSimulationState.length > 1 ? this.$t('forms.cycles.groupSeedsBank') + ': ' + this.formatToMoney(this.getSimulationState[this.simulationStep].bankContractsDuringCycleSeeds.toFixed(0)) : this.$t('forms.cycles.groupSeedsBank')
     },
     labelGDP () {
-      return this.getSimulationState.length > 0 ? this.$t('forms.cycles.groupGDP') + ': ' + this.formatToMoney(this.getSimulationState[this.simulationStep].totalGDP.toFixed(0)) : this.$t('forms.cycles.groupGDP')
+      return this.getSimulationState.length > 1 ? this.$t('forms.cycles.groupGDP') + ': ' + this.formatToMoney(this.getSimulationState[this.simulationStep].totalGDP.toFixed(0)) : this.$t('forms.cycles.groupGDP')
     },
     labelPeopleGrowth () {
-      return this.getSimulationState.length > 0 ? this.$t('forms.cycles.peopleGrowth') + ': ' + this.formatToMoney(this.getSimulationState[this.simulationStep].peopleGrowthLabel.toFixed(0)) : this.$t('forms.cycles.peopleGrowth')
+      return this.getSimulationState.length > 1 ? this.$t('forms.cycles.peopleGrowth') + ': ' + this.formatToMoney(this.getSimulationState[this.simulationStep].peopleGrowthLabel.toFixed(0)) : this.$t('forms.cycles.peopleGrowth')
     },
     labelOrganizationsGrowth () {
-      return this.getSimulationState.length > 0 ? this.$t('forms.cycles.orgGrowth') + ': ' + this.formatToMoney(this.getSimulationState[this.simulationStep].organizationsGrowthLabel.toFixed(0)) : this.$t('forms.cycles.orgGrowth')
+      return this.getSimulationState.length > 1 ? this.$t('forms.cycles.orgGrowth') + ': ' + this.formatToMoney(this.getSimulationState[this.simulationStep].organizationsGrowthLabel.toFixed(0)) : this.$t('forms.cycles.orgGrowth')
     },
     labelEnterExchanges () {
-      return this.getSimulationState.length > 0 ? this.$t('forms.cycles.enterExchanges') + ': ' + this.formatToMoney(this.getSimulationState[this.simulationStep].enterExchangesLabel.toFixed(0)) : this.$t('forms.cycles.enterExchanges')
+      return this.getSimulationState.length > 1 ? this.$t('forms.cycles.enterExchanges') + ': ' + this.formatToMoney(this.getSimulationState[this.simulationStep].enterExchangesLabel.toFixed(0)) : this.$t('forms.cycles.enterExchanges')
     },
     labelExitExchanges () {
-      return this.getSimulationState.length > 0 ? this.$t('forms.cycles.exitExchanges') + ': ' + this.formatToMoney(this.getSimulationState[this.simulationStep].exitExchangesLabel.toFixed(0)) : this.$t('forms.cycles.exitExchanges')
+      return this.getSimulationState.length > 1 ? this.$t('forms.cycles.exitExchanges') + ': ' + this.formatToMoney(this.getSimulationState[this.simulationStep].exitExchangesLabel.toFixed(0)) : this.$t('forms.cycles.exitExchanges')
     },
     labelBDCGrowth () {
-      return this.getSimulationState.length > 0 ? this.$t('forms.cycles.bdcGrowth') + ': ' + this.formatToMoney(this.getSimulationState[this.simulationStep].numBdcs.toFixed(0)) : this.$t('forms.cycles.bdcGrowth')
+      return this.getSimulationState.length > 1 ? this.$t('forms.cycles.bdcGrowth') + ': ' + this.formatToMoney(this.getSimulationState[this.simulationStep].numBdcs.toFixed(0)) : this.$t('forms.cycles.bdcGrowth')
     },
     labelChangeRequiredToMeetDemand () {
-      return this.getSimulationState.length > 0 ? this.$t('forms.cycles.changeRequiredToMeetDemand') + ': ' + this.formatToMoney(this.getSimulationState[this.simulationStep].changeRequiredToMeetDemand.toFixed(0)) : this.$t('forms.cycles.changeRequiredToMeetDemand')
+      return this.getSimulationState.length > 1 ? this.$t('forms.cycles.changeRequiredToMeetDemand') + ': ' + this.formatToMoney(this.getSimulationState[this.simulationStep].changeRequiredToMeetDemand.toFixed(0)) : this.$t('forms.cycles.changeRequiredToMeetDemand')
     },
     labelSeedsRemovesPlanted () {
-      return this.getSimulationState.length > 0 ? this.$t('forms.cycles.planted') + ': ' + this.formatToMoney(this.getSimulationState[this.simulationStep].plantedSeedsDuringCycle.toFixed(0)) : this.$t('forms.cycles.planted')
+      return this.getSimulationState.length > 1 ? this.$t('forms.cycles.planted') + ': ' + this.formatToMoney(this.getSimulationState[this.simulationStep].plantedSeedsDuringCycle.toFixed(0)) : this.$t('forms.cycles.planted')
     },
     labelSeedsIntroduceUnplanted () {
-      return this.getSimulationState.length > 0 ? this.$t('forms.cycles.unplanted') + ': ' + this.formatToMoney(this.getSimulationState[this.simulationStep].unplantedSeeds.toFixed(0)) : this.$t('forms.cycles.unplanted')
+      return this.getSimulationState.length > 1 ? this.$t('forms.cycles.unplanted') + ': ' + this.formatToMoney(this.getSimulationState[this.simulationStep].unplantedSeeds.toFixed(0)) : this.$t('forms.cycles.unplanted')
     },
     labelSeedsRemovesBurned () {
-      return this.getSimulationState.length > 0 ? this.$t('forms.cycles.burned') + ': ' + this.formatToMoney(this.getSimulationState[this.simulationStep].burnedSeedsDuringCycle) : this.$t('forms.cycles.burned')
+      return this.getSimulationState.length > 1 ? this.$t('forms.cycles.burned') + ': ' + this.formatToMoney(this.getSimulationState[this.simulationStep].burnedSeedsDuringCycle) : this.$t('forms.cycles.burned')
     },
     showSaveSimulation () {
-      return this.getSimulationState.length > 0
+      return this.getSimulationState.length > 1
     }
   },
-  beforeMount () {
+  async beforeMount () {
+    await this.onInit()
     this.syncFormData()
   },
   mounted () {
@@ -729,6 +730,11 @@ export default {
       console.log('Event bus listened, loadSimulation closed')
       this.showLoadCycle = false
     })
+    try {
+      // this.onInit()
+    } catch (error) {
+      console.error('Errrroooorr', error)
+    }
   },
   beforeDestroy () {
     this.$store.$EventBus.$off('simulation-applied')
@@ -774,9 +780,66 @@ export default {
     }
   },
   methods: {
-    ...mapActions('harvest', ['getInitSimulationStep', 'doCycle']),
+    ...mapActions('harvest', ['getInitSimulationStep', 'doCycle', 'initState']),
     ...mapActions('simulations', ['cleanSimulationData']),
     ...mapMutations('harvest', ['setSimulationStep']),
+    async onInit () {
+      const simulationState = {
+        changeRequiredToMeetDemand: this.changeRequiredToMeetDemand.value,
+        volumeGrowth: this.volumeGrowth.value,
+        totalGDP: this.totalGDP,
+        // ==== new values ==== //
+        gdpPerPerson: this.gdpPerPerson.value,
+        gdpPerOrganisation: this.gdpPerOrganisation.value,
+        // changeRequiredToMeetDemand: 33339041.096,
+        seedsDestroyed: this.seedsDestroyed.value,
+        plantedSeeds: this.plantedSeeds.value,
+        enterExchanges: this.enterExchanges.value,
+        enterExchangesWeight: this.enterExchangesWeight.value,
+        enterSeedsBank: this.enterSeedsBank.value,
+        // seedsRemoved3Cycles: 26681232.878,
+        unplantedSeedsPerUser: this.unplantedSeedsPerUser.value,
+        unplantedSeeds: this.unplantedSeeds.value,
+        exitExchanges: this.exitExchanges.value,
+        exitExchangesWeight: this.exitExchangesWeight.value,
+        exitSeedsBank: this.exitSeedsBank.value,
+        // seedsIntroducedPrevious3Cycles: 14669178.079,
+        // seedsGrownPerCycle: 15117031.964999998,
+        percentageOfHarvestAssignedCirculating: parseFloat(this.percentageOfHarvestAssignedCirculating),
+        percentageDistributionOfNewHarvest: { gdc: this.gdc.value, bdc: this.bdc.value, organizations: this.organizations.value, accounts: this.accounts.value },
+        maxPercentageAccounts: parseFloat(this.maxPercentageAccounts),
+        maxPercentageOrganizations: parseFloat(this.maxPercentageOrganizations),
+        maxPercentageBdc: parseFloat(this.maxPercentageBdc),
+        bdcPercentagesDistribution: { regenGrants: this.regenGrantsBDC.value, regenLoans: this.regenLoans.value, openProposal: this.openProposal.value },
+        gdcPercentagesDistribution: {
+          networkMaintenance: this.networkMaintenance.value,
+          regenGrants: this.regenGrantsGDC.value,
+          coreDevelopment: this.coreDevelopment.value,
+          interestFreeLoans: this.interestFreeLoans.value
+        },
+        totals: this.totals,
+        numPeopleAccounts: this.numPeopleAccounts.value,
+        peopleGrowth: this.peopleGrowth.value,
+        seedsPlantedPerUserFixed: this.seedsPlantedPerUserFixed.value,
+        seedsPlantedPerUserVariable: this.seedsPlantedPerUserVariable.value,
+        averageSeedsBurnedPerUser: this.averageSeedsBurnedPerUser.value,
+        numOrganizationAccounts: this.numOrganizationAccounts.value,
+        organizationsGrowth: this.organizationsGrowth.value,
+        numBdcs: this.numBdcs.value,
+        bdcsGrowth: this.bdcsGrowth.value,
+        contractsGrowth: this.contractsGrowth.value,
+        newContractsDuringCycle: this.contracts.value,
+        outstandingContractsSeeds: this.outstandingContractsSeeds.value,
+        outstandingContracts: this.outstandingContracts.value,
+        closedContractsPercentage: this.closedContractsPercentage.value,
+        seedsPerContract: this.seedsPerContract.value
+        // harvestDistribution: {}
+      }
+      await this.initState({
+        simulationState
+      })
+      console.log('Inited!')
+    },
     async onCleanSimulationData () {
       try {
         this.showConfirmCleanSimulation = false
@@ -939,6 +1002,7 @@ export default {
     syncFormData () {
       //   console.log('Before Sync Form:', this.getSimulationState)
       console.log('Before Sync Form: volumeGrowth ', this.cycleDataForm)
+      if (this.cycleDataForm === undefined) return
       this.changeRequiredToMeetDemand = parseFloat(this.cycleDataForm.changeRequiredToMeetDemand)
       this.volumeGrowth = parseFloat(this.cycleDataForm.volumeGrowth).toFixed(4)
       this.seedsDestroyed = parseFloat(this.cycleDataForm.burnedSeedsDuringCycle)
@@ -1032,32 +1096,32 @@ export default {
 
 <style lang="sass">
 #container-add-cycle .q-item
-  min-height: 55px;
-  border-radius: 3px 3px 0px 0px;
+  min-height: 55px
+  border-radius: 3px 3px 0px 0px
 #container-add-cycle .modalLoadSimulation
   min-width: 30vw
   width: 40vw
   max-width: 60vw
 #container-add-cycle .cycle-form
 #container-add-cycle .form-group
-    border: 1px solid
-    border-color: gray
-    padding: 5px
+  border: 1px solid
+  border-color: gray
+  padding: 5px
 #container-add-cycle .scroll-container
-    height: calc(100vh - 245px)
-    max-width: 100%
+  height: calc(100vh - 245px)
+  max-width: 100%
 #container-add-cycle .bg-readonly
-    background: blue
+  background: blue
 #container-add-cycle .c_input
-    background-color: inherit
-    flex: 1
-    border: none
+  background-color: inherit
+  flex: 1
+  border: none
 #container-add-cycle .c_input:focus
-    background-color: inherit
-    flex: 1
-    border: none !important
+  background-color: inherit
+  flex: 1
+  border: none !important
 #container-add-cycle input:focus, textarea:focus, select:focus
-    outline: none
+  outline: none
 .modal-load-simulation
   height: 90vh
   width: 40vw

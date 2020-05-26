@@ -1,9 +1,9 @@
 <template lang="pug">
 #Container
-  group-container.relative-position.q-pa-md.full-width(title="eeds" v-if="totalSimulationSteps === 0")
+  group-container.relative-position.q-pa-md.full-width(title="eeds" v-if="totalSimulationSteps <= 1")
     .no-data-view
       #labels.absolute-center
-        card-table-totals.cursor-pointer(v-if="dataTableGeneral.rows" :data="dataTableGeneral.rows[0]" :selected="tableSelected === constant.SEEDS_GENERAL")
+        card-table-totals-init.cursor-pointer(v-if="dataTableGeneral.rows" :data="dataTableGeneral.rows[0]" :selected="tableSelected === constant.SEEDS_GENERAL")
         .text-no-data.text-weight-thin.text-center {{$t('common.notData')}}
         .text-no-data.text-weight-thin.text-center {{$t('common.notDataIndication')}}
   q-scroll-area.scroll-container(ref="scrollArea" v-else)
@@ -114,6 +114,7 @@
 <script>
 import CustomChart from '~/pages/harvest/chart'
 import CustomTableHeader from '~/pages/harvest/components/customTableHeader'
+import CardTableTotalsInit from '~/pages/harvest/components/card-table-totals-init'
 import CardTableTotals from '~/pages/harvest/components/card-table-totals'
 import CardTableGrowth from '~/pages/harvest/components/card-table-growth'
 import CardTableGdc from '~/pages/harvest/components/card-table-gdc'
@@ -122,7 +123,7 @@ import GroupContainer from '~/components/group-container'
 import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'harvest-dashboard',
-  components: { CustomChart, CustomTableHeader, CardTableTotals, CardTableGrowth, CardTableGdc, GroupContainer },
+  components: { CustomChart, CustomTableHeader, CardTableTotals, CardTableGrowth, CardTableGdc, GroupContainer, CardTableTotalsInit },
   beforeMount () {
     this.constant = harvestConstant
   },
