@@ -48,7 +48,9 @@ export const getDataTable = async function ({ dispatch, commit, state }, { table
           {
             seeds3cycles: stepState.seedsGrownPerCycle * 3,
             seedsPerCycle: stepState.seedsGrownPerCycle,
-            seedsPerBlock: stepState.seedsGrownPerCycle / (HarvestConstants.CYCLE * 172800)
+            seedsPerBlock: stepState.seedsGrownPerCycle / (HarvestConstants.CYCLE * 172800),
+            totalGev: stepState.totalGDP,
+            volumeGrowth: stepState.volumeGrowth
           }]
       })
       break
