@@ -15,7 +15,9 @@ export const totalSimulationSteps = ({ simulationState }) => {
 export const dataChart = ({ dataChart }) => dataChart
 export const getSimulationState = ({ simulationState }) => simulationState
 export const cycleDataForm = ({ simulationStep, simulationState, stateForm }) => {
-  if (simulationState.length > 0) {
+  if (simulationState.length === 1) {
+    return simulationState[0]
+  } else if (simulationState.length > 0) {
     return simulationState[simulationStep]
   } else return stateForm
 }

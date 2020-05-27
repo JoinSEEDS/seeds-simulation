@@ -7,29 +7,36 @@
             .row.justify-center
               img.icon(src="~/assets/functionIcon.png")
               span.text-white.text-center.q-mx-sm.text-title {{$t('pages.tableCard.supply')}}
-            .text-white.text-center.text-value {{data.totalSeeds | formatToMoney}}
+            .text-white.text-center.text-value {{generalStatesInitTable.data.totalSeeds | formatToMoney}}
         .col-6
           q-card.cardItem.q-pa-lg
             .row.justify-center
               img.icon(src="~/assets/circulatingIcon.png")
               .text-white.text-center.q-mx-sm.text-title {{$t('pages.tableCard.circulating')}}
-            .text-white.text-center.text-value {{data.totalCirculatingSeeds | formatToMoney}}
+            .text-white.text-center.text-value {{generalStatesInitTable.data.totalCirculatingSeeds | formatToMoney}}
         .col-6
           q-card.cardItem.q-pa-lg
             .row.justify-center
               img.icon(src="~/assets/plantedIcon.png")
               .text-white.text-center.q-mx-sm.text-title {{$t('pages.tableCard.planted')}}
-            .text-white.text-center.text-value {{data.totalSeedsPlanted | formatToMoney}}
+            .text-white.text-center.text-value {{generalStatesInitTable.data.totalSeedsPlanted | formatToMoney}}
         .col-6
           q-card.cardItem.q-pa-lg
             .row.justify-center
               img.icon(src="~/assets/burnedIcon.png")
               .text-white.text-center.q-mx-sm.text-title {{$t('pages.tableCard.burned')}}
-            .text-white.text-center.text-value {{data.totalSeedsBurned | formatToMoney}}
+            .text-white.text-center.text-value {{generalStatesInitTable.data.totalSeedsBurned | formatToMoney}}
+        .col-6
+          q-card.cardItem.q-pa-lg
+            .row.justify-center
+              img.icon(src="~/assets/burnedIcon.png")
+              .text-white.text-center.q-mx-sm.text-title {{$t('pages.tableCard.totalGEV')}}
+            .text-white.text-center.text-value {{generalStatesInitTable.data.totalGEV | formatToMoney}}
 </template>
 
 <script>
 import groupContainer from '~/components/group-container'
+import { mapState } from 'vuex'
 export default {
   name: 'card-table-totals-init',
   props: {
@@ -40,7 +47,10 @@ export default {
       type: Boolean
     }
   },
-  components: { groupContainer }
+  components: { groupContainer },
+  computed: {
+    ...mapState('harvest', ['generalStatesInitTable'])
+  }
 }
 </script>
 

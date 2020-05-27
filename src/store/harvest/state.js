@@ -11,6 +11,16 @@ export default () => ({
       }
     ]
   },
+  generalStatesInitTable: {
+    tableName: 'Init Seeds',
+    data: {
+      totalCirculatingSeeds: 1256637061,
+      totalSeedsPlanted: 1256637061,
+      totalSeedsBurned: 0,
+      totalSeeds: 3141592653,
+      totalGEV: 1000
+    }
+  },
   seedsGrownTable: {
     tableName: 'Seeds Grown'
   },
@@ -114,6 +124,7 @@ export default () => ({
     numOrganizationAccounts: 100000,
     organizationsGrowth: 0.018,
     gdpPerOrganisation: 25000,
+    // (gdpPerPerson * numPeopleAccounts) +  (gdpPerOrganisation * numOrganizationAccounts)
     numBdcs: 100,
     bdcsGrowth: 0.012,
     changeRequiredToMeetDemand: 0,

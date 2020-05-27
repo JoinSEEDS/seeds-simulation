@@ -722,16 +722,18 @@ export default {
     }
   },
   async beforeMount () {
-    await this.onInit()
-    this.syncFormData()
+    // await this.onInit()
+    // this.syncFormData()
   },
-  mounted () {
+  async mounted () {
     this.$store.$EventBus.$on('simulation-applied', () => {
       console.log('Event bus listened, loadSimulation closed')
       this.showLoadCycle = false
     })
     try {
       // this.onInit()
+      // await this.onInit()
+      this.syncFormData()
     } catch (error) {
       console.error('Errrroooorr', error)
     }
@@ -777,12 +779,37 @@ export default {
         default:
           console.warn('Not case found on fieldValue watch')
       }
+    },
+    gdpPerPerson () {
+      this.changeDataStatesInitTable()
+    },
+    numPeopleAccounts () {
+      this.changeDataStatesInitTable()
+    },
+    gdpPerOrganisation () {
+      this.changeDataStatesInitTable()
+    },
+    numOrganizationAccounts () {
+      this.changeDataStatesInitTable()
     }
   },
   methods: {
     ...mapActions('harvest', ['getInitSimulationStep', 'doCycle', 'initState']),
     ...mapActions('simulations', ['cleanSimulationData']),
-    ...mapMutations('harvest', ['setSimulationStep']),
+    ...mapMutations('harvest', ['setSimulationStep', 'setDataStatesInitTable']),
+    changeDataStatesInitTable () {
+      if (this.totalSimulationSteps > 1) return
+      let newData = {
+        totalCirculatingSeeds: 1256637061,
+        totalSeedsPlanted: 1256637061,
+        totalSeedsBurned: 0,
+        totalSeeds: 3141592653,
+        // totalGEV: 1000,
+        // totalGEV: (gdpPerPerson * numPeopleAccounts) +  (gdpPerOrganisation * numOrganizationAccounts),
+        totalGEV: (this.gdpPerPerson.value * this.numPeopleAccounts.value) + (this.gdpPerOrganisation.value * this.numOrganizationAccounts.value)
+      }
+      this.setDataStatesInitTable(newData)
+    },
     async onInit () {
       const simulationState = {
         changeRequiredToMeetDemand: this.changeRequiredToMeetDemand.value,
@@ -835,7 +862,8 @@ export default {
         seedsPerContract: this.seedsPerContract.value
         // harvestDistribution: {}
       }
-      await this.initState({
+      console.warn('Se llamo InitState!!!', 'Lugar 0')
+      this.initState({
         simulationState
       })
       console.log('Inited!')
@@ -1057,6 +1085,7 @@ export default {
       console.log('....................................................')
       console.log('MIRA EN CYCLES: seeds per contract:', parseFloat(this.cycleDataForm.seedsPerContract).toFixed(2))
       console.log('....................................................')
+      this.changeDataStatesInitTable()
       //   console.log('After Sync Form:', this.getSimulationState)
     },
     cleanFormat (value) {
