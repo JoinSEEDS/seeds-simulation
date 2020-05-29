@@ -172,7 +172,7 @@ export default {
       interestFreeLoans: 'Interest Free Loans',
       totalAmount: 'Total Amount',
       totalGEV: 'Total GEV',
-      volumeGrowth: 'Volume Growth'
+      volumeGrowth: 'GEV Growth'
     }
   }
 }

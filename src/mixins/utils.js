@@ -64,6 +64,13 @@ export const utils = {
       const priceRound = Math.round(amount)
       let format = new Intl.NumberFormat().format(priceRound)
       return `${format}`
+    },
+    formatNumber (amount) {
+      const p = parseFloat(amount).toFixed(2)
+      // const amount = absolute ? Math.abs(this.amount) : this.amount
+      // const priceRound = Math.round(amount)
+      let format = new Intl.NumberFormat().format(p)
+      return `${format}`
     }
   }
 }
