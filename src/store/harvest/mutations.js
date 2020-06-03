@@ -22,6 +22,12 @@ export const setDataChart = (state, data) => {
 export const setDataSimulationState = (state, data) => {
   // console.log('Antes del spilce', state.simulationState)
   // console.log('Antes del spilce Step:', data.step)
+  // if (data.step === 0) {
+  //   console.log('step === 0', data.simulation[0])
+  //   state.simulationState[0] = data.simulation[0]
+  //   return
+  // }
+
   if (data.step < state.simulationState.length) {
     state.simulationState.splice(data.step + 1, state.simulationState.length)
   }
@@ -71,6 +77,11 @@ export const restartSimulation = (state, newState) => {
 export const setSimulationStep = (state, step) => {
   state.simulationStep = step
 }
+
 export const setDataForm = (state, dataForm) => {
   state.stateForm = dataForm
+}
+
+export const setDataStatesInitTable = (state, newData) => {
+  state.generalStatesInitTable.data = newData
 }

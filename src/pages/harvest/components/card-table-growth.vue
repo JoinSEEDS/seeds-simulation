@@ -25,7 +25,7 @@
             .row.justify-center
               img.icon(src="~/assets/perBlockIcon.png")
               .text-title.text-white.text-center.q-mx-sm {{$t('pages.tableCard.volumeGrowth')}}
-            .text-value.text-white.text-center {{data.volumeGrowth | formatToMoney}}
+            .text-value.text-white.text-center {{(data.volumeGrowth * 100)|formatNumber}} %
 </template>
 
 <script>

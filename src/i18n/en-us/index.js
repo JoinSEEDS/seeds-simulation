@@ -76,15 +76,15 @@ export default {
       interestFreeLoans: 'Interest Free Loans',
       // -END
       numPeopleAccounts: 'Number of People Accounts',
-      peopleGrowth: 'People Growth',
+      peopleGrowth: 'People',
       gdpPerPerson: 'Yearly GEV per Person',
-      seedsPlantedPerUserFixed: 'Seeds Planted Per User Fixed',
-      seedsPlantedPerUserVariable: 'Seeds Planted Per User Variable',
+      seedsPlantedPerUserFixed: 'Avg. Seeds Planted for New Members',
+      seedsPlantedPerUserVariable: 'Avg. Seeds Planted Per Round',
       averageSeedsBurnedPerUser: 'Average Seeds Burned Per User',
       numOrganizationAccounts: 'Number of Organization Accounts',
       organizationsGrowth: 'Organizations Growth',
-      orgGrowth: 'Org Growth',
-      bdcGrowth: 'BDC Growth',
+      orgGrowth: 'Organisations',
+      bdcGrowth: 'Bioregions',
       gdpPerOrganisation: 'Yearly GEV per Organization',
       numBdcs: 'Number of Bdcs',
       bdcsGrowth: 'BDCs Growth',
@@ -172,7 +172,7 @@ export default {
       interestFreeLoans: 'Interest Free Loans',
       totalAmount: 'Total Amount',
       totalGEV: 'Total GEV',
-      volumeGrowth: 'Volume Growth'
+      volumeGrowth: 'GEV Growth'
     }
   }
 }

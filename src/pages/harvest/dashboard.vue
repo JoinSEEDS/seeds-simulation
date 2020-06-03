@@ -1,6 +1,6 @@
 <template lang="pug">
 #Container
-  group-container.relative-position.q-pa-md.full-width(title="eeds" v-if="totalSimulationSteps <= 1")
+  group-container.relative-position.q-pa-md.full-width(title="eeds" v-if="totalSimulationSteps < 1")
     .no-data-view
       #labels.absolute-center
         card-table-totals-init.cursor-pointer(v-if="dataTableGeneral.rows" :data="dataTableGeneral.rows[0]" :selected="tableSelected === constant.SEEDS_GENERAL")
@@ -153,6 +153,7 @@ export default {
   },
   watch: {
     simulationStep (currentStep, prevStep) {
+      if (currentStep <= 1) return
       console.log('The simulation step was changed', currentStep, prevStep)
       console.log('Before Cycle Tables', this.getSimulationState)
       this.setCycleTables({ step: this.simulationStep })

@@ -461,9 +461,13 @@ export const setCycleTables = async function ({ dispatch, commit, state }, { ste
 }
 
 export const initState = async function ({ dispatch, commit, state }, { simulationState }) {
-  let newState = initCycle(Object.assign({}, simulationState))
+  const st = state.stateForm
+  // let newState = initCycle(Object.assign({}, simulationState))
+  let newState = initCycle(Object.assign({}, st))
 
+  console.warn('InitState!!!', 'Step 0')
   commit('setDataSimulationState', { simulation: [newState], step: 0 })
+  // commit('overwriteSimulationState', [newState])
   commit('setSimulationStep', state.simulationState.length - 1)
 
   return true
@@ -477,6 +481,7 @@ export const doCycle = async function ({ dispatch, commit, state }, { simulation
   console.log('DoCycle Action')
   if (state.simulationState.length === 0) {
     console.log('DoCycle Action 1')
+    console.warn('Se llamo InitState!!!', 'lugar 0')
     let initState = initCycle(Object.assign({}, simulationState))
     let newState = doNextCycle(Object.assign({}, initState), true)
     console.log(newState)
