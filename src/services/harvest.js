@@ -285,7 +285,7 @@ export const doNextCycle = function (state, update) {
 
   let pastCirculatingSeeds = newState.totals.circulatingSeeds
 
-  let totalCirculatingSeeds = newState.totals.circulatingSeeds + newState.percentageOfHarvestAssignedCirculating * newState.seedsGrownPerCycle
+  let totalCirculatingSeeds = newState.totals.circulatingSeeds + newState.changeRequiredToMeetDemand
   if (isNegative(totalCirculatingSeeds)) {
     return {
       error: 'negative',
@@ -356,10 +356,10 @@ export const doNextCycle = function (state, update) {
   console.info('')
   console.info('')
   console.info('CIRCULATING SEEDS:')
-  console.info('Circulating Seeds = (Past Circulating Seeds) + (Seeds Grown Per Cycle)')
+  console.info('Circulating Seeds = (Past Circulating Seeds) + (Change Required to Meet Demand)')
   console.info('\tCirculating Seeds =', totalCirculatingSeeds)
   console.info('\tPast Circulating Seeds =', pastCirculatingSeeds)
-  console.info('\tSeeds Grown Per Cycle =', newState.seedsGrownPerCycle)
+  console.info('\tChange Required to Meet Demand =', newState.changeRequiredToMeetDemand)
   console.info('')
   console.info('')
   console.info('PLANTED SEEDS:')
