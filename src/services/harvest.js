@@ -160,7 +160,7 @@ export const initCycle = function (state) {
 
   newState.newContractsDuringCycle = 0
 
-  newState.outstandingContractsSeeds = 628318530
+  newState.outstandingContractsSeeds = 0
   newState.outstandingContracts = Math.floor(newState.outstandingContractsSeeds / newState.seedsPerContract)
 
   newState.totals = {
@@ -248,6 +248,7 @@ export const doNextCycle = function (state, update) {
     newState.newContractsDuringCycle = 0
   }
 
+  console.log(`Outstanding contracts: ${newState.outstandingContracts} closedContractsPercentage:${newState.closedContractsPercentage}`)
   newState.closedContractsDuringCycleSeeds = newState.outstandingContracts * newState.closedContractsPercentage
   newState.closedContractsDuringCycle = Math.floor(newState.closedContractsDuringCycleSeeds / newState.seedsPerContract)
 

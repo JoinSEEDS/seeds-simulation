@@ -616,13 +616,13 @@ export default {
       // changeRequiredToMeetDemand: 33339041.096,
       seedsDestroyed: 0,
       plantedSeeds: 0,
-      enterExchanges: 0,
-      enterExchangesWeight: 0,
+      enterExchanges: '',
+      enterExchangesWeight: '',
       enterSeedsBank: 0,
       // seedsRemoved3Cycles: 26681232.878,
       unplantedSeeds: 0,
-      exitExchanges: 0,
-      exitExchangesWeight: 0,
+      exitExchanges: '',
+      exitExchangesWeight: '',
       exitSeedsBank: 0,
       percentageOfHarvestAssignedCirculating: 0,
       // Interface - START percentageDistributionOfNewHarvest
@@ -659,8 +659,8 @@ export default {
       contracts: 0,
       contractsSeeds: 0,
       contractsGrowth: 0,
-      outstandingContracts: 0,
-      outstandingContractsSeeds: 0,
+      outstandingContracts: '',
+      outstandingContractsSeeds: '',
       seedsPerContract: 0,
       closedContracts: 0,
       closedContractsSeeds: 0,
@@ -1079,8 +1079,8 @@ export default {
       this.bankSeedsPerCycle = parseFloat(this.cycleDataForm.bankSeedsPerCycle).toFixed(2)
       this.seedsPerContract = parseFloat(this.cycleDataForm.seedsPerContract)
       this.outstandingContractsSeeds = parseFloat(this.cycleDataForm.outstandingContractsSeeds)
-      this.contractsSeeds = parseFloat(this.cycleDataForm.newContractsDuringCycleSeeds).toFixed(2)
-      this.closedContractsSeeds = parseFloat(this.cycleDataForm.closedContractsDuringCycleSeeds).toFixed(2)
+      this.contractsSeeds = parseFloat(this.cycleDataForm.newContractsDuringCycleSeeds)
+      this.closedContractsSeeds = parseFloat(this.cycleDataForm.closedContractsDuringCycleSeeds)
 
       console.log('....................................................')
       console.log('MIRA EN CYCLES: seeds per contract:', parseFloat(this.cycleDataForm.seedsPerContract).toFixed(2))

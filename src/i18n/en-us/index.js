@@ -77,7 +77,7 @@ export default {
       // -END
       numPeopleAccounts: 'Number of People Accounts',
       peopleGrowth: 'People',
-      gdpPerPerson: 'Yearly GEV per Person',
+      gdpPerPerson: 'Yearly QEV per Person',
       seedsPlantedPerUserFixed: 'Avg. Seeds Planted for New Members',
       seedsPlantedPerUserVariable: 'Avg. Seeds Planted Per Round',
       averageSeedsBurnedPerUser: 'Average Seeds Burned Per User',
@@ -85,7 +85,7 @@ export default {
       organizationsGrowth: 'Organizations Growth',
       orgGrowth: 'Organisations',
       bdcGrowth: 'Bioregions',
-      gdpPerOrganisation: 'Yearly GEV per Organization',
+      gdpPerOrganisation: 'Yearly QEV per Organization',
       numBdcs: 'Number of Bdcs',
       bdcsGrowth: 'BDCs Growth',
       // Interface Seeds Bank
@@ -99,7 +99,7 @@ export default {
       contractsGrowth: 'Contracts Growth',
       seedsPerContract: 'Average Contract Value',
       // Groups
-      groupGDP: 'GEV',
+      groupGDP: 'QEV',
       groupSeedsBank: 'Seeds Bank',
       groupSeedsRemove: 'Seeds Removed',
       groupSeedsIntroduce: 'Seeds Introduced',
@@ -171,8 +171,8 @@ export default {
       coreDevelopment: 'Core Development',
       interestFreeLoans: 'Interest Free Loans',
       totalAmount: 'Total Amount',
-      totalGEV: 'Total GEV',
-      volumeGrowth: 'GEV Growth'
+      totalGEV: 'Total QEV',
+      volumeGrowth: 'QEV Growth'
     }
   }
 }
