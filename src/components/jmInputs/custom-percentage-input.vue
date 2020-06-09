@@ -22,7 +22,8 @@ export default {
     scale: { type: String, default: '100' },
     readonly: {},
     rules: { type: Array },
-    bgColor: {}
+    bgColor: {},
+    labelSuffix: { type: String, default: ' (%)' }
   },
   data () {
     return {
@@ -31,7 +32,7 @@ export default {
   },
   computed: {
     labelComputed () {
-      return this.label + ' (%)'
+      return `${this.label}${this.labelSuffix}`
     }
   },
   mounted () {

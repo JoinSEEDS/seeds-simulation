@@ -55,15 +55,16 @@
                                   header-class="text-positive"
                                 )
                                   div.q-pr-sm.q-py-xs
-                                    percentage-input(
-                                      v-model='peopleGrowth'
-                                      :label="$t('forms.cycles.peopleGrowth')"
-                                      :rules="[rules.required]"
-                                    )
                                     money-input(
                                       v-model='numPeopleAccounts'
                                       :label="$t('forms.cycles.numPeopleAccounts')"
                                       :rules="[rules.positiveInteger]"
+                                    )
+                                    percentage-input(
+                                      v-model='peopleGrowth'
+                                      :label="$t('forms.cycles.growthPerCycle')"
+                                      :rules="[rules.required]"
+                                      labelSuffix=''
                                     )
                                     money-input(
                                       v-model='gdpPerPerson'
@@ -85,8 +86,9 @@
                                     )
                                     percentage-input(
                                         v-model='organizationsGrowth'
-                                        :label="$t('forms.cycles.organizationsGrowth')"
+                                        :label="$t('forms.cycles.growthPerCycle')"
                                         :rules="[rules.required]"
+                                        labelSuffix=''
                                     )
                                     money-input(
                                         v-model='gdpPerOrganisation'
@@ -101,15 +103,16 @@
                                   header-class="text-positive"
                                 )
                                   div.q-pr-sm.q-py-xs
-                                    percentage-input(
-                                      v-model='bdcsGrowth'
-                                      :label="$t('forms.cycles.bdcsGrowth')"
-                                      :rules="[rules.required]"
-                                    )
                                     money-input(
                                         v-model='numBdcs'
                                         :label="$t('forms.cycles.numBdcs')"
                                         :rules="[rules.nonNegative]"
+                                    )
+                                    percentage-input(
+                                      v-model='bdcsGrowth'
+                                      :label="$t('forms.cycles.growthPerCycle')"
+                                      :rules="[rules.required]"
+                                      labelSuffix=''
                                     )
                                 q-expansion-item(
                                   dense-toggle

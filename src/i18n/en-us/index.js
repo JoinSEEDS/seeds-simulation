@@ -81,13 +81,13 @@ export default {
       seedsPlantedPerUserFixed: 'Avg. Seeds Planted for New Members',
       seedsPlantedPerUserVariable: 'Avg. Seeds Planted Per Round',
       averageSeedsBurnedPerUser: 'Average Seeds Burned Per User',
-      numOrganizationAccounts: 'Number of Organization Accounts',
-      organizationsGrowth: 'Organizations Growth',
+      numOrganizationAccounts: 'Number of Organisations',
+      organizationsGrowth: 'Organization\'s Growth',
       orgGrowth: 'Organisations',
       bdcGrowth: 'Bioregions',
-      gdpPerOrganisation: 'Yearly QEV per Organization',
-      numBdcs: 'Number of Bdcs',
-      bdcsGrowth: 'BDCs Growth',
+      gdpPerOrganisation: 'Yearly QEV per Organisation',
+      numBdcs: 'Number of BDC\'s',
+      bdcsGrowth: 'BDC\'s Growth',
       // Interface Seeds Bank
       outstandingContracts: 'Outstanding Contracts',
       outstandingContractsSeeds: 'Value of Outstanding Contracts',
@@ -105,7 +105,8 @@ export default {
       groupSeedsIntroduce: 'Seeds Introduced',
       groupHarvestDistribution: 'Harvest Distribution',
       groupBDCDistribution: 'BDC Distribution',
-      groupGDCDistribution: 'GDC Distribution'
+      groupGDCDistribution: 'GDC Distribution',
+      growthPerCycle: '% Growth Per Cycle'
     }
   },
   menu: {

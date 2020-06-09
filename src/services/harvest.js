@@ -200,7 +200,7 @@ export const doNextCycle = function (state, update) {
   if (isNegative(newState.numOrganizationAccounts)) {
     return {
       error: 'negative',
-      field: 'Number of Organization Accounts'
+      field: 'Number of Organisations'
     }
   }
 
@@ -208,7 +208,7 @@ export const doNextCycle = function (state, update) {
   if (isNegative(newState.numBdcs)) {
     return {
       error: 'negative',
-      field: 'Number of BDCs'
+      field: 'Number of BDC\'s'
     }
   }
 
