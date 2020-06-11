@@ -3,7 +3,7 @@
   #container-group
     #name-group
       .title-group
-        img.seeds-icon(src="~/assets/seeds-green-small.png")
+        img.seeds-icon(v-if="icon" src="~/assets/seeds-green-small.png")
         span.p.text-title {{title}}
     .q-pa-md
         slot
@@ -17,6 +17,10 @@ export default {
     title: {
       type: String,
       default: 'Title'
+    },
+    icon: {
+      type: Boolean,
+      default: true
     }
   }
 }
