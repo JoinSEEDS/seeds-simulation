@@ -328,24 +328,6 @@
                                 q-expansion-item(
                                   dense-toggle
                                   group="groupSeedsIntroduce"
-                                  :label="labelExitExchanges"
-                                  header-class="text-positive"
-                                )
-                                  div.q-pr-sm.q-py-xs
-                                    money-input(
-                                        v-model='exitExchanges'
-                                        :label="$t('forms.cycles.exitExchanges')"
-                                        :rules="[rules.nonNegative]"
-                                        seedsIcon
-                                    )
-                                    percentage-input(
-                                        v-model='exitExchangesWeight'
-                                        :label="$t('forms.cycles.exitExchangesWeight')"
-                                        :rules="[rules.nonNegative]"
-                                    )
-                                q-expansion-item(
-                                  dense-toggle
-                                  group="groupSeedsIntroduce"
                                   :label="labelSeedsIntroduceUnplanted"
                                   header-class="text-positive"
                                 )
@@ -364,6 +346,24 @@
                                         :bgColor="bgColor"
                                         :rules="[rules.nonNegative]"
                                         seedsIcon
+                                    )
+                                q-expansion-item(
+                                  dense-toggle
+                                  group="groupSeedsIntroduce"
+                                  :label="labelExitExchanges"
+                                  header-class="text-positive"
+                                )
+                                  div.q-pr-sm.q-py-xs
+                                    money-input(
+                                        v-model='exitExchanges'
+                                        :label="$t('forms.cycles.exitExchanges')"
+                                        :rules="[rules.nonNegative]"
+                                        seedsIcon
+                                    )
+                                    percentage-input(
+                                        v-model='exitExchangesWeight'
+                                        :label="$t('forms.cycles.exitExchangesWeight')"
+                                        :rules="[rules.nonNegative]"
                                     )
                         q-separator
                         //- Harvest Distribution

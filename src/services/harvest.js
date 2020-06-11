@@ -208,7 +208,7 @@ export const doNextCycle = function (state, update) {
   if (isNegative(newState.numBdcs)) {
     return {
       error: 'negative',
-      field: 'Number of BDC\'s'
+      field: 'Number of Bioregions'
     }
   }
 

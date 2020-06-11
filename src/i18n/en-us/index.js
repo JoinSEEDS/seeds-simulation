@@ -50,28 +50,28 @@ export default {
       enterSeedsBank: 'Enter Seeds Bank',
       // seedsRemoved3Cycles: 26681232.878,
       unplantedSeeds: 'Unplanted Seeds During Cycle',
-      unplantedSeedsPerUser: 'Unplanted Seeds Per User',
+      unplantedSeedsPerUser: 'Avg. Seeds Unplanted Per Round',
       exitExchanges: 'Exit Exchanges',
       exitExchangesWeight: 'Exit Exchanges Weight',
       exitSeedsBank: 'Exit Seeds Bank',
       percentageOfHarvestAssignedCirculating: '% Of Harvest Assigned Circulating',
       // Interface - START percentageDistributionOfNewHarvest
-      gdc: 'GDC',
-      bdc: 'BDC',
+      gdc: 'Global',
+      bdc: 'Bioregions',
       organizations: 'Organizations',
-      accounts: 'Accounts',
+      accounts: 'People',
       // -END
       maxPercentageAccounts: 'Max % Accounts',
       maxPercentageOrganizations: 'Max % Organizations',
       maxPercentageBdc: 'Max % BDC',
       // Interface - Start bdcPercentagesDistribution
-      regenGrantsBDC: 'Regen Grants BDC',
+      regenGrantsBDC: 'Regen Grants',
       regenLoans: 'Regen Loans',
       openProposal: 'Open Proposal',
       // -END
       // Interface - Start gdcPercentagesDistribution
       networkMaintenance: 'Network Maintenance',
-      regenGrantsGDC: 'Regen Grants GDC',
+      regenGrantsGDC: 'Regen Grants',
       coreDevelopment: 'Core Development',
       interestFreeLoans: 'Interest Free Loans',
       // -END
@@ -86,7 +86,7 @@ export default {
       orgGrowth: 'Organisations',
       bdcGrowth: 'Bioregions',
       gdpPerOrganisation: 'Yearly QEV per Organisation',
-      numBdcs: 'Number of BDC\'s',
+      numBdcs: 'Number of Bioregions',
       bdcsGrowth: 'BDC\'s Growth',
       // Interface Seeds Bank
       outstandingContracts: 'Outstanding Contracts',
@@ -104,8 +104,8 @@ export default {
       groupSeedsRemove: 'Seeds Removed',
       groupSeedsIntroduce: 'Seeds Introduced',
       groupHarvestDistribution: 'Harvest Distribution',
-      groupBDCDistribution: 'BDC Distribution',
-      groupGDCDistribution: 'GDC Distribution',
+      groupBDCDistribution: 'Bioregion Distribution',
+      groupGDCDistribution: 'Global Distribution',
       growthPerCycle: '% Growth Per Cycle'
     }
   },
@@ -160,7 +160,7 @@ export default {
       resetSimulation: 'Reset simulation'
     },
     tableCard: {
-      supply: 'Supply',
+      supply: 'Total Supply',
       circulating: 'Circulating',
       planted: 'Planted',
       burned: 'Burned',
@@ -172,7 +172,7 @@ export default {
       coreDevelopment: 'Core Development',
       interestFreeLoans: 'Interest Free Loans',
       totalAmount: 'Total Amount',
-      totalGEV: 'Total QEV',
+      totalGEV: 'Current QEV',
       volumeGrowth: 'QEV Growth'
     }
   }
