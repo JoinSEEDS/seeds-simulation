@@ -23,7 +23,7 @@ export default {
     },
     async onLoginAsGuest () {
       console.log('onLoginAsGuest')
-      await this.login({ returnUrl: '/dashboard' })
+      await this.login({ returnUrl: '/dashboard', guest: true })
     },
     async onAccountEntered (account) {
       await this.login({ idx: this.idx, account, returnUrl: this.$route.query.returnUrl })

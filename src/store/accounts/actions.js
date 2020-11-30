@@ -8,10 +8,10 @@ const getAuthenticator = function (ual, wallet = null) {
   }
 }
 
-export const login = async function ({ commit, dispatch }, { idx, account, returnUrl }) {
+export const login = async function ({ commit, dispatch }, { idx, account, returnUrl, guest }) {
   const authenticator = this.$ual.authenticators[idx]
   try {
-    if (!idx) {
+    if (!idx && guest) {
       commit('setAccount', 'Guest')
       const defaultReturnUrl = localStorage.getItem('returning') ? '/dashboard' : '/dashboard'
       this.$router.push({ path: returnUrl || defaultReturnUrl })

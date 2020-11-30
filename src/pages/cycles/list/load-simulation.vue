@@ -9,7 +9,7 @@
     :breakpoint="0"
     align="justify"
   )
-    q-tab(name="mySimulations", :label="$t('pages.saveSimulation.mySimulations')")
+    q-tab(name="mySimulations", :label="$t('pages.saveSimulation.mySimulations')" v-if="isAuthenticated")
     q-tab(name="allSimulations", :label="$t('pages.saveSimulation.allSimulations')")
   q-separator
   q-tab-panels.q-pt-none(
@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import { mapActions, mapMutations, mapState } from 'vuex'
+import { mapActions, mapMutations, mapState, mapGetters } from 'vuex'
 import SimulationItem from '~/pages/cycles/list/components/simulation-item'
 import SearchBar from '~/components/search-bar'
 export default {
@@ -71,7 +71,8 @@ export default {
     }
   },
   computed: {
-    ...mapState('simulations', ['mySimulations', 'allSimulations'])
+    ...mapState('simulations', ['mySimulations', 'allSimulations']),
+    ...mapGetters('accounts', ['isAuthenticated'])
   },
   watch: {
     searchDesc () {
