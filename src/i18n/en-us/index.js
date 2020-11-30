@@ -130,7 +130,8 @@ export default {
     login: {
       getApp: 'Download the app',
       title: 'Select your wallet',
-      selectAccount: 'Please select an account'
+      selectAccount: 'Please select an account',
+      guest: 'Continue as guest'
     },
     harvest: {
       grownSeedsChart: {

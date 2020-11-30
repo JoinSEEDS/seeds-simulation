@@ -11,6 +11,12 @@ const getAuthenticator = function (ual, wallet = null) {
 export const login = async function ({ commit, dispatch }, { idx, account, returnUrl }) {
   const authenticator = this.$ual.authenticators[idx]
   try {
+    if (!idx) {
+      commit('setAccount', 'Guest')
+      const defaultReturnUrl = localStorage.getItem('returning') ? '/dashboard' : '/dashboard'
+      this.$router.push({ path: returnUrl || defaultReturnUrl })
+      return
+    }
     commit('setLoadingWallet', authenticator.getStyle().text)
     await authenticator.init()
     if (!account) {
