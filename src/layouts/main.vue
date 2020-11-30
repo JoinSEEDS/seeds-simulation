@@ -22,7 +22,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('accounts', ['isAuthenticated']),
+    ...mapGetters('accounts', ['isAuthenticated', 'isGuest']),
     ...mapState('simulations', ['editingMySimulation']),
     titleBar () {
       return this.editingMySimulation.status ? `${this.$t('pages.saveSimulation.simulation')}: ${this.editingMySimulation.simulation.name}` : ''
@@ -59,8 +59,8 @@ export default {
               strong  {{editingMySimulation.simulation.name}}
             q-icon.cursor-pointer.iconClose(name="cancel" @click="showConfirmCleanSimulation = true")
               q-tooltip {{$t('pages.saveSimulation.cleanSimulation')}}
-        right-menu-authenticated(v-if="isAuthenticated")
-        right-menu-guest(v-if="!isAuthenticated")
+        right-menu-authenticated(v-if="isAuthenticated || isGuest")
+        right-menu-guest(v-if="!isAuthenticated && !isGuest")
         q-btn(
           flat
           dense

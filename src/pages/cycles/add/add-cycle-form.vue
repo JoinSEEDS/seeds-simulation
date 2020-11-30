@@ -678,6 +678,7 @@ export default {
   computed: {
     ...mapGetters('harvest', ['simulationStep', 'totalSimulationSteps', 'cycleDataForm', 'getSimulationState']),
     ...mapState('simulations', ['editingMySimulation']),
+    ...mapGetters('accounts', ['isGuest', 'isAuthenticated']),
     titleSaveSimulation () {
       return this.editingMySimulation.status ? this.$t('pages.saveSimulation.updateSimulations') : this.$t('pages.saveSimulation.saveSimulation')
     },
@@ -721,7 +722,7 @@ export default {
       return this.getSimulationState.length > 1 ? this.$t('forms.cycles.burned') + ': ' + this.formatToMoney(this.getSimulationState[this.simulationStep].burnedSeedsDuringCycle) : this.$t('forms.cycles.burned')
     },
     showSaveSimulation () {
-      return this.getSimulationState.length > 1
+      return (this.getSimulationState.length > 1 && (this.isAuthenticated))
     }
   },
   async beforeMount () {

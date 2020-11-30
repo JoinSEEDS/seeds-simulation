@@ -28,7 +28,7 @@ export default function ({ store }) {
     // Verify the screens is for users guest
     if (to.matched.some(record => !record.meta.guest)) {
       // Verify if the user is authenticated
-      if (store.getters['accounts/isAuthenticated']) {
+      if (store.getters['accounts/isAuthenticated'] || store.getters['accounts/isGuest']) {
         // Verify the communication method
         // if (to.matched.some(record => record.meta.needVerifyComm)) {
         //   const isRegistered = store.getters['profiles/isRegistered']

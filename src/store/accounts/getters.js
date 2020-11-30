@@ -1,4 +1,5 @@
-export const isAuthenticated = ({ account }) => !!account
+export const isAuthenticated = ({ account }) => (account && account !== 'Guest')
+export const isGuest = ({ account }) => (account && account === 'Guest')
 export const account = ({ account }) => account
 export const loading = ({ loading }) => loading
 export const isAutoLoading = ({ autoLogin }) => autoLogin
