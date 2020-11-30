@@ -63,9 +63,11 @@ export const loginToBackend = async function ({ commit }) {
 }
 
 export const logout = async function ({ commit }) {
+  // commit('simulations/cleanSimulationData', { root: true })
+  await this.dispatch('simulations/cleanSimulationData', { root: true })
   const { authenticator } = getAuthenticator(this.$ual)
   authenticator && authenticator.logout()
-  commit('profiles/setProfile', undefined, { root: true })
+  // commit('profiles/setProfile', undefined, { root: true })
   commit('setAccount')
   localStorage.removeItem('autoLogin')
   this.$api = null
