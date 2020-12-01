@@ -53,8 +53,13 @@ import SearchBar from '~/components/search-bar'
 export default {
   name: 'load-simulation',
   components: { SimulationItem, SearchBar },
-  mounted () {
+  async mounted () {
     this.$refs.mySimulationScroll.trigger()
+    if (!this.isAuthenticated) {
+      this.tab = 'allSimulations'
+      await this.$nextTick()
+      this.resetAllSimulationScroll()
+    }
   },
   beforeDestroy () {
     this.cleanAllSimulations()
