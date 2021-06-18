@@ -33,13 +33,13 @@ export default () => ({
     expand: false
   },
   bdcsTable: {
-    tableName: 'BDC',
+    tableName: 'R-DHO',
     // tableName: 'Seeds Distributed for BDCs',
     expanded: false
   },
   gdcTable: {
-    // tableName: 'Seeds for GDC'
-    tableName: 'GDC'
+    // tableName: 'Seeds for G-DHO'
+    tableName: 'G-DHO'
   },
   dataChart: {
     chartName: 'undefined'

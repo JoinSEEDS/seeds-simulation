@@ -408,7 +408,7 @@
                                 //-     template(v-slot:control='{ id, floatingLabel, value, emitValue }')
                                 //-         input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
                         q-separator
-                        //- BDC Distribution
+                        //- R-DHO Distribution
                         q-expansion-item(
                           dense-toggle
                           group="formGroup"
@@ -442,7 +442,7 @@
                                 //-     template(v-slot:control='{ id, floatingLabel, value, emitValue }')
                                 //-         input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
                         q-separator
-                        //- GDC Distribution
+                        //- G-DHO Distribution
                         q-expansion-item(
                           dense-toggle
                           group="formGroup"

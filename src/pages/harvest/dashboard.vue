@@ -348,12 +348,12 @@ export default {
           headerClasses: 'sticky bg-primary text-white',
           style: 'max-width: 100px'
         },
-        { name: 'numBdc', align: 'left', label: '# of BDC\'s', field: 'numBdcs', sortable: true, headerClasses: 'sticky bg-primary text-white', format: val => this.formatToMoney(val) },
+        { name: 'numBdc', align: 'left', label: '# of R-DHO\'s', field: 'numBdcs', sortable: true, headerClasses: 'sticky bg-primary text-white', format: val => this.formatToMoney(val) },
         { name: 'openProposal', label: 'Open Proposal', field: 'openProposal', sortable: true, headerClasses: 'sticky bg-primary text-white', format: val => this.formatToMoney(val) },
         { name: 'regenGrants', label: 'Regen Grants', field: 'regenGrants', sortable: true, headerClasses: 'sticky bg-primary text-white', format: val => this.formatToMoney(val) },
         { name: 'regenLoans', label: 'Regen Loans', field: 'regenLoans', sortable: true, headerClasses: 'sticky bg-primary text-white', format: val => this.formatToMoney(val) },
         { name: 'totalAmount', label: 'Total Amount', field: 'budget', sortable: true, headerClasses: 'sticky bg-primary text-white', format: val => this.formatToMoney(val) },
-        { name: 'totalAmountPerBdc', label: 'Total Amount per BDC', field: 'budgetPerBdc', sortable: true, headerClasses: 'sticky bg-primary text-white', format: val => this.formatToMoney(val) }
+        { name: 'totalAmountPerBdc', label: 'Total Amount per R-DHO', field: 'budgetPerBdc', sortable: true, headerClasses: 'sticky bg-primary text-white', format: val => this.formatToMoney(val) }
       ],
       columnsTableGDC: [
         {

@@ -63,7 +63,7 @@ export default {
       // -END
       maxPercentageAccounts: 'Max % Accounts',
       maxPercentageOrganizations: 'Max % Organizations',
-      maxPercentageBdc: 'Max % BDC',
+      maxPercentageBdc: 'Max % R-DHO',
       // Interface - Start bdcPercentagesDistribution
       regenGrantsBDC: 'Regen Grants',
       regenLoans: 'Regen Loans',
@@ -87,7 +87,7 @@ export default {
       bdcGrowth: 'Bioregions',
       gdpPerOrganisation: 'Yearly QEV per Organisation',
       numBdcs: 'Number of Bioregions',
-      bdcsGrowth: 'BDC\'s Growth',
+      bdcsGrowth: 'R-DHO\'s Growth',
       // Interface Seeds Bank
       outstandingContracts: 'Outstanding Contracts',
       outstandingContractsSeeds: 'Value of Outstanding Contracts',

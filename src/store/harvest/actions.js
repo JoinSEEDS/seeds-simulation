@@ -121,7 +121,7 @@ export const getDataTable = async function ({ dispatch, commit, state }, { table
         allBdc
       } = harvestDistribution.bdcs
       commit('setDataBdcsTable', {
-        tableName: 'BDC',
+        tableName: 'R-DHO',
         totalAmount: totalAmountForBdcs,
         all: getBdcRows({ ...allBdc, k: 0 }),
         sample10: getBdcRows({ ...allBdc, k: 9 }),
@@ -143,8 +143,8 @@ export const getDataTable = async function ({ dispatch, commit, state }, { table
       break
     case HarvestConstants.SEEDS_GDC:
       commit('setDataGdcTable', {
-        // tableName: 'Seeds for GDC',
-        tableName: 'GDC',
+        // tableName: 'Seeds for G-DHO',
+        tableName: 'G-DHO',
         rows: [
           {
             totalAmountForGdc: harvestDistribution.gdcs.totalAmountForGdc,
@@ -352,13 +352,13 @@ export const getDataChart = async function ({ dispatch, commit, state }, { table
       data = {
         categories: Array.from({ length: state.simulationState.length - 1 }, (v, k) => k + 1),
         series: seriesBdc,
-        chartName: 'BDC\'s'
+        chartName: 'R-DHO\'s'
       }
       // data = {
       //   categories: Array.from({ length: state.simulationState.length - 1 }, (v, k) => k + 1),
       //   series: [
       //     {
-      //       name: 'Total Amount For BDC',
+      //       name: 'Total Amount For R-DHO',
       //       data: state.simulationState.slice(1).map(s => { return s.harvestDistribution.bdcs.totalAmountForBdcs })
       //     },
       //     {
@@ -385,7 +385,7 @@ export const getDataChart = async function ({ dispatch, commit, state }, { table
         categories: Array.from({ length: state.simulationState.length - 1 }, (v, k) => k + 1),
         series: [
           {
-            name: 'Total Amount For GDC',
+            name: 'Total Amount For G-DHO',
             data: state.simulationState.slice(1).map(s => { return s.harvestDistribution.gdcs.totalAmountForGdc })
           },
           {
@@ -409,7 +409,7 @@ export const getDataChart = async function ({ dispatch, commit, state }, { table
             visible: false
           }
         ],
-        chartName: 'GDC'
+        chartName: 'G-DHO'
       }
       break
     case HarvestConstants.SEEDS_GENERAL:

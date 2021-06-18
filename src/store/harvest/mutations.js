@@ -62,12 +62,12 @@ export const restartSimulation = (state, newState) => {
     expand: false
   }
   state.bdcsTable = {
-    tableName: 'BDC',
+    tableName: 'R-DHO',
     expanded: false
   }
   state.gdcTable = {
-    // tableName: 'Seeds for GDC'
-    tableName: 'GDC'
+    // tableName: 'Seeds for G-DHO'
+    tableName: 'G-DHO'
   }
   state.dataChart = {
     chartName: 'undefined'
