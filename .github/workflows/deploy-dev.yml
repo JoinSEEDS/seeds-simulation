@@ -53,15 +53,3 @@ jobs:
           AWS_REGION: 'eu-west-1'
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_KEY }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET }}
-
-      # - name: S3 Sync and Invalidate Cloudfront Distribution
-      #   uses: digital-scarcity/s3-sync-action@master
-      #   with:
-      #     args: --acl public-read --follow-symlinks
-      #   env:
-      #     AWS_S3_BUCKET: ${{ secrets.DEV_AWS_S3_BUCKET }}
-      #     AWS_ACCESS_KEY_ID: ${{ secrets.DEV_AWS_ACCESS_KEY_ID }}
-      #     AWS_SECRET_ACCESS_KEY: ${{ secrets.DEV_AWS_SECRET_ACCESS_KEY }}
-      #     # AWS_REGION: 'us-east-1'   # optional: defaults to us-east-1
-      #     SOURCE_DIR: 'dist/spa'      # optional: defaults to entire repository
-      #     AWS_DISTRIBUTION_ID: ${{ secrets.DEV_DISTRIBUTION_ID }}
