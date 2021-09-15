@@ -446,10 +446,39 @@
                         q-expansion-item(
                           dense-toggle
                           group="formGroup"
-                          :label="$t('forms.cycles.groupGDCDistribution')"
+                          :label="$t('forms.cycles.gdho')"
                           header-class="text-positive"
                         )
                           q-card
+                            q-card-section
+                              template(v-for="(dho,index) in DHOS")
+                                .row.justify-center.items-center.q-mb-md
+                                  .col-5
+                                    q-input.q-mr-sm(
+                                      :label="$t('forms.cycles.name')"
+                                      v-model='dho.name'
+                                      filled
+                                      :rules="[rules.required]"
+                                    )
+                                  .col-5
+                                    q-input.q-mr-sm(
+                                      :label="$t('forms.cycles.votes')"
+                                      v-model='dho.votes'
+                                      type="number"
+                                      suffix="%"
+                                      filled
+                                      :rules="[rules.nonNegative]"
+                                    )
+                                  .col-1.q-pb-md
+                                    q-icon.animated-icon(
+                                      name="delete"
+                                      v-ripple
+                                      size="sm"
+                                      color="negative"
+                                      @click="deleteDHO(index)"
+                                    )
+                              .row.justify-end.q-mt-md
+                                q-btn(label="Add DHO" color="positive" @click="addDHOS")
                             q-card-section.q-gutter-y-sm
                                 percentage-input(
                                     v-model='networkMaintenance'
@@ -672,7 +701,8 @@ export default {
       seedsPlantedPerUserVariable: 0,
       averageSeedsBurnedPerUser: 0,
       unplantedSeedsPerUser: 0,
-      totals: undefined
+      totals: undefined,
+      DHOS: []
     }
   },
   computed: {
@@ -1100,6 +1130,13 @@ export default {
         amount = parseFloat(match[0].replace(/,/g, '')) // replace , thousands separator
       }
       return amount
+    },
+    addDHOS () {
+      this.DHOS = [...this.DHOS, { name: '', votes: 0 }]
+    },
+    deleteDHO (id) {
+      const filteredList = this.DHOS.filter((_, index) => index !== id)
+      this.DHOS = [...filteredList]
     }
   },
   filters: {

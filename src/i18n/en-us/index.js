@@ -106,7 +106,10 @@ export default {
       groupHarvestDistribution: 'Harvest Distribution',
       groupBDCDistribution: 'Bioregion Distribution',
       groupGDCDistribution: 'Global Distribution',
-      growthPerCycle: '% Growth Per Cycle'
+      growthPerCycle: '% Growth Per Cycle',
+      name: 'Name',
+      votes: 'Votes (%)',
+      gdho: 'G-DHO'
     }
   },
   menu: {
