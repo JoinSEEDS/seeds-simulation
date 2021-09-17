@@ -460,29 +460,36 @@
                                     :rules="[rules.nonNegative]"
                                   )
                             q-card-section
-                              template(v-for="(dho,index) in DHOS")
-                                .row.justify-center.items-center
+                              template(v-if="DHOS.length > 0")
+                                .row.q-mb-xs
                                   .col-2.q-mr-sm
+                                  .col
+                                    .text-bold.text-left {{ $t('forms.cycles.votes') }}
+                                  .col
+                                    .text-bold.text-left {{ $t('forms.cycles.distribution') }}
+                                  .col-1.q-pb-md
+                              template(v-for="(dho,index) in DHOS")
+                                .row.justify-center.items-center.q-pb-md
+                                  .col-2.q-mr-sm.q-py-md
                                     .text {{ dho.name }}
                                   .col
-                                    percentage-input.q-mr-sm(
-                                      :label="$t('forms.cycles.votes')"
+                                    q-input.q-pb-none(
                                       v-model='dho.votes'
-                                      type="number"
                                       suffix="%"
+                                      type="number"
                                       filled
                                       :rules="[rules.nonNegative]"
                                     )
                                   .col
-                                    percentage-input.q-mr-sm(
+                                    .text.text-center {{ dho.distribution }}
+                                    //percentage-input.q-mr-sm(
                                       :label="$t('forms.cycles.distribution')"
                                       v-model='dho.distribution'
                                       type="number"
-                                      suffix="%"
                                       filled
                                       :rules="[rules.nonNegative]"
-                                    )
-                                  .col-1.q-pb-md
+                                    // )
+                                  .col-1
                                     q-icon(
                                       name="delete"
                                       v-ripple
