@@ -450,18 +450,22 @@
                           header-class="text-positive"
                         )
                           q-card
+                            q-card-section.q-pb-none
+                              .row
+                                .col
+                                  percentage-input(
+                                    v-model='min_votes'
+                                    :label="$t('forms.cycles.min_votes')"
+                                    label="Min Votes"
+                                    :rules="[rules.nonNegative]"
+                                  )
                             q-card-section
                               template(v-for="(dho,index) in DHOS")
-                                .row.justify-center.items-center.q-mb-md
-                                  .col-5
-                                    q-input.q-mr-sm(
-                                      :label="$t('forms.cycles.name')"
-                                      v-model='dho.name'
-                                      filled
-                                      :rules="[rules.required]"
-                                    )
-                                  .col-5
-                                    q-input.q-mr-sm(
+                                .row.justify-center.items-center
+                                  .col-2.q-mr-sm
+                                    .text {{ dho.name }}
+                                  .col
+                                    percentage-input.q-mr-sm(
                                       :label="$t('forms.cycles.votes')"
                                       v-model='dho.votes'
                                       type="number"
@@ -469,8 +473,17 @@
                                       filled
                                       :rules="[rules.nonNegative]"
                                     )
+                                  .col
+                                    percentage-input.q-mr-sm(
+                                      :label="$t('forms.cycles.distribution')"
+                                      v-model='dho.distribution'
+                                      type="number"
+                                      suffix="%"
+                                      filled
+                                      :rules="[rules.nonNegative]"
+                                    )
                                   .col-1.q-pb-md
-                                    q-icon.animated-icon(
+                                    q-icon(
                                       name="delete"
                                       v-ripple
                                       size="sm"
@@ -702,7 +715,8 @@ export default {
       averageSeedsBurnedPerUser: 0,
       unplantedSeedsPerUser: 0,
       totals: undefined,
-      DHOS: []
+      DHOS: [],
+      min_votes: undefined
     }
   },
   computed: {
@@ -1132,10 +1146,21 @@ export default {
       return amount
     },
     addDHOS () {
-      this.DHOS = [...this.DHOS, { name: '', votes: 0 }]
+      const dhos = this.DHOS.map((dho, index) => {
+        return {
+          ...dho,
+          name: `DHO ${index + 1}`
+        }
+      })
+      this.DHOS = [...dhos, { name: `DH0 ${dhos.length + 1}`, votes: 0, distribution: 0 }]
     },
     deleteDHO (id) {
-      const filteredList = this.DHOS.filter((_, index) => index !== id)
+      const filteredList = this.DHOS.filter((_, index) => index !== id).map((dho, index) => {
+        return {
+          ...dho,
+          name: `DHO ${index + 1}`
+        }
+      })
       this.DHOS = [...filteredList]
     }
   },

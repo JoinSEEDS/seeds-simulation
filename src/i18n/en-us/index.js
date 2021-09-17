@@ -108,8 +108,10 @@ export default {
       groupGDCDistribution: 'Global Distribution',
       growthPerCycle: '% Growth Per Cycle',
       name: 'Name',
-      votes: 'Votes (%)',
-      gdho: 'G-DHO'
+      votes: 'Votes',
+      gdho: 'G-DHO',
+      distribution: 'Distribution',
+      min_votes: 'Min Votes'
     }
   },
   menu: {
