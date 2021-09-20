@@ -453,14 +453,18 @@
                             q-card-section.q-pb-none
                               .row
                                 .col
-                                  percentage-input(
-                                    v-model='min_votes'
-                                    :label="$t('forms.cycles.min_votes')"
-                                    label="Min Votes"
+                                  q-input(
+                                    v-model='globalDhoInfo.minimumVotePercentage'
+                                    :label="`${ $t('forms.cycles.min_votes') } (%)`"
                                     :rules="[rules.nonNegative]"
+                                    suffix="%"
+                                    type="number"
+                                    min="0"
+                                    max="100"
+                                    filled
                                   )
                             q-card-section
-                              template(v-if="DHOS.length > 0")
+                              template(v-if="globalDhoInfo.dhos.length > 0")
                                 .row.q-mb-xs
                                   .col-2.q-mr-sm
                                   .col
@@ -468,20 +472,22 @@
                                   .col
                                     .text-bold.text-left {{ $t('forms.cycles.distribution') }}
                                   .col-1.q-pb-md
-                              template(v-for="(dho,index) in DHOS")
+                              template(v-for="(dho,index) in globalDhoInfo.dhos")
                                 .row.justify-center.items-center.q-pb-md
                                   .col-2.q-mr-sm.q-py-md
                                     .text {{ dho.name }}
                                   .col
                                     q-input.q-pb-none(
-                                      v-model='dho.votes'
+                                      v-model='dho.votePercentage'
                                       suffix="%"
                                       type="number"
                                       filled
                                       :rules="[rules.nonNegative]"
+                                      min="0"
+                                      max="100"
                                     )
                                   .col
-                                    .text.text-center {{ dho.distribution }}
+                                    .text.text-center {{ dho.distPercentage }}
                                     //percentage-input.q-mr-sm(
                                       :label="$t('forms.cycles.distribution')"
                                       v-model='dho.distribution'
@@ -722,8 +728,10 @@ export default {
       averageSeedsBurnedPerUser: 0,
       unplantedSeedsPerUser: 0,
       totals: undefined,
-      DHOS: [],
-      min_votes: undefined
+      globalDhoInfo: {
+        dhos: [],
+        minimumVotePercentage: 0
+      }
     }
   },
   computed: {
@@ -758,6 +766,7 @@ export default {
       return this.getSimulationState.length > 1 ? this.$t('forms.cycles.exitExchanges') + ': ' + this.formatToMoney(this.getSimulationState[this.simulationStep].exitExchangesLabel.toFixed(0)) : this.$t('forms.cycles.exitExchanges')
     },
     labelBDCGrowth () {
+      // console.log(this.getSimulationState[this.simulationStep].numBdcs.toFixed(0), '111111')
       return this.getSimulationState.length > 1 ? this.$t('forms.cycles.bdcGrowth') + ': ' + this.formatToMoney(this.getSimulationState[this.simulationStep].numBdcs.toFixed(0)) : this.$t('forms.cycles.bdcGrowth')
     },
     labelChangeRequiredToMeetDemand () {
@@ -1066,10 +1075,11 @@ export default {
             outstandingContractsSeeds: this.outstandingContractsSeeds.value,
             outstandingContracts: this.outstandingContracts.value,
             closedContractsPercentage: this.closedContractsPercentage.value,
-            seedsPerContract: this.seedsPerContract.value
+            seedsPerContract: this.seedsPerContract.value,
+            globalDhoInfo: this.globalDhoInfo
             // harvestDistribution: {}
           }
-          console.log('DoCycle Data:', simulationState)
+          console.log('DoCycle Data:', simulationState, this.bdcsGrowth)
           await this.doCycle(
             {
               simulationState, step: (this.simulationStep)
@@ -1136,7 +1146,8 @@ export default {
       this.outstandingContractsSeeds = parseFloat(this.cycleDataForm.outstandingContractsSeeds)
       this.contractsSeeds = parseFloat(this.cycleDataForm.newContractsDuringCycleSeeds)
       this.closedContractsSeeds = parseFloat(this.cycleDataForm.closedContractsDuringCycleSeeds)
-
+      this.globalDhoInfo = { ...this.cycleDataForm.globalDhoInfo }
+      this.globalDhoInfo.dhos = this.globalDhoInfo.dhos.map((dho, index) => { return { ...dho, name: `DHO ${index}` } })
       console.log('....................................................')
       console.log('MIRA EN CYCLES: seeds per contract:', parseFloat(this.cycleDataForm.seedsPerContract).toFixed(2))
       console.log('....................................................')
@@ -1153,22 +1164,22 @@ export default {
       return amount
     },
     addDHOS () {
-      const dhos = this.DHOS.map((dho, index) => {
+      const dhos = this.globalDhoInfo.dhos.map((dho, index) => {
         return {
           ...dho,
           name: `DHO ${index + 1}`
         }
       })
-      this.DHOS = [...dhos, { name: `DH0 ${dhos.length + 1}`, votes: 0, distribution: 0 }]
+      this.globalDhoInfo.dhos = [...dhos, { name: `DH0 ${dhos.length + 1}`, votePercentage: 0, distPercentage: 0 }]
     },
     deleteDHO (id) {
-      const filteredList = this.DHOS.filter((_, index) => index !== id).map((dho, index) => {
+      const filteredList = this.globalDhoInfo.dhos.filter((_, index) => index !== id).map((dho, index) => {
         return {
           ...dho,
           name: `DHO ${index + 1}`
         }
       })
-      this.DHOS = [...filteredList]
+      this.globalDhoInfo.dhos = [...filteredList]
     }
   },
   filters: {
