@@ -214,20 +214,6 @@ export const initCycle = function (state) {
     seeds: 3141592653
   }
 
-  newState.globalDhoInfo = calcDhoDistPercentages({
-    minimumVotePercentage: 0.1,
-    dhos: [
-      {
-        votePercentage: 0.8,
-        distPercentage: 0
-      },
-      {
-        votePercentage: 0.2,
-        distPercentage: 0
-      }
-    ]
-  })
-
   console.log('new global calculated:', newState.globalDhoInfo)
   console.log(newState.globalDhoInfo.dhos)
 
