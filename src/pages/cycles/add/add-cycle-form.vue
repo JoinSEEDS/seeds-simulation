@@ -390,7 +390,7 @@
                                 )
                                 //- q-field(filled v-model='bdc' :label="$t('forms.cycles.bdc')")
                                 //-     template(v-slot:control='{ id, floatingLabel, value, emitValue }')
-                                //-         input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
+                                //-  @change       input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
                                 percentage-input(
                                     v-model='organizations'
                                     :label="$t('forms.cycles.organizations')"
@@ -453,15 +453,21 @@
                             q-card-section.q-pb-none
                               .row
                                 .col
-                                  q-input(
-                                    v-model='globalDhoInfo.minimumVotePercentage'
-                                    :label="`${ $t('forms.cycles.min_votes') } (%)`"
+                                  // q-input(
                                     :rules="[rules.nonNegative]"
                                     suffix="%"
                                     type="number"
                                     min="0"
-                                    max="100"
+                                    max="1"
+                                    mask="#.#"
                                     filled
+                                    @input="updateDistribution"
+                                  // )
+                                  percentage-input(
+                                    v-model='globalDhoInfo.minimumVotePercentage'
+                                    :rules="[rules.nonNegative]"
+                                    :label="$t('forms.cycles.min_votes')"
+                                    @input="updateDistribution"
                                   )
                             q-card-section
                               template(v-if="globalDhoInfo.dhos.length > 0")
@@ -477,15 +483,22 @@
                                   .col-2.q-mr-sm.q-py-md
                                     .text {{ dho.name }}
                                   .col
-                                    q-input.q-pb-none(
+                                    percentage-input.q-pb-none(
                                       v-model='dho.votePercentage'
+                                      :rules="[rules.nonNegative]"
+                                      :isLabelActive="false"
+                                      @input="updateDistribution"
+                                    )
+                                    // q-input.q-pb-none(
                                       suffix="%"
                                       type="number"
                                       filled
                                       :rules="[rules.nonNegative]"
                                       min="0"
-                                      max="100"
-                                    )
+                                      max="1"
+                                      mask="#.#"
+                                      @input="updateDistribution"
+                                    // )
                                   .col
                                     .text.text-center {{ dho.distPercentage }}
                                     //percentage-input.q-mr-sm(
@@ -651,6 +664,7 @@ import { MoneyInput, PercentageInput } from '~/components/jmInputs'
 import SaveSimulationForm from '~/pages/cycles/add/save-simulation-form'
 import LoadSimulation from '~/pages/cycles/list/load-simulation'
 import { validation } from '~/mixins/validation'
+import { calcDhoDistPercentages } from '~/services/harvest'
 export default {
   name: 'add-cycle-form',
   directives: { money: VMoney },
@@ -897,7 +911,7 @@ export default {
         // seedsIntroducedPrevious3Cycles: 14669178.079,
         // seedsGrownPerCycle: 15117031.964999998,
         percentageOfHarvestAssignedCirculating: parseFloat(this.percentageOfHarvestAssignedCirculating),
-        percentageDistributionOfNewHarvest: { gdc: this.gdc.value, bdc: this.bdc.value, organizations: this.organizations.value, accounts: this.accounts.value },
+        percentageDistributionOfNewHarvest: { gdc: this.gdc.value, bdc: this.bdc.value, organizations: this.organizations.value, accounts: this.accounts.value, dhos: this.gdc.value },
         maxPercentageAccounts: parseFloat(this.maxPercentageAccounts),
         maxPercentageOrganizations: parseFloat(this.maxPercentageOrganizations),
         maxPercentageBdc: parseFloat(this.maxPercentageBdc),
@@ -1049,7 +1063,7 @@ export default {
             // seedsIntroducedPrevious3Cycles: 14669178.079,
             // seedsGrownPerCycle: 15117031.964999998,
             percentageOfHarvestAssignedCirculating: parseFloat(this.percentageOfHarvestAssignedCirculating),
-            percentageDistributionOfNewHarvest: { gdc: this.gdc.value, bdc: this.bdc.value, organizations: this.organizations.value, accounts: this.accounts.value },
+            percentageDistributionOfNewHarvest: { gdc: this.gdc.value, bdc: this.bdc.value, organizations: this.organizations.value, accounts: this.accounts.value, dhos: this.gdc.value },
             maxPercentageAccounts: parseFloat(this.maxPercentageAccounts),
             maxPercentageOrganizations: parseFloat(this.maxPercentageOrganizations),
             maxPercentageBdc: parseFloat(this.maxPercentageBdc),
@@ -1076,7 +1090,7 @@ export default {
             outstandingContracts: this.outstandingContracts.value,
             closedContractsPercentage: this.closedContractsPercentage.value,
             seedsPerContract: this.seedsPerContract.value,
-            globalDhoInfo: this.globalDhoInfo
+            globalDhoInfo: this.formatValues()
             // harvestDistribution: {}
           }
           console.log('DoCycle Data:', simulationState, this.bdcsGrowth)
@@ -1147,7 +1161,7 @@ export default {
       this.contractsSeeds = parseFloat(this.cycleDataForm.newContractsDuringCycleSeeds)
       this.closedContractsSeeds = parseFloat(this.cycleDataForm.closedContractsDuringCycleSeeds)
       this.globalDhoInfo = { ...this.cycleDataForm.globalDhoInfo }
-      this.globalDhoInfo.dhos = this.globalDhoInfo.dhos.map((dho, index) => { return { ...dho, name: `DHO ${index}` } })
+      this.globalDhoInfo.dhos = this.globalDhoInfo.dhos.map((dho, index) => { return { ...dho, name: `DHO ${index + 1}` } })
       console.log('....................................................')
       console.log('MIRA EN CYCLES: seeds per contract:', parseFloat(this.cycleDataForm.seedsPerContract).toFixed(2))
       console.log('....................................................')
@@ -1180,6 +1194,34 @@ export default {
         }
       })
       this.globalDhoInfo.dhos = [...filteredList]
+    },
+    formatValues () {
+      if (!this.globalDhoInfo.dhos) return JSON.parse(JSON.stringify(this.globalDhoInfo))
+      let globalDhoInfo = {}
+      globalDhoInfo.dhos = this.globalDhoInfo.dhos.map(dho => {
+        const { votePercentage } = dho
+        return { ...dho, votePercentage: votePercentage.value }
+      })
+      globalDhoInfo.minimumVotePercentage = this.globalDhoInfo.minimumVotePercentage.value
+
+      console.log(globalDhoInfo)
+
+      return JSON.parse(JSON.stringify(globalDhoInfo))
+    },
+    updateDistribution () {
+      const dhoInfo = this.formatValues()
+      const { dhos } = calcDhoDistPercentages(dhoInfo)
+
+      if (dhos) {
+        this.globalDhoInfo.dhos.forEach((dho, index) => {
+          dho.distPercentage = dhos[index].distPercentage
+        })
+      } else {
+        this.globalDhoInfo.dhos.forEach((dho, index) => {
+          dho.distPercentage = 0
+        })
+        /* this.showNotification(`${error} in field: ${field}`, 'error') */
+      }
     }
   },
   filters: {
