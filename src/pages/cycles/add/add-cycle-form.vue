@@ -516,7 +516,7 @@
                                       color="negative"
                                       @click="deleteDHO(index)"
                                     )
-                              .row.justify-end.q-mt-md
+                              .row.justify-end.q-mt-sm
                                 q-btn(label="Add DHO" color="positive" @click="addDHOS")
                             q-card-section.q-gutter-y-sm
                                 percentage-input(
