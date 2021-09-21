@@ -171,15 +171,16 @@ export const calcDhoDistPercentages = function (globalDhoInfo) {
   const newGlobalDhoInfo = { ...globalDhoInfo }
   const { minimumVotePercentage, dhos } = newGlobalDhoInfo
 
-  const totalPercentage = dhos.map(dho => dho.votePercentage).reduce((acc, curr) => acc + curr)
+  console.log(minimumVotePercentage, dhos)
+  const totalPercentage = dhos.map(dho => dho.votePercentage).reduce((acc, curr) => Number(acc) + Number(curr), 0)
   if (Math.abs(1.0 - totalPercentage) >= 0.001) {
     return {
-      error: 'invalidPercentage',
+      error: 'InvalidPercentage',
       field: 'Total dhos vote percentages'
     }
   }
 
-  const totalValidPercentage = dhos.filter(dho => dho.votePercentage >= minimumVotePercentage).map(dho => dho.votePercentage).reduce((acc, curr) => acc + curr)
+  const totalValidPercentage = dhos.filter(dho => dho.votePercentage >= minimumVotePercentage).map(dho => dho.votePercentage).reduce((acc, curr) => Number(acc) + Number(curr), 0)
   const newDhos = dhos.map(dho => {
     dho.distPercentage = (dho.votePercentage >= minimumVotePercentage) ? dho.votePercentage / totalValidPercentage : 0
     return dho
