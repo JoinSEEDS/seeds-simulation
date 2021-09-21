@@ -23,7 +23,11 @@ export default {
     readonly: {},
     rules: { type: Array },
     bgColor: {},
-    labelSuffix: { type: String, default: ' (%)' }
+    labelSuffix: { type: String, default: ' (%)' },
+    isLabelActive: {
+      type: Boolean,
+      default: true
+    }
   },
   data () {
     return {
@@ -32,7 +36,7 @@ export default {
   },
   computed: {
     labelComputed () {
-      return `${this.label}${this.labelSuffix}`
+      return this.isLabelActive ? `${this.label}${this.labelSuffix}` : undefined
     }
   },
   mounted () {
