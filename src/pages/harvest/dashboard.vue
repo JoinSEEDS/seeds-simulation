@@ -89,6 +89,9 @@
         .col-md-4.col-sm-12(@click="selectTable(constant.SEEDS_GDC)" v-if="dataTableGDC.rows")
             custom-table-header.headerGDC(iconSrc="gdcTableIcon" :titleTable="dataTableGDC.tableName" :subtitleTable="dataTableGDC.totalAmount")
             card-table-gdc(:data="dataTableGDC.rows[0]" :selected="tableSelected === constant.SEEDS_GDC")
+        .col-md-4.col-sm-12(@click="selectTable(constant.SEEDS_GDC)" v-if="dataTableDHOs.rows")
+            custom-table-header(iconSrc="gdcTableIcon" :titleTable="dataTableDHOs.tableName" :subtitleTable="dataTableDHOs.totalAmount")
+            card-table-dhos(:data="dataTableDHOs.rows" :selected="tableSelected === constant.SEEDS_DHOS" :totalAmount="dataTableDHOs.totalAmount")
             //- q-table(
             //- :data="dataTableGDC.rows"
             //- :columns="columnsTableGDC"
@@ -121,12 +124,13 @@ import CardTableTotalsInit from '~/pages/harvest/components/card-table-totals-in
 import CardTableTotals from '~/pages/harvest/components/card-table-totals'
 import CardTableGrowth from '~/pages/harvest/components/card-table-growth'
 import CardTableGdc from '~/pages/harvest/components/card-table-gdc'
+import CardTableDhos from '~/pages/harvest/components/card-table-dhos'
 import harvestConstant from '~/const/harvestConstants'
 import GroupContainer from '~/components/group-container'
 import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'harvest-dashboard',
-  components: { CustomChart, CustomTableHeader, CardTableTotals, CardTableGrowth, CardTableGdc, GroupContainer, CardTableTotalsInit },
+  components: { CustomChart, CustomTableHeader, CardTableTotals, CardTableGrowth, CardTableGdc, GroupContainer, CardTableTotalsInit, CardTableDhos },
   beforeMount () {
     this.constant = harvestConstant
   },
@@ -176,7 +180,8 @@ export default {
       this.getDataChart({ tableId: this.tableSelected, compare: this.valueOption })
       if (this.tableSelected === this.constant.SEEDS_IND_ACCNTS ||
           this.tableSelected === this.constant.SEEDS_ORG_ACCNTS ||
-          this.tableSelected === this.constant.SEEDS_BDC) {
+          this.tableSelected === this.constant.SEEDS_BDC ||
+          this.tableSelected === this.constant.SEEDS_DHOS) {
         this.showOptions = true
       } else {
         this.showOptions = false
@@ -195,7 +200,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('harvest', ['dataTableGeneral', 'dataTableGROWN', 'dataTableIND', 'dataTableORG', 'dataTableBDC', 'dataTableGDC', 'simulationStep', 'totalSimulationSteps', 'dataChart', 'getSimulationState']),
+    ...mapGetters('harvest', ['dataTableGeneral', 'dataTableGROWN', 'dataTableIND', 'dataTableORG', 'dataTableBDC', 'dataTableGDC', 'simulationStep', 'totalSimulationSteps', 'dataChart', 'getSimulationState', 'dataTableDHOs']),
     getIndividualAccounts () {
       switch (this.showAllIndividualAccounts) {
         case 1:
