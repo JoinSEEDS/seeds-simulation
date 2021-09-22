@@ -381,6 +381,7 @@ export const getDataChart = async function ({ dispatch, commit, state }, { table
       // }
       break
     case HarvestConstants.SEEDS_GDC:
+    // case HarvestConstants.SEEDS_DHOS:
       data = {
         categories: Array.from({ length: state.simulationState.length - 1 }, (v, k) => k + 1),
         series: [
