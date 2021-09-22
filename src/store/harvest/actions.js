@@ -413,6 +413,28 @@ export const getDataChart = async function ({ dispatch, commit, state }, { table
         chartName: 'G-DHO'
       }
       break
+    case HarvestConstants.SEEDS_DHOS:
+      const simulations = state.simulationState.slice(1).map(s => { return s.harvestDistribution.dhos })
+      const arraydistAmountByDho = simulations.map(dho => dho.map(d => d.distAmount))
+      let objdistAmountByDho = {}
+
+      const addValueInObjectByKey = (distAmount, index) => {
+        const valueIsArray = Array.isArray(objdistAmountByDho[index])
+        if (!valueIsArray) objdistAmountByDho[index] = []
+        objdistAmountByDho[index].push(distAmount)
+      }
+      arraydistAmountByDho.forEach(array => array.forEach(addValueInObjectByKey))
+
+      let distAmountsByDho = Object.values(objdistAmountByDho).map((distAmounts, index) => {
+        return { name: `DHO ${index + 1}`, data: distAmounts }
+      })
+
+      data = {
+        categories: Array.from({ length: state.simulationState.length - 1 }, (v, k) => k + 1),
+        series: distAmountsByDho,
+        chartName: 'G-DHO'
+      }
+      break
     case HarvestConstants.SEEDS_GENERAL:
       data = {
         categories: Array.from({ length: state.simulationState.length - 1 }, (v, k) => k + 1),
