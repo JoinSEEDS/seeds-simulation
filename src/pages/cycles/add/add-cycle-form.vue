@@ -471,6 +471,9 @@
                                   )
                             q-card-section
                               template(v-if="globalDhoInfo.dhos.length > 0")
+                                .row(v-if="votesAbovePercentage")
+                                  .col.q-pa-sm
+                                    .text-subtitle2.text-red Total percentage of dhos votes above 100%.
                                 .row.q-mb-xs
                                   .col-2.q-mr-sm
                                   .col
@@ -621,7 +624,7 @@
                 p {{simulationStep}} / {{totalSimulationSteps}}
             .column.justify-center
               .col-2
-                  q-btn(round color="positive" icon="keyboard_arrow_right" @click="() => nextCycle()")
+                  q-btn(round color="positive" :disable="votesAbovePercentage" icon="keyboard_arrow_right" @click="() => nextCycle()")
         //- Modals
         q-dialog(v-model="showSaveCycle" persistent)
           q-card(style="min-width: 40vw")
@@ -797,6 +800,10 @@ export default {
     },
     showSaveSimulation () {
       return (this.getSimulationState.length > 1 && (this.isAuthenticated))
+    },
+    votesAbovePercentage () {
+      const totalPercentage = this.globalDhoInfo.dhos.map(dho => dho.votePercentage.value).reduce((acc, curr) => Number(acc) + Number(curr), 0)
+      return totalPercentage > 1
     }
   },
   async beforeMount () {
@@ -1280,6 +1287,8 @@ export default {
 .modal-load-simulation
   height: 90vh
   width: 40vw
+.banner
+  background-color: $red
 @media(min-width: 0px) and (max-width: 1025px)
   #container-add-cycle .scroll-container
     height: calc(100vh - 190px)
