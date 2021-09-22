@@ -503,7 +503,7 @@
                                       @input="updateDistribution"
                                     // )
                                   .col
-                                    .text.text-center {{ dho.distPercentage }}
+                                    .text.text-center {{ dho.distPercentage * 100 }}
                                     //percentage-input.q-mr-sm(
                                       :label="$t('forms.cycles.distribution')"
                                       v-model='dho.distribution'
