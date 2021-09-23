@@ -473,7 +473,7 @@
                               template(v-if="globalDhoInfo.dhos.length > 0")
                                 .row(v-if="votesAbovePercentage")
                                   .col.q-pa-sm
-                                    .text-subtitle2.text-red Total percentage of dhos votes above 100%.
+                                    .text-subtitle2.text-red Total percentage of dhos votes must be 100%.
                                 .row.q-mb-xs
                                   .col-2.q-mr-sm
                                   .col
@@ -503,7 +503,7 @@
                                       @input="updateDistribution"
                                     // )
                                   .col
-                                    .text.text-center {{ dho.distPercentage * 100 }}
+                                    .text.text-center {{ Number.parseFloat(dho.distPercentage * 100).toFixed(2) }}
                                     //percentage-input.q-mr-sm(
                                       :label="$t('forms.cycles.distribution')"
                                       v-model='dho.distribution'
@@ -803,7 +803,7 @@ export default {
     },
     votesAbovePercentage () {
       const totalPercentage = this.globalDhoInfo.dhos.map(dho => dho.votePercentage.value).reduce((acc, curr) => Number(acc) + Number(curr), 0)
-      return totalPercentage > 1
+      return totalPercentage !== 1
     }
   },
   async beforeMount () {
