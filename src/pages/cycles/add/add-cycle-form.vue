@@ -471,12 +471,15 @@
                                   )
                             q-card-section.q-pt-none
                               template(v-if="globalDhoInfo.dhos.length > 0")
-                                .row
-                                  .col.q-pa-sm(v-if="votesAbovePercentage")
-                                    .text-subtitle2.text-red {{ $t('forms.cycles.total_percentage_assigned', { percentage: Number.parseFloat(votesPercentage * 100).toFixed(2) } ) }}
-                                      span.q-ml-xs
-                                        q-icon(name="cancel")
-                                  .col.q-pa-sm(v-else)
+                                .row(v-if="votesAbovePercentage")
+                                  .col-1
+                                      q-icon(name="cancel" color="red")
+                                  .col
+                                      .text-subtitle2.text-red {{ $t('forms.cycles.total_percentage_assigned', { percentage: Number.parseFloat(votesPercentage * 100).toFixed(2) } ) }}
+                                .row(v-else)
+                                  .col-1
+                                      q-icon(name="info")
+                                  .col
                                     .text-subtitle2 {{ $t('forms.cycles.total_percentage') }}
                                 .row.q-mb-xs
                                   .col-2.q-mr-sm
