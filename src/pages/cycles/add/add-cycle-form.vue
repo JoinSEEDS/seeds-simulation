@@ -521,7 +521,7 @@
                                     )
                               .row.justify-end.q-mt-sm
                                 q-btn(label="Add DHO" color="positive" @click="addDHOS")
-                            q-card-section.q-gutter-y-sm
+                            // q-card-section.q-gutter-y-sm
                                 percentage-input(
                                     v-model='networkMaintenance'
                                     :label="$t('forms.cycles.networkMaintenance')"
