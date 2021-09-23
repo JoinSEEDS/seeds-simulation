@@ -473,7 +473,7 @@
                               template(v-if="globalDhoInfo.dhos.length > 0")
                                 .row(v-if="votesAbovePercentage")
                                   .col.q-pa-sm
-                                    .text-subtitle2.text-red Total percentage of dhos votes must be 100%.
+                                    .text-subtitle2.text-red {{ $t('forms.cycles.total_percentage', { percentage: Number.parseFloat(votesPercentage * 100).toFixed(2) } ) }}
                                 .row.q-mb-xs
                                   .col-2.q-mr-sm
                                   .col
@@ -802,8 +802,11 @@ export default {
       return (this.getSimulationState.length > 1 && (this.isAuthenticated))
     },
     votesAbovePercentage () {
+      return this.votesPercentage !== 1
+    },
+    votesPercentage () {
       const totalPercentage = this.globalDhoInfo.dhos.map(dho => dho.votePercentage.value).reduce((acc, curr) => Number(acc) + Number(curr), 0)
-      return totalPercentage !== 1
+      return totalPercentage
     }
   },
   async beforeMount () {

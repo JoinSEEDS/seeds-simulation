@@ -111,7 +111,8 @@ export default {
       votes: 'Votes',
       gdho: 'G-DHO',
       distribution: 'Distribution',
-      min_votes: 'Min Votes'
+      min_votes: 'Min Votes',
+      total_percentage: 'Total percentage of dhos votes must be 100%. ({percentage}% assigned)'
     }
   },
   menu: {
