@@ -463,17 +463,21 @@
                                     filled
                                     @input="updateDistribution"
                                   // )
-                                  percentage-input(
+                                  percentage-input.q-pb-sm(
                                     v-model='globalDhoInfo.minimumVotePercentage'
                                     :rules="[rules.nonNegative]"
                                     :label="$t('forms.cycles.min_votes')"
                                     @input="updateDistribution"
                                   )
-                            q-card-section
+                            q-card-section.q-pt-none
                               template(v-if="globalDhoInfo.dhos.length > 0")
-                                .row(v-if="votesAbovePercentage")
-                                  .col.q-pa-sm
-                                    .text-subtitle2.text-red {{ $t('forms.cycles.total_percentage', { percentage: Number.parseFloat(votesPercentage * 100).toFixed(2) } ) }}
+                                .row
+                                  .col.q-pa-sm(v-if="votesAbovePercentage")
+                                    .text-subtitle2.text-red {{ $t('forms.cycles.total_percentage_assigned', { percentage: Number.parseFloat(votesPercentage * 100).toFixed(2) } ) }}
+                                      span.q-ml-xs
+                                        q-icon(name="cancel")
+                                  .col.q-pa-sm(v-else)
+                                    .text-subtitle2 {{ $t('forms.cycles.total_percentage') }}
                                 .row.q-mb-xs
                                   .col-2.q-mr-sm
                                   .col
@@ -1292,6 +1296,8 @@ export default {
   width: 40vw
 .banner
   background-color: $red
+.error-percentage
+  height: 50px
 @media(min-width: 0px) and (max-width: 1025px)
   #container-add-cycle .scroll-container
     height: calc(100vh - 190px)

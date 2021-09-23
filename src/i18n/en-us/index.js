@@ -112,7 +112,8 @@ export default {
       gdho: 'G-DHO',
       distribution: 'Distribution',
       min_votes: 'Min Votes',
-      total_percentage: 'Total percentage of dhos votes must be 100%. ({percentage}% assigned)'
+      total_percentage_assigned: 'Total percentage of dhos votes must be 100%. ({percentage}% assigned)',
+      total_percentage: 'Total percentage of dhos votes must be 100%.'
     }
   },
   menu: {
