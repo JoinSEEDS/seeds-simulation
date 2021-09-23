@@ -5,7 +5,8 @@
         img.icon(:src="require(`assets/${iconSrc}.png`)" v-if="iconSrc")
         p.titleTable {{titleTable}}
     div.row.justify-between.items-center.container-subtitle.q-px-md(v-if="subtitleTable")
-        p.text-center Total Amount: {{this.formatToMoney(subtitleTable)}}
+        p.text-center(v-if="showContendSelected") Total Amount: {{this.formatToMoney(subtitleTable)}}
+        p.text-center.custom-padding(v-else) Total Amount: {{this.formatToMoney(subtitleTable)}}
         #contSelect.select(@click.stop="prevent" v-if="showContendSelected")
           q-select.selectC(
             label-color="white"
@@ -121,4 +122,6 @@ export default {
     line-height: 21px
   #containerHeader .div-else
     height: 39px
+  .custom-padding
+    padding-bottom: 18px
 </style>
