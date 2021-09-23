@@ -180,8 +180,7 @@ export default {
       this.getDataChart({ tableId: this.tableSelected, compare: this.valueOption })
       if (this.tableSelected === this.constant.SEEDS_IND_ACCNTS ||
           this.tableSelected === this.constant.SEEDS_ORG_ACCNTS ||
-          this.tableSelected === this.constant.SEEDS_BDC ||
-          this.tableSelected === this.constant.SEEDS_DHOS) {
+          this.tableSelected === this.constant.SEEDS_BDC) {
         this.showOptions = true
       } else {
         this.showOptions = false
