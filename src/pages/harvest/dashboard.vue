@@ -90,7 +90,7 @@
         //-     custom-table-header.headerGDC(iconSrc="gdcTableIcon" :titleTable="dataTableGDC.tableName" :subtitleTable="dataTableGDC.totalAmount")
         //-     card-table-gdc(:data="dataTableGDC.rows[0]" :selected="tableSelected === constant.SEEDS_GDC")
         .col-md-4.col-sm-12(@click="selectTable(constant.SEEDS_DHOS)" v-if="dataTableDHOs.rows")
-            custom-table-header(iconSrc="gdcTableIcon" :titleTable="dataTableDHOs.tableName" :subtitleTable="dataTableDHOs.totalAmount")
+            custom-table-header(iconSrc="gdcTableIcon" :titleTable="dataTableDHOs.tableName" :subtitleTable="dataTableDHOs.totalAmount" :showContendSelected="false")
             card-table-dhos(:data="dataTableDHOs.rows" :selected="tableSelected === constant.SEEDS_DHOS" :totalAmount="dataTableDHOs.totalAmount")
             //- q-table(
             //- :data="dataTableGDC.rows"

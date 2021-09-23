@@ -6,7 +6,7 @@
         p.titleTable {{titleTable}}
     div.row.justify-between.items-center.container-subtitle.q-px-md(v-if="subtitleTable")
         p.text-center Total Amount: {{this.formatToMoney(subtitleTable)}}
-        #contSelect.select(@click.stop="prevent")
+        #contSelect.select(@click.stop="prevent" v-if="showContendSelected")
           q-select.selectC(
             label-color="white"
             dense
@@ -43,6 +43,10 @@ export default {
     },
     iconSrc: {
       type: String
+    },
+    showContendSelected: {
+      type: Boolean,
+      default: true
     }
   },
   data () {
