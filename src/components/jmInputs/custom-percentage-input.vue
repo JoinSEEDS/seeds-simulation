@@ -10,6 +10,7 @@
         :readonly="readonly"
         :bg-color="bgColor"
         filled
+        :dense="dense"
     )
 </template>
 
@@ -27,7 +28,8 @@ export default {
     isLabelActive: {
       type: Boolean,
       default: true
-    }
+    },
+    dense: {}
   },
   data () {
     return {

@@ -481,7 +481,7 @@
                                       q-icon(name="info")
                                   .col
                                     .text-subtitle2 {{ $t('forms.cycles.total_percentage') }}
-                                .row.q-mb-xs
+                                .row.q-mb-xs.q-col-gutter-x-md
                                   .col-2.q-mr-sm
                                   .col
                                     .text-bold.text-left {{ $t('forms.cycles.votes') }}
@@ -492,12 +492,13 @@
                                 .row.justify-center.items-center.q-pb-md
                                   .col-2.q-mr-sm.q-py-md
                                     .text {{ dho.name }}
-                                  .col
+                                  .col.q-px-sm
                                     percentage-input.q-pb-none(
                                       v-model='dho.votePercentage'
                                       :rules="[rules.nonNegative]"
                                       :isLabelActive="false"
                                       @input="updateDistribution"
+                                      dense
                                     )
                                     // q-input.q-pb-none(
                                       suffix="%"

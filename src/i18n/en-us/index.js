@@ -108,12 +108,12 @@ export default {
       groupGDCDistribution: 'Global Distribution',
       growthPerCycle: '% Growth Per Cycle',
       name: 'Name',
-      votes: 'Votes',
+      votes: '% Votes',
       gdho: 'G-DHO',
       distribution: 'Distribution',
       min_votes: 'Min Votes',
-      total_percentage_assigned: 'Total percentage of dhos votes must be 100%. ({percentage}% assigned)',
-      total_percentage: 'Total percentage of dhos votes must be 100%.'
+      total_percentage_assigned: '% Votes must add up to 100%. ({percentage}% assigned)',
+      total_percentage: '% Votes must add up to 100%.'
     }
   },
   menu: {
