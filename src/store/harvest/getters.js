@@ -21,3 +21,8 @@ export const cycleDataForm = ({ simulationStep, simulationState, stateForm }) =>
     return simulationState[simulationStep]
   } else return stateForm
 }
+export const dataTableDHOs = ({ simulationStep, simulationState }) => {
+  const rows = simulationState[simulationStep].harvestDistribution.dhos
+  const totalAmount = rows.map(dho => dho.distAmount).reduce((acc, curr) => acc + curr, 0)
+  return { rows, totalAmount, tableName: 'DHOs' }
+}

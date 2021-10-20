@@ -140,6 +140,24 @@ function distributeGdc (budget, percentages) {
   }
 }
 
+// globalDhoInfo: {
+//   minimumVotePercentage: 0.1,
+//   dhos: [
+//     {
+//       votePercentage: 0.2,
+//       distPercentage: 0
+//     }
+//   ]
+// }
+
+function distributeDhos (budget, dhos) {
+  return dhos.map(dho => {
+    return {
+      distAmount: budget * dho.distPercentage
+    }
+  })
+}
+
 function isNegative (amount) {
   if (amount < 0) {
     return true
@@ -147,8 +165,34 @@ function isNegative (amount) {
   return false
 }
 
+export const calcDhoDistPercentages = function (globalDhoInfo) {
+  console.log('globalDhoInfo:', globalDhoInfo)
+
+  const newGlobalDhoInfo = { ...globalDhoInfo }
+  const { minimumVotePercentage, dhos } = newGlobalDhoInfo
+
+  console.log(minimumVotePercentage, dhos)
+  const totalPercentage = dhos.map(dho => dho.votePercentage).reduce((acc, curr) => Number(acc) + Number(curr), 0)
+  if (Math.abs(1.0 - totalPercentage) >= 0.001) {
+    return {
+      error: 'InvalidPercentage',
+      field: 'Total dhos vote percentages'
+    }
+  }
+
+  const totalValidPercentage = dhos.filter(dho => dho.votePercentage >= minimumVotePercentage).map(dho => dho.votePercentage).reduce((acc, curr) => Number(acc) + Number(curr), 0)
+  const newDhos = dhos.map(dho => {
+    dho.distPercentage = (dho.votePercentage >= minimumVotePercentage) ? dho.votePercentage / totalValidPercentage : 0
+    return dho
+  })
+
+  newGlobalDhoInfo.dhos = newDhos
+
+  return newGlobalDhoInfo
+}
+
 export const initCycle = function (state) {
-  let newState = state
+  const newState = { ...state }
 
   newState.totalGDP = (newState.numPeopleAccounts * newState.gdpPerPerson) + (newState.numOrganizationAccounts * newState.gdpPerOrganisation)
 
@@ -170,21 +214,22 @@ export const initCycle = function (state) {
     seeds: 3141592653
   }
 
+  console.log('new global calculated:', newState.globalDhoInfo)
+  console.log(newState.globalDhoInfo.dhos)
+
   newState.harvestDistribution = {
     peopleAccounts: distributeAccounts(0, newState.numPeopleAccounts),
-
     organizationAccounts: distributeOrganizations(0, newState.numOrganizationAccounts),
-
     bdcs: distributeBdc(0, newState.numBdcs, newState.bdcPercentagesDistribution),
-
-    gdcs: distributeGdc(0, newState.gdcPercentagesDistribution)
+    gdcs: distributeGdc(0, newState.gdcPercentagesDistribution),
+    dhos: distributeDhos(0, newState.globalDhoInfo.dhos)
   }
 
   return newState
 }
 
 export const doNextCycle = function (state, update) {
-  let newState = state
+  let newState = { ...state }
 
   let newAccountsNum = Math.floor(newState.numPeopleAccounts * newState.peopleGrowth)
 
@@ -392,12 +437,10 @@ export const doNextCycle = function (state, update) {
   // harvest distribution
   newState.harvestDistribution = {
     peopleAccounts: distributeAccounts(newState.seedsGrownPerCycle * newState.percentageDistributionOfNewHarvest.accounts, newState.numPeopleAccounts),
-
     organizationAccounts: distributeOrganizations(newState.seedsGrownPerCycle * newState.percentageDistributionOfNewHarvest.organizations, newState.numOrganizationAccounts),
-
     bdcs: distributeBdc(newState.seedsGrownPerCycle * newState.percentageDistributionOfNewHarvest.bdc, newState.numBdcs, newState.bdcPercentagesDistribution),
-
-    gdcs: distributeGdc(newState.seedsGrownPerCycle * newState.percentageDistributionOfNewHarvest.gdc, newState.gdcPercentagesDistribution)
+    gdcs: distributeGdc(newState.seedsGrownPerCycle * newState.percentageDistributionOfNewHarvest.gdc, newState.gdcPercentagesDistribution),
+    dhos: distributeDhos(newState.seedsGrownPerCycle * newState.percentageDistributionOfNewHarvest.dhos, newState.globalDhoInfo.dhos)
   }
 
   return newState

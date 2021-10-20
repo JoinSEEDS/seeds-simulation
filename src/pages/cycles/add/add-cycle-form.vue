@@ -390,7 +390,7 @@
                                 )
                                 //- q-field(filled v-model='bdc' :label="$t('forms.cycles.bdc')")
                                 //-     template(v-slot:control='{ id, floatingLabel, value, emitValue }')
-                                //-         input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
+                                //-  @change       input.c_input(:id='id' :value='value' @change='e => emitValue(e.target.value)' v-money='moneyFormat' v-show='floatingLabel')
                                 percentage-input(
                                     v-model='organizations'
                                     :label="$t('forms.cycles.organizations')"
@@ -446,11 +446,90 @@
                         q-expansion-item(
                           dense-toggle
                           group="formGroup"
-                          :label="$t('forms.cycles.groupGDCDistribution')"
+                          :label="$t('forms.cycles.gdho')"
                           header-class="text-positive"
                         )
                           q-card
-                            q-card-section.q-gutter-y-sm
+                            q-card-section.q-pb-none
+                              .row
+                                .col
+                                  // q-input(
+                                    :rules="[rules.nonNegative]"
+                                    suffix="%"
+                                    type="number"
+                                    min="0"
+                                    max="1"
+                                    mask="#.#"
+                                    filled
+                                    @input="updateDistribution"
+                                  // )
+                                  percentage-input.q-pb-sm(
+                                    v-model='globalDhoInfo.minimumVotePercentage'
+                                    :rules="[rules.nonNegative]"
+                                    :label="$t('forms.cycles.min_votes')"
+                                    @input="updateDistribution"
+                                  )
+                            q-card-section.q-pt-none
+                              template(v-if="globalDhoInfo.dhos.length > 0")
+                                .row(v-if="votesAbovePercentage")
+                                  .col-1
+                                      q-icon(name="cancel" color="red")
+                                  .col
+                                      .text-subtitle2.text-red {{ $t('forms.cycles.total_percentage_assigned', { percentage: Number.parseFloat(votesPercentage * 100).toFixed(2) } ) }}
+                                .row(v-else)
+                                  .col-1
+                                      q-icon(name="info")
+                                  .col
+                                    .text-subtitle2 {{ $t('forms.cycles.total_percentage') }}
+                                .row.q-mb-xs.q-col-gutter-x-md
+                                  .col-2.q-mr-sm
+                                  .col
+                                    .text-bold.text-left {{ $t('forms.cycles.votes') }}
+                                  .col
+                                    .text-bold.text-left {{ $t('forms.cycles.distribution') }}
+                                  .col-1.q-pb-md
+                              template(v-for="(dho,index) in globalDhoInfo.dhos")
+                                .row.justify-center.items-center.q-pb-md
+                                  .col-2.q-mr-sm.q-py-md
+                                    .text {{ dho.name }}
+                                  .col.q-px-sm
+                                    percentage-input.q-pb-none(
+                                      v-model='dho.votePercentage'
+                                      :rules="[rules.nonNegative]"
+                                      :isLabelActive="false"
+                                      @input="updateDistribution"
+                                      dense
+                                    )
+                                    // q-input.q-pb-none(
+                                      suffix="%"
+                                      type="number"
+                                      filled
+                                      :rules="[rules.nonNegative]"
+                                      min="0"
+                                      max="1"
+                                      mask="#.#"
+                                      @input="updateDistribution"
+                                    // )
+                                  .col
+                                    .text.text-center {{ Number.parseFloat(dho.distPercentage * 100).toFixed(2) }}
+                                    //percentage-input.q-mr-sm(
+                                      :label="$t('forms.cycles.distribution')"
+                                      v-model='dho.distribution'
+                                      type="number"
+                                      filled
+                                      :rules="[rules.nonNegative]"
+                                    // )
+                                  .col-1
+                                    q-icon(
+                                      name="delete"
+                                      v-ripple
+                                      size="sm"
+                                      color="negative"
+                                      @click="deleteDHO(index)"
+                                    )
+                              .row.justify-end.q-mt-sm
+                                q-btn(label="Add DHO" color="positive" @click="addDHOS")
+                            // q-card-section.q-gutter-y-sm
                                 percentage-input(
                                     v-model='networkMaintenance'
                                     :label="$t('forms.cycles.networkMaintenance')"
@@ -553,7 +632,7 @@
                 p {{simulationStep}} / {{totalSimulationSteps}}
             .column.justify-center
               .col-2
-                  q-btn(round color="positive" icon="keyboard_arrow_right" @click="() => nextCycle()")
+                  q-btn(round color="positive" :disable="votesAbovePercentage" icon="keyboard_arrow_right" @click="() => nextCycle()")
         //- Modals
         q-dialog(v-model="showSaveCycle" persistent)
           q-card(style="min-width: 40vw")
@@ -596,6 +675,7 @@ import { MoneyInput, PercentageInput } from '~/components/jmInputs'
 import SaveSimulationForm from '~/pages/cycles/add/save-simulation-form'
 import LoadSimulation from '~/pages/cycles/list/load-simulation'
 import { validation } from '~/mixins/validation'
+import { calcDhoDistPercentages } from '~/services/harvest'
 export default {
   name: 'add-cycle-form',
   directives: { money: VMoney },
@@ -672,7 +752,11 @@ export default {
       seedsPlantedPerUserVariable: 0,
       averageSeedsBurnedPerUser: 0,
       unplantedSeedsPerUser: 0,
-      totals: undefined
+      totals: undefined,
+      globalDhoInfo: {
+        dhos: [],
+        minimumVotePercentage: 0
+      }
     }
   },
   computed: {
@@ -707,6 +791,7 @@ export default {
       return this.getSimulationState.length > 1 ? this.$t('forms.cycles.exitExchanges') + ': ' + this.formatToMoney(this.getSimulationState[this.simulationStep].exitExchangesLabel.toFixed(0)) : this.$t('forms.cycles.exitExchanges')
     },
     labelBDCGrowth () {
+      // console.log(this.getSimulationState[this.simulationStep].numBdcs.toFixed(0), '111111')
       return this.getSimulationState.length > 1 ? this.$t('forms.cycles.bdcGrowth') + ': ' + this.formatToMoney(this.getSimulationState[this.simulationStep].numBdcs.toFixed(0)) : this.$t('forms.cycles.bdcGrowth')
     },
     labelChangeRequiredToMeetDemand () {
@@ -723,6 +808,13 @@ export default {
     },
     showSaveSimulation () {
       return (this.getSimulationState.length > 1 && (this.isAuthenticated))
+    },
+    votesAbovePercentage () {
+      return this.votesPercentage !== 1
+    },
+    votesPercentage () {
+      const totalPercentage = this.globalDhoInfo.dhos.map(dho => dho.votePercentage.value).reduce((acc, curr) => Number(acc) + Number(curr), 0)
+      return totalPercentage
     }
   },
   async beforeMount () {
@@ -837,7 +929,7 @@ export default {
         // seedsIntroducedPrevious3Cycles: 14669178.079,
         // seedsGrownPerCycle: 15117031.964999998,
         percentageOfHarvestAssignedCirculating: parseFloat(this.percentageOfHarvestAssignedCirculating),
-        percentageDistributionOfNewHarvest: { gdc: this.gdc.value, bdc: this.bdc.value, organizations: this.organizations.value, accounts: this.accounts.value },
+        percentageDistributionOfNewHarvest: { gdc: this.gdc.value, bdc: this.bdc.value, organizations: this.organizations.value, accounts: this.accounts.value, dhos: this.gdc.value },
         maxPercentageAccounts: parseFloat(this.maxPercentageAccounts),
         maxPercentageOrganizations: parseFloat(this.maxPercentageOrganizations),
         maxPercentageBdc: parseFloat(this.maxPercentageBdc),
@@ -989,7 +1081,7 @@ export default {
             // seedsIntroducedPrevious3Cycles: 14669178.079,
             // seedsGrownPerCycle: 15117031.964999998,
             percentageOfHarvestAssignedCirculating: parseFloat(this.percentageOfHarvestAssignedCirculating),
-            percentageDistributionOfNewHarvest: { gdc: this.gdc.value, bdc: this.bdc.value, organizations: this.organizations.value, accounts: this.accounts.value },
+            percentageDistributionOfNewHarvest: { gdc: this.gdc.value, bdc: this.bdc.value, organizations: this.organizations.value, accounts: this.accounts.value, dhos: this.gdc.value },
             maxPercentageAccounts: parseFloat(this.maxPercentageAccounts),
             maxPercentageOrganizations: parseFloat(this.maxPercentageOrganizations),
             maxPercentageBdc: parseFloat(this.maxPercentageBdc),
@@ -1015,10 +1107,11 @@ export default {
             outstandingContractsSeeds: this.outstandingContractsSeeds.value,
             outstandingContracts: this.outstandingContracts.value,
             closedContractsPercentage: this.closedContractsPercentage.value,
-            seedsPerContract: this.seedsPerContract.value
+            seedsPerContract: this.seedsPerContract.value,
+            globalDhoInfo: this.formatValues()
             // harvestDistribution: {}
           }
-          console.log('DoCycle Data:', simulationState)
+          console.log('DoCycle Data:', simulationState, this.bdcsGrowth)
           await this.doCycle(
             {
               simulationState, step: (this.simulationStep)
@@ -1085,7 +1178,8 @@ export default {
       this.outstandingContractsSeeds = parseFloat(this.cycleDataForm.outstandingContractsSeeds)
       this.contractsSeeds = parseFloat(this.cycleDataForm.newContractsDuringCycleSeeds)
       this.closedContractsSeeds = parseFloat(this.cycleDataForm.closedContractsDuringCycleSeeds)
-
+      this.globalDhoInfo = { ...this.cycleDataForm.globalDhoInfo }
+      this.globalDhoInfo.dhos = this.globalDhoInfo.dhos.map((dho, index) => { return { ...dho, name: `DHO ${index + 1}` } })
       console.log('....................................................')
       console.log('MIRA EN CYCLES: seeds per contract:', parseFloat(this.cycleDataForm.seedsPerContract).toFixed(2))
       console.log('....................................................')
@@ -1100,6 +1194,52 @@ export default {
         amount = parseFloat(match[0].replace(/,/g, '')) // replace , thousands separator
       }
       return amount
+    },
+    addDHOS () {
+      const dhos = this.globalDhoInfo.dhos.map((dho, index) => {
+        return {
+          ...dho,
+          name: `DHO ${index + 1}`
+        }
+      })
+      this.globalDhoInfo.dhos = [...dhos, { name: `DH0 ${dhos.length + 1}`, votePercentage: 0, distPercentage: 0 }]
+    },
+    deleteDHO (id) {
+      const filteredList = this.globalDhoInfo.dhos.filter((_, index) => index !== id).map((dho, index) => {
+        return {
+          ...dho,
+          name: `DHO ${index + 1}`
+        }
+      })
+      this.globalDhoInfo.dhos = [...filteredList]
+    },
+    formatValues () {
+      if (!this.globalDhoInfo.dhos) return JSON.parse(JSON.stringify(this.globalDhoInfo))
+      let globalDhoInfo = {}
+      globalDhoInfo.dhos = this.globalDhoInfo.dhos.map(dho => {
+        const { votePercentage } = dho
+        return { ...dho, votePercentage: votePercentage.value }
+      })
+      globalDhoInfo.minimumVotePercentage = this.globalDhoInfo.minimumVotePercentage.value
+
+      console.log(globalDhoInfo)
+
+      return JSON.parse(JSON.stringify(globalDhoInfo))
+    },
+    updateDistribution () {
+      const dhoInfo = this.formatValues()
+      const { dhos } = calcDhoDistPercentages(dhoInfo)
+
+      if (dhos) {
+        this.globalDhoInfo.dhos.forEach((dho, index) => {
+          dho.distPercentage = dhos[index].distPercentage
+        })
+      } else {
+        this.globalDhoInfo.dhos.forEach((dho, index) => {
+          dho.distPercentage = 0
+        })
+        /* this.showNotification(`${error} in field: ${field}`, 'error') */
+      }
     }
   },
   filters: {
@@ -1158,6 +1298,10 @@ export default {
 .modal-load-simulation
   height: 90vh
   width: 40vw
+.banner
+  background-color: $red
+.error-percentage
+  height: 50px
 @media(min-width: 0px) and (max-width: 1025px)
   #container-add-cycle .scroll-container
     height: calc(100vh - 190px)

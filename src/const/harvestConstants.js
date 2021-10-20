@@ -5,5 +5,6 @@ export default {
   SEEDS_BDC: 4,
   SEEDS_GDC: 5,
   SEEDS_GENERAL: 6,
-  CYCLE: 29.5
+  CYCLE: 29.5,
+  SEEDS_DHOS: 29.5
 }

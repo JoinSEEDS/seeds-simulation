@@ -148,6 +148,19 @@ export default () => ({
       burnedSeeds: 0,
       seeds: 0
     },
+    globalDhoInfo: {
+      minimumVotePercentage: 0.1,
+      dhos: [
+        {
+          votePercentage: 0.8,
+          distPercentage: 0
+        },
+        {
+          votePercentage: 0.2,
+          distPercentage: 0
+        }
+      ]
+    },
     harvestDistribution: {
       peopleAccounts: {
         totalAmountForAccounts: 4535109.589499999,

@@ -106,7 +106,14 @@ export default {
       groupHarvestDistribution: 'Harvest Distribution',
       groupBDCDistribution: 'Bioregion Distribution',
       groupGDCDistribution: 'Global Distribution',
-      growthPerCycle: '% Growth Per Cycle'
+      growthPerCycle: '% Growth Per Cycle',
+      name: 'Name',
+      votes: '% Votes',
+      gdho: 'G-DHO',
+      distribution: 'Distribution',
+      min_votes: 'Min Votes',
+      total_percentage_assigned: '% Votes must add up to 100%. ({percentage}% assigned)',
+      total_percentage: '% Votes must add up to 100%.'
     }
   },
   menu: {
